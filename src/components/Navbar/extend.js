@@ -1,8 +1,3 @@
-/**
- * allows you to merge in router, redux, etc.
- *
- * @param component {Component}
- * @returns {Component}
- */
+import {withRouter} from 'react-router-dom';
 
-export default component => component;
+export default component => withRouter(component);

@@ -13,27 +13,35 @@ const SHROOM = 'images/shroom.png';
 const MAX_SHROOM_HEIGHT = 200;
 const SPRITE_SHROOM_HEIGHT = 921;
 const SPRITE_SRHOOM_WIDTH = 788;
-const BASE_SCALE = MAX_SHROOM_HEIGHT/SPRITE_SHROOM_HEIGHT;
+const BASE_SCALE = MAX_SHROOM_HEIGHT / SPRITE_SHROOM_HEIGHT;
+
+const MOVE_RATE = 0.5;
 
 const randTint = (scale = null) => {
   let max = 256;
   if (scale !== null) {
     max *= scale;
   }
-  let min = max * 3/4;
+  let min = Math.max(25, max * 3 / 4);
   max = Math.floor(max);
-  min = Math.floor(min);
+  min = _.clamp(Math.floor(min), 128, 256);
   return c(_.random(min, max), _.random(min, max), _.random(min, max)).num();
 };
+
+let id = 0;
 
 export default class BGGrassTiler {
 
   constructor(size, parent) {
+    this.id = ++id;
     this.time = 0;
     this.size = size;
     this.ticker = new PIXI.ticker.Ticker();
-    this.ticker.add((delta) => this.update(delta));
+    this.boundUpdate = this.update.bind(this);
+    this.ticker.add(this.boundUpdate);
+    this.ticker.maxFPS = 12;
     this.ticker.start();
+    // eslint-disable-next-line no-console
     console.log('BGdrawer started for size:', size);
 
     this.app = new PIXI.Application({
@@ -44,6 +52,7 @@ export default class BGGrassTiler {
 
     this.tufts = [];
     this.grasses = new PIXI.Container();
+    this.grasses.x = -500;
     this.app.stage.addChild(this.grasses);
 
     this.shrooms = new PIXI.Container();
@@ -53,15 +62,13 @@ export default class BGGrassTiler {
 
     if (PIXI.loader.resources[FIELD_SHEET]) {
       this.drawGrass();
-    }
-    else {
+    } else {
       PIXI.loader.add(FIELD_SHEET)
         .load(() => {
           this.drawGrass();
         });
     }
   }
-
 
   get size() {
     return this._size;
@@ -78,14 +85,15 @@ export default class BGGrassTiler {
 
   drawGrass() {
     this.sheet = PIXI.loader.resources[FIELD_SHEET].spritesheet;
-    this.started = true;
-    for (let column = -1; column <= (1 + this.size.width / SPRITE_WIDTH); column += 1) {
+    this.grasses.removeChildren();
+    console.log('drawing grasses in ', this.size);
+    for (let column = -1; column <= ((500 + this.size.width) / SPRITE_WIDTH); column += 1) {
       for (let row = -1; row <= 2 * this.size.height / SPRITE_HEIGHT; ++row) {
         let x = column * SPRITE_WIDTH;
         if (row % 2 === 0) {
           x -= SPRITE_WIDTH / 2;
         }
-        this.addTuft(x, row * SPRITE_HEIGHT/2, column, row);
+        this.addTuft(x, row * SPRITE_HEIGHT / 1.5, column, row);
       }
     }
 
@@ -101,45 +109,45 @@ export default class BGGrassTiler {
     }
   }
 
+  addTuft(x, y, i, j) {
+    const n = _.random(ROWS * COLS - 1);
+   // console.log('adding tuft ', n, '(', i, ',', j, ') at (', x, y, ')');
+    let sprite = new PIXI.Sprite(this.sheet.textures['field-' + n]);
+    // sprite.tint = randTint(Math.sqrt(y / this.size.height));
+    Object.assign(sprite, {x, y});
+    this.grasses.addChild(sprite);
+  }
+
   drawShroom(x, y) {
     const sprite = PIXI.Sprite.from(SHROOM);
     sprite.anchor.set(0.5, 1);
-    const s = (Math.random() * 2/3 + 0.3333) * BASE_SCALE;
-    sprite.scale= {x: s, y: s};
-    sprite.tint = randTint((y / this.size.height));
+    const s = (Math.random() * 2 / 3 + 0.3333) * BASE_SCALE;
+    sprite.scale = {x: s, y: s};
     Object.assign(sprite, {x, y});
     this.shrooms.addChild(sprite);
-    this.app.render();
   }
 
   drawShrooms() {
-
-    for (let y = 0; y < MAX_SHROOM_HEIGHT + this.size.height; y += _.random(MAX_SHROOM_HEIGHT / 10, MAX_SHROOM_HEIGHT/2)) {
-      let x = _.random(MAX_SHROOM_HEIGHT/2, this.size.height + MAX_SHROOM_HEIGHT/2);
+    for (let y = 0;
+         y < MAX_SHROOM_HEIGHT + this.size.height;
+         y += _.random(MAX_SHROOM_HEIGHT / 10, MAX_SHROOM_HEIGHT / 2)) {
+      let x = _.random(MAX_SHROOM_HEIGHT / 2, this.size.height + MAX_SHROOM_HEIGHT / 2);
       this.drawShroom(x, y);
     }
-
-  }
-
-  addTuft(x, y, i, j) {
-    const n = _.random(ROWS * COLS - 1);
-    // console.log('adding tuft ', n, '(', i, ',', j, ') at (', x, y, ')');
-    let sprite = new PIXI.Sprite(this.sheet.textures['field-' + n]);
-    sprite.tint = randTint(Math.sqrt(y / this.size.height));
-    this.tufts.push(sprite);
-    let grass = new PIXI.Container({x, y});
-    grass.addChild(sprite);
-    Object.assign(grass, {x, y});
-    this.grasses.addChild(grass);
+    this.app.render();
+    this.started = true;
   }
 
   stop() {
     this.stopped = true;
     this.parent.innerHTML = '';
+    console.log('stopped grass tiler');
     this.ticker.stop();
   }
 
   update(delta) {
+    this.app.render();
+    return;
     if (!this.lastRedrawDelta) {
       this.lastRedrawDelta = delta;
     }
@@ -147,10 +155,20 @@ export default class BGGrassTiler {
       return;
     }
     if (this.stopped) {
-      console.log('stopped');
       return;
     }
-    // @TODO - animation.
+    if (this.updating) {
+      return;
+    }
+    this.updating = true;
+   // console.log('id: ', this.id, 'delta: ', delta, 'grasses: ', this.grasses.children.length);
+    this.grasses.children.concat(this.shrooms.children).forEach(tuft => {
+      tuft.x += delta * MOVE_RATE;
+      if ((tuft.x) > this.size.width + 500) {
+        tuft.x -= (this.size.width + 1000);
+      }
+    });
+    this.updating = false;
   }
 
 }

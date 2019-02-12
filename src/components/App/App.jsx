@@ -7,6 +7,7 @@ import BGGrassTiler from './../../js/BGGrassTiler';
 import Navbar from '../Navbar';
 import Homepage from '../Homepage';
 import Article from '../Article';
+import Category from '../Category';
 
 const BG_GREEN = '#3d431d';
 
@@ -15,15 +16,18 @@ const SiteFrame = sc.div`
   height: 100vh
   background-color: transparent;
   justify-content: start;
-  @media(min-width: 800px) {
-  display: grid;
-    grid-template-rows: 60px 60px auto;
-  }
+  display: flex;
+  flex-direction: column;
+  justify-content: stretch;
 `;
 
+const Content = sc.div`
+flex: 1;
+overflow-y: auto;
+`;
 
 const Background = sc.div`
-  background: ${BG_GREEN};
+  background: black;
 z-index: -1000;
 width: 100vw;
 height: 100vh;
@@ -32,21 +36,6 @@ left: 0;
 top: 0;
 overflow: hidden;
 display: fixed;
-`;
-
-const SiteHeadline = sc.h1`
-text-align: center;
-text-transform: uppercase;
-font-family: 'Merriweather Sans', sans-serif;
-color: rgba(255,255,255,0.5);
-font-weight: 300;
-font-size: 3rem;
-margin: 0;
-padding: 0;
-line-height: 100%;
-@media(max-width: 800px) {
-  font-size: 1rem;
-}
 `;
 
 
@@ -87,7 +76,7 @@ export default class App extends Component {
     this.rebindMouseListener();
   }
 
-  redrawBG(){
+  redrawBG() {
     const frame = document.getElementById('site-frame');
     this.setState({
       screenSize: {
@@ -128,6 +117,7 @@ export default class App extends Component {
     if (this.drawer) {
       this.drawer.stop();
     }
+    console.log('initing pixi');
     this.drawer = new BGGrassTiler(this.state.screenSize, document.getElementById('site-background'));
   }
 
@@ -137,12 +127,14 @@ export default class App extends Component {
         <SiteFrame id="site-frame" data-id="site-frame">
           <Background id="site-background">
           </Background>
-          <SiteHeadline>Wonderland Labs</SiteHeadline>
           <Navbar/>
-          <Switch>
-            <Route path="/" exact component={Homepage} />
-            <Route path="/article/:path*" component={Article} />
-          </Switch>
+          <Content>
+            <Switch>
+              <Route path="/" exact component={Homepage}/>
+              <Route path="/article/:path*" component={Article}/>
+              <Route path="/category/:directory*" component={Category}/>
+            </Switch>
+          </Content>
         </SiteFrame>
       </BrowserRouter>
     );

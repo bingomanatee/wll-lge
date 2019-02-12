@@ -18,8 +18,12 @@ module.exports = {
         "experimentalObjectRestSpread": true
       }
   },
+  "globals": {
+    "PIXI": "true"
+  },
   "rules":
     {
+      "no-console": ["warn"],
       "indent":
         [
           "error",
@@ -36,5 +40,4 @@ module.exports = {
           "always"
         ]
     }
-}
-;
+};

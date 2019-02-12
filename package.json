@@ -28,7 +28,6 @@
   },
   "dependencies": {
     "@babel/runtime-corejs2": "^7.3.1",
-    "@inlet/react-pixi": "^0.4.3",
     "@wonderlandlabs/looking-glass-engine": "^1.0.12",
     "axios": "^0.18.0",
     "chroma-js": "^2.0.2",
@@ -39,7 +38,6 @@
     "json5": "^2.1.0",
     "lodash": "^4.17.11",
     "marked": "^0.6.0",
-    "pixi.js": "^4.8.5",
     "react": "^16.3.0",
     "react-dom": "^16.3.0",
     "react-router-dom": "^4.3.1",
