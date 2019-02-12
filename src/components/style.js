@@ -3,8 +3,8 @@ import {SMALL_NAV} from "../constants";
 import {Link} from "react-router-dom";
 
 const BG_COLOR = 'rgba(255,255,204,0.85)';
-const GREEN_MASK = 'rgba(153,255,100,0.5)';
-const GREEN_MASK_THICK = 'rgba(153,255,100,0.95)';
+const GREEN_MASK = 'rgba(255,204,100,0.5)';
+const GREEN_MASK_THICK = 'rgba(255,204,100,0.95)';
 const HEADLINE_FONT = `'Merriweather Sans', sans-serif`;
 
 export const ArticleWrapper = sc.div`

@@ -38,9 +38,9 @@ export default class BGGrassTiler {
     this.size = size;
     this.ticker = new PIXI.ticker.Ticker();
     this.boundUpdate = this.update.bind(this);
-    this.ticker.add(this.boundUpdate);
+/*    this.ticker.add(this.boundUpdate);
     this.ticker.maxFPS = 12;
-    this.ticker.start();
+    this.ticker.start();*/
     // eslint-disable-next-line no-console
     console.log('BGdrawer started for size:', size);
 

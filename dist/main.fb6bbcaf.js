@@ -54501,9 +54501,10 @@ function () {
     this.size = size;
     this.ticker = new PIXI.ticker.Ticker();
     this.boundUpdate = this.update.bind(this);
-    this.ticker.add(this.boundUpdate);
-    this.ticker.maxFPS = 12;
-    this.ticker.start(); // eslint-disable-next-line no-console
+    /*    this.ticker.add(this.boundUpdate);
+        this.ticker.maxFPS = 12;
+        this.ticker.start();*/
+    // eslint-disable-next-line no-console
 
     console.log('BGdrawer started for size:', size);
     this.app = new PIXI.Application(_objectSpread({}, size, {
@@ -54786,8 +54787,8 @@ function _templateObject() {
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
 var BG_COLOR = 'rgba(255,255,204,0.85)';
-var GREEN_MASK = 'rgba(153,255,100,0.5)';
-var GREEN_MASK_THICK = 'rgba(153,255,100,0.95)';
+var GREEN_MASK = 'rgba(255,204,100,0.5)';
+var GREEN_MASK_THICK = 'rgba(255,204,100,0.95)';
 var HEADLINE_FONT = "'Merriweather Sans', sans-serif";
 
 var ArticleWrapper = _styledComponents.default.div(_templateObject());
