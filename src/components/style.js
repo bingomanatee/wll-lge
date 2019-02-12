@@ -1,11 +1,30 @@
 import sc from "styled-components";
-import {SMALL_NAV} from "../constants";
 import {Link} from "react-router-dom";
+import {SMALL_NAV} from "../constants";
 
 const BG_COLOR = 'rgba(255,255,204,0.85)';
 const GREEN_MASK = 'rgba(255,204,100,0.5)';
 const GREEN_MASK_THICK = 'rgba(255,204,100,0.95)';
+const ARTICLE_LINK_BACK = 'rgba(51,25,12,0.95)';
 const HEADLINE_FONT = `'Merriweather Sans', sans-serif`;
+
+export const SiteHeadline = sc.h1`
+text-align: center;
+text-transform: uppercase;
+font-family: ${HEADLINE_FONT};
+color: black;
+font-weight: 300;
+font-size: 2rem;
+margin: 0;
+padding: 0;
+line-height: 100%;
+background-color: ${GREEN_MASK};
+text-shadow: 2px 2px 2px #FFFFFF;
+@media(max-width: 800px) {
+  font-size: 1rem;
+  font-weight: 800;
+}
+`;
 
 export const ArticleWrapper = sc.div`
 width: 100%;
@@ -33,7 +52,7 @@ padding: 0.2rem 0.5rem;
 @media(min-width: ${SMALL_NAV}) {
 margin: 0.25rem 1rem;
 }
-background: rgba(0,0,0,0.8);
+background: ${ARTICLE_LINK_BACK};
 :hover {
 text-decoration: underline;
 }
@@ -43,16 +62,17 @@ text-decoration: underline;
 export const PageHead = sc.h1`
 font-family: ${HEADLINE_FONT};
 color: white;
-font-weight: 300;
+font-weight: 800;
 font-size: 2rem;
 text-align: center;
 text-transform: uppercase;
 margins: 0;
-padding: 0;
+  padding: 0 4rem;
 text-shadow: 2px 2px 2px #000000;
 background-color: ${GREEN_MASK};
 @media(max-width: ${SMALL_NAV}) {
 font-size: 1rem;
+padding: 0;
 }
 `;
 
@@ -138,20 +158,3 @@ justify-content: center;
 }
 `;
 
-export const SiteHeadline = sc.h1`
-text-align: center;
-text-transform: uppercase;
-font-family: ${HEADLINE_FONT};
-color: black;
-font-weight: 300;
-font-size: 2rem;
-margin: 0;
-padding: 0;
-line-height: 100%;
-background-color: ${GREEN_MASK};
-text-shadow: 2px 2px 2px #FFFFFF;
-@media(max-width: 800px) {
-  font-size: 1rem;
-  font-weight: 800;
-}
-`;

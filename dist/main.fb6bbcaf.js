@@ -54543,8 +54543,8 @@ function () {
       this.grasses.removeChildren();
       console.log('drawing grasses in ', this.size);
 
-      for (var column = -1; column <= (500 + this.size.width) / SPRITE_WIDTH; column += 1) {
-        for (var row = -1; row <= 2 * this.size.height / SPRITE_HEIGHT; ++row) {
+      for (var column = -1; column <= (1000 + this.size.width) / SPRITE_WIDTH; column += 1) {
+        for (var row = -1; row <= 2 * this.size.height / SPRITE_HEIGHT; row += 0.5) {
           var x = column * SPRITE_WIDTH;
 
           if (row % 2 === 0) {
@@ -54571,8 +54571,9 @@ function () {
       var n = _lodash.default.random(ROWS * COLS - 1); // console.log('adding tuft ', n, '(', i, ',', j, ') at (', x, y, ')');
 
 
-      var sprite = new PIXI.Sprite(this.sheet.textures['field-' + n]); // sprite.tint = randTint(Math.sqrt(y / this.size.height));
-
+      var sprite = new PIXI.Sprite(this.sheet.textures['field-' + n]);
+      sprite.tint = randTint(Math.sqrt(y / this.size.height));
+      sprite.scale.set(0.5, 0.5);
       Object.assign(sprite, {
         x: x,
         y: y
@@ -54589,6 +54590,7 @@ function () {
         x: s,
         y: s
       };
+      sprite.tint = randTint(Math.sqrt(y / this.size.height));
       Object.assign(sprite, {
         x: x,
         y: y
@@ -54674,18 +54676,18 @@ module.exports = {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.SiteHeadline = exports.CategoryList = exports.CategoryView = exports.NavbarFrame = exports.Text = exports.ArticleFrame = exports.PageHead = exports.ArticleItem = exports.ArticleList = exports.ArticleWrapper = void 0;
+exports.CategoryList = exports.CategoryView = exports.NavbarFrame = exports.Text = exports.ArticleFrame = exports.PageHead = exports.ArticleItem = exports.ArticleList = exports.ArticleWrapper = exports.SiteHeadline = void 0;
 
 var _styledComponents = _interopRequireDefault(require("styled-components"));
 
-var _constants = require("../constants");
-
 var _reactRouterDom = require("react-router-dom");
+
+var _constants = require("../constants");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _templateObject10() {
-  var data = _taggedTemplateLiteral(["\ntext-align: center;\ntext-transform: uppercase;\nfont-family: ", ";\ncolor: black;\nfont-weight: 300;\nfont-size: 2rem;\nmargin: 0;\npadding: 0;\nline-height: 100%;\nbackground-color: ", ";\ntext-shadow: 2px 2px 2px #FFFFFF;\n@media(max-width: 800px) {\n  font-size: 1rem;\n  font-weight: 800;\n}\n"]);
+  var data = _taggedTemplateLiteral(["\nclear: both;\nmargin:0.5rem 1rem ;\n@media(min-width: 800px) {\nflex-wrap: wrap;\npadding: 0 1rem;\ndisplay: flex;\nflex-direction: row;\njustify-content: center;\n}\n"]);
 
   _templateObject10 = function _templateObject10() {
     return data;
@@ -54695,7 +54697,7 @@ function _templateObject10() {
 }
 
 function _templateObject9() {
-  var data = _taggedTemplateLiteral(["\nclear: both;\nmargin:0.5rem 1rem ;\n@media(min-width: 800px) {\nflex-wrap: wrap;\npadding: 0 1rem;\ndisplay: flex;\nflex-direction: row;\njustify-content: center;\n}\n"]);
+  var data = _taggedTemplateLiteral(["\nbackground-color: ", ";\ncolor: black;\ndisplay: block;\npadding: 0rem 0.25rem;\ntext-decoration: none;\ntext-align: center;\ntext-transform: uppercase;\nfont-family: 'Merriweather Sans', sans-serif;\nfont-weight: 800;\nfont-size: 0.8rem;\nline-height: 100%;\nmargin-right: 1rem;\nwhite-space: nowrap;\n@media(min-width: ", ") {\nfont-size: 1rem;\n}\n:hover {\ncolor: white;\n}\n"]);
 
   _templateObject9 = function _templateObject9() {
     return data;
@@ -54705,7 +54707,7 @@ function _templateObject9() {
 }
 
 function _templateObject8() {
-  var data = _taggedTemplateLiteral(["\nbackground-color: ", ";\ncolor: black;\ndisplay: block;\npadding: 0rem 0.25rem;\ntext-decoration: none;\ntext-align: center;\ntext-transform: uppercase;\nfont-family: 'Merriweather Sans', sans-serif;\nfont-weight: 800;\nfont-size: 0.8rem;\nline-height: 100%;\nmargin-right: 1rem;\nwhite-space: nowrap;\n@media(min-width: ", ") {\nfont-size: 1rem;\n}\n:hover {\ncolor: white;\n}\n"]);
+  var data = _taggedTemplateLiteral(["\nflex: 0;\nmargin-top: 4px;\n"]);
 
   _templateObject8 = function _templateObject8() {
     return data;
@@ -54715,7 +54717,7 @@ function _templateObject8() {
 }
 
 function _templateObject7() {
-  var data = _taggedTemplateLiteral(["\nflex: 0;\nmargin-top: 4px;\n"]);
+  var data = _taggedTemplateLiteral(["\npadding: 0.5rem 2rem;\nbackground-color: ", ";\n-webkit-box-shadow: 0px 0px ", " ", " ", ";\n-moz-box-shadow: 0px 0px ", " ", " ", ";\nbox-shadow: 0px 0px ", " ", " ", ";\nfont-family: 'Cormorant Garamond',Georgia,serif;\nfont-size: 1.1rem;\n\npre {\nfont-size: 0.8rem;\n}\nh1, h2, h3, h4, h5, h6 {\nfont-family: ", ";\nfont-size: 1rem;\npadding: 0;\nmargin: 0;\n}\nh1 {\nfont-size: 1.75rem;\ntext-shadow: 2px 2px 2px black;\ncolor: white;\ntext-transform: uppercase;\nmargin-bottom: 0.5rem;\n}\nh2 {\ntext-shadow: 2px 2px 2px white;\nfont-size: 1.5rem;\nmargin-bottom: 0.25rem;\n}\n"]);
 
   _templateObject7 = function _templateObject7() {
     return data;
@@ -54725,7 +54727,7 @@ function _templateObject7() {
 }
 
 function _templateObject6() {
-  var data = _taggedTemplateLiteral(["\npadding: 0.5rem 2rem;\nbackground-color: ", ";\n-webkit-box-shadow: 0px 0px ", " ", " ", ";\n-moz-box-shadow: 0px 0px ", " ", " ", ";\nbox-shadow: 0px 0px ", " ", " ", ";\nfont-family: 'Cormorant Garamond',Georgia,serif;\nfont-size: 1.1rem;\n\npre {\nfont-size: 0.8rem;\n}\nh1, h2, h3, h4, h5, h6 {\nfont-family: ", ";\nfont-size: 1rem;\npadding: 0;\nmargin: 0;\n}\nh1 {\nfont-size: 1.75rem;\ntext-shadow: 2px 2px 2px black;\ncolor: white;\ntext-transform: uppercase;\nmargin-bottom: 0.5rem;\n}\nh2 {\ntext-shadow: 2px 2px 2px white;\nfont-size: 1.5rem;\nmargin-bottom: 0.25rem;\n}\n"]);
+  var data = _taggedTemplateLiteral(["\npadding: 2rem 3rem;\npadding-top: 0; \n@media(max-width: ", ") {\npadding: 0;\n}\n"]);
 
   _templateObject6 = function _templateObject6() {
     return data;
@@ -54735,7 +54737,7 @@ function _templateObject6() {
 }
 
 function _templateObject5() {
-  var data = _taggedTemplateLiteral(["\npadding: 2rem 3rem;\npadding-top: 0; \n@media(max-width: ", ") {\npadding: 0;\n}\n"]);
+  var data = _taggedTemplateLiteral(["\nfont-family: ", ";\ncolor: white;\nfont-weight: 800;\nfont-size: 2rem;\ntext-align: center;\ntext-transform: uppercase;\nmargins: 0;\n  padding: 0 4rem;\ntext-shadow: 2px 2px 2px #000000;\nbackground-color: ", ";\n@media(max-width: ", ") {\nfont-size: 1rem;\npadding: 0;\n}\n"]);
 
   _templateObject5 = function _templateObject5() {
     return data;
@@ -54745,7 +54747,7 @@ function _templateObject5() {
 }
 
 function _templateObject4() {
-  var data = _taggedTemplateLiteral(["\nfont-family: ", ";\ncolor: white;\nfont-weight: 300;\nfont-size: 2rem;\ntext-align: center;\ntext-transform: uppercase;\nmargins: 0;\npadding: 0;\ntext-shadow: 2px 2px 2px #000000;\nbackground-color: ", ";\n@media(max-width: ", ") {\nfont-size: 1rem;\n}\n"]);
+  var data = _taggedTemplateLiteral(["\ndisplay: block;\ntext-decoration: none;\ncolor: white;\nfont-family: 'Merriweather Sans', sans-serif;\nfont-weight: 300;\ncolor: white !important;\npadding: 0.2rem 0.5rem;\n@media(min-width: ", ") {\nmargin: 0.25rem 1rem;\n}\nbackground: ", ";\n:hover {\ntext-decoration: underline;\n}\n"]);
 
   _templateObject4 = function _templateObject4() {
     return data;
@@ -54755,7 +54757,7 @@ function _templateObject4() {
 }
 
 function _templateObject3() {
-  var data = _taggedTemplateLiteral(["\ndisplay: block;\ntext-decoration: none;\ncolor: white;\nfont-family: 'Merriweather Sans', sans-serif;\nfont-weight: 300;\ncolor: white !important;\npadding: 0.2rem 0.5rem;\n@media(min-width: ", ") {\nmargin: 0.25rem 1rem;\n}\nbackground: rgba(0,0,0,0.8);\n:hover {\ntext-decoration: underline;\n}\n"]);
+  var data = _taggedTemplateLiteral(["\n@media(min-width: ", ") {\ndisplay: flex;\nflex-direction: row;\njustify-content: center;\nflex-wrap: wrap;\n}\n"]);
 
   _templateObject3 = function _templateObject3() {
     return data;
@@ -54765,7 +54767,7 @@ function _templateObject3() {
 }
 
 function _templateObject2() {
-  var data = _taggedTemplateLiteral(["\n@media(min-width: ", ") {\ndisplay: flex;\nflex-direction: row;\njustify-content: center;\nflex-wrap: wrap;\n}\n"]);
+  var data = _taggedTemplateLiteral(["\nwidth: 100%;\n@media(min-width: 800px) {\noverflow-y: auto\n}"]);
 
   _templateObject2 = function _templateObject2() {
     return data;
@@ -54775,7 +54777,7 @@ function _templateObject2() {
 }
 
 function _templateObject() {
-  var data = _taggedTemplateLiteral(["\nwidth: 100%;\n@media(min-width: 800px) {\noverflow-y: auto\n}"]);
+  var data = _taggedTemplateLiteral(["\ntext-align: center;\ntext-transform: uppercase;\nfont-family: ", ";\ncolor: black;\nfont-weight: 300;\nfont-size: 2rem;\nmargin: 0;\npadding: 0;\nline-height: 100%;\nbackground-color: ", ";\ntext-shadow: 2px 2px 2px #FFFFFF;\n@media(max-width: 800px) {\n  font-size: 1rem;\n  font-weight: 800;\n}\n"]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -54789,46 +54791,47 @@ function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(
 var BG_COLOR = 'rgba(255,255,204,0.85)';
 var GREEN_MASK = 'rgba(255,204,100,0.5)';
 var GREEN_MASK_THICK = 'rgba(255,204,100,0.95)';
+var ARTICLE_LINK_BACK = 'rgba(51,25,12,0.95)';
 var HEADLINE_FONT = "'Merriweather Sans', sans-serif";
 
-var ArticleWrapper = _styledComponents.default.div(_templateObject());
+var SiteHeadline = _styledComponents.default.h1(_templateObject(), HEADLINE_FONT, GREEN_MASK);
+
+exports.SiteHeadline = SiteHeadline;
+
+var ArticleWrapper = _styledComponents.default.div(_templateObject2());
 
 exports.ArticleWrapper = ArticleWrapper;
 
-var ArticleList = _styledComponents.default.div(_templateObject2(), _constants.SMALL_NAV);
+var ArticleList = _styledComponents.default.div(_templateObject3(), _constants.SMALL_NAV);
 
 exports.ArticleList = ArticleList;
-var ArticleItem = (0, _styledComponents.default)(_reactRouterDom.Link)(_templateObject3(), _constants.SMALL_NAV);
+var ArticleItem = (0, _styledComponents.default)(_reactRouterDom.Link)(_templateObject4(), _constants.SMALL_NAV, ARTICLE_LINK_BACK);
 exports.ArticleItem = ArticleItem;
 
-var PageHead = _styledComponents.default.h1(_templateObject4(), HEADLINE_FONT, GREEN_MASK, _constants.SMALL_NAV);
+var PageHead = _styledComponents.default.h1(_templateObject5(), HEADLINE_FONT, GREEN_MASK, _constants.SMALL_NAV);
 
 exports.PageHead = PageHead;
 
-var ArticleFrame = _styledComponents.default.article(_templateObject5(), _constants.SMALL_NAV);
+var ArticleFrame = _styledComponents.default.article(_templateObject6(), _constants.SMALL_NAV);
 
 exports.ArticleFrame = ArticleFrame;
 var n1 = '4px';
 var n2 = '4px';
 
-var Text = _styledComponents.default.div(_templateObject6(), GREEN_MASK_THICK, n1, n2, GREEN_MASK_THICK, n1, n2, GREEN_MASK_THICK, n1, n2, GREEN_MASK_THICK, HEADLINE_FONT);
+var Text = _styledComponents.default.div(_templateObject7(), GREEN_MASK_THICK, n1, n2, GREEN_MASK_THICK, n1, n2, GREEN_MASK_THICK, n1, n2, GREEN_MASK_THICK, HEADLINE_FONT);
 
 exports.Text = Text;
 
-var NavbarFrame = _styledComponents.default.div(_templateObject7());
+var NavbarFrame = _styledComponents.default.div(_templateObject8());
 
 exports.NavbarFrame = NavbarFrame;
-var CategoryView = (0, _styledComponents.default)(_reactRouterDom.Link)(_templateObject8(), GREEN_MASK, _constants.SMALL_NAV);
+var CategoryView = (0, _styledComponents.default)(_reactRouterDom.Link)(_templateObject9(), GREEN_MASK, _constants.SMALL_NAV);
 exports.CategoryView = CategoryView;
 
-var CategoryList = _styledComponents.default.div(_templateObject9());
+var CategoryList = _styledComponents.default.div(_templateObject10());
 
 exports.CategoryList = CategoryList;
-
-var SiteHeadline = _styledComponents.default.h1(_templateObject10(), HEADLINE_FONT, GREEN_MASK);
-
-exports.SiteHeadline = SiteHeadline;
-},{"styled-components":"../node_modules/styled-components/dist/styled-components.browser.esm.js","../constants":"constants.json","react-router-dom":"../node_modules/react-router-dom/es/index.js"}],"components/Navbar/NavbarView.jsx":[function(require,module,exports) {
+},{"styled-components":"../node_modules/styled-components/dist/styled-components.browser.esm.js","react-router-dom":"../node_modules/react-router-dom/es/index.js","../constants":"constants.json"}],"components/Navbar/NavbarView.jsx":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {

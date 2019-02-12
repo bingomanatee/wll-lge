@@ -87,8 +87,8 @@ export default class BGGrassTiler {
     this.sheet = PIXI.loader.resources[FIELD_SHEET].spritesheet;
     this.grasses.removeChildren();
     console.log('drawing grasses in ', this.size);
-    for (let column = -1; column <= ((500 + this.size.width) / SPRITE_WIDTH); column += 1) {
-      for (let row = -1; row <= 2 * this.size.height / SPRITE_HEIGHT; ++row) {
+    for (let column = -1; column <= ((1000 + this.size.width) / SPRITE_WIDTH); column += 1) {
+      for (let row = -1; row <= 2 * this.size.height / SPRITE_HEIGHT; row += 0.5) {
         let x = column * SPRITE_WIDTH;
         if (row % 2 === 0) {
           x -= SPRITE_WIDTH / 2;
@@ -113,7 +113,8 @@ export default class BGGrassTiler {
     const n = _.random(ROWS * COLS - 1);
    // console.log('adding tuft ', n, '(', i, ',', j, ') at (', x, y, ')');
     let sprite = new PIXI.Sprite(this.sheet.textures['field-' + n]);
-    // sprite.tint = randTint(Math.sqrt(y / this.size.height));
+     sprite.tint = randTint(Math.sqrt(y / this.size.height));
+    sprite.scale.set(0.5, 0.5);
     Object.assign(sprite, {x, y});
     this.grasses.addChild(sprite);
   }
@@ -123,6 +124,7 @@ export default class BGGrassTiler {
     sprite.anchor.set(0.5, 1);
     const s = (Math.random() * 2 / 3 + 0.3333) * BASE_SCALE;
     sprite.scale = {x: s, y: s};
+    sprite.tint = randTint(Math.sqrt(y / this.size.height));
     Object.assign(sprite, {x, y});
     this.shrooms.addChild(sprite);
   }
