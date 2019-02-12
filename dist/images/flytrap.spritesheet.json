@@ -1,0 +1,17 @@
+{
+  "meta": {
+    "image": "flytrap.png"
+  },
+  "frames": {
+    "flytrap": {
+      "x": 344,
+      "y": 49,
+      "w": 680,
+      "h": 641
+    },
+    "source": {
+      "w": 1024,
+      "h" : 1024
+    }
+  }
+}

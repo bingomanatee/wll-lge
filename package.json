@@ -1,0 +1,49 @@
+{
+  "name": "wonderland-labs-lge",
+  "version": "1.0.0",
+  "main": "src/index.js",
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/core": "^7.0.0-0",
+    "@babel/plugin-transform-react-jsx-source": "^7.2.0",
+    "@babel/plugin-transform-runtime": "^7.2.0",
+    "@babel/preset-react": "^7.0.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1",
+    "class-propper": "^1.0.5",
+    "eslint": "^5.12.1",
+    "gulp-modify-file": "^1.0.1",
+    "gulp-rename": "^1.4.0",
+    "parcel-bundler": "^1.11.0",
+    "parcel-plugin-static-files-copy": "^2.0.0",
+    "postcss-modules": "^1.4.1"
+  },
+  "staticFiles": {
+    "staticPath": "static",
+    "watcherGlob": "**"
+  },
+  "scripts": {
+    "dev": "parcel src/index.html",
+    "build": "parcel build src/index.html/"
+  },
+  "dependencies": {
+    "@babel/runtime-corejs2": "^7.3.1",
+    "@inlet/react-pixi": "^0.4.3",
+    "@wonderlandlabs/looking-glass-engine": "^1.0.12",
+    "axios": "^0.18.0",
+    "chroma-js": "^2.0.2",
+    "eslint-plugin-mocha": "^5.2.1",
+    "eslint-plugin-react": "^7.12.4",
+    "gulp": "^4.0.0",
+    "gulp-cli": "^2.0.1",
+    "json5": "^2.1.0",
+    "lodash": "^4.17.11",
+    "marked": "^0.6.0",
+    "pixi.js": "^4.8.5",
+    "react": "^16.3.0",
+    "react-dom": "^16.3.0",
+    "react-router-dom": "^4.3.1",
+    "semantic-ui-react": "^0.84.0",
+    "styled-components": "^4.1.3"
+  }
+}

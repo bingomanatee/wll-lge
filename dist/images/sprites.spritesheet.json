@@ -1,0 +1,103 @@
+{
+  "meta": {
+    "image": "sprites@half.png"
+  },
+  "frames": {
+    "ball": {
+      "frame": {
+        "x": 24,
+        "y": 19,
+        "w": 101,
+        "h": 107,
+        "r": 0,
+        "c": 0
+      },
+      "rotated": false,
+      "trimmed": false,
+      "sourceSize": {
+        "w": 726,
+        "h": 357
+      }
+    },
+    "carnoplant": {
+      "frame": {
+        "x": 163,
+        "y": 12,
+        "w": 205,
+        "h": 153,
+        "r": 0,
+        "c": 0
+      },
+      "rotated": false,
+      "trimmed": false,
+      "sourceSize": {
+        "w": 726,
+        "h": 357
+      }
+    },
+    "mushroom": {
+      "frame": {
+        "x": 24,
+        "y": 179,
+        "w": 139,
+        "h": 137,
+        "r": 0,
+        "c": 0
+      },
+      "rotated": false,
+      "trimmed": false,
+      "sourceSize": {
+        "w": 726,
+        "h": 357
+      }
+    },
+    "rat": {
+      "frame": {
+        "x": 200,
+        "y": 184,
+        "w": 178,
+        "h": 168,
+        "r": 0,
+        "c": 0
+      },
+      "rotated": false,
+      "trimmed": false,
+      "sourceSize": {
+        "w": 726,
+        "h": 357
+      }
+    },
+    "snake": {
+      "frame": {
+        "x": 390,
+        "y": 55,
+        "w": 155,
+        "h": 232,
+        "r": 0,
+        "c": 0
+      },
+      "rotated": false,
+      "trimmed": false,
+      "sourceSize": {
+        "w": 726,
+        "h": 357
+      }
+    },
+    "flower": {
+      "frame": {
+        "x": 550,
+        "y": 81,
+        "w": 153,
+        "h": 198,
+        "r": 0,
+        "c": 0
+      },
+      "rotated": false,
+      "trimmed": false,
+      "sourceSize": {
+        "w": 726,
+        "h": 357
+      }
+    }
+  }
+}
