@@ -20,7 +20,6 @@ export default class CategoryContainer extends Component {
       axios.get(
         'https://wonderland-labs.herokuapp.com/api/articles').then(result => {
         let directory = decodeURIComponent(this.state.directory);
-        console.log('cat result:', result);
         let articles = result.data.filter(a => {
           return a.published && a.directory === directory;
         });
@@ -32,7 +31,6 @@ export default class CategoryContainer extends Component {
     }
 
     this._catSub = categories.subscribe(({state}) => {
-      console.log('gotten cats:', state);
       if (state.categories) {
         let directory = decodeURIComponent(this.state.directory);
         let matches = state.categories.filter(c => c.directory === directory);

@@ -3,7 +3,6 @@ import pt from 'prop-types';
 import {ArticleWrapper, ArticleList, ArticleItem} from '../style';
 
 const HomepageView = (state) => {
-  console.log('state:', state);
   return (
     <ArticleWrapper>
       <ArticleList>

@@ -11,7 +11,6 @@ export default class NavbarContainer extends Component {
 
   componentDidMount() {
     this._catSub = categories.subscribe(({state}) => {
-      console.log('gotten cats:', state);
       this.setState({categories: state.categories || []});
     });
   }

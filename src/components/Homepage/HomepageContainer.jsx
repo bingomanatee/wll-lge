@@ -17,13 +17,11 @@ export default class HomepageContainer extends Component {
 
   componentDidMount() {
     articles.subscribe(({state}) => {
-      console.log('article state: ', state);
       this.setState(state);
     });
   }
 
   render() {
-    console.log('state: ', this.state);
     return (
       <HomepageView {...this.state}>
       </HomepageView>

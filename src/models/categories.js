@@ -6,7 +6,6 @@ const categories = new Store({
   starter: ({actions}) => {
     axios.get('https://wonderland-labs.herokuapp.com/api/categories')
       .then(({data}) => {
-        console.log('category data:', data);
         actions.setCategories(data);
       });
   }

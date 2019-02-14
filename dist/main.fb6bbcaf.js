@@ -54788,13 +54788,12 @@ function _templateObject() {
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-var BG_COLOR = 'rgba(255,255,204,0.85)';
-var GREEN_MASK = 'rgba(255,204,100,0.5)';
-var GREEN_MASK_THICK = 'rgba(255,204,100,0.95)';
-var ARTICLE_LINK_BACK = 'rgba(51,25,12,0.95)';
+var BUTTON_MASK = 'rgba(200,200,200,0.5)';
+var CONTENT_MASK = 'rgb(255,255,255)';
+var ARTICLE_LINK_BACK = 'rgba(128,128,128,0.95)';
 var HEADLINE_FONT = "'Merriweather Sans', sans-serif";
 
-var SiteHeadline = _styledComponents.default.h1(_templateObject(), HEADLINE_FONT, GREEN_MASK);
+var SiteHeadline = _styledComponents.default.h1(_templateObject(), HEADLINE_FONT, BUTTON_MASK);
 
 exports.SiteHeadline = SiteHeadline;
 
@@ -54808,7 +54807,7 @@ exports.ArticleList = ArticleList;
 var ArticleItem = (0, _styledComponents.default)(_reactRouterDom.Link)(_templateObject4(), _constants.SMALL_NAV, ARTICLE_LINK_BACK);
 exports.ArticleItem = ArticleItem;
 
-var PageHead = _styledComponents.default.h1(_templateObject5(), HEADLINE_FONT, GREEN_MASK, _constants.SMALL_NAV);
+var PageHead = _styledComponents.default.h1(_templateObject5(), HEADLINE_FONT, BUTTON_MASK, _constants.SMALL_NAV);
 
 exports.PageHead = PageHead;
 
@@ -54818,14 +54817,14 @@ exports.ArticleFrame = ArticleFrame;
 var n1 = '4px';
 var n2 = '4px';
 
-var Text = _styledComponents.default.div(_templateObject7(), GREEN_MASK_THICK, n1, n2, GREEN_MASK_THICK, n1, n2, GREEN_MASK_THICK, n1, n2, GREEN_MASK_THICK, HEADLINE_FONT);
+var Text = _styledComponents.default.div(_templateObject7(), CONTENT_MASK, n1, n2, CONTENT_MASK, n1, n2, CONTENT_MASK, n1, n2, CONTENT_MASK, HEADLINE_FONT);
 
 exports.Text = Text;
 
 var NavbarFrame = _styledComponents.default.div(_templateObject8());
 
 exports.NavbarFrame = NavbarFrame;
-var CategoryView = (0, _styledComponents.default)(_reactRouterDom.Link)(_templateObject9(), GREEN_MASK, _constants.SMALL_NAV);
+var CategoryView = (0, _styledComponents.default)(_reactRouterDom.Link)(_templateObject9(), BUTTON_MASK, _constants.SMALL_NAV);
 exports.CategoryView = CategoryView;
 
 var CategoryList = _styledComponents.default.div(_templateObject10());
@@ -74616,7 +74615,6 @@ var categories = new _lookingGlassEngine.Store({
 
     _axios.default.get('https://wonderland-labs.herokuapp.com/api/categories').then(function (_ref2) {
       var data = _ref2.data;
-      console.log('category data:', data);
       actions.setCategories(data);
     });
   }
@@ -74694,7 +74692,6 @@ function (_Component) {
 
       this._catSub = _categories.default.subscribe(function (_ref) {
         var state = _ref.state;
-        console.log('gotten cats:', state);
 
         _this2.setState({
           categories: state.categories || []
@@ -74799,7 +74796,6 @@ var _style = require("../style");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var HomepageView = function HomepageView(state) {
-  console.log('state:', state);
   return _react.default.createElement(_style.ArticleWrapper, null, _react.default.createElement(_style.ArticleList, null, state.homepageArticles.map(function (a) {
     return _react.default.createElement(_style.ArticleItem, {
       to: '/article/' + a.path,
@@ -74836,7 +74832,6 @@ var articles = new _lookingGlassEngine.Store({
     var actions = _ref.actions;
 
     _axios.default.get('https://wonderland-labs.herokuapp.com/api/homepage-articles').then(function (response) {
-      console.log('response from get homepage articles;', response);
       actions.setHomepageArticles(response.data);
     });
   }
@@ -74913,7 +74908,6 @@ function (_Component) {
 
       _articles.default.subscribe(function (_ref) {
         var state = _ref.state;
-        console.log('article state: ', state);
 
         _this2.setState(state);
       });
@@ -74921,7 +74915,6 @@ function (_Component) {
   }, {
     key: "render",
     value: function render() {
-      console.log('state: ', this.state);
       return _react.default.createElement(_HomepageView.default, this.state);
     }
   }]);
@@ -76628,8 +76621,6 @@ function (_Component) {
 
       if (!this.state.loaded && this.state.path) {
         _axios.default.get('https://wonderland-labs.herokuapp.com/api/articles/' + encodeURIComponent(this.state.path)).then(function (result) {
-          console.log('result:', result);
-
           _this2.setState(_objectSpread({}, result.data, {
             loaded: true
           }));
@@ -76806,7 +76797,6 @@ function (_Component) {
       if (!this.state.loaded && this.state.directory) {
         _axios.default.get('https://wonderland-labs.herokuapp.com/api/articles').then(function (result) {
           var directory = decodeURIComponent(_this2.state.directory);
-          console.log('cat result:', result);
           var articles = result.data.filter(function (a) {
             return a.published && a.directory === directory;
           });
@@ -76822,7 +76812,6 @@ function (_Component) {
 
       this._catSub = _categories.default.subscribe(function (_ref) {
         var state = _ref.state;
-        console.log('gotten cats:', state);
 
         if (state.categories) {
           var directory = decodeURIComponent(_this2.state.directory);
@@ -76951,16 +76940,6 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
-function _templateObject3() {
-  var data = _taggedTemplateLiteral(["\n  background: black;\nz-index: -1000;\nwidth: 100vw;\nheight: 100vh;\nposition: fixed;\nleft: 0;\ntop: 0;\noverflow: hidden;\ndisplay: fixed;\n"]);
-
-  _templateObject3 = function _templateObject3() {
-    return data;
-  };
-
-  return data;
-}
-
 function _templateObject2() {
   var data = _taggedTemplateLiteral(["\nflex: 1;\noverflow-y: auto;\n"]);
 
@@ -76989,128 +76968,24 @@ var SiteFrame = _styledComponents.default.div(_templateObject());
 
 var Content = _styledComponents.default.div(_templateObject2());
 
-var Background = _styledComponents.default.div(_templateObject3());
-
-(function () {
-  var throttle = function throttle(type, name, obj) {
-    obj = obj || window;
-    var running = false;
-
-    var func = function func() {
-      if (running) {
-        return;
-      }
-
-      running = true;
-      requestAnimationFrame(function () {
-        obj.dispatchEvent(new CustomEvent(name));
-        running = false;
-      });
-    };
-
-    obj.addEventListener(type, func);
-  };
-  /* init - you can init any event */
-
-
-  throttle('resize', 'optimizedResize');
-})();
-
 var App =
 /*#__PURE__*/
 function (_Component) {
   _inherits(App, _Component);
 
-  function App(props) {
-    var _this;
-
+  function App() {
     _classCallCheck(this, App);
 
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(App).call(this, props));
-    _this.state = {
-      screenSize: {
-        width: window.innerWidth,
-        height: innerHeight
-      }
-    };
-    return _this;
+    return _possibleConstructorReturn(this, _getPrototypeOf(App).apply(this, arguments));
   }
 
   _createClass(App, [{
-    key: "componentDidMount",
-    value: function componentDidMount() {
-      window.addEventListener('optimizedResize', _lodash.default.debounce(this.redrawBG.bind(this), 500));
-      this.initPixi();
-      this.rebindMouseListener();
-    }
-  }, {
-    key: "redrawBG",
-    value: function redrawBG() {
-      var _this2 = this;
-
-      var frame = document.getElementById('site-frame');
-      this.setState({
-        screenSize: {
-          width: frame.clientWidth,
-          height: frame.clientHeight
-        }
-      }, function () {
-        _this2.initPixi();
-
-        _this2.rebindMouseListener();
-      });
-    }
-  }, {
-    key: "mouseMoveListener",
-    value: function mouseMoveListener(event) {
-      if (this.drawer) {
-        this.drawer.mouseMove(event.clientX, event.clientY);
-      }
-    }
-  }, {
-    key: "rebindMouseListener",
-    value: function rebindMouseListener() {
-      if (!this._boundML) {
-        this._boundML = _lodash.default.throttle(this.mouseMoveListener.bind(this), 200);
-      }
-
-      if (this._lastFrame) {
-        this._lastFrame.removeEventListener('mousemove', this._boundML);
-      }
-
-      var frame = document.getElementById('site-frame');
-      this._lastFrame = frame;
-      frame.addEventListener('mousemove', this._boundML);
-    }
-  }, {
-    key: "initPixi",
-    value: function initPixi() {
-      var _this3 = this;
-
-      this.initPixi = _lodash.default.debounce(function () {
-        return _this3.initPixiReal();
-      }, 500);
-      this.initPixi();
-    }
-  }, {
-    key: "initPixiReal",
-    value: function initPixiReal() {
-      if (this.drawer) {
-        this.drawer.stop();
-      }
-
-      console.log('initing pixi');
-      this.drawer = new _BGGrassTiler.default(this.state.screenSize, document.getElementById('site-background'));
-    }
-  }, {
     key: "render",
     value: function render() {
       return _react.default.createElement(_reactRouterDom.BrowserRouter, null, _react.default.createElement(SiteFrame, {
         id: "site-frame",
         "data-id": "site-frame"
-      }, _react.default.createElement(Background, {
-        id: "site-background"
-      }), _react.default.createElement(_Navbar.default, null), _react.default.createElement(Content, null, _react.default.createElement(_reactRouterDom.Switch, null, _react.default.createElement(_reactRouterDom.Route, {
+      }, _react.default.createElement(_Navbar.default, null), _react.default.createElement(Content, null, _react.default.createElement(_reactRouterDom.Switch, null, _react.default.createElement(_reactRouterDom.Route, {
         path: "/",
         exact: true,
         component: _Homepage.default
@@ -77128,7 +77003,1246 @@ function (_Component) {
 }(_react.Component);
 
 exports.default = App;
-},{"react":"../node_modules/react/index.js","lodash":"../node_modules/lodash/lodash.js","react-router-dom":"../node_modules/react-router-dom/es/index.js","styled-components":"../node_modules/styled-components/dist/styled-components.browser.esm.js","./../../js/BGGrassTiler":"js/BGGrassTiler.js","../Navbar":"components/Navbar/index.js","../Homepage":"components/Homepage/index.js","../Article":"components/Article/index.js","../Category":"components/Category/index.js"}],"js/main.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","lodash":"../node_modules/lodash/lodash.js","react-router-dom":"../node_modules/react-router-dom/es/index.js","styled-components":"../node_modules/styled-components/dist/styled-components.browser.esm.js","./../../js/BGGrassTiler":"js/BGGrassTiler.js","../Navbar":"components/Navbar/index.js","../Homepage":"components/Homepage/index.js","../Article":"components/Article/index.js","../Category":"components/Category/index.js"}],"../node_modules/machina/lib/machina.js":[function(require,module,exports) {
+var define;
+/*!
+ *  * machina - A library for creating powerful and flexible finite state machines. Loosely inspired by Erlang/OTP's gen_fsm behavior.
+ *  * Author: Jim Cowart (http://ifandelse.com)
+ *  * Version: v4.0.2
+ *  * Url: http://machina-js.org/
+ *  * License(s): 
+ */
+(function webpackUniversalModuleDefinition(root, factory) {
+  if (typeof exports === 'object' && typeof module === 'object') module.exports = factory(require("lodash"));else if (typeof define === 'function' && define.amd) define(["lodash"], factory);else if (typeof exports === 'object') exports["machina"] = factory(require("lodash"));else root["machina"] = factory(root["_"]);
+})(this, function (__WEBPACK_EXTERNAL_MODULE_1__) {
+  return (
+    /******/
+    function (modules) {
+      // webpackBootstrap
+
+      /******/
+      // The module cache
+
+      /******/
+      var installedModules = {};
+      /******/
+
+      /******/
+      // The require function
+
+      /******/
+
+      function __webpack_require__(moduleId) {
+        /******/
+
+        /******/
+        // Check if module is in cache
+
+        /******/
+        if (installedModules[moduleId])
+          /******/
+          return installedModules[moduleId].exports;
+        /******/
+
+        /******/
+        // Create a new module (and put it into the cache)
+
+        /******/
+
+        var module = installedModules[moduleId] = {
+          /******/
+          exports: {},
+
+          /******/
+          id: moduleId,
+
+          /******/
+          loaded: false
+          /******/
+
+        };
+        /******/
+
+        /******/
+        // Execute the module function
+
+        /******/
+
+        modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+        /******/
+
+        /******/
+        // Flag the module as loaded
+
+        /******/
+
+        module.loaded = true;
+        /******/
+
+        /******/
+        // Return the exports of the module
+
+        /******/
+
+        return module.exports;
+        /******/
+      }
+      /******/
+
+      /******/
+
+      /******/
+      // expose the modules object (__webpack_modules__)
+
+      /******/
+
+
+      __webpack_require__.m = modules;
+      /******/
+
+      /******/
+      // expose the module cache
+
+      /******/
+
+      __webpack_require__.c = installedModules;
+      /******/
+
+      /******/
+      // __webpack_public_path__
+
+      /******/
+
+      __webpack_require__.p = "";
+      /******/
+
+      /******/
+      // Load entry module and return exports
+
+      /******/
+
+      return __webpack_require__(0);
+      /******/
+    }(
+    /************************************************************************/
+
+    /******/
+    [
+    /* 0 */
+
+    /***/
+    function (module, exports, __webpack_require__) {
+      var _ = __webpack_require__(1);
+
+      var emitter = __webpack_require__(2);
+
+      module.exports = _.merge(emitter.instance, {
+        Fsm: __webpack_require__(5),
+        BehavioralFsm: __webpack_require__(6),
+        utils: __webpack_require__(3),
+        eventListeners: {
+          newFsm: []
+        }
+      });
+      /***/
+    },
+    /* 1 */
+
+    /***/
+    function (module, exports) {
+      module.exports = __WEBPACK_EXTERNAL_MODULE_1__;
+      /***/
+    },
+    /* 2 */
+
+    /***/
+    function (module, exports, __webpack_require__) {
+      var utils = __webpack_require__(3);
+
+      var _ = __webpack_require__(1);
+
+      function getInstance() {
+        return {
+          emit: function (eventName) {
+            var args = utils.getLeaklessArgs(arguments);
+
+            if (this.eventListeners["*"]) {
+              _.each(this.eventListeners["*"], function (callback) {
+                if (!this.useSafeEmit) {
+                  callback.apply(this, args);
+                } else {
+                  try {
+                    callback.apply(this, args);
+                  } catch (exception) {
+                    /* istanbul ignore else  */
+                    if (console && typeof console.log !== "undefined") {
+                      console.log(exception.stack);
+                    }
+                  }
+                }
+              }.bind(this));
+            }
+
+            if (this.eventListeners[eventName]) {
+              _.each(this.eventListeners[eventName], function (callback) {
+                if (!this.useSafeEmit) {
+                  callback.apply(this, args.slice(1));
+                } else {
+                  try {
+                    callback.apply(this, args.slice(1));
+                  } catch (exception) {
+                    /* istanbul ignore else  */
+                    if (console && typeof console.log !== "undefined") {
+                      console.log(exception.stack);
+                    }
+                  }
+                }
+              }.bind(this));
+            }
+          },
+          on: function (eventName, callback) {
+            var self = this;
+            self.eventListeners = self.eventListeners || {
+              "*": []
+            };
+
+            if (!self.eventListeners[eventName]) {
+              self.eventListeners[eventName] = [];
+            }
+
+            self.eventListeners[eventName].push(callback);
+            return {
+              eventName: eventName,
+              callback: callback,
+              off: function () {
+                self.off(eventName, callback);
+              }
+            };
+          },
+          off: function (eventName, callback) {
+            this.eventListeners = this.eventListeners || {
+              "*": []
+            };
+
+            if (!eventName) {
+              this.eventListeners = {};
+            } else {
+              if (callback) {
+                this.eventListeners[eventName] = _.without(this.eventListeners[eventName], callback);
+              } else {
+                this.eventListeners[eventName] = [];
+              }
+            }
+          }
+        };
+      }
+
+      module.exports = {
+        getInstance: getInstance,
+        instance: getInstance()
+      };
+      /***/
+    },
+    /* 3 */
+
+    /***/
+    function (module, exports, __webpack_require__) {
+      var slice = [].slice;
+
+      var events = __webpack_require__(4);
+
+      var _ = __webpack_require__(1);
+
+      var makeFsmNamespace = function () {
+        var machinaCount = 0;
+        return function () {
+          return "fsm." + machinaCount++;
+        };
+      }();
+
+      function getDefaultBehavioralOptions() {
+        return {
+          initialState: "uninitialized",
+          eventListeners: {
+            "*": []
+          },
+          states: {},
+          namespace: makeFsmNamespace(),
+          useSafeEmit: false,
+          hierarchy: {},
+          pendingDelegations: {}
+        };
+      }
+
+      function getDefaultClientMeta() {
+        return {
+          inputQueue: [],
+          targetReplayState: "",
+          state: undefined,
+          priorState: undefined,
+          priorAction: "",
+          currentAction: "",
+          currentActionArgs: undefined,
+          inExitHandler: false
+        };
+      }
+
+      function getLeaklessArgs(args, startIdx) {
+        var result = [];
+
+        for (var i = startIdx || 0; i < args.length; i++) {
+          result[i] = args[i];
+        }
+
+        return result;
+      }
+      /*
+      	handle ->
+      		child = stateObj._child && stateObj._child.instance;
+      
+      	transition ->
+      		newStateObj._child = getChildFsmInstance( newStateObj._child );
+      		child = newStateObj._child && newStateObj._child.instance;
+      */
+
+
+      function getChildFsmInstance(config) {
+        if (!config) {
+          return;
+        }
+
+        var childFsmDefinition = {};
+
+        if (typeof config === "object") {
+          // is this a config object with a factory?
+          if (config.factory) {
+            childFsmDefinition = config;
+            childFsmDefinition.instance = childFsmDefinition.factory();
+          } else {
+            // assuming this is a machina instance
+            childFsmDefinition.factory = function () {
+              return config;
+            };
+          }
+        } else if (typeof config === "function") {
+          childFsmDefinition.factory = config;
+        }
+
+        childFsmDefinition.instance = childFsmDefinition.factory();
+        return childFsmDefinition;
+      }
+
+      function listenToChild(fsm, child) {
+        // Need to investigate potential for discarded event
+        // listener memory leak in long-running, deeply-nested hierarchies.
+        return child.on("*", function (eventName, data) {
+          switch (eventName) {
+            case events.NO_HANDLER:
+              if (!data.ticket && !data.delegated && data.namespace !== fsm.namespace) {
+                // Ok - we're dealing w/ a child handling input that should bubble up
+                data.args[1].bubbling = true;
+              } // we do NOT bubble _reset inputs up to the parent
+
+
+              if (data.inputType !== "_reset") {
+                fsm.handle.apply(fsm, data.args);
+              }
+
+              break;
+
+            case events.HANDLING:
+              var ticket = data.ticket;
+
+              if (ticket && fsm.pendingDelegations[ticket]) {
+                delete fsm.pendingDelegations[ticket];
+              }
+
+              fsm.emit(eventName, data); // possibly transform payload?
+
+              break;
+
+            default:
+              fsm.emit(eventName, data); // possibly transform payload?
+
+              break;
+          }
+        });
+      } // _machKeys are members we want to track across the prototype chain of an extended FSM constructor
+      // Since we want to eventually merge the aggregate of those values onto the instance so that FSMs
+      // that share the same extended prototype won't share state *on* those prototypes.
+
+
+      var _machKeys = ["states", "initialState"];
+
+      var extend = function (protoProps, staticProps) {
+        var parent = this;
+        var fsm; // placeholder for instance constructor
+
+        var machObj = {}; // object used to hold initialState & states from prototype for instance-level merging
+
+        var Ctor = function () {}; // placeholder ctor function used to insert level in prototype chain
+        // The constructor function for the new subclass is either defined by you
+        // (the "constructor" property in your `extend` definition), or defaulted
+        // by us to simply call the parent's constructor.
+
+
+        if (protoProps && protoProps.hasOwnProperty("constructor")) {
+          fsm = protoProps.constructor;
+        } else {
+          // The default machina constructor (when using inheritance) creates a
+          // deep copy of the states/initialState values from the prototype and
+          // extends them over the instance so that they'll be instance-level.
+          // If an options arg (args[0]) is passed in, a states or intialState
+          // value will be preferred over any data pulled up from the prototype.
+          fsm = function () {
+            var args = slice.call(arguments, 0);
+            args[0] = args[0] || {};
+            var blendedState;
+            var instanceStates = args[0].states || {};
+            blendedState = _.merge(_.cloneDeep(machObj), {
+              states: instanceStates
+            });
+            blendedState.initialState = args[0].initialState || this.initialState;
+
+            _.extend(args[0], blendedState);
+
+            parent.apply(this, args);
+          };
+        } // Inherit class (static) properties from parent.
+
+
+        _.merge(fsm, parent); // Set the prototype chain to inherit from `parent`, without calling
+        // `parent`'s constructor function.
+
+
+        Ctor.prototype = parent.prototype;
+        fsm.prototype = new Ctor(); // Add prototype properties (instance properties) to the subclass,
+        // if supplied.
+
+        if (protoProps) {
+          _.extend(fsm.prototype, protoProps);
+
+          _.merge(machObj, _.transform(protoProps, function (accum, val, key) {
+            if (_machKeys.indexOf(key) !== -1) {
+              accum[key] = val;
+            }
+          }));
+        } // Add static properties to the constructor function, if supplied.
+
+
+        if (staticProps) {
+          _.merge(fsm, staticProps);
+        } // Correctly set child's `prototype.constructor`.
+
+
+        fsm.prototype.constructor = fsm; // Set a convenience property in case the parent's prototype is needed later.
+
+        fsm.__super__ = parent.prototype;
+        return fsm;
+      };
+
+      function createUUID() {
+        var s = [];
+        var hexDigits = "0123456789abcdef";
+
+        for (var i = 0; i < 36; i++) {
+          s[i] = hexDigits.substr(Math.floor(Math.random() * 0x10), 1);
+        }
+
+        s[14] = "4"; // bits 12-15 of the time_hi_and_version field to 0010
+
+        /* jshint ignore:start */
+
+        s[19] = hexDigits.substr(s[19] & 0x3 | 0x8, 1); // bits 6-7 of the clock_seq_hi_and_reserved to 01
+
+        /* jshint ignore:end */
+
+        s[8] = s[13] = s[18] = s[23] = "-";
+        return s.join("");
+      }
+
+      module.exports = {
+        createUUID: createUUID,
+        extend: extend,
+        getDefaultBehavioralOptions: getDefaultBehavioralOptions,
+        getDefaultOptions: getDefaultBehavioralOptions,
+        getDefaultClientMeta: getDefaultClientMeta,
+        getChildFsmInstance: getChildFsmInstance,
+        getLeaklessArgs: getLeaklessArgs,
+        listenToChild: listenToChild,
+        makeFsmNamespace: makeFsmNamespace
+      };
+      /***/
+    },
+    /* 4 */
+
+    /***/
+    function (module, exports) {
+      module.exports = {
+        NEXT_TRANSITION: "transition",
+        HANDLING: "handling",
+        HANDLED: "handled",
+        NO_HANDLER: "nohandler",
+        TRANSITION: "transition",
+        TRANSITIONED: "transitioned",
+        INVALID_STATE: "invalidstate",
+        DEFERRED: "deferred",
+        NEW_FSM: "newfsm"
+      };
+      /***/
+    },
+    /* 5 */
+
+    /***/
+    function (module, exports, __webpack_require__) {
+      var BehavioralFsm = __webpack_require__(6);
+
+      var utils = __webpack_require__(3);
+
+      var _ = __webpack_require__(1);
+
+      var Fsm = {
+        constructor: function () {
+          BehavioralFsm.apply(this, arguments);
+          this.ensureClientMeta();
+        },
+        initClient: function initClient() {
+          var initialState = this.initialState;
+
+          if (!initialState) {
+            throw new Error("You must specify an initial state for this FSM");
+          }
+
+          if (!this.states[initialState]) {
+            throw new Error("The initial state specified does not exist in the states object.");
+          }
+
+          this.transition(initialState);
+        },
+        ensureClientMeta: function ensureClientMeta() {
+          if (!this._stamped) {
+            this._stamped = true;
+
+            _.defaults(this, _.cloneDeep(utils.getDefaultClientMeta()));
+
+            this.initClient();
+          }
+
+          return this;
+        },
+        ensureClientArg: function (args) {
+          var _args = args; // we need to test the args and verify that if a client arg has
+          // been passed, it must be this FSM instance (this isn't a behavioral FSM)
+
+          if (typeof _args[0] === "object" && !("inputType" in _args[0]) && _args[0] !== this) {
+            _args.splice(0, 1, this);
+          } else if (typeof _args[0] !== "object" || typeof _args[0] === "object" && "inputType" in _args[0]) {
+            _args.unshift(this);
+          }
+
+          return _args;
+        },
+        getHandlerArgs: function (args, isCatchAll) {
+          // index 0 is the client, index 1 is inputType
+          // if we're in a catch-all handler, input type needs to be included in the args
+          // inputType might be an object, so we need to just get the inputType string if so
+          var _args = args;
+          var input = _args[1];
+
+          if (typeof inputType === "object") {
+            _args.splice(1, 1, input.inputType);
+          }
+
+          return isCatchAll ? _args.slice(1) : _args.slice(2);
+        },
+        getSystemHandlerArgs: function (args, client) {
+          return args;
+        },
+        // "classic" machina FSM do not emit the client property on events (which would be the FSM itself)
+        buildEventPayload: function () {
+          var args = this.ensureClientArg(utils.getLeaklessArgs(arguments));
+          var data = args[1];
+
+          if (_.isPlainObject(data)) {
+            return _.extend(data, {
+              namespace: this.namespace
+            });
+          } else {
+            return {
+              data: data || null,
+              namespace: this.namespace
+            };
+          }
+        }
+      };
+
+      _.each(["handle", "transition", "deferUntilTransition", "processQueue", "clearQueue"], function (methodWithClientInjected) {
+        Fsm[methodWithClientInjected] = function () {
+          var args = this.ensureClientArg(utils.getLeaklessArgs(arguments));
+          return BehavioralFsm.prototype[methodWithClientInjected].apply(this, args);
+        };
+      });
+
+      Fsm = BehavioralFsm.extend(Fsm);
+      module.exports = Fsm;
+      /***/
+    },
+    /* 6 */
+
+    /***/
+    function (module, exports, __webpack_require__) {
+      var _ = __webpack_require__(1);
+
+      var utils = __webpack_require__(3);
+
+      var emitter = __webpack_require__(2);
+
+      var topLevelEmitter = emitter.instance;
+
+      var events = __webpack_require__(4);
+
+      var MACHINA_PROP = "__machina__";
+
+      function BehavioralFsm(options) {
+        _.extend(this, options);
+
+        _.defaults(this, utils.getDefaultBehavioralOptions());
+
+        this.initialize.apply(this, arguments);
+        topLevelEmitter.emit(events.NEW_FSM, this);
+      }
+
+      _.extend(BehavioralFsm.prototype, {
+        initialize: function () {},
+        initClient: function initClient(client) {
+          var initialState = this.initialState;
+
+          if (!initialState) {
+            throw new Error("You must specify an initial state for this FSM");
+          }
+
+          if (!this.states[initialState]) {
+            throw new Error("The initial state specified does not exist in the states object.");
+          }
+
+          this.transition(client, initialState);
+        },
+        configForState: function configForState(newState) {
+          var newStateObj = this.states[newState];
+          var child;
+
+          _.each(this.hierarchy, function (childListener, key) {
+            if (childListener && typeof childListener.off === "function") {
+              childListener.off();
+            }
+          });
+
+          if (newStateObj._child) {
+            newStateObj._child = utils.getChildFsmInstance(newStateObj._child);
+            child = newStateObj._child && newStateObj._child.instance;
+            this.hierarchy[child.namespace] = utils.listenToChild(this, child);
+          }
+
+          return child;
+        },
+        ensureClientMeta: function ensureClientMeta(client) {
+          if (typeof client !== "object") {
+            throw new Error("An FSM client must be an object.");
+          }
+
+          client[MACHINA_PROP] = client[MACHINA_PROP] || {};
+
+          if (!client[MACHINA_PROP][this.namespace]) {
+            client[MACHINA_PROP][this.namespace] = _.cloneDeep(utils.getDefaultClientMeta());
+            this.initClient(client);
+          }
+
+          return client[MACHINA_PROP][this.namespace];
+        },
+        buildEventPayload: function (client, data) {
+          if (_.isPlainObject(data)) {
+            return _.extend(data, {
+              client: client,
+              namespace: this.namespace
+            });
+          } else {
+            return {
+              client: client,
+              data: data || null,
+              namespace: this.namespace
+            };
+          }
+        },
+        getHandlerArgs: function (args, isCatchAll) {
+          // index 0 is the client, index 1 is inputType
+          // if we're in a catch-all handler, input type needs to be included in the args
+          // inputType might be an object, so we need to just get the inputType string if so
+          var _args = args.slice(0);
+
+          var input = _args[1];
+
+          if (typeof input === "object") {
+            _args.splice(1, 1, input.inputType);
+          }
+
+          return isCatchAll ? _args : [_args[0]].concat(_args.slice(2));
+        },
+        getSystemHandlerArgs: function (args, client) {
+          return [client].concat(args);
+        },
+        handle: function (client, input) {
+          var inputDef = input;
+
+          if (typeof input === "undefined") {
+            throw new Error("The input argument passed to the FSM's handle method is undefined. Did you forget to pass the input name?");
+          }
+
+          if (typeof input === "string") {
+            inputDef = {
+              inputType: input,
+              delegated: false,
+              ticket: undefined
+            };
+          }
+
+          var clientMeta = this.ensureClientMeta(client);
+          var args = utils.getLeaklessArgs(arguments);
+
+          if (typeof input !== "object") {
+            args.splice(1, 1, inputDef);
+          }
+
+          clientMeta.currentActionArgs = args.slice(1);
+          var currentState = clientMeta.state;
+          var stateObj = this.states[currentState];
+          var handlerName;
+          var handler;
+          var isCatchAll = false;
+          var child;
+          var result;
+          var action;
+
+          if (!clientMeta.inExitHandler) {
+            child = this.configForState(currentState);
+
+            if (child && !this.pendingDelegations[inputDef.ticket] && !inputDef.bubbling) {
+              inputDef.ticket = inputDef.ticket || utils.createUUID();
+              inputDef.delegated = true;
+              this.pendingDelegations[inputDef.ticket] = {
+                delegatedTo: child.namespace
+              }; // WARNING - returning a value from `handle` on child FSMs is not really supported.
+              // If you need to return values from child FSM input handlers, use events instead.
+
+              result = child.handle.apply(child, args);
+            } else {
+              if (inputDef.ticket && this.pendingDelegations[inputDef.ticket]) {
+                delete this.pendingDelegations[inputDef.ticket];
+              }
+
+              handlerName = stateObj[inputDef.inputType] ? inputDef.inputType : "*";
+              isCatchAll = handlerName === "*";
+              handler = stateObj[handlerName] || this[handlerName] || this["*"];
+              action = clientMeta.state + "." + handlerName;
+              clientMeta.currentAction = action;
+              var eventPayload = this.buildEventPayload(client, {
+                inputType: inputDef.inputType,
+                delegated: inputDef.delegated,
+                ticket: inputDef.ticket
+              });
+
+              if (!handler) {
+                this.emit(events.NO_HANDLER, _.extend({
+                  args: args
+                }, eventPayload));
+              } else {
+                this.emit(events.HANDLING, eventPayload);
+
+                if (typeof handler === "function") {
+                  result = handler.apply(this, this.getHandlerArgs(args, isCatchAll));
+                } else {
+                  result = handler;
+                  this.transition(client, handler);
+                }
+
+                this.emit(events.HANDLED, eventPayload);
+              }
+
+              clientMeta.priorAction = clientMeta.currentAction;
+              clientMeta.currentAction = "";
+              clientMeta.currentActionArgs = undefined;
+            }
+          }
+
+          return result;
+        },
+        transition: function (client, newState) {
+          var clientMeta = this.ensureClientMeta(client);
+          var curState = clientMeta.state;
+          var curStateObj = this.states[curState];
+          var newStateObj = this.states[newState];
+          var child;
+          var args = utils.getLeaklessArgs(arguments).slice(2);
+
+          if (!clientMeta.inExitHandler && newState !== curState) {
+            if (newStateObj) {
+              child = this.configForState(newState);
+
+              if (curStateObj && curStateObj._onExit) {
+                clientMeta.inExitHandler = true;
+
+                curStateObj._onExit.call(this, client);
+
+                clientMeta.inExitHandler = false;
+              }
+
+              clientMeta.targetReplayState = newState;
+              clientMeta.priorState = curState;
+              clientMeta.state = newState;
+              var eventPayload = this.buildEventPayload(client, {
+                fromState: clientMeta.priorState,
+                action: clientMeta.currentAction,
+                toState: newState
+              });
+              this.emit(events.TRANSITION, eventPayload);
+
+              if (newStateObj._onEnter) {
+                newStateObj._onEnter.apply(this, this.getSystemHandlerArgs(args, client));
+              }
+
+              this.emit(events.TRANSITIONED, eventPayload);
+
+              if (child) {
+                child.handle(client, "_reset");
+              }
+
+              if (clientMeta.targetReplayState === newState) {
+                this.processQueue(client, events.NEXT_TRANSITION);
+              }
+
+              return;
+            }
+
+            this.emit(events.INVALID_STATE, this.buildEventPayload(client, {
+              state: clientMeta.state,
+              attemptedState: newState
+            }));
+          }
+        },
+        deferUntilTransition: function (client, stateName) {
+          var clientMeta = this.ensureClientMeta(client);
+          var stateList = _.isArray(stateName) ? stateName : stateName ? [stateName] : undefined;
+
+          if (clientMeta.currentActionArgs) {
+            var queued = {
+              type: events.NEXT_TRANSITION,
+              untilState: stateList,
+              args: clientMeta.currentActionArgs
+            };
+            clientMeta.inputQueue.push(queued);
+            var eventPayload = this.buildEventPayload(client, {
+              state: clientMeta.state,
+              queuedArgs: queued
+            });
+            this.emit(events.DEFERRED, eventPayload);
+          }
+        },
+        deferAndTransition: function (client, stateName) {
+          this.deferUntilTransition(client, stateName);
+          this.transition(client, stateName);
+        },
+        processQueue: function (client) {
+          var clientMeta = this.ensureClientMeta(client);
+
+          var filterFn = function (item) {
+            return !item.untilState || _.includes(item.untilState, clientMeta.state);
+          };
+
+          var toProcess = _.filter(clientMeta.inputQueue, filterFn);
+
+          clientMeta.inputQueue = _.difference(clientMeta.inputQueue, toProcess);
+
+          _.each(toProcess, function (item) {
+            this.handle.apply(this, [client].concat(item.args));
+          }.bind(this));
+        },
+        clearQueue: function (client, name) {
+          var clientMeta = this.ensureClientMeta(client);
+
+          if (!name) {
+            clientMeta.inputQueue = [];
+          } else {
+            // first pass we remove the target state from any `untilState` array
+            _.each(clientMeta.inputQueue, function (item) {
+              item.untilState = _.without(item.untilState, name);
+            }); // second pass we clear out deferred events with empty untilState arrays
+
+
+            var filter = function (evnt) {
+              return evnt.untilState.length !== 0;
+            };
+
+            clientMeta.inputQueue = _.filter(clientMeta.inputQueue, filter);
+          }
+        },
+        compositeState: function (client) {
+          var clientMeta = this.ensureClientMeta(client);
+          var state = clientMeta.state;
+          var child = this.states[state]._child && this.states[state]._child.instance;
+
+          if (child) {
+            state += "." + child.compositeState(client);
+          }
+
+          return state;
+        }
+      }, emitter.getInstance());
+
+      BehavioralFsm.extend = utils.extend;
+      module.exports = BehavioralFsm;
+      /***/
+    }])
+  );
+});
+
+;
+},{"lodash":"../node_modules/lodash/lodash.js"}],"js/background.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _lodash = _interopRequireDefault(require("lodash"));
+
+var _machina = require("machina");
+
+var _chromaJs = _interopRequireDefault(require("chroma-js"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+/*
+
+const BG_NONE = Symbol('BG_NONE');
+const BG_STARTED = Symbol('BG_STARTED');
+const BG_STARTING = Symbol('BG_STARTING');
+const BG_ACTIVE = Symbol('BG_ACTIVVE');
+const BG_STOPPING = Symbo('BG_STOPPING');
+const BG_STOPPED = Symbol('BG_STOPPED');
+*/
+var WHITE = (0, _chromaJs.default)(255, 255, 255).num();
+var BLACK = (0, _chromaJs.default)(0, 0, 0).num();
+var SQUARE1 = (0, _chromaJs.default)(102, 102, 102).num();
+var SQUARE2 = (0, _chromaJs.default)(204, 204, 204).num();
+var TIME_MAX = 8000;
+
+var Backgrounder =
+/*#__PURE__*/
+function () {
+  function Backgrounder(monitor, fsm) {
+    var _this = this;
+
+    _classCallCheck(this, Backgrounder);
+
+    this.monitor = monitor;
+    this.fsm = fsm;
+    console.log('new background');
+    this.cycle = 0;
+    monitor.timer.add(function (time) {
+      return _this.update(time);
+    });
+  }
+
+  _createClass(Backgrounder, [{
+    key: "setSize",
+    value: function setSize(x, y) {
+      this._size = {
+        width: x,
+        height: y
+      };
+      this.sizes = [x, y];
+      this.xy = {
+        x: x,
+        y: y
+      };
+    }
+  }, {
+    key: "update",
+    value: function update(time) {
+      this.cycle += time;
+      this.cycle %= TIME_MAX;
+      this.o.scale.set(this.scale, this.scale);
+      var blurrer = new PIXI.filters.BlurFilter();
+      blurrer.blur = 6 + 5 * this.scale;
+      this.o.filters = [blurrer];
+      this.o.angle = this.rotAngle;
+    }
+  }, {
+    key: "start",
+    value: function start() {
+      console.log('Backgrounder.start', this.fsm.state);
+      var container = document.getElementById('site-background');
+      this.setSize(container.clientWidth, container.clientHeight);
+      container.innerHTML = ''; // wipe out any old canvas -- should be done in stop but just in case.
+
+      this.app = new PIXI.Application(this.size);
+      container.appendChild(this.app.view);
+      this.o = new PIXI.Container();
+      this.o.position.set(this.relX(0.5), this.relY(0.5));
+      var blur = new PIXI.filters.BlurFilter();
+      this.o.filters = [blur];
+      console.log('o position: ', this.o.position);
+      this.app.stage.addChild(this.o);
+      this.draw();
+    }
+  }, {
+    key: "stop",
+    value: function stop() {
+      console.log('Backgrounder.stop', this.fsm.state);
+    }
+  }, {
+    key: "kill",
+    value: function kill() {
+      console.log('Backgrounder.kill', this.fsm.state);
+      this.stop();
+    }
+  }, {
+    key: "oX",
+    value: function oX(x) {
+      var clamp = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
+      var dX = this.width * x;
+      return clamp ? _lodash.default.clamp(dX, this.width / -2, this.width / 2) : dX;
+    }
+  }, {
+    key: "oY",
+    value: function oY(x) {
+      var clamp = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
+      var dX = this.height * x;
+      return clamp ? _lodash.default.clamp(dX, this.height / -2, this.height / 2) : dX;
+    }
+  }, {
+    key: "relX",
+    value: function relX(x) {
+      var clamp = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
+      var dX = this.width * x;
+      return clamp ? _lodash.default.clamp(dX, 0, this.width) : dX;
+    }
+  }, {
+    key: "relY",
+    value: function relY(y) {
+      var clamp = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
+      var dY = this.height * y;
+      return clamp ? _lodash.default.clamp(dY, 0, this.height) : dY;
+    }
+  }, {
+    key: "drawBoard",
+    value: function drawBoard() {
+      var g = new PIXI.Graphics();
+      var squareSize;
+
+      if (this.width > this.height) {
+        squareSize = this.width / 8;
+      } else {
+        squareSize = this.height / 8;
+      }
+
+      var isWhite = true;
+
+      for (var i = -4; i < 4; ++i) {
+        for (var j = -4; j < 4; ++j) {
+          var color = (j + 200) % 2 === (i + 200) % 2 ? SQUARE1 : SQUARE2;
+          isWhite = !isWhite;
+          g.beginFill(color);
+          g.drawRect(i * squareSize, j * squareSize, squareSize, squareSize);
+          g.endFill();
+          console.log('drawing ', i, j, 'color: ', color);
+          g.lineStyle(1, (0, _chromaJs.default)(255, 0, 0));
+          g.drawRect(i * squareSize, j * squareSize, squareSize, squareSize);
+          g.lineStyle(0);
+        }
+      }
+
+      this.o.addChild(g);
+    }
+  }, {
+    key: "draw",
+    value: function draw() {
+      this.drawBoard();
+    }
+  }, {
+    key: "rotAngle",
+    get: function get() {
+      var a = this.cycle * 4 % TIME_MAX;
+      a *= 360 / TIME_MAX;
+      return a;
+    }
+  }, {
+    key: "scale",
+    get: function get() {
+      var scaleAngle = this.cycle % TIME_MAX;
+      scaleAngle *= Math.PI * 2 / TIME_MAX;
+      var sin = Math.sin(scaleAngle);
+      return 1 + sin / 2;
+    }
+  }, {
+    key: "size",
+    get: function get() {
+      return this._size || {
+        width: 0,
+        height: 0
+      };
+    }
+  }, {
+    key: "width",
+    get: function get() {
+      return this.size.width;
+    }
+  }, {
+    key: "height",
+    get: function get() {
+      return this.size.height;
+    }
+  }]);
+
+  return Backgrounder;
+}();
+
+var addEvent = function addEvent(object, type, callback) {
+  if (object == null || typeof object == 'undefined') {
+    return;
+  }
+
+  if (object.addEventListener) {
+    object.addEventListener(type, callback, false);
+  } else if (object.attachEvent) {
+    object.attachEvent('on' + type, callback);
+  } else {
+    object['on' + type] = callback;
+  }
+};
+
+var Monitor = function Monitor() {
+  var _this2 = this;
+
+  _classCallCheck(this, Monitor);
+
+  var self = this;
+  this.timer = new PIXI.Ticker();
+  this.timer.start();
+  this.status = new _machina.Fsm({
+    namespace: 'monitor',
+    initialState: 'BG_NONE',
+    states: {
+      initialize: {
+        namespace: 'monitor',
+        '*': function _() {
+          this.deferUntilTransition();
+          this.transition('BG_NONE');
+        }
+      },
+      // ------ END INITIALIZE
+      BG_NONE: {
+        _onEnter: function _onEnter() {
+          if (self.background) {
+            self.background.kill();
+            self.background = null;
+          }
+        },
+        _stop: function _stop() {
+          if (self.background) {
+            // should not ever happen
+            self.background.kill();
+            self.background = null;
+          } // in any event, no transition necessary
+
+        },
+        _start: function _start() {
+          if (self.background) {
+            // should never happen
+            self.background.kill();
+            self.background = null;
+          }
+
+          this.transition('BG_STARTING');
+        }
+      },
+      // ----- END BG_NONE
+      BG_STARTING: {
+        _onEnter: function _onEnter() {
+          if (!self.background) {
+            self.background = new Backgrounder(self, this);
+          }
+
+          self.background.start();
+          this.transition('BG_STARTED');
+        },
+        _stop: 'BG_STOPPING'
+      },
+      // ----- END BG_STARTING
+      BG_STARTED: {
+        _stop: 'BG_STOPPING'
+      },
+      // ----- END BG_STARTED
+      BG_STOPPING: {
+        _onEnter: function _onEnter() {
+          if (self.background) {
+            // should ALWAYS happen
+            self.background.kill();
+            self.background = null;
+          }
+
+          this.transition('BG_STOPPED');
+        }
+      },
+      // ----- END BG_STOPPING
+      BG_STOPPED: {
+        _onEnter: function _onEnter() {
+          if (self.background) {
+            // should ALWAYS happen
+            self.background.kill();
+            self.background = null;
+          }
+
+          this.transition('BG_NONE');
+        }
+      } // ----- END BG_STOPPED
+      // ------ end states
+
+    },
+    start: function start() {
+      this.handle('_start');
+    },
+    stop: function stop() {
+      this.handle('_stop');
+    }
+  });
+
+  var resizeEnd = _lodash.default.debounce(function () {
+    _this2.status.start();
+  }, 500);
+
+  addEvent(window, 'resize', function () {
+    _this2.status.stop();
+
+    resizeEnd();
+  });
+  this.status.on('transition', function (_ref) {
+    var fromState = _ref.fromState,
+        toState = _ref.toState;
+    console.log('monitor transition: ', fromState, '...', toState);
+  });
+  this.status.start();
+};
+
+var _default = Monitor;
+exports.default = _default;
+},{"lodash":"../node_modules/lodash/lodash.js","machina":"../node_modules/machina/lib/machina.js","chroma-js":"../node_modules/chroma-js/chroma.js"}],"js/main.js":[function(require,module,exports) {
 "use strict";
 
 var _react = _interopRequireDefault(require("react"));
@@ -77137,10 +78251,13 @@ var _reactDom = require("react-dom");
 
 var _App = _interopRequireDefault(require("../components/App/App"));
 
+var _background = _interopRequireDefault(require("./background"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+var mon = new _background.default();
 (0, _reactDom.render)(_react.default.createElement(_App.default, null), document.getElementById("app"));
-},{"react":"../node_modules/react/index.js","react-dom":"../node_modules/react-dom/index.js","../components/App/App":"components/App/App.jsx"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","react-dom":"../node_modules/react-dom/index.js","../components/App/App":"components/App/App.jsx","./background":"js/background.js"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -77167,7 +78284,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55583" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52960" + '/');
 
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);

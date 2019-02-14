@@ -14,7 +14,6 @@ export default class ArticleContainer extends Component {
         'https://wonderland-labs.herokuapp.com/api/articles/'
         + encodeURIComponent(this.state.path)
       ).then(result => {
-        console.log('result:', result);
         this.setState({...result.data, loaded: true});
       })
         .catch(err => {

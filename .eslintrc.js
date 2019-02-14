@@ -19,7 +19,8 @@ module.exports = {
       }
   },
   "globals": {
-    "PIXI": "true"
+    "PIXI": "true",
+    "window": "true",
   },
   "rules":
     {

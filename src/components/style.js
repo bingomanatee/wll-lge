@@ -2,10 +2,9 @@ import sc from "styled-components";
 import {Link} from "react-router-dom";
 import {SMALL_NAV} from "../constants";
 
-const BG_COLOR = 'rgba(255,255,204,0.85)';
-const GREEN_MASK = 'rgba(255,204,100,0.5)';
-const GREEN_MASK_THICK = 'rgba(255,204,100,0.95)';
-const ARTICLE_LINK_BACK = 'rgba(51,25,12,0.95)';
+const BUTTON_MASK = 'rgba(200,200,200,0.5)';
+const CONTENT_MASK = 'rgb(255,255,255)';
+const ARTICLE_LINK_BACK = 'rgba(128,128,128,0.95)';
 const HEADLINE_FONT = `'Merriweather Sans', sans-serif`;
 
 export const SiteHeadline = sc.h1`
@@ -18,7 +17,7 @@ font-size: 2rem;
 margin: 0;
 padding: 0;
 line-height: 100%;
-background-color: ${GREEN_MASK};
+background-color: ${BUTTON_MASK};
 text-shadow: 2px 2px 2px #FFFFFF;
 @media(max-width: 800px) {
   font-size: 1rem;
@@ -69,7 +68,7 @@ text-transform: uppercase;
 margins: 0;
   padding: 0 4rem;
 text-shadow: 2px 2px 2px #000000;
-background-color: ${GREEN_MASK};
+background-color: ${BUTTON_MASK};
 @media(max-width: ${SMALL_NAV}) {
 font-size: 1rem;
 padding: 0;
@@ -89,10 +88,10 @@ const n2 = '4px';
 
 export const Text = sc.div`
 padding: 0.5rem 2rem;
-background-color: ${GREEN_MASK_THICK};
--webkit-box-shadow: 0px 0px ${n1} ${n2} ${GREEN_MASK_THICK};
--moz-box-shadow: 0px 0px ${n1} ${n2} ${GREEN_MASK_THICK};
-box-shadow: 0px 0px ${n1} ${n2} ${GREEN_MASK_THICK};
+background-color: ${CONTENT_MASK};
+-webkit-box-shadow: 0px 0px ${n1} ${n2} ${CONTENT_MASK};
+-moz-box-shadow: 0px 0px ${n1} ${n2} ${CONTENT_MASK};
+box-shadow: 0px 0px ${n1} ${n2} ${CONTENT_MASK};
 font-family: 'Cormorant Garamond',Georgia,serif;
 font-size: 1.1rem;
 
@@ -125,7 +124,7 @@ margin-top: 4px;
 `;
 
 export const CategoryView = sc(Link)`
-background-color: ${GREEN_MASK};
+background-color: ${BUTTON_MASK};
 color: black;
 display: block;
 padding: 0rem 0.25rem;

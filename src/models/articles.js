@@ -6,7 +6,6 @@ const articles = new Store({
   starter: ({actions}) => {
     axios.get('https://wonderland-labs.herokuapp.com/api/homepage-articles')
       .then((response) => {
-        console.log('response from get homepage articles;', response);
         actions.setHomepageArticles(response.data);
       });
   }

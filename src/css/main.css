@@ -302,6 +302,17 @@ textarea {
   position: fixed;
 }
 
+#site-background {
+  background: black;
+  z-index: -1000;
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  left: 0;
+  top: 0;
+  overflow: hidden;
+}
+
 pre {
   white-space: pre-wrap !important;
   margin-top: 0.5rem;
