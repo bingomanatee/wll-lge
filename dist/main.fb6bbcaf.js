@@ -79586,18 +79586,24 @@ function getGame() {
   return _lodash.default.uniq(boards);
 }
 
+var pieceMap = new Map([['p', 'black_pawn'], ['P', 'white_pawn'], ['k', 'black_king'], ['K', 'white_king'], ['black', 'black_bishop'], ['BLACK', 'white_bishop'], ['n', 'black_horse'], ['N', 'white_horse'], ['q', 'black_queen'], ['Q', 'white_queen'], ['1', [false]], ['2', [false, false]], ['3', [false, false, false]], ['4', [false, false, false, false]], ['5', [false, false, false, false, false]], ['6', [false, false, false, false, false, false]], ['7', [false, false, false, false, false, false, false]], ['8', [false, false, false, false, false, false, false, false]]]);
+
+function rowToPieces(row) {
+  var pieces = row.split('').map(function (key) {
+    return pieceMap.get(key);
+  });
+  return _lodash.default.flattenDeep(pieces);
+}
+
+function moveToPieces(move) {
+  return move.split('/').map(rowToPieces);
+}
+
 var WHITE = (0, _chromaJs.default)(255, 255, 255).num();
 var BLACK = (0, _chromaJs.default)(0, 0, 0).num();
 var SQUARE1 = (0, _chromaJs.default)(102, 102, 102).num();
 var SQUARE2 = (0, _chromaJs.default)(204, 204, 204).num();
-var WHITE_PAWN = WHITE;
-var DARK_PAWN = (0, _chromaJs.default)(100, 100, 100).num();
 var TIME_MAX = 8000;
-var PAWN = 'images/pawn.png';
-
-var coinFlip = function coinFlip() {
-  return Math.random() > 0.5;
-};
 
 var Backgrounder =
 /*#__PURE__*/
@@ -79642,7 +79648,6 @@ function () {
       this.o.addChild(this.pieces);
       var blur = new PIXI.filters.BlurFilter();
       this.o.filters = [blur];
-      console.log('o position: ', this.o.position);
       this.app.stage.addChild(this.o);
       this.resize();
       this.draw();
@@ -79666,25 +79671,29 @@ function () {
   }, {
     key: "update",
     value: function update(time) {
+      var _this3 = this;
+
       this.cycle += time;
       this.cycle %= TIME_MAX;
       this.o.scale.set(this.scale, this.scale);
       var blurrer = new PIXI.filters.BlurFilter();
       var blur = 10 - 6 * this.scale;
-      console.log('blur:', Number.parseFloat(blur).toFixed(1));
       blurrer.blur = blur;
       this.o.filters = [blurrer];
       this.o.angle = this.rotAngle;
+      if (this.pieces) this.pieces.children.forEach(function (p) {
+        return p.angle = -_this3.rotAngle;
+      });
     }
   }, {
     key: "resize",
     value: function resize() {
-      var _this3 = this;
+      var _this4 = this;
 
       var container = document.getElementById('site-background');
       this.setSize(container.clientWidth, container.clientHeight);
       requestAnimationFrame(function () {
-        _this3.draw();
+        _this4.draw();
       });
     }
   }, {
@@ -79728,7 +79737,8 @@ function () {
     }
   }, {
     key: "drawBoard",
-    value: function drawBoard(ss) {
+    value: function drawBoard() {
+      var ss = this.squareSize;
       this.board.removeChildren();
       var g = new PIXI.Graphics();
       var isWhite = true;
@@ -79750,34 +79760,38 @@ function () {
       this.board.addChild(g);
     }
   }, {
-    key: "drawPieces",
-    value: function drawPieces(ss) {
-      this.pieces.removeChildren();
-      var isWhite = false;
-      var rescale = ss / 300;
+    key: "move",
+    value: function move() {
+      var _this5 = this;
 
-      for (var i = -3.5; i < 4.5; ++i) {
-        for (var j = -3.5; j < 4.5; ++j) {
-          if (coinFlip() && coinFlip()) continue;
-          isWhite = !isWhite;
-          var pawnContainer = new PIXI.Container();
-          pawnContainer.position.set(i * ss, j * ss);
-          var sprite = PIXI.Sprite.from(PAWN);
-          sprite.anchor.set(0.5);
-          sprite.tint = coinFlip() ? WHITE_PAWN : DARK_PAWN;
-          sprite.scale.set(rescale, rescale);
-          pawnContainer.addChild(sprite);
-          this.pieces.addChild(pawnContainer);
-        }
+      if (!this.game) {
+        return;
       }
+
+      var nextMove = this.game.shift();
+      this.game.push(nextMove);
+      var pieces = moveToPieces(nextMove);
+      var ss = this.squareSize;
+      this.pieces.removeChildren();
+      pieces.forEach(function (row, r) {
+        row.forEach(function (name, c) {
+          if (name) {
+            var sprite = PIXI.Sprite.from('images/pieces/' + name + '.png');
+            var i = r - 3.5;
+            var j = c - 3.5;
+            sprite.anchor.set(0.5);
+            sprite.scale.set(ss / 200 * _this5.scale);
+            sprite.position.set(i * ss, j * ss);
+
+            _this5.pieces.addChild(sprite);
+          }
+        });
+      });
     }
   }, {
     key: "draw",
     value: function draw() {
-      this.o.removeChildren();
-      var ss = this.squareSize;
-      this.drawBoard(ss);
-      this.drawPieces(ss);
+      this.drawBoard();
     }
   }, {
     key: "rotAngle",

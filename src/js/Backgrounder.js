@@ -15,16 +15,43 @@ function getGame() {
   return _.uniq(boards);
 }
 
+const pieceMap = new Map([
+  ['p', 'black_pawn'],
+  ['P', 'white_pawn'],
+  ['k', 'black_king'],
+  ['K', 'white_king'],
+  ['black', 'black_bishop'],
+  ['BLACK', 'white_bishop'],
+  ['n', 'black_horse'],
+  ['N', 'white_horse'],
+  ['q', 'black_queen'],
+  ['Q', 'white_queen'],
+  ['1', [false]],
+  ['2', [false, false]],
+  ['3', [false, false, false]],
+  ['4', [false, false, false, false]],
+  ['5', [false, false, false, false, false]],
+  ['6', [false, false, false, false, false, false]],
+  ['7', [false, false, false, false, false, false, false]],
+  ['8', [false, false, false, false, false, false, false, false]],
+]);
+
+function rowToPieces(row) {
+  const pieces = row.split('').map(key => {
+    return pieceMap.get(key);
+  });
+  return _.flattenDeep(pieces);
+}
+
+function moveToPieces(move) {
+  return move.split('/').map(rowToPieces);
+}
+
 const WHITE = c(255, 255, 255).num();
 const BLACK = c(0, 0, 0).num();
 const SQUARE1 = c(102, 102, 102).num();
 const SQUARE2 = c(204, 204, 204).num();
-const WHITE_PAWN = WHITE;
-const DARK_PAWN = c(100,100,100).num();
 const TIME_MAX = 8000;
-const PAWN = 'images/pawn.png';
-
-const coinFlip = () => Math.random() > 0.5;
 
 class Backgrounder {
   constructor(monitor, fsm) {
@@ -54,7 +81,6 @@ class Backgrounder {
     this.o.addChild(this.pieces);
     const blur = new PIXI.filters.BlurFilter();
     this.o.filters = [blur];
-    console.log('o position: ', this.o.position);
     this.app.stage.addChild(this.o);
     this.resize();
     this.draw();
@@ -74,11 +100,11 @@ class Backgrounder {
     this.cycle %= TIME_MAX;
     this.o.scale.set(this.scale, this.scale);
     let blurrer = new PIXI.filters.BlurFilter();
-    const blur =  10 - 6 * this.scale;
-    console.log('blur:', Number.parseFloat(blur).toFixed(1));
+    const blur = 10 - 6 * this.scale;
     blurrer.blur = blur;
     this.o.filters = [blurrer];
     this.o.angle = this.rotAngle;
+    if (this.pieces) this.pieces.children.forEach(p => p.angle = -this.rotAngle)
   }
 
   get rotAngle() {
@@ -146,10 +172,11 @@ class Backgrounder {
   }
 
   get squareSize() {
-    return Math.max(this.width,this.height) / 8;
+    return Math.max(this.width, this.height) / 8;
   }
 
-  drawBoard(ss) {
+  drawBoard() {
+    const ss = this.squareSize;
     this.board.removeChildren();
 
     let g = new PIXI.Graphics();
@@ -170,31 +197,35 @@ class Backgrounder {
 
     this.board.addChild(g);
   }
-  drawPieces(ss) {
-    this.pieces.removeChildren();
-    let isWhite = false;
-    const rescale = ss/300;
-    for (let i = -3.5; i < 4.5; ++i) {
-      for (let j = -3.5; j < 4.5; ++j) {
-        if(coinFlip() && coinFlip()) continue;
-        isWhite = !isWhite;
-        let pawnContainer = new PIXI.Container();
-        pawnContainer.position.set(i * ss, j * ss);
-        let sprite = PIXI.Sprite.from(PAWN);
-        sprite.anchor.set(0.5);
-        sprite.tint = coinFlip() ? WHITE_PAWN : DARK_PAWN;
-        sprite.scale.set(rescale, rescale);
-        pawnContainer.addChild(sprite);
-        this.pieces.addChild(pawnContainer);
-      }
+
+  move() {
+    if (!this.game) {
+      return;
     }
+    let nextMove = this.game.shift();
+    this.game.push(nextMove);
+    let pieces = moveToPieces(nextMove);
+    const ss = this.squareSize;
+
+    this.pieces.removeChildren();
+
+    pieces.forEach((row, r) => {
+      row.forEach((name, c) => {
+        if (name) {
+          const sprite = PIXI.Sprite.from('images/pieces/' + name + '.png');
+          let i = r - 3.5;
+          let j = c - 3.5;
+          sprite.anchor.set(0.5);
+          sprite.scale.set(ss/200 * this.scale);
+          sprite.position.set(i * ss, j * ss);
+          this.pieces.addChild(sprite);
+        }
+      });
+    });
   }
 
   draw() {
-    this.o.removeChildren();
-    const ss = this.squareSize;
-    this.drawBoard(ss);
-    this.drawPieces(ss);
+    this.drawBoard();
   }
 }
 
