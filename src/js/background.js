@@ -14,9 +14,33 @@ const BG_STOPPED = Symbol('BG_STOPPED');
 
 const WHITE = c(255, 255, 255).num();
 const BLACK = c(0, 0, 0).num();
-const SQUARE1 = c(102,102,102).num();
-const SQUARE2 = c(204,204,204).num();
-const TIME_MAX = 8000;
+const DARK_GREY = c(100,100,100).num();
+const SQUARE1 = c(102, 102, 102).num();
+const SQUARE2 = c(204, 204, 204).num();
+const TIME_MAX = 10000;
+
+const PAWN = 'images/pawn.png';
+let _gpiPromise;
+
+function getPawnImage() {
+  if (!_gpiPromise) {
+    _gpiPromise = new Promise((done, fail) => {
+      try {
+        PIXI.loader.add(PAWN)
+          .load(done);
+      } catch (err) {
+        console.log('err.message:', err.message);
+        if (/Resource named "images\/pawn.png" already exists./.test(err.message)) {
+          done();
+        }
+        else {
+          fail(err);
+        }
+      }
+    });
+  }
+  return _gpiPromise;
+}
 
 class Backgrounder {
   constructor(monitor, fsm) {
@@ -24,7 +48,9 @@ class Backgrounder {
     this.fsm = fsm;
     console.log('new background');
     this.cycle = 0;
-    monitor.timer.add((time) => this.update(time));
+    this.updateBound = (time) => this.update(time);
+    monitor.timer.add(this.updateBound);
+    this.pawns = [];
   }
 
   setSize(x, y) {
@@ -38,24 +64,26 @@ class Backgrounder {
     this.cycle %= TIME_MAX;
     this.o.scale.set(this.scale, this.scale);
     let blurrer = new PIXI.filters.BlurFilter();
-    blurrer.blur = 6 + 5 * this.scale;
+    blurrer.blur = 20 - 9 * this.scale;
+    blurrer.resolution = 0.5;
+    blurrer.padding = 10;
     this.o.filters = [blurrer];
     this.o.angle = this.rotAngle;
   }
 
   get rotAngle() {
     let a = (this.cycle * 4) % TIME_MAX;
-     a *= 360/ TIME_MAX;
-     return a;
+    a *= 360 / TIME_MAX;
+    return a;
   }
 
   get scale() {
     let scaleAngle = this.cycle % TIME_MAX;
-    scaleAngle *= Math.PI * 2/ TIME_MAX;
+    scaleAngle *= Math.PI * 2 / TIME_MAX;
 
     let sin = Math.sin(scaleAngle);
 
-    return 1 + sin/2;
+    return 1.5 + sin / 2;
   }
 
   get size() {
@@ -80,6 +108,8 @@ class Backgrounder {
 
   stop() {
     console.log('Backgrounder.stop', this.fsm.state);
+    this.monitor.timer.remove(this.updateBound);
+    this.stopped = true;
   }
 
   kill() {
@@ -115,14 +145,34 @@ class Backgrounder {
     return clamp ? _.clamp(dY, 0, this.height) : dY;
   }
 
+  get squareSize() {
+    return Math.min(this.width, this.width) / 8;
+  }
+
+  drawPawns() {
+    let c = new PIXI.Container();
+
+    const ss = this.squareSize;
+    for (let i = -4; i < 4; ++i) {
+      for (let j = -4; j < 4; ++j) {
+        if (Math.random() > 0.5) continue;
+        let s = PIXI.Sprite.from(PAWN);
+        s.anchor.set(0.5, 0.8);
+        s.scale.set(ss / 500);
+        s.position.set(ss * i + ss / 2, ss * j + ss / 2);
+        if(Math.random()< 0.5) s.tint = DARK_GREY;
+        c.addChild(s);
+        console.log('drawing pawns at ', s.position);
+      }
+    }
+
+    this.o.addChild(c);
+  }
+
   drawBoard() {
     let g = new PIXI.Graphics();
-    let squareSize;
-    if (this.width > this.height) {
-      squareSize = this.width / 8;
-    } else {
-      squareSize = this.height / 8;
-    }
+
+    const ss = this.squareSize;
 
     let isWhite = true;
     for (let i = -4; i < 4; ++i) {
@@ -130,12 +180,8 @@ class Backgrounder {
         let color = ((j + 200) % 2 === (i + 200) % 2) ? SQUARE1 : SQUARE2;
         isWhite = !isWhite;
         g.beginFill(color);
-        g.drawRect(i * squareSize, j * squareSize, squareSize, squareSize);
+        g.drawRect(i * ss, j * ss, ss, ss);
         g.endFill();
-        console.log('drawing ', i, j, 'color: ', color);
-        g.lineStyle(1, c(255, 0, 0));
-        g.drawRect(i * squareSize, j * squareSize, squareSize, squareSize);
-        g.lineStyle(0);
       }
     }
     this.o.addChild(g);
@@ -143,18 +189,24 @@ class Backgrounder {
 
   draw() {
     this.drawBoard();
+    getPawnImage().then(() => this.drawPawns())
+      .catch(err => {
+        console.log('error getting pawns: ', err);
+      });
   }
 }
 
 var addEvent = function (object, type, callback) {
-  if (object == null || typeof (object) == 'undefined') {
+  if (object == null || typeof (object) === 'undefined') {
     return;
   }
   if (object.addEventListener) {
     object.addEventListener(type, callback, false);
-  } else if (object.attachEvent) {
+  }
+  else if (object.attachEvent) {
     object.attachEvent('on' + type, callback);
-  } else {
+  }
+  else {
     object['on' + type] = callback;
   }
 };

@@ -77938,9 +77938,33 @@ const BG_STOPPED = Symbol('BG_STOPPED');
 */
 var WHITE = (0, _chromaJs.default)(255, 255, 255).num();
 var BLACK = (0, _chromaJs.default)(0, 0, 0).num();
+var DARK_GREY = (0, _chromaJs.default)(100, 100, 100).num();
 var SQUARE1 = (0, _chromaJs.default)(102, 102, 102).num();
 var SQUARE2 = (0, _chromaJs.default)(204, 204, 204).num();
-var TIME_MAX = 8000;
+var TIME_MAX = 10000;
+var PAWN = 'images/pawn.png';
+
+var _gpiPromise;
+
+function getPawnImage() {
+  if (!_gpiPromise) {
+    _gpiPromise = new Promise(function (done, fail) {
+      try {
+        PIXI.loader.add(PAWN).load(done);
+      } catch (err) {
+        console.log('err.message:', err.message);
+
+        if (/Resource named "images\/pawn.png" already exists./.test(err.message)) {
+          done();
+        } else {
+          fail(err);
+        }
+      }
+    });
+  }
+
+  return _gpiPromise;
+}
 
 var Backgrounder =
 /*#__PURE__*/
@@ -77954,9 +77978,13 @@ function () {
     this.fsm = fsm;
     console.log('new background');
     this.cycle = 0;
-    monitor.timer.add(function (time) {
+
+    this.updateBound = function (time) {
       return _this.update(time);
-    });
+    };
+
+    monitor.timer.add(this.updateBound);
+    this.pawns = [];
   }
 
   _createClass(Backgrounder, [{
@@ -77979,7 +78007,9 @@ function () {
       this.cycle %= TIME_MAX;
       this.o.scale.set(this.scale, this.scale);
       var blurrer = new PIXI.filters.BlurFilter();
-      blurrer.blur = 6 + 5 * this.scale;
+      blurrer.blur = 20 - 9 * this.scale;
+      blurrer.resolution = 0.5;
+      blurrer.padding = 10;
       this.o.filters = [blurrer];
       this.o.angle = this.rotAngle;
     }
@@ -78005,6 +78035,8 @@ function () {
     key: "stop",
     value: function stop() {
       console.log('Backgrounder.stop', this.fsm.state);
+      this.monitor.timer.remove(this.updateBound);
+      this.stopped = true;
     }
   }, {
     key: "kill",
@@ -78041,17 +78073,31 @@ function () {
       return clamp ? _lodash.default.clamp(dY, 0, this.height) : dY;
     }
   }, {
+    key: "drawPawns",
+    value: function drawPawns() {
+      var c = new PIXI.Container();
+      var ss = this.squareSize;
+
+      for (var i = -4; i < 4; ++i) {
+        for (var j = -4; j < 4; ++j) {
+          if (Math.random() > 0.5) continue;
+          var s = PIXI.Sprite.from(PAWN);
+          s.anchor.set(0.5, 0.8);
+          s.scale.set(ss / 500);
+          s.position.set(ss * i + ss / 2, ss * j + ss / 2);
+          if (Math.random() < 0.5) s.tint = DARK_GREY;
+          c.addChild(s);
+          console.log('drawing pawns at ', s.position);
+        }
+      }
+
+      this.o.addChild(c);
+    }
+  }, {
     key: "drawBoard",
     value: function drawBoard() {
       var g = new PIXI.Graphics();
-      var squareSize;
-
-      if (this.width > this.height) {
-        squareSize = this.width / 8;
-      } else {
-        squareSize = this.height / 8;
-      }
-
+      var ss = this.squareSize;
       var isWhite = true;
 
       for (var i = -4; i < 4; ++i) {
@@ -78059,12 +78105,8 @@ function () {
           var color = (j + 200) % 2 === (i + 200) % 2 ? SQUARE1 : SQUARE2;
           isWhite = !isWhite;
           g.beginFill(color);
-          g.drawRect(i * squareSize, j * squareSize, squareSize, squareSize);
+          g.drawRect(i * ss, j * ss, ss, ss);
           g.endFill();
-          console.log('drawing ', i, j, 'color: ', color);
-          g.lineStyle(1, (0, _chromaJs.default)(255, 0, 0));
-          g.drawRect(i * squareSize, j * squareSize, squareSize, squareSize);
-          g.lineStyle(0);
         }
       }
 
@@ -78073,7 +78115,14 @@ function () {
   }, {
     key: "draw",
     value: function draw() {
+      var _this2 = this;
+
       this.drawBoard();
+      getPawnImage().then(function () {
+        return _this2.drawPawns();
+      }).catch(function (err) {
+        console.log('error getting pawns: ', err);
+      });
     }
   }, {
     key: "rotAngle",
@@ -78088,7 +78137,7 @@ function () {
       var scaleAngle = this.cycle % TIME_MAX;
       scaleAngle *= Math.PI * 2 / TIME_MAX;
       var sin = Math.sin(scaleAngle);
-      return 1 + sin / 2;
+      return 1.5 + sin / 2;
     }
   }, {
     key: "size",
@@ -78108,13 +78157,18 @@ function () {
     get: function get() {
       return this.size.height;
     }
+  }, {
+    key: "squareSize",
+    get: function get() {
+      return Math.min(this.width, this.width) / 8;
+    }
   }]);
 
   return Backgrounder;
 }();
 
 var addEvent = function addEvent(object, type, callback) {
-  if (object == null || typeof object == 'undefined') {
+  if (object == null || typeof object === 'undefined') {
     return;
   }
 
@@ -78128,7 +78182,7 @@ var addEvent = function addEvent(object, type, callback) {
 };
 
 var Monitor = function Monitor() {
-  var _this2 = this;
+  var _this3 = this;
 
   _classCallCheck(this, Monitor);
 
@@ -78224,11 +78278,11 @@ var Monitor = function Monitor() {
   });
 
   var resizeEnd = _lodash.default.debounce(function () {
-    _this2.status.start();
+    _this3.status.start();
   }, 500);
 
   addEvent(window, 'resize', function () {
-    _this2.status.stop();
+    _this3.status.stop();
 
     resizeEnd();
   });
@@ -78284,7 +78338,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52960" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "60254" + '/');
 
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
