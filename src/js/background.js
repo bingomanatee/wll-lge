@@ -1,198 +1,6 @@
 import _ from 'lodash';
 import {Fsm} from 'machina';
-import c from 'chroma-js';
-
-/*
-
-const BG_NONE = Symbol('BG_NONE');
-const BG_STARTED = Symbol('BG_STARTED');
-const BG_STARTING = Symbol('BG_STARTING');
-const BG_ACTIVE = Symbol('BG_ACTIVVE');
-const BG_STOPPING = Symbo('BG_STOPPING');
-const BG_STOPPED = Symbol('BG_STOPPED');
-*/
-
-const WHITE = c(255, 255, 255).num();
-const BLACK = c(0, 0, 0).num();
-const DARK_GREY = c(100,100,100).num();
-const SQUARE1 = c(102, 102, 102).num();
-const SQUARE2 = c(204, 204, 204).num();
-const TIME_MAX = 10000;
-
-const PAWN = 'images/pawn.png';
-let _gpiPromise;
-
-function getPawnImage() {
-  if (!_gpiPromise) {
-    _gpiPromise = new Promise((done, fail) => {
-      try {
-        PIXI.loader.add(PAWN)
-          .load(done);
-      } catch (err) {
-        console.log('err.message:', err.message);
-        if (/Resource named "images\/pawn.png" already exists./.test(err.message)) {
-          done();
-        }
-        else {
-          fail(err);
-        }
-      }
-    });
-  }
-  return _gpiPromise;
-}
-
-class Backgrounder {
-  constructor(monitor, fsm) {
-    this.monitor = monitor;
-    this.fsm = fsm;
-    this.cycle = 0;
-    this.updateBound = (time) => this.update(time);
-    monitor.timer.add(this.updateBound);
-    this.pawns = [];
-  }
-
-  setSize(x, y) {
-    this._size = {width: x, height: y};
-    this.sizes = [x, y];
-    this.xy = {x, y};
-  }
-
-  update(time) {
-    this.cycle += time;
-    this.cycle %= TIME_MAX;
-    this.o.scale.set(this.scale, this.scale);
-    let blurrer = new PIXI.filters.BlurFilter();
-    blurrer.blur = 20 - 9 * this.scale;
-    blurrer.resolution = 0.5;
-    blurrer.padding = 10;
-    this.o.filters = [blurrer];
-    this.o.angle = this.rotAngle;
-  }
-
-  get rotAngle() {
-    let a = (this.cycle * 4) % TIME_MAX;
-    a *= 360 / TIME_MAX;
-    return a;
-  }
-
-  get scale() {
-    let scaleAngle = this.cycle % TIME_MAX;
-    scaleAngle *= Math.PI * 2 / TIME_MAX;
-
-    let sin = Math.sin(scaleAngle);
-
-    return 1.5 + sin / 2;
-  }
-
-  get size() {
-    return this._size || {width: 0, height: 0};
-  }
-
-  start() {
-    console.log('Backgrounder.start', this.fsm.state);
-    let container = document.getElementById('site-background');
-    this.setSize(container.clientWidth, container.clientHeight);
-    container.innerHTML = ''; // wipe out any old canvas -- should be done in stop but just in case.
-    this.app = new PIXI.Application(this.size);
-    container.appendChild(this.app.view);
-    this.o = new PIXI.Container();
-    this.o.position.set(this.relX(0.5), this.relY(0.5));
-    const blur = new PIXI.filters.BlurFilter();
-    this.o.filters = [blur];
-    console.log('o position: ', this.o.position);
-    this.app.stage.addChild(this.o);
-    this.draw();
-  }
-
-  stop() {
-    console.log('Backgrounder.stop', this.fsm.state);
-    this.monitor.timer.remove(this.updateBound);
-    this.stopped = true;
-  }
-
-  kill() {
-    console.log('Backgrounder.kill', this.fsm.state);
-    this.stop();
-  }
-
-  get width() {
-    return this.size.width;
-  }
-
-  get height() {
-    return this.size.height;
-  }
-
-  oX(x, clamp = true) {
-    let dX = this.width * x;
-    return clamp ? _.clamp(dX, this.width / -2, this.width / 2) : dX;
-  }
-
-  oY(x, clamp = true) {
-    let dX = this.height * x;
-    return clamp ? _.clamp(dX, this.height / -2, this.height / 2) : dX;
-  }
-
-  relX(x, clamp = true) {
-    let dX = this.width * x;
-    return clamp ? _.clamp(dX, 0, this.width) : dX;
-  }
-
-  relY(y, clamp = true) {
-    let dY = this.height * y;
-    return clamp ? _.clamp(dY, 0, this.height) : dY;
-  }
-
-  get squareSize() {
-    return Math.min(this.width, this.width) / 8;
-  }
-
-  drawPawns() {
-    let c = new PIXI.Container();
-
-    const ss = this.squareSize;
-    for (let i = -4; i < 4; ++i) {
-      for (let j = -4; j < 4; ++j) {
-        if (Math.random() > 0.5) continue;
-        let s = PIXI.Sprite.from(PAWN);
-        s.anchor.set(0.5, 0.8);
-        s.scale.set(ss / 500);
-        s.position.set(ss * i + ss / 2, ss * j + ss / 2);
-        if(Math.random()< 0.5) s.tint = DARK_GREY;
-        c.addChild(s);
-      }
-    }
-
-    this.o.addChild(c);
-  }
-
-  drawBoard() {
-    let g = new PIXI.Graphics();
-
-    const ss = this.squareSize;
-
-    let isWhite = true;
-    for (let i = -4; i < 4; ++i) {
-      for (let j = -4; j < 4; ++j) {
-        let color = ((j + 200) % 2 === (i + 200) % 2) ? SQUARE1 : SQUARE2;
-        isWhite = !isWhite;
-        g.beginFill(color);
-        g.drawRect(i * ss, j * ss, ss, ss);
-        g.endFill();
-      }
-    }
-    this.o.addChild(g);
-  }
-
-  draw() {
-    this.drawBoard();
-    getPawnImage().then(() => this.drawPawns())
-      .catch(err => {
-        console.log('error getting pawns: ', err);
-      });
-  }
-}
+import Backgrounder from './Backgrounder';
 
 var addEvent = function (object, type, callback) {
   if (object == null || typeof (object) === 'undefined') {
@@ -234,17 +42,13 @@ class Monitor {
             }
           },
           _stop: function () {
-            if (self.background) { // should not ever happen
-              self.background.kill();
-              self.background = null;
-            }
+            /*  if (self.background) { // should not ever happen
+                self.background.kill();
+                self.background = null;
+              }*/
             // in any event, no transition necessary
           },
           _start: function () {
-            if (self.background) { // should never happen
-              self.background.kill();
-              self.background = null;
-            }
             this.transition('BG_STARTING');
           }
         }, // ----- END BG_NONE
@@ -253,29 +57,30 @@ class Monitor {
             if (!self.background) {
               self.background = new Backgrounder(self, this);
             }
-            self.background.start();
             this.transition('BG_STARTED');
           },
           _stop: 'BG_STOPPING'
         }, // ----- END BG_STARTING
         BG_STARTED: {
-          _stop: 'BG_STOPPING'
+          _stop: 'BG_STOPPING',
+          _onEnter: function () {
+            if (self.background) {
+              self.background.start();
+            }
+          },
+          _resize: function () {
+            if (self.background) {
+              self.background.resize();
+            }
+          }
         }, // ----- END BG_STARTED
         BG_STOPPING: {
           _onEnter: function () {
-            if (self.background) { // should ALWAYS happen
-              self.background.kill();
-              self.background = null;
-            }
             this.transition('BG_STOPPED');
           }
         }, // ----- END BG_STOPPING
         BG_STOPPED: {
           _onEnter: function () {
-            if (self.background) { // should ALWAYS happen
-              self.background.kill();
-              self.background = null;
-            }
             this.transition('BG_NONE');
           }
         }, // ----- END BG_STOPPED
@@ -286,14 +91,16 @@ class Monitor {
       },
       stop: function () {
         this.handle('_stop');
+      },
+      resize: function () {
+        this.handle('_resize');
       }
     });
 
     const resizeEnd = _.debounce(() => {
-      this.status.start();
+      this.status.resize();
     }, 500);
     addEvent(window, 'resize', () => {
-      this.status.stop();
       resizeEnd();
     });
 
