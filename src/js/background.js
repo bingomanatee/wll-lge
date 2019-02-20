@@ -46,7 +46,6 @@ class Backgrounder {
   constructor(monitor, fsm) {
     this.monitor = monitor;
     this.fsm = fsm;
-    console.log('new background');
     this.cycle = 0;
     this.updateBound = (time) => this.update(time);
     monitor.timer.add(this.updateBound);
@@ -162,7 +161,6 @@ class Backgrounder {
         s.position.set(ss * i + ss / 2, ss * j + ss / 2);
         if(Math.random()< 0.5) s.tint = DARK_GREY;
         c.addChild(s);
-        console.log('drawing pawns at ', s.position);
       }
     }
 

@@ -3,13 +3,12 @@ import _ from 'lodash';
 import {BrowserRouter, Switch, Route} from 'react-router-dom';
 
 import sc from 'styled-components';
-import BGGrassTiler from './../../js/BGGrassTiler';
 import Navbar from '../Navbar';
 import Homepage from '../Homepage';
 import Article from '../Article';
 import Category from '../Category';
 
-const BG_GREEN = '#3d431d';
+import userStore from '../../models/user';
 
 const SiteFrame = sc.div`
   width: 100vw;
@@ -31,9 +30,11 @@ export default class App extends Component {
     return (
       <BrowserRouter>
         <SiteFrame id="site-frame" data-id="site-frame">
-          <Navbar/>
+          <Navbar userStore={userStore}/>
           <Content>
             <Switch>
+              <Route path="/login" exact component={Homepage}/>
+              <Route path="/logout" exact component={Homepage}/>
               <Route path="/" exact component={Homepage}/>
               <Route path="/article/:path*" component={Article}/>
               <Route path="/category/:directory*" component={Category}/>

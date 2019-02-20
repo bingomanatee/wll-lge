@@ -123,6 +123,27 @@ flex: 0;
 margin-top: 4px;
 `;
 
+export const UserButton = sc.div`
+background-color: ${BUTTON_MASK};
+color: black;
+display: block;
+padding: 0rem 0.25rem;
+text-decoration: none;
+text-align: center;
+font-family: 'Merriweather Sans', sans-serif;
+font-weight: 400;
+font-size: 0.8rem;
+line-height: 100%;
+margin-right: 1rem;
+white-space: nowrap;
+@media(min-width: ${SMALL_NAV}) {
+font-size: 1rem;
+}
+:hover {
+color: white;
+}
+`;
+
 export const CategoryView = sc(Link)`
 background-color: ${BUTTON_MASK};
 color: black;
