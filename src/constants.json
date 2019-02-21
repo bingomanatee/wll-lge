@@ -1,3 +1,4 @@
 {
-  "SMALL_NAV": "500px"
+  "SMALL_NAV": "500px",
+  "LARGE_NAV": "1200px"
 }

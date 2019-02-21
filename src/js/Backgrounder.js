@@ -100,7 +100,7 @@ class Backgrounder {
     this.cycle %= TIME_MAX;
     this.o.scale.set(this.scale, this.scale);
     let blurrer = new PIXI.filters.BlurFilter();
-    const blur = 10 - 6 * this.scale;
+    const blur = 6 * this.scale - 2;
     blurrer.blur = blur;
     this.o.filters = [blurrer];
     this.o.angle = this.rotAngle;

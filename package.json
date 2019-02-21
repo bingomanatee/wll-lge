@@ -31,6 +31,7 @@
     "@wonderlandlabs/looking-glass-engine": "^1.0.12",
     "auth0-js": "^9.10.0",
     "axios": "^0.18.0",
+    "babel-polyfill": "^6.26.0",
     "chess.js": "^0.10.2",
     "chroma-js": "^2.0.2",
     "eslint-plugin-mocha": "^5.2.1",

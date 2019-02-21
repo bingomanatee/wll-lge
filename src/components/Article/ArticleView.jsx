@@ -1,18 +1,27 @@
 import React from 'react';
 import pt from 'prop-types';
 import marked from 'marked';
-import {ArticleFrame, PageHead, Text} from '../style';
+import {ArticleFrame, PageHead, Text, ButtonList, FuzzyBox, EditButton} from '../style';
+import ArticleEdit from '../ArticleEdit';
 
-const ArticleView = ({loaded, title, content}) => {
+const ArticleView = ({loaded, title, content, isAdmin, isEditing, toggleEdit, path}) => {
   if (!loaded) {
     return '';
   }
   return (
     <div>
       <PageHead>{title}</PageHead>
-    <ArticleFrame>
-      <Text dangerouslySetInnerHTML={{__html: marked(content)}}/>
-    </ArticleFrame>
+      <ArticleFrame>
+        <FuzzyBox>
+          {!isEditing && <Text dangerouslySetInnerHTML={{__html: marked(content)}}/>}
+          {isEditing && <ArticleEdit path={path} onSave={toggleEdit} />}
+          {isAdmin && <ButtonList>
+            <EditButton data-sc-type='ButtonList' onClick={toggleEdit}>
+              {isEditing ? 'Cancel' : 'Edit'}
+            </EditButton>
+          </ButtonList>}
+        </FuzzyBox>
+      </ArticleFrame>
     </div>
   );
 };
@@ -20,7 +29,8 @@ const ArticleView = ({loaded, title, content}) => {
 ArticleView.propTypes = {
   title: pt.string,
   content: pt.string,
-  loaded: pt.bool
+  loaded: pt.bool,
+  toggleEdit: pt.func,
 };
 
 ArticleView.defaultProps = {

@@ -1,8 +1,8 @@
 import React from 'react';
 import pt from 'prop-types';
-import {NavbarFrame, SiteHeadline, CategoryList, CategoryView,UserButton} from '../style';
+import {NavbarFrame, SiteHeadline, CategoryList, CategoryView,UserButton, UserIcon, Line} from '../style';
 
-const NavbarView = ({categories, gotoCategory, user, userStore}) => (
+const NavbarView = ({categories, gotoCategory, user, isAdmin, isEditing, userStore}) => (
   <NavbarFrame>
     <SiteHeadline>Wonderland Labs</SiteHeadline>
     <CategoryList>
@@ -13,11 +13,19 @@ const NavbarView = ({categories, gotoCategory, user, userStore}) => (
           onClick={() => gotoCategory(cat)}>{cat.title}
         </CategoryView>;
       })}
+    </CategoryList>
+    <Line />
+    <CategoryList>
+      {user && <UserButton>
+        <UserIcon {...user} />
+        {user.name}
+      </UserButton>}
       <UserButton
         onClick={() => {
           !user ? userStore.actions.logIn() : userStore.actions.logOut();
         }}
-      >{user ? user.name : 'login'} {user && ' – logout'}</UserButton>
+      >{user ? 'sign out' : 'sign in'}</UserButton>
+      {isAdmin &&  <UserButton>Administer</UserButton>}
     </CategoryList>
   </NavbarFrame>
 );

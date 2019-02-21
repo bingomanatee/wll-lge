@@ -16,7 +16,11 @@ export default class NavbarContainer extends Component {
 
     if (this.props.userStore) {
       this._userSub = this.props.userStore.subscribe(({state}) => {
-        this.setState({user: state.user || false});
+        console.log('nav: store state:', state);
+        this.setState({
+          user: state.user || false,
+          isAdmin: state.isAdmin,
+        });
       });
     }
   }
