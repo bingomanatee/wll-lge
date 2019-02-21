@@ -5,7 +5,7 @@ import {
   ArticleFrame,
   ArticleItem,
   ArticleList,
-  ArticleWrapper,
+  ArticleListWrapper,
   ButtonList,
   EditButton,
   FuzzyBox,
@@ -19,13 +19,13 @@ const noop = a => a;
 const CategoryView = ({ category, isAdmin, toggleEdit, isEditing, categoryArticles }) => (
   <div>
     <PageHead>{_.get(category, 'title')}</PageHead>
-    <ArticleWrapper>
+    <ArticleListWrapper>
       <ArticleList>
         {categoryArticles.map(a => (<ArticleItem
           to={'/article/' + a.path}
           key={a.path}>{a.title}</ArticleItem>))}
       </ArticleList>
-    </ArticleWrapper>
+    </ArticleListWrapper>
     {isEditing && <CategoryEdit category={category} />}
     {isAdmin && <ButtonList>
       <EditButton data-sc-type='ButtonList' onClick={toggleEdit}>

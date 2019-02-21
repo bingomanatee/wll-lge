@@ -26,7 +26,7 @@ text-shadow: 2px 2px 2px #FFFFFF;
 }
 `;
 
-export const ArticleWrapper = sc.div`
+export const ArticleListWrapper = sc.div`
 width: 100%;
 @media(min-width: 800px) {
 overflow-y: auto
