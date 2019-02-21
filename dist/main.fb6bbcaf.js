@@ -51292,7 +51292,7 @@ function _templateObject19() {
 }
 
 function _templateObject18() {
-  var data = _taggedTemplateLiteral(["\nbackground-color: black;\nfont-size: 1rem;\ncolor: ", ";\ntext-transform: uppercase;\noutline: none;\npadding: 0.5rem 1rem;\n-webkit-appearance: none;\n-moz-appearance: none;\n:hover {\ncolor: white;\nbackground-color: blue;\n}\n"]);
+  var data = _taggedTemplateLiteral(["\nbackground-color: black;\nfont-size: 1rem;\ncolor: ", ";\ntext-transform: uppercase;\noutline: none;\npadding: 0.5rem 1rem;\n-webkit-appearance: none;\n-moz-appearance: none;\n:hover {\ncolor: white;\nbackground-color: blue;\nborder: 1px solid rgba(0,0,0,0);\n}\n"]);
 
   _templateObject18 = function _templateObject18() {
     return data;
@@ -85757,11 +85757,9 @@ function (_Component) {
                 return _articles.default.actions.getArticle(this.state.path);
 
               case 15:
-                _context.next = 17;
-                return this.setState(_articles.default.state.currentArticle);
+                console.log('asserting new version of  article: ', _articles.default.state.currentArticle);
+                this.setState(_articles.default.state.currentArticle); // @TODO: inspect result for match
 
-              case 17:
-                // @TODO: inspect result for match
                 if (this.props.onSave) this.props.onSave();
 
               case 18:
@@ -85926,6 +85924,7 @@ var ArticleView = function ArticleView(_ref) {
     return '';
   }
 
+  console.log('rendering content: ', content.substr(0, 20), '...', content.substr(-100));
   return _react.default.createElement("div", null, _react.default.createElement(_style.PageHead, null, title), _react.default.createElement(_style.ArticleFrame, null, _react.default.createElement(_style.FuzzyBox, null, !isEditing && _react.default.createElement(_style.Text, {
     dangerouslySetInnerHTML: {
       __html: (0, _marked.default)(content)
@@ -86127,7 +86126,7 @@ var ArticleContainerHOC = (0, _extend.default)(_ArticleContainer.default);
 exports.ArticleContainerHOC = ArticleContainerHOC;
 var _default = ArticleContainerHOC;
 exports.default = _default;
-},{"./ArticleContainer":"components/Article/ArticleContainer.jsx","./ArticleView":"components/Article/ArticleView.jsx","./extend":"components/Article/extend.js"}],"components/Category/CategoryView.jsx":[function(require,module,exports) {
+},{"./ArticleContainer":"components/Article/ArticleContainer.jsx","./ArticleView":"components/Article/ArticleView.jsx","./extend":"components/Article/extend.js"}],"components/CategoryEdit/CategoryEditView.jsx":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -86137,11 +86136,7 @@ exports.default = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
-var _lodash = _interopRequireDefault(require("lodash"));
-
 var _propTypes = _interopRequireDefault(require("prop-types"));
-
-var _style = require("../style");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -86149,26 +86144,30 @@ var noop = function noop(a) {
   return a;
 };
 
-var CategoryView = function CategoryView(_ref) {
-  var category = _ref.category,
-      categoryArticles = _ref.categoryArticles;
-  return _react.default.createElement("div", null, _react.default.createElement(_style.PageHead, null, _lodash.default.get(category, 'title')), _react.default.createElement(_style.ArticleWrapper, null, _react.default.createElement(_style.ArticleList, null, categoryArticles.map(function (a) {
-    return _react.default.createElement(_style.ArticleItem, {
-      to: '/article/' + a.path,
-      key: a.path
-    }, a.title);
-  }))));
+var CategoryEditView = function CategoryEditView(_ref) {
+  var categoryEditFoo = _ref.categoryEditFoo,
+      setCategoryEditFoo = _ref.setCategoryEditFoo;
+  return _react.default.createElement("div", null, _react.default.createElement("b", null, "CategoryEdit:"), _react.default.createElement("input", {
+    type: "text",
+    name: "categoryEdit-foo-input",
+    value: categoryEditFoo,
+    onChange: function onChange(event) {
+      return setCategoryEditFoo(event.target.value);
+    }
+  }));
 };
 
-CategoryView.propTypes = {
-  category: _propTypes.default.object
+CategoryEditView.propTypes = {
+  categoryEditFoo: _propTypes.default.string,
+  setCategoryEditFoo: _propTypes.default.func
 };
-CategoryView.defaultProps = {
-  category: {}
+CategoryEditView.defaultProps = {
+  categoryEditFoo: '',
+  setCategoryEditFoo: noop
 };
-var _default = CategoryView;
+var _default = CategoryEditView;
 exports.default = _default;
-},{"react":"../node_modules/react/index.js","lodash":"../node_modules/lodash/lodash.js","prop-types":"../node_modules/prop-types/index.js","../style":"components/style.js"}],"components/Category/CategoryContainer.jsx":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","prop-types":"../node_modules/prop-types/index.js"}],"components/CategoryEdit/CategoryEditContainer.jsx":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -86178,17 +86177,19 @@ exports.default = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
 
-var _CategoryView = _interopRequireDefault(require("./CategoryView"));
-
-var _axios = _interopRequireDefault(require("axios"));
-
-var _categories = _interopRequireDefault(require("../../models/categories"));
+var _CategoryEditView = _interopRequireDefault(require("./CategoryEditView"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
 
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -86205,6 +86206,214 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+var CategoryEditContainer =
+/*#__PURE__*/
+function (_Component) {
+  _inherits(CategoryEditContainer, _Component);
+
+  function CategoryEditContainer(props) {
+    var _this;
+
+    _classCallCheck(this, CategoryEditContainer);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(CategoryEditContainer).call(this, props));
+    _this.state = CategoryEditContainer.getDerivedStateFromProps(props, {
+      categoryEditFoo: 1
+    });
+    return _this;
+  }
+
+  _createClass(CategoryEditContainer, [{
+    key: "setCategoryEditFoo",
+    value: function setCategoryEditFoo(value) {
+      return this.setState({
+        categoryEditFoo: value
+      });
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var _this2 = this;
+
+      var props = _objectSpread({}, this.props);
+
+      var children = props.children;
+      delete props.children;
+      return _react.default.createElement(_CategoryEditView.default, _extends({}, props, this.state, {
+        setCategoryEditFoo: function setCategoryEditFoo(value) {
+          return _this2.setCategoryEditFoo(value);
+        }
+      }), children);
+    }
+  }], [{
+    key: "getDerivedStateFromProps",
+    value: function getDerivedStateFromProps(props, state) {
+      return _objectSpread({}, state, props);
+    }
+  }]);
+
+  return CategoryEditContainer;
+}(_react.Component);
+
+exports.default = CategoryEditContainer;
+},{"react":"../node_modules/react/index.js","./CategoryEditView":"components/CategoryEdit/CategoryEditView.jsx"}],"components/CategoryEdit/extend.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+/**
+ * allows you to merge in router, redux, etc.
+ *
+ * @param component {Component}
+ * @returns {Component}
+ */
+var _default = function _default(component) {
+  return component;
+};
+
+exports.default = _default;
+},{}],"components/CategoryEdit/index.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+Object.defineProperty(exports, "CategoryEditContainer", {
+  enumerable: true,
+  get: function () {
+    return _CategoryEditContainer.default;
+  }
+});
+Object.defineProperty(exports, "CategoryEditView", {
+  enumerable: true,
+  get: function () {
+    return _CategoryEditView.default;
+  }
+});
+exports.CategoryEditContainerHOC = exports.CategoryEditViewHOC = exports.default = void 0;
+
+var _CategoryEditContainer = _interopRequireDefault(require("./CategoryEditContainer"));
+
+var _CategoryEditView = _interopRequireDefault(require("./CategoryEditView"));
+
+var _extend = _interopRequireDefault(require("./extend"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var CategoryEditViewHOC = (0, _extend.default)(_CategoryEditView.default);
+exports.CategoryEditViewHOC = CategoryEditViewHOC;
+var CategoryEditContainerHOC = (0, _extend.default)(_CategoryEditContainer.default);
+exports.CategoryEditContainerHOC = CategoryEditContainerHOC;
+var _default = CategoryEditContainerHOC;
+exports.default = _default;
+},{"./CategoryEditContainer":"components/CategoryEdit/CategoryEditContainer.jsx","./CategoryEditView":"components/CategoryEdit/CategoryEditView.jsx","./extend":"components/CategoryEdit/extend.js"}],"components/Category/CategoryView.jsx":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireDefault(require("react"));
+
+var _lodash = _interopRequireDefault(require("lodash"));
+
+var _propTypes = _interopRequireDefault(require("prop-types"));
+
+var _style = require("../style");
+
+var _CategoryEdit = _interopRequireDefault(require("../CategoryEdit"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var noop = function noop(a) {
+  return a;
+};
+
+var CategoryView = function CategoryView(_ref) {
+  var category = _ref.category,
+      isAdmin = _ref.isAdmin,
+      toggleEdit = _ref.toggleEdit,
+      isEditing = _ref.isEditing,
+      categoryArticles = _ref.categoryArticles;
+  return _react.default.createElement("div", null, _react.default.createElement(_style.PageHead, null, _lodash.default.get(category, 'title')), _react.default.createElement(_style.ArticleWrapper, null, _react.default.createElement(_style.ArticleList, null, categoryArticles.map(function (a) {
+    return _react.default.createElement(_style.ArticleItem, {
+      to: '/article/' + a.path,
+      key: a.path
+    }, a.title);
+  }))), isEditing && _react.default.createElement(_CategoryEdit.default, {
+    category: category
+  }), isAdmin && _react.default.createElement(_style.ButtonList, null, _react.default.createElement(_style.EditButton, {
+    "data-sc-type": "ButtonList",
+    onClick: toggleEdit
+  }, isEditing ? 'Cancel' : 'Edit')));
+};
+
+CategoryView.propTypes = {
+  category: _propTypes.default.object,
+  isAdmin: _propTypes.default.bool,
+  isEditing: _propTypes.default.bool,
+  categoryArticles: _propTypes.default.array,
+  toggleEdit: _propTypes.default.func
+};
+CategoryView.defaultProps = {
+  category: {},
+  isAdmin: false,
+  isEditing: false,
+  toggleEdit: noop,
+  categoryArticles: []
+};
+var _default = CategoryView;
+exports.default = _default;
+},{"react":"../node_modules/react/index.js","lodash":"../node_modules/lodash/lodash.js","prop-types":"../node_modules/prop-types/index.js","../style":"components/style.js","../CategoryEdit":"components/CategoryEdit/index.js"}],"components/Category/CategoryContainer.jsx":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireWildcard(require("react"));
+
+var _CategoryView = _interopRequireDefault(require("./CategoryView"));
+
+var _axios = _interopRequireDefault(require("axios"));
+
+var _categories = _interopRequireDefault(require("../../models/categories"));
+
+var _user = _interopRequireDefault(require("../../models/user"));
+
+var _ArticleView = _interopRequireDefault(require("../Article/ArticleView"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
+
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+var API_URL = "https://wonderland-labs.herokuapp.com/api";
 
 var CategoryContainer =
 /*#__PURE__*/
@@ -86233,8 +86442,9 @@ function (_Component) {
       var _this2 = this;
 
       if (!this.state.loaded && this.state.directory) {
-        _axios.default.get('https://wonderland-labs.herokuapp.com/api/articles').then(function (result) {
-          var directory = decodeURIComponent(_this2.state.directory);
+        var directory = decodeURIComponent(this.state.directory);
+
+        _axios.default.get(API_URL + '/articles').then(function (result) {
           var articles = result.data.filter(function (a) {
             return a.published && a.directory === directory;
           });
@@ -86250,14 +86460,16 @@ function (_Component) {
 
       this._catSub = _categories.default.subscribe(function (_ref) {
         var state = _ref.state;
+        var directory = decodeURIComponent(_this2.state.directory);
 
         if (state.categories) {
-          var directory = decodeURIComponent(_this2.state.directory);
           var matches = state.categories.filter(function (c) {
             return c.directory === directory;
           });
 
           if (matches.length) {
+            console.log('category: ', matches);
+
             _this2.setState({
               category: matches[0],
               catLoaded: true
@@ -86265,11 +86477,45 @@ function (_Component) {
           }
         }
       });
+      this._userSub = _user.default.subscribe(function (_ref2) {
+        var state = _ref2.state;
+
+        _this2.setState({
+          user: state.user,
+          isAdmin: state.isAdmin
+        });
+      });
+    }
+  }, {
+    key: "toggleEdit",
+    value: function toggleEdit() {
+      if (!this.state.isAdmin) {
+        return this.setState({
+          isEditing: false
+        });
+      }
+
+      this.setState({
+        isEditing: !this.state.isEditing
+      });
+    }
+  }, {
+    key: "componentWillUnmount",
+    value: function componentWillUnmount() {
+      if (this._userSub) {
+        this._userSub.unsubscribe();
+      }
     }
   }, {
     key: "render",
     value: function render() {
-      return _react.default.createElement(_CategoryView.default, this.state);
+      var _this3 = this;
+
+      return _react.default.createElement(_CategoryView.default, _extends({
+        toggleEdit: function toggleEdit() {
+          return _this3.toggleEdit();
+        }
+      }, this.state));
     }
   }]);
 
@@ -86277,7 +86523,7 @@ function (_Component) {
 }(_react.Component);
 
 exports.default = CategoryContainer;
-},{"react":"../node_modules/react/index.js","./CategoryView":"components/Category/CategoryView.jsx","axios":"../node_modules/axios/index.js","../../models/categories":"models/categories.js"}],"components/Category/extend.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","./CategoryView":"components/Category/CategoryView.jsx","axios":"../node_modules/axios/index.js","../../models/categories":"models/categories.js","../../models/user":"models/user.js","../Article/ArticleView":"components/Article/ArticleView.jsx"}],"components/Category/extend.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {

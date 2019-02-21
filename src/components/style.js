@@ -242,6 +242,7 @@ padding: 0.5rem 1rem;
 :hover {
 color: white;
 background-color: blue;
+border: 1px solid rgba(0,0,0,0);
 }
 `;
 

@@ -8,13 +8,14 @@ const ArticleView = ({loaded, title, content, isAdmin, isEditing, toggleEdit, pa
   if (!loaded) {
     return '';
   }
+  console.log('rendering content: ', content.substr(0, 20), '...', content.substr(-100));
   return (
     <div>
       <PageHead>{title}</PageHead>
       <ArticleFrame>
         <FuzzyBox>
           {!isEditing && <Text dangerouslySetInnerHTML={{__html: marked(content)}}/>}
-          {isEditing && <ArticleEdit path={path} onSave={toggleEdit} />}
+          {isEditing && <ArticleEdit path={path} onSave={toggleEdit}/>}
           {isAdmin && <ButtonList>
             <EditButton data-sc-type='ButtonList' onClick={toggleEdit}>
               {isEditing ? 'Cancel' : 'Edit'}

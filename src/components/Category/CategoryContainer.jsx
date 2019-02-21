@@ -3,6 +3,10 @@ import CategoryView from './CategoryView';
 import axios from 'axios';
 
 import categories from '../../models/categories';
+import userStore from '../../models/user';
+import ArticleView from "../Article/ArticleView";
+
+const API_URL = process.env.API_URL;
 
 export default class CategoryContainer extends Component {
   constructor(props) {
@@ -17,9 +21,9 @@ export default class CategoryContainer extends Component {
 
   componentDidMount() {
     if (!this.state.loaded && this.state.directory) {
+      const directory = decodeURIComponent(this.state.directory);
       axios.get(
-        'https://wonderland-labs.herokuapp.com/api/articles').then(result => {
-        let directory = decodeURIComponent(this.state.directory);
+        API_URL + '/articles').then(result => {
         let articles = result.data.filter(a => {
           return a.published && a.directory === directory;
         });
@@ -31,19 +35,42 @@ export default class CategoryContainer extends Component {
     }
 
     this._catSub = categories.subscribe(({state}) => {
+      let directory = decodeURIComponent(this.state.directory);
       if (state.categories) {
-        let directory = decodeURIComponent(this.state.directory);
         let matches = state.categories.filter(c => c.directory === directory);
         if (matches.length) {
+          console.log('category: ', matches);
           this.setState({category: matches[0], catLoaded: true});
         }
       }
     });
+
+    this._userSub = userStore.subscribe(({state}) => {
+      this.setState({
+        user: state.user,
+        isAdmin: state.isAdmin
+      });
+    });
+  }
+
+  toggleEdit() {
+    if (!this.state.isAdmin) {
+      return this.setState({isEditing: false});
+    }
+    this.setState({isEditing: !this.state.isEditing});
+  }
+
+  componentWillUnmount() {
+    if (this._userSub) {
+      this._userSub.unsubscribe();
+    }
   }
 
   render() {
     return (
-      <CategoryView {...this.state}>
+      <CategoryView
+        toggleEdit={() => this.toggleEdit()}
+        {...this.state}>
       </CategoryView>
     );
   }

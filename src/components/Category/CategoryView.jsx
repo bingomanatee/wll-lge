@@ -1,10 +1,22 @@
 import React from 'react';
 import _ from 'lodash';
 import pt from 'prop-types';
-import {ArticleFrame, ArticleItem, ArticleList, ArticleWrapper, PageHead, Text} from '../style';
+import {
+  ArticleFrame,
+  ArticleItem,
+  ArticleList,
+  ArticleWrapper,
+  ButtonList,
+  EditButton,
+  FuzzyBox,
+  PageHead,
+  Text
+} from '../style';
+import CategoryEdit from '../CategoryEdit';
+
 const noop = a => a;
 
-const CategoryView = ({ category, categoryArticles }) => (
+const CategoryView = ({ category, isAdmin, toggleEdit, isEditing, categoryArticles }) => (
   <div>
     <PageHead>{_.get(category, 'title')}</PageHead>
     <ArticleWrapper>
@@ -14,15 +26,29 @@ const CategoryView = ({ category, categoryArticles }) => (
           key={a.path}>{a.title}</ArticleItem>))}
       </ArticleList>
     </ArticleWrapper>
+    {isEditing && <CategoryEdit category={category} />}
+    {isAdmin && <ButtonList>
+      <EditButton data-sc-type='ButtonList' onClick={toggleEdit}>
+        {isEditing ? 'Cancel' : 'Edit'}
+      </EditButton>
+    </ButtonList>}
   </div>
 );
 
 CategoryView.propTypes = {
   category: pt.object,
+  isAdmin: pt.bool,
+  isEditing: pt.bool,
+  categoryArticles: pt.array,
+  toggleEdit: pt.func
 };
 
 CategoryView.defaultProps = {
-  category: {}
+  category: {},
+  isAdmin: false,
+  isEditing: false,
+  toggleEdit: noop,
+  categoryArticles: []
 };
 
 export default CategoryView;
