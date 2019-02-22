@@ -104,7 +104,2099 @@ parcelRequire = (function (modules, cache, entry, globalName) {
 
   // Override the current require with this new one
   return newRequire;
-})({"../node_modules/base64-js/index.js":[function(require,module,exports) {
+})({"../node_modules/core-js/library/modules/_global.js":[function(require,module,exports) {
+
+// https://github.com/zloirock/core-js/issues/86#issuecomment-115759028
+var global = module.exports = typeof window != 'undefined' && window.Math == Math
+  ? window : typeof self != 'undefined' && self.Math == Math ? self
+  // eslint-disable-next-line no-new-func
+  : Function('return this')();
+if (typeof __g == 'number') __g = global; // eslint-disable-line no-undef
+
+},{}],"../node_modules/core-js/library/modules/_core.js":[function(require,module,exports) {
+var core = module.exports = { version: '2.6.3' };
+if (typeof __e == 'number') __e = core; // eslint-disable-line no-undef
+
+},{}],"../node_modules/core-js/library/modules/_a-function.js":[function(require,module,exports) {
+module.exports = function (it) {
+  if (typeof it != 'function') throw TypeError(it + ' is not a function!');
+  return it;
+};
+
+},{}],"../node_modules/core-js/library/modules/_ctx.js":[function(require,module,exports) {
+// optional / simple context binding
+var aFunction = require('./_a-function');
+module.exports = function (fn, that, length) {
+  aFunction(fn);
+  if (that === undefined) return fn;
+  switch (length) {
+    case 1: return function (a) {
+      return fn.call(that, a);
+    };
+    case 2: return function (a, b) {
+      return fn.call(that, a, b);
+    };
+    case 3: return function (a, b, c) {
+      return fn.call(that, a, b, c);
+    };
+  }
+  return function (/* ...args */) {
+    return fn.apply(that, arguments);
+  };
+};
+
+},{"./_a-function":"../node_modules/core-js/library/modules/_a-function.js"}],"../node_modules/core-js/library/modules/_is-object.js":[function(require,module,exports) {
+module.exports = function (it) {
+  return typeof it === 'object' ? it !== null : typeof it === 'function';
+};
+
+},{}],"../node_modules/core-js/library/modules/_an-object.js":[function(require,module,exports) {
+var isObject = require('./_is-object');
+module.exports = function (it) {
+  if (!isObject(it)) throw TypeError(it + ' is not an object!');
+  return it;
+};
+
+},{"./_is-object":"../node_modules/core-js/library/modules/_is-object.js"}],"../node_modules/core-js/library/modules/_fails.js":[function(require,module,exports) {
+module.exports = function (exec) {
+  try {
+    return !!exec();
+  } catch (e) {
+    return true;
+  }
+};
+
+},{}],"../node_modules/core-js/library/modules/_descriptors.js":[function(require,module,exports) {
+// Thank's IE8 for his funny defineProperty
+module.exports = !require('./_fails')(function () {
+  return Object.defineProperty({}, 'a', { get: function () { return 7; } }).a != 7;
+});
+
+},{"./_fails":"../node_modules/core-js/library/modules/_fails.js"}],"../node_modules/core-js/library/modules/_dom-create.js":[function(require,module,exports) {
+var isObject = require('./_is-object');
+var document = require('./_global').document;
+// typeof document.createElement is 'object' in old IE
+var is = isObject(document) && isObject(document.createElement);
+module.exports = function (it) {
+  return is ? document.createElement(it) : {};
+};
+
+},{"./_is-object":"../node_modules/core-js/library/modules/_is-object.js","./_global":"../node_modules/core-js/library/modules/_global.js"}],"../node_modules/core-js/library/modules/_ie8-dom-define.js":[function(require,module,exports) {
+module.exports = !require('./_descriptors') && !require('./_fails')(function () {
+  return Object.defineProperty(require('./_dom-create')('div'), 'a', { get: function () { return 7; } }).a != 7;
+});
+
+},{"./_descriptors":"../node_modules/core-js/library/modules/_descriptors.js","./_fails":"../node_modules/core-js/library/modules/_fails.js","./_dom-create":"../node_modules/core-js/library/modules/_dom-create.js"}],"../node_modules/core-js/library/modules/_to-primitive.js":[function(require,module,exports) {
+// 7.1.1 ToPrimitive(input [, PreferredType])
+var isObject = require('./_is-object');
+// instead of the ES6 spec version, we didn't implement @@toPrimitive case
+// and the second argument - flag - preferred type is a string
+module.exports = function (it, S) {
+  if (!isObject(it)) return it;
+  var fn, val;
+  if (S && typeof (fn = it.toString) == 'function' && !isObject(val = fn.call(it))) return val;
+  if (typeof (fn = it.valueOf) == 'function' && !isObject(val = fn.call(it))) return val;
+  if (!S && typeof (fn = it.toString) == 'function' && !isObject(val = fn.call(it))) return val;
+  throw TypeError("Can't convert object to primitive value");
+};
+
+},{"./_is-object":"../node_modules/core-js/library/modules/_is-object.js"}],"../node_modules/core-js/library/modules/_object-dp.js":[function(require,module,exports) {
+var anObject = require('./_an-object');
+var IE8_DOM_DEFINE = require('./_ie8-dom-define');
+var toPrimitive = require('./_to-primitive');
+var dP = Object.defineProperty;
+
+exports.f = require('./_descriptors') ? Object.defineProperty : function defineProperty(O, P, Attributes) {
+  anObject(O);
+  P = toPrimitive(P, true);
+  anObject(Attributes);
+  if (IE8_DOM_DEFINE) try {
+    return dP(O, P, Attributes);
+  } catch (e) { /* empty */ }
+  if ('get' in Attributes || 'set' in Attributes) throw TypeError('Accessors not supported!');
+  if ('value' in Attributes) O[P] = Attributes.value;
+  return O;
+};
+
+},{"./_an-object":"../node_modules/core-js/library/modules/_an-object.js","./_ie8-dom-define":"../node_modules/core-js/library/modules/_ie8-dom-define.js","./_to-primitive":"../node_modules/core-js/library/modules/_to-primitive.js","./_descriptors":"../node_modules/core-js/library/modules/_descriptors.js"}],"../node_modules/core-js/library/modules/_property-desc.js":[function(require,module,exports) {
+module.exports = function (bitmap, value) {
+  return {
+    enumerable: !(bitmap & 1),
+    configurable: !(bitmap & 2),
+    writable: !(bitmap & 4),
+    value: value
+  };
+};
+
+},{}],"../node_modules/core-js/library/modules/_hide.js":[function(require,module,exports) {
+var dP = require('./_object-dp');
+var createDesc = require('./_property-desc');
+module.exports = require('./_descriptors') ? function (object, key, value) {
+  return dP.f(object, key, createDesc(1, value));
+} : function (object, key, value) {
+  object[key] = value;
+  return object;
+};
+
+},{"./_object-dp":"../node_modules/core-js/library/modules/_object-dp.js","./_property-desc":"../node_modules/core-js/library/modules/_property-desc.js","./_descriptors":"../node_modules/core-js/library/modules/_descriptors.js"}],"../node_modules/core-js/library/modules/_has.js":[function(require,module,exports) {
+var hasOwnProperty = {}.hasOwnProperty;
+module.exports = function (it, key) {
+  return hasOwnProperty.call(it, key);
+};
+
+},{}],"../node_modules/core-js/library/modules/_export.js":[function(require,module,exports) {
+
+var global = require('./_global');
+var core = require('./_core');
+var ctx = require('./_ctx');
+var hide = require('./_hide');
+var has = require('./_has');
+var PROTOTYPE = 'prototype';
+
+var $export = function (type, name, source) {
+  var IS_FORCED = type & $export.F;
+  var IS_GLOBAL = type & $export.G;
+  var IS_STATIC = type & $export.S;
+  var IS_PROTO = type & $export.P;
+  var IS_BIND = type & $export.B;
+  var IS_WRAP = type & $export.W;
+  var exports = IS_GLOBAL ? core : core[name] || (core[name] = {});
+  var expProto = exports[PROTOTYPE];
+  var target = IS_GLOBAL ? global : IS_STATIC ? global[name] : (global[name] || {})[PROTOTYPE];
+  var key, own, out;
+  if (IS_GLOBAL) source = name;
+  for (key in source) {
+    // contains in native
+    own = !IS_FORCED && target && target[key] !== undefined;
+    if (own && has(exports, key)) continue;
+    // export native or passed
+    out = own ? target[key] : source[key];
+    // prevent global pollution for namespaces
+    exports[key] = IS_GLOBAL && typeof target[key] != 'function' ? source[key]
+    // bind timers to global for call from export context
+    : IS_BIND && own ? ctx(out, global)
+    // wrap global constructors for prevent change them in library
+    : IS_WRAP && target[key] == out ? (function (C) {
+      var F = function (a, b, c) {
+        if (this instanceof C) {
+          switch (arguments.length) {
+            case 0: return new C();
+            case 1: return new C(a);
+            case 2: return new C(a, b);
+          } return new C(a, b, c);
+        } return C.apply(this, arguments);
+      };
+      F[PROTOTYPE] = C[PROTOTYPE];
+      return F;
+    // make static versions for prototype methods
+    })(out) : IS_PROTO && typeof out == 'function' ? ctx(Function.call, out) : out;
+    // export proto methods to core.%CONSTRUCTOR%.methods.%NAME%
+    if (IS_PROTO) {
+      (exports.virtual || (exports.virtual = {}))[key] = out;
+      // export proto methods to core.%CONSTRUCTOR%.prototype.%NAME%
+      if (type & $export.R && expProto && !expProto[key]) hide(expProto, key, out);
+    }
+  }
+};
+// type bitmap
+$export.F = 1;   // forced
+$export.G = 2;   // global
+$export.S = 4;   // static
+$export.P = 8;   // proto
+$export.B = 16;  // bind
+$export.W = 32;  // wrap
+$export.U = 64;  // safe
+$export.R = 128; // real proto method for `library`
+module.exports = $export;
+
+},{"./_global":"../node_modules/core-js/library/modules/_global.js","./_core":"../node_modules/core-js/library/modules/_core.js","./_ctx":"../node_modules/core-js/library/modules/_ctx.js","./_hide":"../node_modules/core-js/library/modules/_hide.js","./_has":"../node_modules/core-js/library/modules/_has.js"}],"../node_modules/core-js/library/modules/es6.date.now.js":[function(require,module,exports) {
+// 20.3.3.1 / 15.9.4.4 Date.now()
+var $export = require('./_export');
+
+$export($export.S, 'Date', { now: function () { return new Date().getTime(); } });
+
+},{"./_export":"../node_modules/core-js/library/modules/_export.js"}],"../node_modules/core-js/library/fn/date/now.js":[function(require,module,exports) {
+require('../../modules/es6.date.now');
+module.exports = require('../../modules/_core').Date.now;
+
+},{"../../modules/es6.date.now":"../node_modules/core-js/library/modules/es6.date.now.js","../../modules/_core":"../node_modules/core-js/library/modules/_core.js"}],"../node_modules/@babel/runtime-corejs2/core-js/date/now.js":[function(require,module,exports) {
+module.exports = require("core-js/library/fn/date/now");
+},{"core-js/library/fn/date/now":"../node_modules/core-js/library/fn/date/now.js"}],"../node_modules/core-js/library/modules/_to-integer.js":[function(require,module,exports) {
+// 7.1.4 ToInteger
+var ceil = Math.ceil;
+var floor = Math.floor;
+module.exports = function (it) {
+  return isNaN(it = +it) ? 0 : (it > 0 ? floor : ceil)(it);
+};
+
+},{}],"../node_modules/core-js/library/modules/_defined.js":[function(require,module,exports) {
+// 7.2.1 RequireObjectCoercible(argument)
+module.exports = function (it) {
+  if (it == undefined) throw TypeError("Can't call method on  " + it);
+  return it;
+};
+
+},{}],"../node_modules/core-js/library/modules/_string-at.js":[function(require,module,exports) {
+var toInteger = require('./_to-integer');
+var defined = require('./_defined');
+// true  -> String#at
+// false -> String#codePointAt
+module.exports = function (TO_STRING) {
+  return function (that, pos) {
+    var s = String(defined(that));
+    var i = toInteger(pos);
+    var l = s.length;
+    var a, b;
+    if (i < 0 || i >= l) return TO_STRING ? '' : undefined;
+    a = s.charCodeAt(i);
+    return a < 0xd800 || a > 0xdbff || i + 1 === l || (b = s.charCodeAt(i + 1)) < 0xdc00 || b > 0xdfff
+      ? TO_STRING ? s.charAt(i) : a
+      : TO_STRING ? s.slice(i, i + 2) : (a - 0xd800 << 10) + (b - 0xdc00) + 0x10000;
+  };
+};
+
+},{"./_to-integer":"../node_modules/core-js/library/modules/_to-integer.js","./_defined":"../node_modules/core-js/library/modules/_defined.js"}],"../node_modules/core-js/library/modules/_library.js":[function(require,module,exports) {
+module.exports = true;
+
+},{}],"../node_modules/core-js/library/modules/_redefine.js":[function(require,module,exports) {
+module.exports = require('./_hide');
+
+},{"./_hide":"../node_modules/core-js/library/modules/_hide.js"}],"../node_modules/core-js/library/modules/_iterators.js":[function(require,module,exports) {
+module.exports = {};
+
+},{}],"../node_modules/core-js/library/modules/_cof.js":[function(require,module,exports) {
+var toString = {}.toString;
+
+module.exports = function (it) {
+  return toString.call(it).slice(8, -1);
+};
+
+},{}],"../node_modules/core-js/library/modules/_iobject.js":[function(require,module,exports) {
+// fallback for non-array-like ES3 and non-enumerable old V8 strings
+var cof = require('./_cof');
+// eslint-disable-next-line no-prototype-builtins
+module.exports = Object('z').propertyIsEnumerable(0) ? Object : function (it) {
+  return cof(it) == 'String' ? it.split('') : Object(it);
+};
+
+},{"./_cof":"../node_modules/core-js/library/modules/_cof.js"}],"../node_modules/core-js/library/modules/_to-iobject.js":[function(require,module,exports) {
+// to indexed object, toObject with fallback for non-array-like ES3 strings
+var IObject = require('./_iobject');
+var defined = require('./_defined');
+module.exports = function (it) {
+  return IObject(defined(it));
+};
+
+},{"./_iobject":"../node_modules/core-js/library/modules/_iobject.js","./_defined":"../node_modules/core-js/library/modules/_defined.js"}],"../node_modules/core-js/library/modules/_to-length.js":[function(require,module,exports) {
+// 7.1.15 ToLength
+var toInteger = require('./_to-integer');
+var min = Math.min;
+module.exports = function (it) {
+  return it > 0 ? min(toInteger(it), 0x1fffffffffffff) : 0; // pow(2, 53) - 1 == 9007199254740991
+};
+
+},{"./_to-integer":"../node_modules/core-js/library/modules/_to-integer.js"}],"../node_modules/core-js/library/modules/_to-absolute-index.js":[function(require,module,exports) {
+var toInteger = require('./_to-integer');
+var max = Math.max;
+var min = Math.min;
+module.exports = function (index, length) {
+  index = toInteger(index);
+  return index < 0 ? max(index + length, 0) : min(index, length);
+};
+
+},{"./_to-integer":"../node_modules/core-js/library/modules/_to-integer.js"}],"../node_modules/core-js/library/modules/_array-includes.js":[function(require,module,exports) {
+// false -> Array#indexOf
+// true  -> Array#includes
+var toIObject = require('./_to-iobject');
+var toLength = require('./_to-length');
+var toAbsoluteIndex = require('./_to-absolute-index');
+module.exports = function (IS_INCLUDES) {
+  return function ($this, el, fromIndex) {
+    var O = toIObject($this);
+    var length = toLength(O.length);
+    var index = toAbsoluteIndex(fromIndex, length);
+    var value;
+    // Array#includes uses SameValueZero equality algorithm
+    // eslint-disable-next-line no-self-compare
+    if (IS_INCLUDES && el != el) while (length > index) {
+      value = O[index++];
+      // eslint-disable-next-line no-self-compare
+      if (value != value) return true;
+    // Array#indexOf ignores holes, Array#includes - not
+    } else for (;length > index; index++) if (IS_INCLUDES || index in O) {
+      if (O[index] === el) return IS_INCLUDES || index || 0;
+    } return !IS_INCLUDES && -1;
+  };
+};
+
+},{"./_to-iobject":"../node_modules/core-js/library/modules/_to-iobject.js","./_to-length":"../node_modules/core-js/library/modules/_to-length.js","./_to-absolute-index":"../node_modules/core-js/library/modules/_to-absolute-index.js"}],"../node_modules/core-js/library/modules/_shared.js":[function(require,module,exports) {
+
+var core = require('./_core');
+var global = require('./_global');
+var SHARED = '__core-js_shared__';
+var store = global[SHARED] || (global[SHARED] = {});
+
+(module.exports = function (key, value) {
+  return store[key] || (store[key] = value !== undefined ? value : {});
+})('versions', []).push({
+  version: core.version,
+  mode: require('./_library') ? 'pure' : 'global',
+  copyright: '© 2019 Denis Pushkarev (zloirock.ru)'
+});
+
+},{"./_core":"../node_modules/core-js/library/modules/_core.js","./_global":"../node_modules/core-js/library/modules/_global.js","./_library":"../node_modules/core-js/library/modules/_library.js"}],"../node_modules/core-js/library/modules/_uid.js":[function(require,module,exports) {
+var id = 0;
+var px = Math.random();
+module.exports = function (key) {
+  return 'Symbol('.concat(key === undefined ? '' : key, ')_', (++id + px).toString(36));
+};
+
+},{}],"../node_modules/core-js/library/modules/_shared-key.js":[function(require,module,exports) {
+var shared = require('./_shared')('keys');
+var uid = require('./_uid');
+module.exports = function (key) {
+  return shared[key] || (shared[key] = uid(key));
+};
+
+},{"./_shared":"../node_modules/core-js/library/modules/_shared.js","./_uid":"../node_modules/core-js/library/modules/_uid.js"}],"../node_modules/core-js/library/modules/_object-keys-internal.js":[function(require,module,exports) {
+var has = require('./_has');
+var toIObject = require('./_to-iobject');
+var arrayIndexOf = require('./_array-includes')(false);
+var IE_PROTO = require('./_shared-key')('IE_PROTO');
+
+module.exports = function (object, names) {
+  var O = toIObject(object);
+  var i = 0;
+  var result = [];
+  var key;
+  for (key in O) if (key != IE_PROTO) has(O, key) && result.push(key);
+  // Don't enum bug & hidden keys
+  while (names.length > i) if (has(O, key = names[i++])) {
+    ~arrayIndexOf(result, key) || result.push(key);
+  }
+  return result;
+};
+
+},{"./_has":"../node_modules/core-js/library/modules/_has.js","./_to-iobject":"../node_modules/core-js/library/modules/_to-iobject.js","./_array-includes":"../node_modules/core-js/library/modules/_array-includes.js","./_shared-key":"../node_modules/core-js/library/modules/_shared-key.js"}],"../node_modules/core-js/library/modules/_enum-bug-keys.js":[function(require,module,exports) {
+// IE 8- don't enum bug keys
+module.exports = (
+  'constructor,hasOwnProperty,isPrototypeOf,propertyIsEnumerable,toLocaleString,toString,valueOf'
+).split(',');
+
+},{}],"../node_modules/core-js/library/modules/_object-keys.js":[function(require,module,exports) {
+// 19.1.2.14 / 15.2.3.14 Object.keys(O)
+var $keys = require('./_object-keys-internal');
+var enumBugKeys = require('./_enum-bug-keys');
+
+module.exports = Object.keys || function keys(O) {
+  return $keys(O, enumBugKeys);
+};
+
+},{"./_object-keys-internal":"../node_modules/core-js/library/modules/_object-keys-internal.js","./_enum-bug-keys":"../node_modules/core-js/library/modules/_enum-bug-keys.js"}],"../node_modules/core-js/library/modules/_object-dps.js":[function(require,module,exports) {
+var dP = require('./_object-dp');
+var anObject = require('./_an-object');
+var getKeys = require('./_object-keys');
+
+module.exports = require('./_descriptors') ? Object.defineProperties : function defineProperties(O, Properties) {
+  anObject(O);
+  var keys = getKeys(Properties);
+  var length = keys.length;
+  var i = 0;
+  var P;
+  while (length > i) dP.f(O, P = keys[i++], Properties[P]);
+  return O;
+};
+
+},{"./_object-dp":"../node_modules/core-js/library/modules/_object-dp.js","./_an-object":"../node_modules/core-js/library/modules/_an-object.js","./_object-keys":"../node_modules/core-js/library/modules/_object-keys.js","./_descriptors":"../node_modules/core-js/library/modules/_descriptors.js"}],"../node_modules/core-js/library/modules/_html.js":[function(require,module,exports) {
+var document = require('./_global').document;
+module.exports = document && document.documentElement;
+
+},{"./_global":"../node_modules/core-js/library/modules/_global.js"}],"../node_modules/core-js/library/modules/_object-create.js":[function(require,module,exports) {
+// 19.1.2.2 / 15.2.3.5 Object.create(O [, Properties])
+var anObject = require('./_an-object');
+var dPs = require('./_object-dps');
+var enumBugKeys = require('./_enum-bug-keys');
+var IE_PROTO = require('./_shared-key')('IE_PROTO');
+var Empty = function () { /* empty */ };
+var PROTOTYPE = 'prototype';
+
+// Create object with fake `null` prototype: use iframe Object with cleared prototype
+var createDict = function () {
+  // Thrash, waste and sodomy: IE GC bug
+  var iframe = require('./_dom-create')('iframe');
+  var i = enumBugKeys.length;
+  var lt = '<';
+  var gt = '>';
+  var iframeDocument;
+  iframe.style.display = 'none';
+  require('./_html').appendChild(iframe);
+  iframe.src = 'javascript:'; // eslint-disable-line no-script-url
+  // createDict = iframe.contentWindow.Object;
+  // html.removeChild(iframe);
+  iframeDocument = iframe.contentWindow.document;
+  iframeDocument.open();
+  iframeDocument.write(lt + 'script' + gt + 'document.F=Object' + lt + '/script' + gt);
+  iframeDocument.close();
+  createDict = iframeDocument.F;
+  while (i--) delete createDict[PROTOTYPE][enumBugKeys[i]];
+  return createDict();
+};
+
+module.exports = Object.create || function create(O, Properties) {
+  var result;
+  if (O !== null) {
+    Empty[PROTOTYPE] = anObject(O);
+    result = new Empty();
+    Empty[PROTOTYPE] = null;
+    // add "__proto__" for Object.getPrototypeOf polyfill
+    result[IE_PROTO] = O;
+  } else result = createDict();
+  return Properties === undefined ? result : dPs(result, Properties);
+};
+
+},{"./_an-object":"../node_modules/core-js/library/modules/_an-object.js","./_object-dps":"../node_modules/core-js/library/modules/_object-dps.js","./_enum-bug-keys":"../node_modules/core-js/library/modules/_enum-bug-keys.js","./_shared-key":"../node_modules/core-js/library/modules/_shared-key.js","./_dom-create":"../node_modules/core-js/library/modules/_dom-create.js","./_html":"../node_modules/core-js/library/modules/_html.js"}],"../node_modules/core-js/library/modules/_wks.js":[function(require,module,exports) {
+var store = require('./_shared')('wks');
+var uid = require('./_uid');
+var Symbol = require('./_global').Symbol;
+var USE_SYMBOL = typeof Symbol == 'function';
+
+var $exports = module.exports = function (name) {
+  return store[name] || (store[name] =
+    USE_SYMBOL && Symbol[name] || (USE_SYMBOL ? Symbol : uid)('Symbol.' + name));
+};
+
+$exports.store = store;
+
+},{"./_shared":"../node_modules/core-js/library/modules/_shared.js","./_uid":"../node_modules/core-js/library/modules/_uid.js","./_global":"../node_modules/core-js/library/modules/_global.js"}],"../node_modules/core-js/library/modules/_set-to-string-tag.js":[function(require,module,exports) {
+var def = require('./_object-dp').f;
+var has = require('./_has');
+var TAG = require('./_wks')('toStringTag');
+
+module.exports = function (it, tag, stat) {
+  if (it && !has(it = stat ? it : it.prototype, TAG)) def(it, TAG, { configurable: true, value: tag });
+};
+
+},{"./_object-dp":"../node_modules/core-js/library/modules/_object-dp.js","./_has":"../node_modules/core-js/library/modules/_has.js","./_wks":"../node_modules/core-js/library/modules/_wks.js"}],"../node_modules/core-js/library/modules/_iter-create.js":[function(require,module,exports) {
+'use strict';
+var create = require('./_object-create');
+var descriptor = require('./_property-desc');
+var setToStringTag = require('./_set-to-string-tag');
+var IteratorPrototype = {};
+
+// 25.1.2.1.1 %IteratorPrototype%[@@iterator]()
+require('./_hide')(IteratorPrototype, require('./_wks')('iterator'), function () { return this; });
+
+module.exports = function (Constructor, NAME, next) {
+  Constructor.prototype = create(IteratorPrototype, { next: descriptor(1, next) });
+  setToStringTag(Constructor, NAME + ' Iterator');
+};
+
+},{"./_object-create":"../node_modules/core-js/library/modules/_object-create.js","./_property-desc":"../node_modules/core-js/library/modules/_property-desc.js","./_set-to-string-tag":"../node_modules/core-js/library/modules/_set-to-string-tag.js","./_hide":"../node_modules/core-js/library/modules/_hide.js","./_wks":"../node_modules/core-js/library/modules/_wks.js"}],"../node_modules/core-js/library/modules/_to-object.js":[function(require,module,exports) {
+// 7.1.13 ToObject(argument)
+var defined = require('./_defined');
+module.exports = function (it) {
+  return Object(defined(it));
+};
+
+},{"./_defined":"../node_modules/core-js/library/modules/_defined.js"}],"../node_modules/core-js/library/modules/_object-gpo.js":[function(require,module,exports) {
+// 19.1.2.9 / 15.2.3.2 Object.getPrototypeOf(O)
+var has = require('./_has');
+var toObject = require('./_to-object');
+var IE_PROTO = require('./_shared-key')('IE_PROTO');
+var ObjectProto = Object.prototype;
+
+module.exports = Object.getPrototypeOf || function (O) {
+  O = toObject(O);
+  if (has(O, IE_PROTO)) return O[IE_PROTO];
+  if (typeof O.constructor == 'function' && O instanceof O.constructor) {
+    return O.constructor.prototype;
+  } return O instanceof Object ? ObjectProto : null;
+};
+
+},{"./_has":"../node_modules/core-js/library/modules/_has.js","./_to-object":"../node_modules/core-js/library/modules/_to-object.js","./_shared-key":"../node_modules/core-js/library/modules/_shared-key.js"}],"../node_modules/core-js/library/modules/_iter-define.js":[function(require,module,exports) {
+'use strict';
+var LIBRARY = require('./_library');
+var $export = require('./_export');
+var redefine = require('./_redefine');
+var hide = require('./_hide');
+var Iterators = require('./_iterators');
+var $iterCreate = require('./_iter-create');
+var setToStringTag = require('./_set-to-string-tag');
+var getPrototypeOf = require('./_object-gpo');
+var ITERATOR = require('./_wks')('iterator');
+var BUGGY = !([].keys && 'next' in [].keys()); // Safari has buggy iterators w/o `next`
+var FF_ITERATOR = '@@iterator';
+var KEYS = 'keys';
+var VALUES = 'values';
+
+var returnThis = function () { return this; };
+
+module.exports = function (Base, NAME, Constructor, next, DEFAULT, IS_SET, FORCED) {
+  $iterCreate(Constructor, NAME, next);
+  var getMethod = function (kind) {
+    if (!BUGGY && kind in proto) return proto[kind];
+    switch (kind) {
+      case KEYS: return function keys() { return new Constructor(this, kind); };
+      case VALUES: return function values() { return new Constructor(this, kind); };
+    } return function entries() { return new Constructor(this, kind); };
+  };
+  var TAG = NAME + ' Iterator';
+  var DEF_VALUES = DEFAULT == VALUES;
+  var VALUES_BUG = false;
+  var proto = Base.prototype;
+  var $native = proto[ITERATOR] || proto[FF_ITERATOR] || DEFAULT && proto[DEFAULT];
+  var $default = $native || getMethod(DEFAULT);
+  var $entries = DEFAULT ? !DEF_VALUES ? $default : getMethod('entries') : undefined;
+  var $anyNative = NAME == 'Array' ? proto.entries || $native : $native;
+  var methods, key, IteratorPrototype;
+  // Fix native
+  if ($anyNative) {
+    IteratorPrototype = getPrototypeOf($anyNative.call(new Base()));
+    if (IteratorPrototype !== Object.prototype && IteratorPrototype.next) {
+      // Set @@toStringTag to native iterators
+      setToStringTag(IteratorPrototype, TAG, true);
+      // fix for some old engines
+      if (!LIBRARY && typeof IteratorPrototype[ITERATOR] != 'function') hide(IteratorPrototype, ITERATOR, returnThis);
+    }
+  }
+  // fix Array#{values, @@iterator}.name in V8 / FF
+  if (DEF_VALUES && $native && $native.name !== VALUES) {
+    VALUES_BUG = true;
+    $default = function values() { return $native.call(this); };
+  }
+  // Define iterator
+  if ((!LIBRARY || FORCED) && (BUGGY || VALUES_BUG || !proto[ITERATOR])) {
+    hide(proto, ITERATOR, $default);
+  }
+  // Plug for library
+  Iterators[NAME] = $default;
+  Iterators[TAG] = returnThis;
+  if (DEFAULT) {
+    methods = {
+      values: DEF_VALUES ? $default : getMethod(VALUES),
+      keys: IS_SET ? $default : getMethod(KEYS),
+      entries: $entries
+    };
+    if (FORCED) for (key in methods) {
+      if (!(key in proto)) redefine(proto, key, methods[key]);
+    } else $export($export.P + $export.F * (BUGGY || VALUES_BUG), NAME, methods);
+  }
+  return methods;
+};
+
+},{"./_library":"../node_modules/core-js/library/modules/_library.js","./_export":"../node_modules/core-js/library/modules/_export.js","./_redefine":"../node_modules/core-js/library/modules/_redefine.js","./_hide":"../node_modules/core-js/library/modules/_hide.js","./_iterators":"../node_modules/core-js/library/modules/_iterators.js","./_iter-create":"../node_modules/core-js/library/modules/_iter-create.js","./_set-to-string-tag":"../node_modules/core-js/library/modules/_set-to-string-tag.js","./_object-gpo":"../node_modules/core-js/library/modules/_object-gpo.js","./_wks":"../node_modules/core-js/library/modules/_wks.js"}],"../node_modules/core-js/library/modules/es6.string.iterator.js":[function(require,module,exports) {
+'use strict';
+var $at = require('./_string-at')(true);
+
+// 21.1.3.27 String.prototype[@@iterator]()
+require('./_iter-define')(String, 'String', function (iterated) {
+  this._t = String(iterated); // target
+  this._i = 0;                // next index
+// 21.1.5.2.1 %StringIteratorPrototype%.next()
+}, function () {
+  var O = this._t;
+  var index = this._i;
+  var point;
+  if (index >= O.length) return { value: undefined, done: true };
+  point = $at(O, index);
+  this._i += point.length;
+  return { value: point, done: false };
+});
+
+},{"./_string-at":"../node_modules/core-js/library/modules/_string-at.js","./_iter-define":"../node_modules/core-js/library/modules/_iter-define.js"}],"../node_modules/core-js/library/modules/_add-to-unscopables.js":[function(require,module,exports) {
+module.exports = function () { /* empty */ };
+
+},{}],"../node_modules/core-js/library/modules/_iter-step.js":[function(require,module,exports) {
+module.exports = function (done, value) {
+  return { value: value, done: !!done };
+};
+
+},{}],"../node_modules/core-js/library/modules/es6.array.iterator.js":[function(require,module,exports) {
+'use strict';
+var addToUnscopables = require('./_add-to-unscopables');
+var step = require('./_iter-step');
+var Iterators = require('./_iterators');
+var toIObject = require('./_to-iobject');
+
+// 22.1.3.4 Array.prototype.entries()
+// 22.1.3.13 Array.prototype.keys()
+// 22.1.3.29 Array.prototype.values()
+// 22.1.3.30 Array.prototype[@@iterator]()
+module.exports = require('./_iter-define')(Array, 'Array', function (iterated, kind) {
+  this._t = toIObject(iterated); // target
+  this._i = 0;                   // next index
+  this._k = kind;                // kind
+// 22.1.5.2.1 %ArrayIteratorPrototype%.next()
+}, function () {
+  var O = this._t;
+  var kind = this._k;
+  var index = this._i++;
+  if (!O || index >= O.length) {
+    this._t = undefined;
+    return step(1);
+  }
+  if (kind == 'keys') return step(0, index);
+  if (kind == 'values') return step(0, O[index]);
+  return step(0, [index, O[index]]);
+}, 'values');
+
+// argumentsList[@@iterator] is %ArrayProto_values% (9.4.4.6, 9.4.4.7)
+Iterators.Arguments = Iterators.Array;
+
+addToUnscopables('keys');
+addToUnscopables('values');
+addToUnscopables('entries');
+
+},{"./_add-to-unscopables":"../node_modules/core-js/library/modules/_add-to-unscopables.js","./_iter-step":"../node_modules/core-js/library/modules/_iter-step.js","./_iterators":"../node_modules/core-js/library/modules/_iterators.js","./_to-iobject":"../node_modules/core-js/library/modules/_to-iobject.js","./_iter-define":"../node_modules/core-js/library/modules/_iter-define.js"}],"../node_modules/core-js/library/modules/web.dom.iterable.js":[function(require,module,exports) {
+
+require('./es6.array.iterator');
+var global = require('./_global');
+var hide = require('./_hide');
+var Iterators = require('./_iterators');
+var TO_STRING_TAG = require('./_wks')('toStringTag');
+
+var DOMIterables = ('CSSRuleList,CSSStyleDeclaration,CSSValueList,ClientRectList,DOMRectList,DOMStringList,' +
+  'DOMTokenList,DataTransferItemList,FileList,HTMLAllCollection,HTMLCollection,HTMLFormElement,HTMLSelectElement,' +
+  'MediaList,MimeTypeArray,NamedNodeMap,NodeList,PaintRequestList,Plugin,PluginArray,SVGLengthList,SVGNumberList,' +
+  'SVGPathSegList,SVGPointList,SVGStringList,SVGTransformList,SourceBufferList,StyleSheetList,TextTrackCueList,' +
+  'TextTrackList,TouchList').split(',');
+
+for (var i = 0; i < DOMIterables.length; i++) {
+  var NAME = DOMIterables[i];
+  var Collection = global[NAME];
+  var proto = Collection && Collection.prototype;
+  if (proto && !proto[TO_STRING_TAG]) hide(proto, TO_STRING_TAG, NAME);
+  Iterators[NAME] = Iterators.Array;
+}
+
+},{"./es6.array.iterator":"../node_modules/core-js/library/modules/es6.array.iterator.js","./_global":"../node_modules/core-js/library/modules/_global.js","./_hide":"../node_modules/core-js/library/modules/_hide.js","./_iterators":"../node_modules/core-js/library/modules/_iterators.js","./_wks":"../node_modules/core-js/library/modules/_wks.js"}],"../node_modules/core-js/library/modules/_wks-ext.js":[function(require,module,exports) {
+exports.f = require('./_wks');
+
+},{"./_wks":"../node_modules/core-js/library/modules/_wks.js"}],"../node_modules/core-js/library/fn/symbol/iterator.js":[function(require,module,exports) {
+require('../../modules/es6.string.iterator');
+require('../../modules/web.dom.iterable');
+module.exports = require('../../modules/_wks-ext').f('iterator');
+
+},{"../../modules/es6.string.iterator":"../node_modules/core-js/library/modules/es6.string.iterator.js","../../modules/web.dom.iterable":"../node_modules/core-js/library/modules/web.dom.iterable.js","../../modules/_wks-ext":"../node_modules/core-js/library/modules/_wks-ext.js"}],"../node_modules/@babel/runtime-corejs2/core-js/symbol/iterator.js":[function(require,module,exports) {
+module.exports = require("core-js/library/fn/symbol/iterator");
+},{"core-js/library/fn/symbol/iterator":"../node_modules/core-js/library/fn/symbol/iterator.js"}],"../node_modules/core-js/library/modules/_meta.js":[function(require,module,exports) {
+var META = require('./_uid')('meta');
+var isObject = require('./_is-object');
+var has = require('./_has');
+var setDesc = require('./_object-dp').f;
+var id = 0;
+var isExtensible = Object.isExtensible || function () {
+  return true;
+};
+var FREEZE = !require('./_fails')(function () {
+  return isExtensible(Object.preventExtensions({}));
+});
+var setMeta = function (it) {
+  setDesc(it, META, { value: {
+    i: 'O' + ++id, // object ID
+    w: {}          // weak collections IDs
+  } });
+};
+var fastKey = function (it, create) {
+  // return primitive with prefix
+  if (!isObject(it)) return typeof it == 'symbol' ? it : (typeof it == 'string' ? 'S' : 'P') + it;
+  if (!has(it, META)) {
+    // can't set metadata to uncaught frozen object
+    if (!isExtensible(it)) return 'F';
+    // not necessary to add metadata
+    if (!create) return 'E';
+    // add missing metadata
+    setMeta(it);
+  // return object ID
+  } return it[META].i;
+};
+var getWeak = function (it, create) {
+  if (!has(it, META)) {
+    // can't set metadata to uncaught frozen object
+    if (!isExtensible(it)) return true;
+    // not necessary to add metadata
+    if (!create) return false;
+    // add missing metadata
+    setMeta(it);
+  // return hash weak collections IDs
+  } return it[META].w;
+};
+// add metadata on freeze-family methods calling
+var onFreeze = function (it) {
+  if (FREEZE && meta.NEED && isExtensible(it) && !has(it, META)) setMeta(it);
+  return it;
+};
+var meta = module.exports = {
+  KEY: META,
+  NEED: false,
+  fastKey: fastKey,
+  getWeak: getWeak,
+  onFreeze: onFreeze
+};
+
+},{"./_uid":"../node_modules/core-js/library/modules/_uid.js","./_is-object":"../node_modules/core-js/library/modules/_is-object.js","./_has":"../node_modules/core-js/library/modules/_has.js","./_object-dp":"../node_modules/core-js/library/modules/_object-dp.js","./_fails":"../node_modules/core-js/library/modules/_fails.js"}],"../node_modules/core-js/library/modules/_wks-define.js":[function(require,module,exports) {
+
+var global = require('./_global');
+var core = require('./_core');
+var LIBRARY = require('./_library');
+var wksExt = require('./_wks-ext');
+var defineProperty = require('./_object-dp').f;
+module.exports = function (name) {
+  var $Symbol = core.Symbol || (core.Symbol = LIBRARY ? {} : global.Symbol || {});
+  if (name.charAt(0) != '_' && !(name in $Symbol)) defineProperty($Symbol, name, { value: wksExt.f(name) });
+};
+
+},{"./_global":"../node_modules/core-js/library/modules/_global.js","./_core":"../node_modules/core-js/library/modules/_core.js","./_library":"../node_modules/core-js/library/modules/_library.js","./_wks-ext":"../node_modules/core-js/library/modules/_wks-ext.js","./_object-dp":"../node_modules/core-js/library/modules/_object-dp.js"}],"../node_modules/core-js/library/modules/_object-gops.js":[function(require,module,exports) {
+exports.f = Object.getOwnPropertySymbols;
+
+},{}],"../node_modules/core-js/library/modules/_object-pie.js":[function(require,module,exports) {
+exports.f = {}.propertyIsEnumerable;
+
+},{}],"../node_modules/core-js/library/modules/_enum-keys.js":[function(require,module,exports) {
+// all enumerable object keys, includes symbols
+var getKeys = require('./_object-keys');
+var gOPS = require('./_object-gops');
+var pIE = require('./_object-pie');
+module.exports = function (it) {
+  var result = getKeys(it);
+  var getSymbols = gOPS.f;
+  if (getSymbols) {
+    var symbols = getSymbols(it);
+    var isEnum = pIE.f;
+    var i = 0;
+    var key;
+    while (symbols.length > i) if (isEnum.call(it, key = symbols[i++])) result.push(key);
+  } return result;
+};
+
+},{"./_object-keys":"../node_modules/core-js/library/modules/_object-keys.js","./_object-gops":"../node_modules/core-js/library/modules/_object-gops.js","./_object-pie":"../node_modules/core-js/library/modules/_object-pie.js"}],"../node_modules/core-js/library/modules/_is-array.js":[function(require,module,exports) {
+// 7.2.2 IsArray(argument)
+var cof = require('./_cof');
+module.exports = Array.isArray || function isArray(arg) {
+  return cof(arg) == 'Array';
+};
+
+},{"./_cof":"../node_modules/core-js/library/modules/_cof.js"}],"../node_modules/core-js/library/modules/_object-gopn.js":[function(require,module,exports) {
+// 19.1.2.7 / 15.2.3.4 Object.getOwnPropertyNames(O)
+var $keys = require('./_object-keys-internal');
+var hiddenKeys = require('./_enum-bug-keys').concat('length', 'prototype');
+
+exports.f = Object.getOwnPropertyNames || function getOwnPropertyNames(O) {
+  return $keys(O, hiddenKeys);
+};
+
+},{"./_object-keys-internal":"../node_modules/core-js/library/modules/_object-keys-internal.js","./_enum-bug-keys":"../node_modules/core-js/library/modules/_enum-bug-keys.js"}],"../node_modules/core-js/library/modules/_object-gopn-ext.js":[function(require,module,exports) {
+// fallback for IE11 buggy Object.getOwnPropertyNames with iframe and window
+var toIObject = require('./_to-iobject');
+var gOPN = require('./_object-gopn').f;
+var toString = {}.toString;
+
+var windowNames = typeof window == 'object' && window && Object.getOwnPropertyNames
+  ? Object.getOwnPropertyNames(window) : [];
+
+var getWindowNames = function (it) {
+  try {
+    return gOPN(it);
+  } catch (e) {
+    return windowNames.slice();
+  }
+};
+
+module.exports.f = function getOwnPropertyNames(it) {
+  return windowNames && toString.call(it) == '[object Window]' ? getWindowNames(it) : gOPN(toIObject(it));
+};
+
+},{"./_to-iobject":"../node_modules/core-js/library/modules/_to-iobject.js","./_object-gopn":"../node_modules/core-js/library/modules/_object-gopn.js"}],"../node_modules/core-js/library/modules/_object-gopd.js":[function(require,module,exports) {
+var pIE = require('./_object-pie');
+var createDesc = require('./_property-desc');
+var toIObject = require('./_to-iobject');
+var toPrimitive = require('./_to-primitive');
+var has = require('./_has');
+var IE8_DOM_DEFINE = require('./_ie8-dom-define');
+var gOPD = Object.getOwnPropertyDescriptor;
+
+exports.f = require('./_descriptors') ? gOPD : function getOwnPropertyDescriptor(O, P) {
+  O = toIObject(O);
+  P = toPrimitive(P, true);
+  if (IE8_DOM_DEFINE) try {
+    return gOPD(O, P);
+  } catch (e) { /* empty */ }
+  if (has(O, P)) return createDesc(!pIE.f.call(O, P), O[P]);
+};
+
+},{"./_object-pie":"../node_modules/core-js/library/modules/_object-pie.js","./_property-desc":"../node_modules/core-js/library/modules/_property-desc.js","./_to-iobject":"../node_modules/core-js/library/modules/_to-iobject.js","./_to-primitive":"../node_modules/core-js/library/modules/_to-primitive.js","./_has":"../node_modules/core-js/library/modules/_has.js","./_ie8-dom-define":"../node_modules/core-js/library/modules/_ie8-dom-define.js","./_descriptors":"../node_modules/core-js/library/modules/_descriptors.js"}],"../node_modules/core-js/library/modules/es6.symbol.js":[function(require,module,exports) {
+
+'use strict';
+// ECMAScript 6 symbols shim
+var global = require('./_global');
+var has = require('./_has');
+var DESCRIPTORS = require('./_descriptors');
+var $export = require('./_export');
+var redefine = require('./_redefine');
+var META = require('./_meta').KEY;
+var $fails = require('./_fails');
+var shared = require('./_shared');
+var setToStringTag = require('./_set-to-string-tag');
+var uid = require('./_uid');
+var wks = require('./_wks');
+var wksExt = require('./_wks-ext');
+var wksDefine = require('./_wks-define');
+var enumKeys = require('./_enum-keys');
+var isArray = require('./_is-array');
+var anObject = require('./_an-object');
+var isObject = require('./_is-object');
+var toIObject = require('./_to-iobject');
+var toPrimitive = require('./_to-primitive');
+var createDesc = require('./_property-desc');
+var _create = require('./_object-create');
+var gOPNExt = require('./_object-gopn-ext');
+var $GOPD = require('./_object-gopd');
+var $DP = require('./_object-dp');
+var $keys = require('./_object-keys');
+var gOPD = $GOPD.f;
+var dP = $DP.f;
+var gOPN = gOPNExt.f;
+var $Symbol = global.Symbol;
+var $JSON = global.JSON;
+var _stringify = $JSON && $JSON.stringify;
+var PROTOTYPE = 'prototype';
+var HIDDEN = wks('_hidden');
+var TO_PRIMITIVE = wks('toPrimitive');
+var isEnum = {}.propertyIsEnumerable;
+var SymbolRegistry = shared('symbol-registry');
+var AllSymbols = shared('symbols');
+var OPSymbols = shared('op-symbols');
+var ObjectProto = Object[PROTOTYPE];
+var USE_NATIVE = typeof $Symbol == 'function';
+var QObject = global.QObject;
+// Don't use setters in Qt Script, https://github.com/zloirock/core-js/issues/173
+var setter = !QObject || !QObject[PROTOTYPE] || !QObject[PROTOTYPE].findChild;
+
+// fallback for old Android, https://code.google.com/p/v8/issues/detail?id=687
+var setSymbolDesc = DESCRIPTORS && $fails(function () {
+  return _create(dP({}, 'a', {
+    get: function () { return dP(this, 'a', { value: 7 }).a; }
+  })).a != 7;
+}) ? function (it, key, D) {
+  var protoDesc = gOPD(ObjectProto, key);
+  if (protoDesc) delete ObjectProto[key];
+  dP(it, key, D);
+  if (protoDesc && it !== ObjectProto) dP(ObjectProto, key, protoDesc);
+} : dP;
+
+var wrap = function (tag) {
+  var sym = AllSymbols[tag] = _create($Symbol[PROTOTYPE]);
+  sym._k = tag;
+  return sym;
+};
+
+var isSymbol = USE_NATIVE && typeof $Symbol.iterator == 'symbol' ? function (it) {
+  return typeof it == 'symbol';
+} : function (it) {
+  return it instanceof $Symbol;
+};
+
+var $defineProperty = function defineProperty(it, key, D) {
+  if (it === ObjectProto) $defineProperty(OPSymbols, key, D);
+  anObject(it);
+  key = toPrimitive(key, true);
+  anObject(D);
+  if (has(AllSymbols, key)) {
+    if (!D.enumerable) {
+      if (!has(it, HIDDEN)) dP(it, HIDDEN, createDesc(1, {}));
+      it[HIDDEN][key] = true;
+    } else {
+      if (has(it, HIDDEN) && it[HIDDEN][key]) it[HIDDEN][key] = false;
+      D = _create(D, { enumerable: createDesc(0, false) });
+    } return setSymbolDesc(it, key, D);
+  } return dP(it, key, D);
+};
+var $defineProperties = function defineProperties(it, P) {
+  anObject(it);
+  var keys = enumKeys(P = toIObject(P));
+  var i = 0;
+  var l = keys.length;
+  var key;
+  while (l > i) $defineProperty(it, key = keys[i++], P[key]);
+  return it;
+};
+var $create = function create(it, P) {
+  return P === undefined ? _create(it) : $defineProperties(_create(it), P);
+};
+var $propertyIsEnumerable = function propertyIsEnumerable(key) {
+  var E = isEnum.call(this, key = toPrimitive(key, true));
+  if (this === ObjectProto && has(AllSymbols, key) && !has(OPSymbols, key)) return false;
+  return E || !has(this, key) || !has(AllSymbols, key) || has(this, HIDDEN) && this[HIDDEN][key] ? E : true;
+};
+var $getOwnPropertyDescriptor = function getOwnPropertyDescriptor(it, key) {
+  it = toIObject(it);
+  key = toPrimitive(key, true);
+  if (it === ObjectProto && has(AllSymbols, key) && !has(OPSymbols, key)) return;
+  var D = gOPD(it, key);
+  if (D && has(AllSymbols, key) && !(has(it, HIDDEN) && it[HIDDEN][key])) D.enumerable = true;
+  return D;
+};
+var $getOwnPropertyNames = function getOwnPropertyNames(it) {
+  var names = gOPN(toIObject(it));
+  var result = [];
+  var i = 0;
+  var key;
+  while (names.length > i) {
+    if (!has(AllSymbols, key = names[i++]) && key != HIDDEN && key != META) result.push(key);
+  } return result;
+};
+var $getOwnPropertySymbols = function getOwnPropertySymbols(it) {
+  var IS_OP = it === ObjectProto;
+  var names = gOPN(IS_OP ? OPSymbols : toIObject(it));
+  var result = [];
+  var i = 0;
+  var key;
+  while (names.length > i) {
+    if (has(AllSymbols, key = names[i++]) && (IS_OP ? has(ObjectProto, key) : true)) result.push(AllSymbols[key]);
+  } return result;
+};
+
+// 19.4.1.1 Symbol([description])
+if (!USE_NATIVE) {
+  $Symbol = function Symbol() {
+    if (this instanceof $Symbol) throw TypeError('Symbol is not a constructor!');
+    var tag = uid(arguments.length > 0 ? arguments[0] : undefined);
+    var $set = function (value) {
+      if (this === ObjectProto) $set.call(OPSymbols, value);
+      if (has(this, HIDDEN) && has(this[HIDDEN], tag)) this[HIDDEN][tag] = false;
+      setSymbolDesc(this, tag, createDesc(1, value));
+    };
+    if (DESCRIPTORS && setter) setSymbolDesc(ObjectProto, tag, { configurable: true, set: $set });
+    return wrap(tag);
+  };
+  redefine($Symbol[PROTOTYPE], 'toString', function toString() {
+    return this._k;
+  });
+
+  $GOPD.f = $getOwnPropertyDescriptor;
+  $DP.f = $defineProperty;
+  require('./_object-gopn').f = gOPNExt.f = $getOwnPropertyNames;
+  require('./_object-pie').f = $propertyIsEnumerable;
+  require('./_object-gops').f = $getOwnPropertySymbols;
+
+  if (DESCRIPTORS && !require('./_library')) {
+    redefine(ObjectProto, 'propertyIsEnumerable', $propertyIsEnumerable, true);
+  }
+
+  wksExt.f = function (name) {
+    return wrap(wks(name));
+  };
+}
+
+$export($export.G + $export.W + $export.F * !USE_NATIVE, { Symbol: $Symbol });
+
+for (var es6Symbols = (
+  // 19.4.2.2, 19.4.2.3, 19.4.2.4, 19.4.2.6, 19.4.2.8, 19.4.2.9, 19.4.2.10, 19.4.2.11, 19.4.2.12, 19.4.2.13, 19.4.2.14
+  'hasInstance,isConcatSpreadable,iterator,match,replace,search,species,split,toPrimitive,toStringTag,unscopables'
+).split(','), j = 0; es6Symbols.length > j;)wks(es6Symbols[j++]);
+
+for (var wellKnownSymbols = $keys(wks.store), k = 0; wellKnownSymbols.length > k;) wksDefine(wellKnownSymbols[k++]);
+
+$export($export.S + $export.F * !USE_NATIVE, 'Symbol', {
+  // 19.4.2.1 Symbol.for(key)
+  'for': function (key) {
+    return has(SymbolRegistry, key += '')
+      ? SymbolRegistry[key]
+      : SymbolRegistry[key] = $Symbol(key);
+  },
+  // 19.4.2.5 Symbol.keyFor(sym)
+  keyFor: function keyFor(sym) {
+    if (!isSymbol(sym)) throw TypeError(sym + ' is not a symbol!');
+    for (var key in SymbolRegistry) if (SymbolRegistry[key] === sym) return key;
+  },
+  useSetter: function () { setter = true; },
+  useSimple: function () { setter = false; }
+});
+
+$export($export.S + $export.F * !USE_NATIVE, 'Object', {
+  // 19.1.2.2 Object.create(O [, Properties])
+  create: $create,
+  // 19.1.2.4 Object.defineProperty(O, P, Attributes)
+  defineProperty: $defineProperty,
+  // 19.1.2.3 Object.defineProperties(O, Properties)
+  defineProperties: $defineProperties,
+  // 19.1.2.6 Object.getOwnPropertyDescriptor(O, P)
+  getOwnPropertyDescriptor: $getOwnPropertyDescriptor,
+  // 19.1.2.7 Object.getOwnPropertyNames(O)
+  getOwnPropertyNames: $getOwnPropertyNames,
+  // 19.1.2.8 Object.getOwnPropertySymbols(O)
+  getOwnPropertySymbols: $getOwnPropertySymbols
+});
+
+// 24.3.2 JSON.stringify(value [, replacer [, space]])
+$JSON && $export($export.S + $export.F * (!USE_NATIVE || $fails(function () {
+  var S = $Symbol();
+  // MS Edge converts symbol values to JSON as {}
+  // WebKit converts symbol values to JSON as null
+  // V8 throws on boxed symbols
+  return _stringify([S]) != '[null]' || _stringify({ a: S }) != '{}' || _stringify(Object(S)) != '{}';
+})), 'JSON', {
+  stringify: function stringify(it) {
+    var args = [it];
+    var i = 1;
+    var replacer, $replacer;
+    while (arguments.length > i) args.push(arguments[i++]);
+    $replacer = replacer = args[1];
+    if (!isObject(replacer) && it === undefined || isSymbol(it)) return; // IE8 returns string on undefined
+    if (!isArray(replacer)) replacer = function (key, value) {
+      if (typeof $replacer == 'function') value = $replacer.call(this, key, value);
+      if (!isSymbol(value)) return value;
+    };
+    args[1] = replacer;
+    return _stringify.apply($JSON, args);
+  }
+});
+
+// 19.4.3.4 Symbol.prototype[@@toPrimitive](hint)
+$Symbol[PROTOTYPE][TO_PRIMITIVE] || require('./_hide')($Symbol[PROTOTYPE], TO_PRIMITIVE, $Symbol[PROTOTYPE].valueOf);
+// 19.4.3.5 Symbol.prototype[@@toStringTag]
+setToStringTag($Symbol, 'Symbol');
+// 20.2.1.9 Math[@@toStringTag]
+setToStringTag(Math, 'Math', true);
+// 24.3.3 JSON[@@toStringTag]
+setToStringTag(global.JSON, 'JSON', true);
+
+},{"./_global":"../node_modules/core-js/library/modules/_global.js","./_has":"../node_modules/core-js/library/modules/_has.js","./_descriptors":"../node_modules/core-js/library/modules/_descriptors.js","./_export":"../node_modules/core-js/library/modules/_export.js","./_redefine":"../node_modules/core-js/library/modules/_redefine.js","./_meta":"../node_modules/core-js/library/modules/_meta.js","./_fails":"../node_modules/core-js/library/modules/_fails.js","./_shared":"../node_modules/core-js/library/modules/_shared.js","./_set-to-string-tag":"../node_modules/core-js/library/modules/_set-to-string-tag.js","./_uid":"../node_modules/core-js/library/modules/_uid.js","./_wks":"../node_modules/core-js/library/modules/_wks.js","./_wks-ext":"../node_modules/core-js/library/modules/_wks-ext.js","./_wks-define":"../node_modules/core-js/library/modules/_wks-define.js","./_enum-keys":"../node_modules/core-js/library/modules/_enum-keys.js","./_is-array":"../node_modules/core-js/library/modules/_is-array.js","./_an-object":"../node_modules/core-js/library/modules/_an-object.js","./_is-object":"../node_modules/core-js/library/modules/_is-object.js","./_to-iobject":"../node_modules/core-js/library/modules/_to-iobject.js","./_to-primitive":"../node_modules/core-js/library/modules/_to-primitive.js","./_property-desc":"../node_modules/core-js/library/modules/_property-desc.js","./_object-create":"../node_modules/core-js/library/modules/_object-create.js","./_object-gopn-ext":"../node_modules/core-js/library/modules/_object-gopn-ext.js","./_object-gopd":"../node_modules/core-js/library/modules/_object-gopd.js","./_object-dp":"../node_modules/core-js/library/modules/_object-dp.js","./_object-keys":"../node_modules/core-js/library/modules/_object-keys.js","./_object-gopn":"../node_modules/core-js/library/modules/_object-gopn.js","./_object-pie":"../node_modules/core-js/library/modules/_object-pie.js","./_object-gops":"../node_modules/core-js/library/modules/_object-gops.js","./_library":"../node_modules/core-js/library/modules/_library.js","./_hide":"../node_modules/core-js/library/modules/_hide.js"}],"../node_modules/core-js/library/modules/es6.object.to-string.js":[function(require,module,exports) {
+
+},{}],"../node_modules/core-js/library/modules/es7.symbol.async-iterator.js":[function(require,module,exports) {
+require('./_wks-define')('asyncIterator');
+
+},{"./_wks-define":"../node_modules/core-js/library/modules/_wks-define.js"}],"../node_modules/core-js/library/modules/es7.symbol.observable.js":[function(require,module,exports) {
+require('./_wks-define')('observable');
+
+},{"./_wks-define":"../node_modules/core-js/library/modules/_wks-define.js"}],"../node_modules/core-js/library/fn/symbol/index.js":[function(require,module,exports) {
+require('../../modules/es6.symbol');
+require('../../modules/es6.object.to-string');
+require('../../modules/es7.symbol.async-iterator');
+require('../../modules/es7.symbol.observable');
+module.exports = require('../../modules/_core').Symbol;
+
+},{"../../modules/es6.symbol":"../node_modules/core-js/library/modules/es6.symbol.js","../../modules/es6.object.to-string":"../node_modules/core-js/library/modules/es6.object.to-string.js","../../modules/es7.symbol.async-iterator":"../node_modules/core-js/library/modules/es7.symbol.async-iterator.js","../../modules/es7.symbol.observable":"../node_modules/core-js/library/modules/es7.symbol.observable.js","../../modules/_core":"../node_modules/core-js/library/modules/_core.js"}],"../node_modules/@babel/runtime-corejs2/core-js/symbol.js":[function(require,module,exports) {
+module.exports = require("core-js/library/fn/symbol");
+},{"core-js/library/fn/symbol":"../node_modules/core-js/library/fn/symbol/index.js"}],"../node_modules/core-js/library/modules/_object-sap.js":[function(require,module,exports) {
+// most Object methods by ES6 should accept primitives
+var $export = require('./_export');
+var core = require('./_core');
+var fails = require('./_fails');
+module.exports = function (KEY, exec) {
+  var fn = (core.Object || {})[KEY] || Object[KEY];
+  var exp = {};
+  exp[KEY] = exec(fn);
+  $export($export.S + $export.F * fails(function () { fn(1); }), 'Object', exp);
+};
+
+},{"./_export":"../node_modules/core-js/library/modules/_export.js","./_core":"../node_modules/core-js/library/modules/_core.js","./_fails":"../node_modules/core-js/library/modules/_fails.js"}],"../node_modules/core-js/library/modules/es6.object.freeze.js":[function(require,module,exports) {
+// 19.1.2.5 Object.freeze(O)
+var isObject = require('./_is-object');
+var meta = require('./_meta').onFreeze;
+
+require('./_object-sap')('freeze', function ($freeze) {
+  return function freeze(it) {
+    return $freeze && isObject(it) ? $freeze(meta(it)) : it;
+  };
+});
+
+},{"./_is-object":"../node_modules/core-js/library/modules/_is-object.js","./_meta":"../node_modules/core-js/library/modules/_meta.js","./_object-sap":"../node_modules/core-js/library/modules/_object-sap.js"}],"../node_modules/core-js/library/fn/object/freeze.js":[function(require,module,exports) {
+require('../../modules/es6.object.freeze');
+module.exports = require('../../modules/_core').Object.freeze;
+
+},{"../../modules/es6.object.freeze":"../node_modules/core-js/library/modules/es6.object.freeze.js","../../modules/_core":"../node_modules/core-js/library/modules/_core.js"}],"../node_modules/@babel/runtime-corejs2/core-js/object/freeze.js":[function(require,module,exports) {
+module.exports = require("core-js/library/fn/object/freeze");
+},{"core-js/library/fn/object/freeze":"../node_modules/core-js/library/fn/object/freeze.js"}],"../node_modules/core-js/library/modules/_is-integer.js":[function(require,module,exports) {
+// 20.1.2.3 Number.isInteger(number)
+var isObject = require('./_is-object');
+var floor = Math.floor;
+module.exports = function isInteger(it) {
+  return !isObject(it) && isFinite(it) && floor(it) === it;
+};
+
+},{"./_is-object":"../node_modules/core-js/library/modules/_is-object.js"}],"../node_modules/core-js/library/modules/es6.number.is-integer.js":[function(require,module,exports) {
+// 20.1.2.3 Number.isInteger(number)
+var $export = require('./_export');
+
+$export($export.S, 'Number', { isInteger: require('./_is-integer') });
+
+},{"./_export":"../node_modules/core-js/library/modules/_export.js","./_is-integer":"../node_modules/core-js/library/modules/_is-integer.js"}],"../node_modules/core-js/library/fn/number/is-integer.js":[function(require,module,exports) {
+require('../../modules/es6.number.is-integer');
+module.exports = require('../../modules/_core').Number.isInteger;
+
+},{"../../modules/es6.number.is-integer":"../node_modules/core-js/library/modules/es6.number.is-integer.js","../../modules/_core":"../node_modules/core-js/library/modules/_core.js"}],"../node_modules/@babel/runtime-corejs2/core-js/number/is-integer.js":[function(require,module,exports) {
+module.exports = require("core-js/library/fn/number/is-integer");
+},{"core-js/library/fn/number/is-integer":"../node_modules/core-js/library/fn/number/is-integer.js"}],"../node_modules/core-js/library/modules/_classof.js":[function(require,module,exports) {
+// getting tag from 19.1.3.6 Object.prototype.toString()
+var cof = require('./_cof');
+var TAG = require('./_wks')('toStringTag');
+// ES3 wrong here
+var ARG = cof(function () { return arguments; }()) == 'Arguments';
+
+// fallback for IE11 Script Access Denied error
+var tryGet = function (it, key) {
+  try {
+    return it[key];
+  } catch (e) { /* empty */ }
+};
+
+module.exports = function (it) {
+  var O, T, B;
+  return it === undefined ? 'Undefined' : it === null ? 'Null'
+    // @@toStringTag case
+    : typeof (T = tryGet(O = Object(it), TAG)) == 'string' ? T
+    // builtinTag case
+    : ARG ? cof(O)
+    // ES3 arguments fallback
+    : (B = cof(O)) == 'Object' && typeof O.callee == 'function' ? 'Arguments' : B;
+};
+
+},{"./_cof":"../node_modules/core-js/library/modules/_cof.js","./_wks":"../node_modules/core-js/library/modules/_wks.js"}],"../node_modules/core-js/library/modules/_an-instance.js":[function(require,module,exports) {
+module.exports = function (it, Constructor, name, forbiddenField) {
+  if (!(it instanceof Constructor) || (forbiddenField !== undefined && forbiddenField in it)) {
+    throw TypeError(name + ': incorrect invocation!');
+  } return it;
+};
+
+},{}],"../node_modules/core-js/library/modules/_iter-call.js":[function(require,module,exports) {
+// call something on iterator step with safe closing on error
+var anObject = require('./_an-object');
+module.exports = function (iterator, fn, value, entries) {
+  try {
+    return entries ? fn(anObject(value)[0], value[1]) : fn(value);
+  // 7.4.6 IteratorClose(iterator, completion)
+  } catch (e) {
+    var ret = iterator['return'];
+    if (ret !== undefined) anObject(ret.call(iterator));
+    throw e;
+  }
+};
+
+},{"./_an-object":"../node_modules/core-js/library/modules/_an-object.js"}],"../node_modules/core-js/library/modules/_is-array-iter.js":[function(require,module,exports) {
+// check on default Array iterator
+var Iterators = require('./_iterators');
+var ITERATOR = require('./_wks')('iterator');
+var ArrayProto = Array.prototype;
+
+module.exports = function (it) {
+  return it !== undefined && (Iterators.Array === it || ArrayProto[ITERATOR] === it);
+};
+
+},{"./_iterators":"../node_modules/core-js/library/modules/_iterators.js","./_wks":"../node_modules/core-js/library/modules/_wks.js"}],"../node_modules/core-js/library/modules/core.get-iterator-method.js":[function(require,module,exports) {
+var classof = require('./_classof');
+var ITERATOR = require('./_wks')('iterator');
+var Iterators = require('./_iterators');
+module.exports = require('./_core').getIteratorMethod = function (it) {
+  if (it != undefined) return it[ITERATOR]
+    || it['@@iterator']
+    || Iterators[classof(it)];
+};
+
+},{"./_classof":"../node_modules/core-js/library/modules/_classof.js","./_wks":"../node_modules/core-js/library/modules/_wks.js","./_iterators":"../node_modules/core-js/library/modules/_iterators.js","./_core":"../node_modules/core-js/library/modules/_core.js"}],"../node_modules/core-js/library/modules/_for-of.js":[function(require,module,exports) {
+var ctx = require('./_ctx');
+var call = require('./_iter-call');
+var isArrayIter = require('./_is-array-iter');
+var anObject = require('./_an-object');
+var toLength = require('./_to-length');
+var getIterFn = require('./core.get-iterator-method');
+var BREAK = {};
+var RETURN = {};
+var exports = module.exports = function (iterable, entries, fn, that, ITERATOR) {
+  var iterFn = ITERATOR ? function () { return iterable; } : getIterFn(iterable);
+  var f = ctx(fn, that, entries ? 2 : 1);
+  var index = 0;
+  var length, step, iterator, result;
+  if (typeof iterFn != 'function') throw TypeError(iterable + ' is not iterable!');
+  // fast case for arrays with default iterator
+  if (isArrayIter(iterFn)) for (length = toLength(iterable.length); length > index; index++) {
+    result = entries ? f(anObject(step = iterable[index])[0], step[1]) : f(iterable[index]);
+    if (result === BREAK || result === RETURN) return result;
+  } else for (iterator = iterFn.call(iterable); !(step = iterator.next()).done;) {
+    result = call(iterator, f, step.value, entries);
+    if (result === BREAK || result === RETURN) return result;
+  }
+};
+exports.BREAK = BREAK;
+exports.RETURN = RETURN;
+
+},{"./_ctx":"../node_modules/core-js/library/modules/_ctx.js","./_iter-call":"../node_modules/core-js/library/modules/_iter-call.js","./_is-array-iter":"../node_modules/core-js/library/modules/_is-array-iter.js","./_an-object":"../node_modules/core-js/library/modules/_an-object.js","./_to-length":"../node_modules/core-js/library/modules/_to-length.js","./core.get-iterator-method":"../node_modules/core-js/library/modules/core.get-iterator-method.js"}],"../node_modules/core-js/library/modules/_species-constructor.js":[function(require,module,exports) {
+// 7.3.20 SpeciesConstructor(O, defaultConstructor)
+var anObject = require('./_an-object');
+var aFunction = require('./_a-function');
+var SPECIES = require('./_wks')('species');
+module.exports = function (O, D) {
+  var C = anObject(O).constructor;
+  var S;
+  return C === undefined || (S = anObject(C)[SPECIES]) == undefined ? D : aFunction(S);
+};
+
+},{"./_an-object":"../node_modules/core-js/library/modules/_an-object.js","./_a-function":"../node_modules/core-js/library/modules/_a-function.js","./_wks":"../node_modules/core-js/library/modules/_wks.js"}],"../node_modules/core-js/library/modules/_invoke.js":[function(require,module,exports) {
+// fast apply, http://jsperf.lnkit.com/fast-apply/5
+module.exports = function (fn, args, that) {
+  var un = that === undefined;
+  switch (args.length) {
+    case 0: return un ? fn()
+                      : fn.call(that);
+    case 1: return un ? fn(args[0])
+                      : fn.call(that, args[0]);
+    case 2: return un ? fn(args[0], args[1])
+                      : fn.call(that, args[0], args[1]);
+    case 3: return un ? fn(args[0], args[1], args[2])
+                      : fn.call(that, args[0], args[1], args[2]);
+    case 4: return un ? fn(args[0], args[1], args[2], args[3])
+                      : fn.call(that, args[0], args[1], args[2], args[3]);
+  } return fn.apply(that, args);
+};
+
+},{}],"../node_modules/core-js/library/modules/_task.js":[function(require,module,exports) {
+
+
+var ctx = require('./_ctx');
+var invoke = require('./_invoke');
+var html = require('./_html');
+var cel = require('./_dom-create');
+var global = require('./_global');
+var process = global.process;
+var setTask = global.setImmediate;
+var clearTask = global.clearImmediate;
+var MessageChannel = global.MessageChannel;
+var Dispatch = global.Dispatch;
+var counter = 0;
+var queue = {};
+var ONREADYSTATECHANGE = 'onreadystatechange';
+var defer, channel, port;
+var run = function () {
+  var id = +this;
+  // eslint-disable-next-line no-prototype-builtins
+  if (queue.hasOwnProperty(id)) {
+    var fn = queue[id];
+    delete queue[id];
+    fn();
+  }
+};
+var listener = function (event) {
+  run.call(event.data);
+};
+// Node.js 0.9+ & IE10+ has setImmediate, otherwise:
+if (!setTask || !clearTask) {
+  setTask = function setImmediate(fn) {
+    var args = [];
+    var i = 1;
+    while (arguments.length > i) args.push(arguments[i++]);
+    queue[++counter] = function () {
+      // eslint-disable-next-line no-new-func
+      invoke(typeof fn == 'function' ? fn : Function(fn), args);
+    };
+    defer(counter);
+    return counter;
+  };
+  clearTask = function clearImmediate(id) {
+    delete queue[id];
+  };
+  // Node.js 0.8-
+  if (require('./_cof')(process) == 'process') {
+    defer = function (id) {
+      process.nextTick(ctx(run, id, 1));
+    };
+  // Sphere (JS game engine) Dispatch API
+  } else if (Dispatch && Dispatch.now) {
+    defer = function (id) {
+      Dispatch.now(ctx(run, id, 1));
+    };
+  // Browsers with MessageChannel, includes WebWorkers
+  } else if (MessageChannel) {
+    channel = new MessageChannel();
+    port = channel.port2;
+    channel.port1.onmessage = listener;
+    defer = ctx(port.postMessage, port, 1);
+  // Browsers with postMessage, skip WebWorkers
+  // IE8 has postMessage, but it's sync & typeof its postMessage is 'object'
+  } else if (global.addEventListener && typeof postMessage == 'function' && !global.importScripts) {
+    defer = function (id) {
+      global.postMessage(id + '', '*');
+    };
+    global.addEventListener('message', listener, false);
+  // IE8-
+  } else if (ONREADYSTATECHANGE in cel('script')) {
+    defer = function (id) {
+      html.appendChild(cel('script'))[ONREADYSTATECHANGE] = function () {
+        html.removeChild(this);
+        run.call(id);
+      };
+    };
+  // Rest old browsers
+  } else {
+    defer = function (id) {
+      setTimeout(ctx(run, id, 1), 0);
+    };
+  }
+}
+module.exports = {
+  set: setTask,
+  clear: clearTask
+};
+
+},{"./_ctx":"../node_modules/core-js/library/modules/_ctx.js","./_invoke":"../node_modules/core-js/library/modules/_invoke.js","./_html":"../node_modules/core-js/library/modules/_html.js","./_dom-create":"../node_modules/core-js/library/modules/_dom-create.js","./_global":"../node_modules/core-js/library/modules/_global.js","./_cof":"../node_modules/core-js/library/modules/_cof.js"}],"../node_modules/core-js/library/modules/_microtask.js":[function(require,module,exports) {
+
+
+var global = require('./_global');
+var macrotask = require('./_task').set;
+var Observer = global.MutationObserver || global.WebKitMutationObserver;
+var process = global.process;
+var Promise = global.Promise;
+var isNode = require('./_cof')(process) == 'process';
+
+module.exports = function () {
+  var head, last, notify;
+
+  var flush = function () {
+    var parent, fn;
+    if (isNode && (parent = process.domain)) parent.exit();
+    while (head) {
+      fn = head.fn;
+      head = head.next;
+      try {
+        fn();
+      } catch (e) {
+        if (head) notify();
+        else last = undefined;
+        throw e;
+      }
+    } last = undefined;
+    if (parent) parent.enter();
+  };
+
+  // Node.js
+  if (isNode) {
+    notify = function () {
+      process.nextTick(flush);
+    };
+  // browsers with MutationObserver, except iOS Safari - https://github.com/zloirock/core-js/issues/339
+  } else if (Observer && !(global.navigator && global.navigator.standalone)) {
+    var toggle = true;
+    var node = document.createTextNode('');
+    new Observer(flush).observe(node, { characterData: true }); // eslint-disable-line no-new
+    notify = function () {
+      node.data = toggle = !toggle;
+    };
+  // environments with maybe non-completely correct, but existent Promise
+  } else if (Promise && Promise.resolve) {
+    // Promise.resolve without an argument throws an error in LG WebOS 2
+    var promise = Promise.resolve(undefined);
+    notify = function () {
+      promise.then(flush);
+    };
+  // for other environments - macrotask based on:
+  // - setImmediate
+  // - MessageChannel
+  // - window.postMessag
+  // - onreadystatechange
+  // - setTimeout
+  } else {
+    notify = function () {
+      // strange IE + webpack dev server bug - use .call(global)
+      macrotask.call(global, flush);
+    };
+  }
+
+  return function (fn) {
+    var task = { fn: fn, next: undefined };
+    if (last) last.next = task;
+    if (!head) {
+      head = task;
+      notify();
+    } last = task;
+  };
+};
+
+},{"./_global":"../node_modules/core-js/library/modules/_global.js","./_task":"../node_modules/core-js/library/modules/_task.js","./_cof":"../node_modules/core-js/library/modules/_cof.js"}],"../node_modules/core-js/library/modules/_new-promise-capability.js":[function(require,module,exports) {
+'use strict';
+// 25.4.1.5 NewPromiseCapability(C)
+var aFunction = require('./_a-function');
+
+function PromiseCapability(C) {
+  var resolve, reject;
+  this.promise = new C(function ($$resolve, $$reject) {
+    if (resolve !== undefined || reject !== undefined) throw TypeError('Bad Promise constructor');
+    resolve = $$resolve;
+    reject = $$reject;
+  });
+  this.resolve = aFunction(resolve);
+  this.reject = aFunction(reject);
+}
+
+module.exports.f = function (C) {
+  return new PromiseCapability(C);
+};
+
+},{"./_a-function":"../node_modules/core-js/library/modules/_a-function.js"}],"../node_modules/core-js/library/modules/_perform.js":[function(require,module,exports) {
+module.exports = function (exec) {
+  try {
+    return { e: false, v: exec() };
+  } catch (e) {
+    return { e: true, v: e };
+  }
+};
+
+},{}],"../node_modules/core-js/library/modules/_user-agent.js":[function(require,module,exports) {
+
+var global = require('./_global');
+var navigator = global.navigator;
+
+module.exports = navigator && navigator.userAgent || '';
+
+},{"./_global":"../node_modules/core-js/library/modules/_global.js"}],"../node_modules/core-js/library/modules/_promise-resolve.js":[function(require,module,exports) {
+var anObject = require('./_an-object');
+var isObject = require('./_is-object');
+var newPromiseCapability = require('./_new-promise-capability');
+
+module.exports = function (C, x) {
+  anObject(C);
+  if (isObject(x) && x.constructor === C) return x;
+  var promiseCapability = newPromiseCapability.f(C);
+  var resolve = promiseCapability.resolve;
+  resolve(x);
+  return promiseCapability.promise;
+};
+
+},{"./_an-object":"../node_modules/core-js/library/modules/_an-object.js","./_is-object":"../node_modules/core-js/library/modules/_is-object.js","./_new-promise-capability":"../node_modules/core-js/library/modules/_new-promise-capability.js"}],"../node_modules/core-js/library/modules/_redefine-all.js":[function(require,module,exports) {
+var hide = require('./_hide');
+module.exports = function (target, src, safe) {
+  for (var key in src) {
+    if (safe && target[key]) target[key] = src[key];
+    else hide(target, key, src[key]);
+  } return target;
+};
+
+},{"./_hide":"../node_modules/core-js/library/modules/_hide.js"}],"../node_modules/core-js/library/modules/_set-species.js":[function(require,module,exports) {
+
+'use strict';
+var global = require('./_global');
+var core = require('./_core');
+var dP = require('./_object-dp');
+var DESCRIPTORS = require('./_descriptors');
+var SPECIES = require('./_wks')('species');
+
+module.exports = function (KEY) {
+  var C = typeof core[KEY] == 'function' ? core[KEY] : global[KEY];
+  if (DESCRIPTORS && C && !C[SPECIES]) dP.f(C, SPECIES, {
+    configurable: true,
+    get: function () { return this; }
+  });
+};
+
+},{"./_global":"../node_modules/core-js/library/modules/_global.js","./_core":"../node_modules/core-js/library/modules/_core.js","./_object-dp":"../node_modules/core-js/library/modules/_object-dp.js","./_descriptors":"../node_modules/core-js/library/modules/_descriptors.js","./_wks":"../node_modules/core-js/library/modules/_wks.js"}],"../node_modules/core-js/library/modules/_iter-detect.js":[function(require,module,exports) {
+var ITERATOR = require('./_wks')('iterator');
+var SAFE_CLOSING = false;
+
+try {
+  var riter = [7][ITERATOR]();
+  riter['return'] = function () { SAFE_CLOSING = true; };
+  // eslint-disable-next-line no-throw-literal
+  Array.from(riter, function () { throw 2; });
+} catch (e) { /* empty */ }
+
+module.exports = function (exec, skipClosing) {
+  if (!skipClosing && !SAFE_CLOSING) return false;
+  var safe = false;
+  try {
+    var arr = [7];
+    var iter = arr[ITERATOR]();
+    iter.next = function () { return { done: safe = true }; };
+    arr[ITERATOR] = function () { return iter; };
+    exec(arr);
+  } catch (e) { /* empty */ }
+  return safe;
+};
+
+},{"./_wks":"../node_modules/core-js/library/modules/_wks.js"}],"../node_modules/core-js/library/modules/es6.promise.js":[function(require,module,exports) {
+
+
+'use strict';
+var LIBRARY = require('./_library');
+var global = require('./_global');
+var ctx = require('./_ctx');
+var classof = require('./_classof');
+var $export = require('./_export');
+var isObject = require('./_is-object');
+var aFunction = require('./_a-function');
+var anInstance = require('./_an-instance');
+var forOf = require('./_for-of');
+var speciesConstructor = require('./_species-constructor');
+var task = require('./_task').set;
+var microtask = require('./_microtask')();
+var newPromiseCapabilityModule = require('./_new-promise-capability');
+var perform = require('./_perform');
+var userAgent = require('./_user-agent');
+var promiseResolve = require('./_promise-resolve');
+var PROMISE = 'Promise';
+var TypeError = global.TypeError;
+var process = global.process;
+var versions = process && process.versions;
+var v8 = versions && versions.v8 || '';
+var $Promise = global[PROMISE];
+var isNode = classof(process) == 'process';
+var empty = function () { /* empty */ };
+var Internal, newGenericPromiseCapability, OwnPromiseCapability, Wrapper;
+var newPromiseCapability = newGenericPromiseCapability = newPromiseCapabilityModule.f;
+
+var USE_NATIVE = !!function () {
+  try {
+    // correct subclassing with @@species support
+    var promise = $Promise.resolve(1);
+    var FakePromise = (promise.constructor = {})[require('./_wks')('species')] = function (exec) {
+      exec(empty, empty);
+    };
+    // unhandled rejections tracking support, NodeJS Promise without it fails @@species test
+    return (isNode || typeof PromiseRejectionEvent == 'function')
+      && promise.then(empty) instanceof FakePromise
+      // v8 6.6 (Node 10 and Chrome 66) have a bug with resolving custom thenables
+      // https://bugs.chromium.org/p/chromium/issues/detail?id=830565
+      // we can't detect it synchronously, so just check versions
+      && v8.indexOf('6.6') !== 0
+      && userAgent.indexOf('Chrome/66') === -1;
+  } catch (e) { /* empty */ }
+}();
+
+// helpers
+var isThenable = function (it) {
+  var then;
+  return isObject(it) && typeof (then = it.then) == 'function' ? then : false;
+};
+var notify = function (promise, isReject) {
+  if (promise._n) return;
+  promise._n = true;
+  var chain = promise._c;
+  microtask(function () {
+    var value = promise._v;
+    var ok = promise._s == 1;
+    var i = 0;
+    var run = function (reaction) {
+      var handler = ok ? reaction.ok : reaction.fail;
+      var resolve = reaction.resolve;
+      var reject = reaction.reject;
+      var domain = reaction.domain;
+      var result, then, exited;
+      try {
+        if (handler) {
+          if (!ok) {
+            if (promise._h == 2) onHandleUnhandled(promise);
+            promise._h = 1;
+          }
+          if (handler === true) result = value;
+          else {
+            if (domain) domain.enter();
+            result = handler(value); // may throw
+            if (domain) {
+              domain.exit();
+              exited = true;
+            }
+          }
+          if (result === reaction.promise) {
+            reject(TypeError('Promise-chain cycle'));
+          } else if (then = isThenable(result)) {
+            then.call(result, resolve, reject);
+          } else resolve(result);
+        } else reject(value);
+      } catch (e) {
+        if (domain && !exited) domain.exit();
+        reject(e);
+      }
+    };
+    while (chain.length > i) run(chain[i++]); // variable length - can't use forEach
+    promise._c = [];
+    promise._n = false;
+    if (isReject && !promise._h) onUnhandled(promise);
+  });
+};
+var onUnhandled = function (promise) {
+  task.call(global, function () {
+    var value = promise._v;
+    var unhandled = isUnhandled(promise);
+    var result, handler, console;
+    if (unhandled) {
+      result = perform(function () {
+        if (isNode) {
+          process.emit('unhandledRejection', value, promise);
+        } else if (handler = global.onunhandledrejection) {
+          handler({ promise: promise, reason: value });
+        } else if ((console = global.console) && console.error) {
+          console.error('Unhandled promise rejection', value);
+        }
+      });
+      // Browsers should not trigger `rejectionHandled` event if it was handled here, NodeJS - should
+      promise._h = isNode || isUnhandled(promise) ? 2 : 1;
+    } promise._a = undefined;
+    if (unhandled && result.e) throw result.v;
+  });
+};
+var isUnhandled = function (promise) {
+  return promise._h !== 1 && (promise._a || promise._c).length === 0;
+};
+var onHandleUnhandled = function (promise) {
+  task.call(global, function () {
+    var handler;
+    if (isNode) {
+      process.emit('rejectionHandled', promise);
+    } else if (handler = global.onrejectionhandled) {
+      handler({ promise: promise, reason: promise._v });
+    }
+  });
+};
+var $reject = function (value) {
+  var promise = this;
+  if (promise._d) return;
+  promise._d = true;
+  promise = promise._w || promise; // unwrap
+  promise._v = value;
+  promise._s = 2;
+  if (!promise._a) promise._a = promise._c.slice();
+  notify(promise, true);
+};
+var $resolve = function (value) {
+  var promise = this;
+  var then;
+  if (promise._d) return;
+  promise._d = true;
+  promise = promise._w || promise; // unwrap
+  try {
+    if (promise === value) throw TypeError("Promise can't be resolved itself");
+    if (then = isThenable(value)) {
+      microtask(function () {
+        var wrapper = { _w: promise, _d: false }; // wrap
+        try {
+          then.call(value, ctx($resolve, wrapper, 1), ctx($reject, wrapper, 1));
+        } catch (e) {
+          $reject.call(wrapper, e);
+        }
+      });
+    } else {
+      promise._v = value;
+      promise._s = 1;
+      notify(promise, false);
+    }
+  } catch (e) {
+    $reject.call({ _w: promise, _d: false }, e); // wrap
+  }
+};
+
+// constructor polyfill
+if (!USE_NATIVE) {
+  // 25.4.3.1 Promise(executor)
+  $Promise = function Promise(executor) {
+    anInstance(this, $Promise, PROMISE, '_h');
+    aFunction(executor);
+    Internal.call(this);
+    try {
+      executor(ctx($resolve, this, 1), ctx($reject, this, 1));
+    } catch (err) {
+      $reject.call(this, err);
+    }
+  };
+  // eslint-disable-next-line no-unused-vars
+  Internal = function Promise(executor) {
+    this._c = [];             // <- awaiting reactions
+    this._a = undefined;      // <- checked in isUnhandled reactions
+    this._s = 0;              // <- state
+    this._d = false;          // <- done
+    this._v = undefined;      // <- value
+    this._h = 0;              // <- rejection state, 0 - default, 1 - handled, 2 - unhandled
+    this._n = false;          // <- notify
+  };
+  Internal.prototype = require('./_redefine-all')($Promise.prototype, {
+    // 25.4.5.3 Promise.prototype.then(onFulfilled, onRejected)
+    then: function then(onFulfilled, onRejected) {
+      var reaction = newPromiseCapability(speciesConstructor(this, $Promise));
+      reaction.ok = typeof onFulfilled == 'function' ? onFulfilled : true;
+      reaction.fail = typeof onRejected == 'function' && onRejected;
+      reaction.domain = isNode ? process.domain : undefined;
+      this._c.push(reaction);
+      if (this._a) this._a.push(reaction);
+      if (this._s) notify(this, false);
+      return reaction.promise;
+    },
+    // 25.4.5.1 Promise.prototype.catch(onRejected)
+    'catch': function (onRejected) {
+      return this.then(undefined, onRejected);
+    }
+  });
+  OwnPromiseCapability = function () {
+    var promise = new Internal();
+    this.promise = promise;
+    this.resolve = ctx($resolve, promise, 1);
+    this.reject = ctx($reject, promise, 1);
+  };
+  newPromiseCapabilityModule.f = newPromiseCapability = function (C) {
+    return C === $Promise || C === Wrapper
+      ? new OwnPromiseCapability(C)
+      : newGenericPromiseCapability(C);
+  };
+}
+
+$export($export.G + $export.W + $export.F * !USE_NATIVE, { Promise: $Promise });
+require('./_set-to-string-tag')($Promise, PROMISE);
+require('./_set-species')(PROMISE);
+Wrapper = require('./_core')[PROMISE];
+
+// statics
+$export($export.S + $export.F * !USE_NATIVE, PROMISE, {
+  // 25.4.4.5 Promise.reject(r)
+  reject: function reject(r) {
+    var capability = newPromiseCapability(this);
+    var $$reject = capability.reject;
+    $$reject(r);
+    return capability.promise;
+  }
+});
+$export($export.S + $export.F * (LIBRARY || !USE_NATIVE), PROMISE, {
+  // 25.4.4.6 Promise.resolve(x)
+  resolve: function resolve(x) {
+    return promiseResolve(LIBRARY && this === Wrapper ? $Promise : this, x);
+  }
+});
+$export($export.S + $export.F * !(USE_NATIVE && require('./_iter-detect')(function (iter) {
+  $Promise.all(iter)['catch'](empty);
+})), PROMISE, {
+  // 25.4.4.1 Promise.all(iterable)
+  all: function all(iterable) {
+    var C = this;
+    var capability = newPromiseCapability(C);
+    var resolve = capability.resolve;
+    var reject = capability.reject;
+    var result = perform(function () {
+      var values = [];
+      var index = 0;
+      var remaining = 1;
+      forOf(iterable, false, function (promise) {
+        var $index = index++;
+        var alreadyCalled = false;
+        values.push(undefined);
+        remaining++;
+        C.resolve(promise).then(function (value) {
+          if (alreadyCalled) return;
+          alreadyCalled = true;
+          values[$index] = value;
+          --remaining || resolve(values);
+        }, reject);
+      });
+      --remaining || resolve(values);
+    });
+    if (result.e) reject(result.v);
+    return capability.promise;
+  },
+  // 25.4.4.4 Promise.race(iterable)
+  race: function race(iterable) {
+    var C = this;
+    var capability = newPromiseCapability(C);
+    var reject = capability.reject;
+    var result = perform(function () {
+      forOf(iterable, false, function (promise) {
+        C.resolve(promise).then(capability.resolve, reject);
+      });
+    });
+    if (result.e) reject(result.v);
+    return capability.promise;
+  }
+});
+
+},{"./_library":"../node_modules/core-js/library/modules/_library.js","./_global":"../node_modules/core-js/library/modules/_global.js","./_ctx":"../node_modules/core-js/library/modules/_ctx.js","./_classof":"../node_modules/core-js/library/modules/_classof.js","./_export":"../node_modules/core-js/library/modules/_export.js","./_is-object":"../node_modules/core-js/library/modules/_is-object.js","./_a-function":"../node_modules/core-js/library/modules/_a-function.js","./_an-instance":"../node_modules/core-js/library/modules/_an-instance.js","./_for-of":"../node_modules/core-js/library/modules/_for-of.js","./_species-constructor":"../node_modules/core-js/library/modules/_species-constructor.js","./_task":"../node_modules/core-js/library/modules/_task.js","./_microtask":"../node_modules/core-js/library/modules/_microtask.js","./_new-promise-capability":"../node_modules/core-js/library/modules/_new-promise-capability.js","./_perform":"../node_modules/core-js/library/modules/_perform.js","./_user-agent":"../node_modules/core-js/library/modules/_user-agent.js","./_promise-resolve":"../node_modules/core-js/library/modules/_promise-resolve.js","./_wks":"../node_modules/core-js/library/modules/_wks.js","./_redefine-all":"../node_modules/core-js/library/modules/_redefine-all.js","./_set-to-string-tag":"../node_modules/core-js/library/modules/_set-to-string-tag.js","./_set-species":"../node_modules/core-js/library/modules/_set-species.js","./_core":"../node_modules/core-js/library/modules/_core.js","./_iter-detect":"../node_modules/core-js/library/modules/_iter-detect.js"}],"../node_modules/core-js/library/modules/es7.promise.finally.js":[function(require,module,exports) {
+
+// https://github.com/tc39/proposal-promise-finally
+'use strict';
+var $export = require('./_export');
+var core = require('./_core');
+var global = require('./_global');
+var speciesConstructor = require('./_species-constructor');
+var promiseResolve = require('./_promise-resolve');
+
+$export($export.P + $export.R, 'Promise', { 'finally': function (onFinally) {
+  var C = speciesConstructor(this, core.Promise || global.Promise);
+  var isFunction = typeof onFinally == 'function';
+  return this.then(
+    isFunction ? function (x) {
+      return promiseResolve(C, onFinally()).then(function () { return x; });
+    } : onFinally,
+    isFunction ? function (e) {
+      return promiseResolve(C, onFinally()).then(function () { throw e; });
+    } : onFinally
+  );
+} });
+
+},{"./_export":"../node_modules/core-js/library/modules/_export.js","./_core":"../node_modules/core-js/library/modules/_core.js","./_global":"../node_modules/core-js/library/modules/_global.js","./_species-constructor":"../node_modules/core-js/library/modules/_species-constructor.js","./_promise-resolve":"../node_modules/core-js/library/modules/_promise-resolve.js"}],"../node_modules/core-js/library/modules/es7.promise.try.js":[function(require,module,exports) {
+'use strict';
+// https://github.com/tc39/proposal-promise-try
+var $export = require('./_export');
+var newPromiseCapability = require('./_new-promise-capability');
+var perform = require('./_perform');
+
+$export($export.S, 'Promise', { 'try': function (callbackfn) {
+  var promiseCapability = newPromiseCapability.f(this);
+  var result = perform(callbackfn);
+  (result.e ? promiseCapability.reject : promiseCapability.resolve)(result.v);
+  return promiseCapability.promise;
+} });
+
+},{"./_export":"../node_modules/core-js/library/modules/_export.js","./_new-promise-capability":"../node_modules/core-js/library/modules/_new-promise-capability.js","./_perform":"../node_modules/core-js/library/modules/_perform.js"}],"../node_modules/core-js/library/fn/promise.js":[function(require,module,exports) {
+require('../modules/es6.object.to-string');
+require('../modules/es6.string.iterator');
+require('../modules/web.dom.iterable');
+require('../modules/es6.promise');
+require('../modules/es7.promise.finally');
+require('../modules/es7.promise.try');
+module.exports = require('../modules/_core').Promise;
+
+},{"../modules/es6.object.to-string":"../node_modules/core-js/library/modules/es6.object.to-string.js","../modules/es6.string.iterator":"../node_modules/core-js/library/modules/es6.string.iterator.js","../modules/web.dom.iterable":"../node_modules/core-js/library/modules/web.dom.iterable.js","../modules/es6.promise":"../node_modules/core-js/library/modules/es6.promise.js","../modules/es7.promise.finally":"../node_modules/core-js/library/modules/es7.promise.finally.js","../modules/es7.promise.try":"../node_modules/core-js/library/modules/es7.promise.try.js","../modules/_core":"../node_modules/core-js/library/modules/_core.js"}],"../node_modules/@babel/runtime-corejs2/core-js/promise.js":[function(require,module,exports) {
+module.exports = require("core-js/library/fn/promise");
+},{"core-js/library/fn/promise":"../node_modules/core-js/library/fn/promise.js"}],"../node_modules/core-js/library/modules/_object-assign.js":[function(require,module,exports) {
+'use strict';
+// 19.1.2.1 Object.assign(target, source, ...)
+var getKeys = require('./_object-keys');
+var gOPS = require('./_object-gops');
+var pIE = require('./_object-pie');
+var toObject = require('./_to-object');
+var IObject = require('./_iobject');
+var $assign = Object.assign;
+
+// should work with symbols and should have deterministic property order (V8 bug)
+module.exports = !$assign || require('./_fails')(function () {
+  var A = {};
+  var B = {};
+  // eslint-disable-next-line no-undef
+  var S = Symbol();
+  var K = 'abcdefghijklmnopqrst';
+  A[S] = 7;
+  K.split('').forEach(function (k) { B[k] = k; });
+  return $assign({}, A)[S] != 7 || Object.keys($assign({}, B)).join('') != K;
+}) ? function assign(target, source) { // eslint-disable-line no-unused-vars
+  var T = toObject(target);
+  var aLen = arguments.length;
+  var index = 1;
+  var getSymbols = gOPS.f;
+  var isEnum = pIE.f;
+  while (aLen > index) {
+    var S = IObject(arguments[index++]);
+    var keys = getSymbols ? getKeys(S).concat(getSymbols(S)) : getKeys(S);
+    var length = keys.length;
+    var j = 0;
+    var key;
+    while (length > j) if (isEnum.call(S, key = keys[j++])) T[key] = S[key];
+  } return T;
+} : $assign;
+
+},{"./_object-keys":"../node_modules/core-js/library/modules/_object-keys.js","./_object-gops":"../node_modules/core-js/library/modules/_object-gops.js","./_object-pie":"../node_modules/core-js/library/modules/_object-pie.js","./_to-object":"../node_modules/core-js/library/modules/_to-object.js","./_iobject":"../node_modules/core-js/library/modules/_iobject.js","./_fails":"../node_modules/core-js/library/modules/_fails.js"}],"../node_modules/core-js/library/modules/es6.object.assign.js":[function(require,module,exports) {
+// 19.1.3.1 Object.assign(target, source)
+var $export = require('./_export');
+
+$export($export.S + $export.F, 'Object', { assign: require('./_object-assign') });
+
+},{"./_export":"../node_modules/core-js/library/modules/_export.js","./_object-assign":"../node_modules/core-js/library/modules/_object-assign.js"}],"../node_modules/core-js/library/fn/object/assign.js":[function(require,module,exports) {
+require('../../modules/es6.object.assign');
+module.exports = require('../../modules/_core').Object.assign;
+
+},{"../../modules/es6.object.assign":"../node_modules/core-js/library/modules/es6.object.assign.js","../../modules/_core":"../node_modules/core-js/library/modules/_core.js"}],"../node_modules/@babel/runtime-corejs2/core-js/object/assign.js":[function(require,module,exports) {
+module.exports = require("core-js/library/fn/object/assign");
+},{"core-js/library/fn/object/assign":"../node_modules/core-js/library/fn/object/assign.js"}],"../node_modules/core-js/library/modules/_string-ws.js":[function(require,module,exports) {
+module.exports = '\x09\x0A\x0B\x0C\x0D\x20\xA0\u1680\u180E\u2000\u2001\u2002\u2003' +
+  '\u2004\u2005\u2006\u2007\u2008\u2009\u200A\u202F\u205F\u3000\u2028\u2029\uFEFF';
+
+},{}],"../node_modules/core-js/library/modules/_string-trim.js":[function(require,module,exports) {
+var $export = require('./_export');
+var defined = require('./_defined');
+var fails = require('./_fails');
+var spaces = require('./_string-ws');
+var space = '[' + spaces + ']';
+var non = '\u200b\u0085';
+var ltrim = RegExp('^' + space + space + '*');
+var rtrim = RegExp(space + space + '*$');
+
+var exporter = function (KEY, exec, ALIAS) {
+  var exp = {};
+  var FORCE = fails(function () {
+    return !!spaces[KEY]() || non[KEY]() != non;
+  });
+  var fn = exp[KEY] = FORCE ? exec(trim) : spaces[KEY];
+  if (ALIAS) exp[ALIAS] = fn;
+  $export($export.P + $export.F * FORCE, 'String', exp);
+};
+
+// 1 -> String#trimLeft
+// 2 -> String#trimRight
+// 3 -> String#trim
+var trim = exporter.trim = function (string, TYPE) {
+  string = String(defined(string));
+  if (TYPE & 1) string = string.replace(ltrim, '');
+  if (TYPE & 2) string = string.replace(rtrim, '');
+  return string;
+};
+
+module.exports = exporter;
+
+},{"./_export":"../node_modules/core-js/library/modules/_export.js","./_defined":"../node_modules/core-js/library/modules/_defined.js","./_fails":"../node_modules/core-js/library/modules/_fails.js","./_string-ws":"../node_modules/core-js/library/modules/_string-ws.js"}],"../node_modules/core-js/library/modules/_parse-float.js":[function(require,module,exports) {
+var $parseFloat = require('./_global').parseFloat;
+var $trim = require('./_string-trim').trim;
+
+module.exports = 1 / $parseFloat(require('./_string-ws') + '-0') !== -Infinity ? function parseFloat(str) {
+  var string = $trim(String(str), 3);
+  var result = $parseFloat(string);
+  return result === 0 && string.charAt(0) == '-' ? -0 : result;
+} : $parseFloat;
+
+},{"./_global":"../node_modules/core-js/library/modules/_global.js","./_string-trim":"../node_modules/core-js/library/modules/_string-trim.js","./_string-ws":"../node_modules/core-js/library/modules/_string-ws.js"}],"../node_modules/core-js/library/modules/es6.parse-float.js":[function(require,module,exports) {
+var $export = require('./_export');
+var $parseFloat = require('./_parse-float');
+// 18.2.4 parseFloat(string)
+$export($export.G + $export.F * (parseFloat != $parseFloat), { parseFloat: $parseFloat });
+
+},{"./_export":"../node_modules/core-js/library/modules/_export.js","./_parse-float":"../node_modules/core-js/library/modules/_parse-float.js"}],"../node_modules/core-js/library/fn/parse-float.js":[function(require,module,exports) {
+require('../modules/es6.parse-float');
+module.exports = require('../modules/_core').parseFloat;
+
+},{"../modules/es6.parse-float":"../node_modules/core-js/library/modules/es6.parse-float.js","../modules/_core":"../node_modules/core-js/library/modules/_core.js"}],"../node_modules/@babel/runtime-corejs2/core-js/parse-float.js":[function(require,module,exports) {
+module.exports = require("core-js/library/fn/parse-float");
+},{"core-js/library/fn/parse-float":"../node_modules/core-js/library/fn/parse-float.js"}],"../node_modules/core-js/library/modules/es6.object.define-properties.js":[function(require,module,exports) {
+var $export = require('./_export');
+// 19.1.2.3 / 15.2.3.7 Object.defineProperties(O, Properties)
+$export($export.S + $export.F * !require('./_descriptors'), 'Object', { defineProperties: require('./_object-dps') });
+
+},{"./_export":"../node_modules/core-js/library/modules/_export.js","./_descriptors":"../node_modules/core-js/library/modules/_descriptors.js","./_object-dps":"../node_modules/core-js/library/modules/_object-dps.js"}],"../node_modules/core-js/library/fn/object/define-properties.js":[function(require,module,exports) {
+require('../../modules/es6.object.define-properties');
+var $Object = require('../../modules/_core').Object;
+module.exports = function defineProperties(T, D) {
+  return $Object.defineProperties(T, D);
+};
+
+},{"../../modules/es6.object.define-properties":"../node_modules/core-js/library/modules/es6.object.define-properties.js","../../modules/_core":"../node_modules/core-js/library/modules/_core.js"}],"../node_modules/@babel/runtime-corejs2/core-js/object/define-properties.js":[function(require,module,exports) {
+module.exports = require("core-js/library/fn/object/define-properties");
+},{"core-js/library/fn/object/define-properties":"../node_modules/core-js/library/fn/object/define-properties.js"}],"../node_modules/core-js/library/modules/es6.object.get-own-property-descriptor.js":[function(require,module,exports) {
+// 19.1.2.6 Object.getOwnPropertyDescriptor(O, P)
+var toIObject = require('./_to-iobject');
+var $getOwnPropertyDescriptor = require('./_object-gopd').f;
+
+require('./_object-sap')('getOwnPropertyDescriptor', function () {
+  return function getOwnPropertyDescriptor(it, key) {
+    return $getOwnPropertyDescriptor(toIObject(it), key);
+  };
+});
+
+},{"./_to-iobject":"../node_modules/core-js/library/modules/_to-iobject.js","./_object-gopd":"../node_modules/core-js/library/modules/_object-gopd.js","./_object-sap":"../node_modules/core-js/library/modules/_object-sap.js"}],"../node_modules/core-js/library/fn/object/get-own-property-descriptor.js":[function(require,module,exports) {
+require('../../modules/es6.object.get-own-property-descriptor');
+var $Object = require('../../modules/_core').Object;
+module.exports = function getOwnPropertyDescriptor(it, key) {
+  return $Object.getOwnPropertyDescriptor(it, key);
+};
+
+},{"../../modules/es6.object.get-own-property-descriptor":"../node_modules/core-js/library/modules/es6.object.get-own-property-descriptor.js","../../modules/_core":"../node_modules/core-js/library/modules/_core.js"}],"../node_modules/@babel/runtime-corejs2/core-js/object/get-own-property-descriptor.js":[function(require,module,exports) {
+module.exports = require("core-js/library/fn/object/get-own-property-descriptor");
+},{"core-js/library/fn/object/get-own-property-descriptor":"../node_modules/core-js/library/fn/object/get-own-property-descriptor.js"}],"../node_modules/core-js/library/modules/es6.object.define-property.js":[function(require,module,exports) {
+var $export = require('./_export');
+// 19.1.2.4 / 15.2.3.6 Object.defineProperty(O, P, Attributes)
+$export($export.S + $export.F * !require('./_descriptors'), 'Object', { defineProperty: require('./_object-dp').f });
+
+},{"./_export":"../node_modules/core-js/library/modules/_export.js","./_descriptors":"../node_modules/core-js/library/modules/_descriptors.js","./_object-dp":"../node_modules/core-js/library/modules/_object-dp.js"}],"../node_modules/core-js/library/fn/object/define-property.js":[function(require,module,exports) {
+require('../../modules/es6.object.define-property');
+var $Object = require('../../modules/_core').Object;
+module.exports = function defineProperty(it, key, desc) {
+  return $Object.defineProperty(it, key, desc);
+};
+
+},{"../../modules/es6.object.define-property":"../node_modules/core-js/library/modules/es6.object.define-property.js","../../modules/_core":"../node_modules/core-js/library/modules/_core.js"}],"../node_modules/@babel/runtime-corejs2/core-js/object/define-property.js":[function(require,module,exports) {
+module.exports = require("core-js/library/fn/object/define-property");
+},{"core-js/library/fn/object/define-property":"../node_modules/core-js/library/fn/object/define-property.js"}],"../node_modules/core-js/library/modules/es6.object.keys.js":[function(require,module,exports) {
+// 19.1.2.14 Object.keys(O)
+var toObject = require('./_to-object');
+var $keys = require('./_object-keys');
+
+require('./_object-sap')('keys', function () {
+  return function keys(it) {
+    return $keys(toObject(it));
+  };
+});
+
+},{"./_to-object":"../node_modules/core-js/library/modules/_to-object.js","./_object-keys":"../node_modules/core-js/library/modules/_object-keys.js","./_object-sap":"../node_modules/core-js/library/modules/_object-sap.js"}],"../node_modules/core-js/library/fn/object/keys.js":[function(require,module,exports) {
+require('../../modules/es6.object.keys');
+module.exports = require('../../modules/_core').Object.keys;
+
+},{"../../modules/es6.object.keys":"../node_modules/core-js/library/modules/es6.object.keys.js","../../modules/_core":"../node_modules/core-js/library/modules/_core.js"}],"../node_modules/@babel/runtime-corejs2/core-js/object/keys.js":[function(require,module,exports) {
+module.exports = require("core-js/library/fn/object/keys");
+},{"core-js/library/fn/object/keys":"../node_modules/core-js/library/fn/object/keys.js"}],"../node_modules/core-js/library/modules/es6.array.is-array.js":[function(require,module,exports) {
+// 22.1.2.2 / 15.4.3.2 Array.isArray(arg)
+var $export = require('./_export');
+
+$export($export.S, 'Array', { isArray: require('./_is-array') });
+
+},{"./_export":"../node_modules/core-js/library/modules/_export.js","./_is-array":"../node_modules/core-js/library/modules/_is-array.js"}],"../node_modules/core-js/library/fn/array/is-array.js":[function(require,module,exports) {
+require('../../modules/es6.array.is-array');
+module.exports = require('../../modules/_core').Array.isArray;
+
+},{"../../modules/es6.array.is-array":"../node_modules/core-js/library/modules/es6.array.is-array.js","../../modules/_core":"../node_modules/core-js/library/modules/_core.js"}],"../node_modules/@babel/runtime-corejs2/core-js/array/is-array.js":[function(require,module,exports) {
+module.exports = require("core-js/library/fn/array/is-array");
+},{"core-js/library/fn/array/is-array":"../node_modules/core-js/library/fn/array/is-array.js"}],"../node_modules/core-js/library/modules/_parse-int.js":[function(require,module,exports) {
+var $parseInt = require('./_global').parseInt;
+var $trim = require('./_string-trim').trim;
+var ws = require('./_string-ws');
+var hex = /^[-+]?0[xX]/;
+
+module.exports = $parseInt(ws + '08') !== 8 || $parseInt(ws + '0x16') !== 22 ? function parseInt(str, radix) {
+  var string = $trim(String(str), 3);
+  return $parseInt(string, (radix >>> 0) || (hex.test(string) ? 16 : 10));
+} : $parseInt;
+
+},{"./_global":"../node_modules/core-js/library/modules/_global.js","./_string-trim":"../node_modules/core-js/library/modules/_string-trim.js","./_string-ws":"../node_modules/core-js/library/modules/_string-ws.js"}],"../node_modules/core-js/library/modules/es6.parse-int.js":[function(require,module,exports) {
+var $export = require('./_export');
+var $parseInt = require('./_parse-int');
+// 18.2.5 parseInt(string, radix)
+$export($export.G + $export.F * (parseInt != $parseInt), { parseInt: $parseInt });
+
+},{"./_export":"../node_modules/core-js/library/modules/_export.js","./_parse-int":"../node_modules/core-js/library/modules/_parse-int.js"}],"../node_modules/core-js/library/fn/parse-int.js":[function(require,module,exports) {
+require('../modules/es6.parse-int');
+module.exports = require('../modules/_core').parseInt;
+
+},{"../modules/es6.parse-int":"../node_modules/core-js/library/modules/es6.parse-int.js","../modules/_core":"../node_modules/core-js/library/modules/_core.js"}],"../node_modules/@babel/runtime-corejs2/core-js/parse-int.js":[function(require,module,exports) {
+module.exports = require("core-js/library/fn/parse-int");
+},{"core-js/library/fn/parse-int":"../node_modules/core-js/library/fn/parse-int.js"}],"../node_modules/core-js/library/fn/object/get-own-property-symbols.js":[function(require,module,exports) {
+require('../../modules/es6.symbol');
+module.exports = require('../../modules/_core').Object.getOwnPropertySymbols;
+
+},{"../../modules/es6.symbol":"../node_modules/core-js/library/modules/es6.symbol.js","../../modules/_core":"../node_modules/core-js/library/modules/_core.js"}],"../node_modules/@babel/runtime-corejs2/core-js/object/get-own-property-symbols.js":[function(require,module,exports) {
+module.exports = require("core-js/library/fn/object/get-own-property-symbols");
+},{"core-js/library/fn/object/get-own-property-symbols":"../node_modules/core-js/library/fn/object/get-own-property-symbols.js"}],"../node_modules/core-js/library/modules/es6.object.create.js":[function(require,module,exports) {
+var $export = require('./_export');
+// 19.1.2.2 / 15.2.3.5 Object.create(O [, Properties])
+$export($export.S, 'Object', { create: require('./_object-create') });
+
+},{"./_export":"../node_modules/core-js/library/modules/_export.js","./_object-create":"../node_modules/core-js/library/modules/_object-create.js"}],"../node_modules/core-js/library/fn/object/create.js":[function(require,module,exports) {
+require('../../modules/es6.object.create');
+var $Object = require('../../modules/_core').Object;
+module.exports = function create(P, D) {
+  return $Object.create(P, D);
+};
+
+},{"../../modules/es6.object.create":"../node_modules/core-js/library/modules/es6.object.create.js","../../modules/_core":"../node_modules/core-js/library/modules/_core.js"}],"../node_modules/@babel/runtime-corejs2/core-js/object/create.js":[function(require,module,exports) {
+module.exports = require("core-js/library/fn/object/create");
+},{"core-js/library/fn/object/create":"../node_modules/core-js/library/fn/object/create.js"}],"../node_modules/@babel/runtime-corejs2/helpers/typeof.js":[function(require,module,exports) {
+var _Symbol$iterator = require("../core-js/symbol/iterator");
+
+var _Symbol = require("../core-js/symbol");
+
+function _typeof2(obj) { if (typeof _Symbol === "function" && typeof _Symbol$iterator === "symbol") { _typeof2 = function _typeof2(obj) { return typeof obj; }; } else { _typeof2 = function _typeof2(obj) { return obj && typeof _Symbol === "function" && obj.constructor === _Symbol && obj !== _Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof2(obj); }
+
+function _typeof(obj) {
+  if (typeof _Symbol === "function" && _typeof2(_Symbol$iterator) === "symbol") {
+    module.exports = _typeof = function _typeof(obj) {
+      return _typeof2(obj);
+    };
+  } else {
+    module.exports = _typeof = function _typeof(obj) {
+      return obj && typeof _Symbol === "function" && obj.constructor === _Symbol && obj !== _Symbol.prototype ? "symbol" : _typeof2(obj);
+    };
+  }
+
+  return _typeof(obj);
+}
+
+module.exports = _typeof;
+},{"../core-js/symbol/iterator":"../node_modules/@babel/runtime-corejs2/core-js/symbol/iterator.js","../core-js/symbol":"../node_modules/@babel/runtime-corejs2/core-js/symbol.js"}],"../node_modules/base64-js/index.js":[function(require,module,exports) {
 'use strict'
 
 exports.byteLength = byteLength
@@ -2147,7 +4239,43 @@ function isnan (val) {
 var define;
 var global = arguments[3];
 var Buffer = require("buffer").Buffer;
-function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof2 = function _typeof2(obj) { return typeof obj; }; } else { _typeof2 = function _typeof2(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof2(obj); }
+"use strict";
+
+var _now = _interopRequireDefault2(require("@babel/runtime-corejs2/core-js/date/now"));
+
+var _iterator = _interopRequireDefault2(require("@babel/runtime-corejs2/core-js/symbol/iterator"));
+
+var _symbol = _interopRequireDefault2(require("@babel/runtime-corejs2/core-js/symbol"));
+
+var _freeze = _interopRequireDefault2(require("@babel/runtime-corejs2/core-js/object/freeze"));
+
+var _isInteger = _interopRequireDefault2(require("@babel/runtime-corejs2/core-js/number/is-integer"));
+
+var _promise = _interopRequireDefault2(require("@babel/runtime-corejs2/core-js/promise"));
+
+var _assign = _interopRequireDefault2(require("@babel/runtime-corejs2/core-js/object/assign"));
+
+var _parseFloat2 = _interopRequireDefault2(require("@babel/runtime-corejs2/core-js/parse-float"));
+
+var _defineProperties = _interopRequireDefault2(require("@babel/runtime-corejs2/core-js/object/define-properties"));
+
+var _getOwnPropertyDescriptor = _interopRequireDefault2(require("@babel/runtime-corejs2/core-js/object/get-own-property-descriptor"));
+
+var _defineProperty = _interopRequireDefault2(require("@babel/runtime-corejs2/core-js/object/define-property"));
+
+var _keys = _interopRequireDefault2(require("@babel/runtime-corejs2/core-js/object/keys"));
+
+var _isArray = _interopRequireDefault2(require("@babel/runtime-corejs2/core-js/array/is-array"));
+
+var _parseInt2 = _interopRequireDefault2(require("@babel/runtime-corejs2/core-js/parse-int"));
+
+var _getOwnPropertySymbols = _interopRequireDefault2(require("@babel/runtime-corejs2/core-js/object/get-own-property-symbols"));
+
+var _create = _interopRequireDefault2(require("@babel/runtime-corejs2/core-js/object/create"));
+
+var _typeof3 = _interopRequireDefault2(require("@babel/runtime-corejs2/helpers/typeof"));
+
+function _interopRequireDefault2(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /*!
  * pixi.js - v5.0.0-rc
@@ -2157,8 +4285,8 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
  * http://www.opensource.org/licenses/mit-license
  */
 (function (global, factory) {
-  (typeof exports === "undefined" ? "undefined" : _typeof2(exports)) === 'object' && typeof module !== 'undefined' ? factory(exports) : typeof define === 'function' && define.amd ? define(['exports'], factory) : (global = global || self, factory(global.PIXI = {}));
-})(this, function (exports) {
+  (typeof exports === "undefined" ? "undefined" : (0, _typeof3.default)(exports)) === 'object' && typeof module !== 'undefined' ? factory(exports) : typeof define === 'function' && define.amd ? define(['exports'], factory) : (global = global || self, factory(global.PIXI = {}));
+})(void 0, function (exports) {
   'use strict';
 
   var commonjsGlobal = typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : {};
@@ -2294,8 +4422,8 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
     //
 
 
-    if (Object.create) {
-      Events.prototype = Object.create(null); //
+    if (_create.default) {
+      Events.prototype = (0, _create.default)(null); //
       // This hack is needed because the `__proto__` property is still inherited in
       // some old browsers like Android 4, iPhone 5.1, Opera 11 and Safari 5.
       //
@@ -2357,8 +4485,8 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
         }
       }
 
-      if (Object.getOwnPropertySymbols) {
-        return names.concat(Object.getOwnPropertySymbols(events));
+      if (_getOwnPropertySymbols.default) {
+        return names.concat((0, _getOwnPropertySymbols.default)(events));
       }
 
       return names;
@@ -3408,7 +5536,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
         var match = navigator.userAgent.match(/OS (\d+)_(\d+)?/);
 
         if (match) {
-          var majorVersion = parseInt(match[1], 10); // All texture units can be used on devices that support ios 11 or above
+          var majorVersion = (0, _parseInt2.default)(match[1], 10); // All texture units can be used on devices that support ios 11 or above
 
           if (majorVersion >= 11) {
             allowMax = true;
@@ -3420,7 +5548,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
         var match$1 = navigator.userAgent.match(/Android\s([0-9.]*)/);
 
         if (match$1) {
-          var majorVersion$1 = parseInt(match$1[1], 10); // All texture units can be used on devices that support Android 7 (Nougat) or above
+          var majorVersion$1 = (0, _parseInt2.default)(match$1[1], 10); // All texture units can be used on devices that support Android 7 (Nougat) or above
 
           if (majorVersion$1 >= 7) {
             allowMax = true;
@@ -3991,7 +6119,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
       /** Detect free variables */
       var freeExports = 'object' == 'object' && exports && !exports.nodeType && exports;
       var freeModule = 'object' == 'object' && module && !module.nodeType && module;
-      var freeGlobal = _typeof2(commonjsGlobal) == 'object' && commonjsGlobal;
+      var freeGlobal = (0, _typeof3.default)(commonjsGlobal) == 'object' && commonjsGlobal;
 
       if (freeGlobal.global === freeGlobal || freeGlobal.window === freeGlobal || freeGlobal.self === freeGlobal) {
         root = freeGlobal;
@@ -4521,7 +6649,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
       // Some AMD build optimizers, like r.js, check for specific condition patterns
       // like the following:
 
-      if (typeof undefined == 'function' && _typeof2(undefined.amd) == 'object' && undefined.amd) {
+      if (typeof undefined == 'function' && (0, _typeof3.default)(undefined.amd) == 'object' && undefined.amd) {
         undefined('punycode', function () {
           return punycode;
         });
@@ -4548,7 +6676,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
       return typeof arg === 'string';
     },
     isObject: function isObject(arg) {
-      return _typeof2(arg) === 'object' && arg !== null;
+      return (0, _typeof3.default)(arg) === 'object' && arg !== null;
     },
     isNull: function isNull(arg) {
       return arg === null;
@@ -4634,7 +6762,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
 
       if (!hasOwnProperty(obj, k)) {
         obj[k] = v;
-      } else if (Array.isArray(obj[k])) {
+      } else if ((0, _isArray.default)(obj[k])) {
         obj[k].push(v);
       } else {
         obj[k] = [obj[k], v];
@@ -4667,7 +6795,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
   'use strict';
 
   var stringifyPrimitive = function stringifyPrimitive(v) {
-    switch (_typeof2(v)) {
+    switch ((0, _typeof3.default)(v)) {
       case 'string':
         return v;
 
@@ -4690,11 +6818,11 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
       obj = undefined;
     }
 
-    if (_typeof2(obj) === 'object') {
-      return Object.keys(obj).map(function (k) {
+    if ((0, _typeof3.default)(obj) === 'object') {
+      return (0, _keys.default)(obj).map(function (k) {
         var ks = encodeURIComponent(stringifyPrimitive(k)) + eq;
 
-        if (Array.isArray(obj[k])) {
+        if ((0, _isArray.default)(obj[k])) {
           return obj[k].map(function (v) {
             return ks + encodeURIComponent(stringifyPrimitive(v));
           }).join(sep);
@@ -4823,7 +6951,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
 
   Url.prototype.parse = function (url, parseQueryString, slashesDenoteHost) {
     if (!util.isString(url)) {
-      throw new TypeError("Parameter 'url' must be a string, not " + _typeof2(url));
+      throw new TypeError("Parameter 'url' must be a string, not " + (0, _typeof3.default)(url));
     } // Copy chrome, IE, opera backslash-handling behavior.
     // Back slashes before the query string get converted to forward slashes
     // See: https://code.google.com/p/chromium/issues/detail?id=25916
@@ -5148,7 +7276,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
       }
     }
 
-    if (this.query && util.isObject(this.query) && Object.keys(this.query).length) {
+    if (this.query && util.isObject(this.query) && (0, _keys.default)(this.query).length) {
       query = querystring.stringify(this.query);
     }
 
@@ -5209,7 +7337,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
     }
 
     var result = new Url();
-    var tkeys = Object.keys(this);
+    var tkeys = (0, _keys.default)(this);
 
     for (var tk = 0; tk < tkeys.length; tk++) {
       var tkey = tkeys[tk];
@@ -5228,7 +7356,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
 
     if (relative.slashes && !relative.protocol) {
       // take everything except the protocol from relative
-      var rkeys = Object.keys(relative);
+      var rkeys = (0, _keys.default)(relative);
 
       for (var rk = 0; rk < rkeys.length; rk++) {
         var rkey = rkeys[rk];
@@ -5257,7 +7385,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
       // because that's known to be hostless.
       // anything else is assumed to be absolute.
       if (!slashedProtocol[relative.protocol]) {
-        var keys = Object.keys(relative);
+        var keys = (0, _keys.default)(relative);
 
         for (var v = 0; v < keys.length; v++) {
           var k = keys[v];
@@ -5547,12 +7675,12 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
     // get all the enumerable property keys
 
 
-    var keys = Object.keys(source); // loop through properties
+    var keys = (0, _keys.default)(source); // loop through properties
 
     for (var i = 0; i < keys.length; ++i) {
       var propertyName = keys[i]; // Set the property using the property descriptor - this works for accessors and normal value properties
 
-      Object.defineProperty(target, propertyName, Object.getOwnPropertyDescriptor(source, propertyName));
+      (0, _defineProperty.default)(target, propertyName, (0, _getOwnPropertyDescriptor.default)(source, propertyName));
     }
   }
 
@@ -5727,7 +7855,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
       string = string.substr(1);
     }
 
-    return parseInt(string, 16);
+    return (0, _parseInt2.default)(string, 16);
   }
   /**
    * Converts a color as an [R, G, B] array to a hex number
@@ -6012,7 +8140,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
    * @type {Object}
    */
 
-  var TextureCache = Object.create(null);
+  var TextureCache = (0, _create.default)(null);
   /**
    * @todo Describe property usage
    *
@@ -6022,7 +8150,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
    * @type {Object}
    */
 
-  var BaseTextureCache = Object.create(null);
+  var BaseTextureCache = (0, _create.default)(null);
   /**
    * Destroys all texture in the cache
    *
@@ -6227,7 +8355,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
     this.canvas.height = val;
   };
 
-  Object.defineProperties(CanvasRenderTarget.prototype, prototypeAccessors);
+  (0, _defineProperties.default)(CanvasRenderTarget.prototype, prototypeAccessors);
   /**
    * Regexp for data URI.
    * Based on: {@link https://github.com/ragingwind/data-uri-regex}
@@ -6335,7 +8463,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
     var resolution = settings.RETINA_PREFIX.exec(url$$1);
 
     if (resolution) {
-      return parseFloat(resolution[1]);
+      return (0, _parseFloat2.default)(resolution[1]);
     }
 
     return defaultValue !== undefined ? defaultValue : 1;
@@ -6681,7 +8809,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
     }
   };
 
-  Object.defineProperties(ObservablePoint.prototype, prototypeAccessors$1);
+  (0, _defineProperties.default)(ObservablePoint.prototype, prototypeAccessors$1);
   /**
    * A number, or a string containing a number.
    * @memberof PIXI
@@ -7221,7 +9349,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
     return new Matrix();
   };
 
-  Object.defineProperties(Matrix, staticAccessors); // Your friendly neighbour https://en.wikipedia.org/wiki/Dihedral_group of order 16
+  (0, _defineProperties.default)(Matrix, staticAccessors); // Your friendly neighbour https://en.wikipedia.org/wiki/Dihedral_group of order 16
 
   var ux = [1, 1, 0, -1, -1, -1, 0, 1, 1, 1, 0, -1, -1, -1, 0, 1];
   var uy = [0, 1, 1, 1, 0, -1, -1, -1, 0, 1, 1, 1, 0, -1, -1, -1];
@@ -7589,7 +9717,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
     }
   };
 
-  Object.defineProperties(Transform.prototype, prototypeAccessors$1$1);
+  (0, _defineProperties.default)(Transform.prototype, prototypeAccessors$1$1);
   Transform.IDENTITY = new Transform();
   /**
    * Rectangle object is an area defined by its position, as indicated by its top-left corner
@@ -7859,8 +9987,8 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
     this.height = y2 - y1;
   };
 
-  Object.defineProperties(Rectangle.prototype, prototypeAccessors$2);
-  Object.defineProperties(Rectangle, staticAccessors$1);
+  (0, _defineProperties.default)(Rectangle.prototype, prototypeAccessors$2);
+  (0, _defineProperties.default)(Rectangle, staticAccessors$1);
   /**
    * The Circle object is used to help draw graphics and can also be used to specify a hit area for displayObjects.
    *
@@ -8069,7 +10197,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
       points[len] = arguments$1[len];
     }
 
-    if (Array.isArray(points[0])) {
+    if ((0, _isArray.default)(points[0])) {
       points = points[0];
     } // if this is an array of points, convert it to a flat array of numbers
 
@@ -8821,7 +10949,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
       DisplayObject.__proto__ = EventEmitter$$1;
     }
 
-    DisplayObject.prototype = Object.create(EventEmitter$$1 && EventEmitter$$1.prototype);
+    DisplayObject.prototype = (0, _create.default)(EventEmitter$$1 && EventEmitter$$1.prototype);
     DisplayObject.prototype.constructor = DisplayObject;
     var prototypeAccessors = {
       _tempDisplayObjectParent: {
@@ -9390,7 +11518,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
       }
     };
 
-    Object.defineProperties(DisplayObject.prototype, prototypeAccessors);
+    (0, _defineProperties.default)(DisplayObject.prototype, prototypeAccessors);
     return DisplayObject;
   }(eventemitter3); // performance increase to avoid using call.. (10x faster)
 
@@ -9464,7 +11592,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
       Container.__proto__ = DisplayObject$$1;
     }
 
-    Container.prototype = Object.create(DisplayObject$$1 && DisplayObject$$1.prototype);
+    Container.prototype = (0, _create.default)(DisplayObject$$1 && DisplayObject$$1.prototype);
     Container.prototype.constructor = Container;
     var prototypeAccessors = {
       width: {
@@ -9979,7 +12107,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
       this._height = value;
     };
 
-    Object.defineProperties(Container.prototype, prototypeAccessors);
+    (0, _defineProperties.default)(Container.prototype, prototypeAccessors);
     return Container;
   }(DisplayObject); // performance increase to avoid using call.. (10x faster)
 
@@ -11423,8 +13551,8 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
     return Ticker._system;
   };
 
-  Object.defineProperties(Ticker.prototype, prototypeAccessors$3);
-  Object.defineProperties(Ticker, staticAccessors$2);
+  (0, _defineProperties.default)(Ticker.prototype, prototypeAccessors$3);
+  (0, _defineProperties.default)(Ticker, staticAccessors$2);
   /**
    * Middleware for for Application Ticker.
    *
@@ -11442,7 +13570,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
   TickerPlugin.init = function init(options) {
     var this$1 = this; // Set default
 
-    options = Object.assign({
+    options = (0, _assign.default)({
       autoStart: true,
       sharedTicker: false
     }, options); // Create ticker setter
@@ -11683,7 +13811,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
 
 
   Resource.prototype.load = function load() {
-    return Promise.resolve();
+    return _promise.default.resolve();
   };
   /**
    * The width of the resource.
@@ -11762,7 +13890,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
     }
   };
 
-  Object.defineProperties(Resource.prototype, prototypeAccessors$4);
+  (0, _defineProperties.default)(Resource.prototype, prototypeAccessors$4);
   /**
    * Base for all the image/canvas resources
    * @class
@@ -11788,7 +13916,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
       BaseImageResource.__proto__ = Resource$$1;
     }
 
-    BaseImageResource.prototype = Object.create(Resource$$1 && Resource$$1.prototype);
+    BaseImageResource.prototype = (0, _create.default)(Resource$$1 && Resource$$1.prototype);
     BaseImageResource.prototype.constructor = BaseImageResource;
     /**
      * Set cross origin based detecting the url and the crossorigin
@@ -11928,7 +14056,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
       ImageResource.__proto__ = BaseImageResource$$1;
     }
 
-    ImageResource.prototype = Object.create(BaseImageResource$$1 && BaseImageResource$$1.prototype);
+    ImageResource.prototype = (0, _create.default)(BaseImageResource$$1 && BaseImageResource$$1.prototype);
     ImageResource.prototype.constructor = ImageResource;
     /**
      * returns a promise when image will be loaded and processed
@@ -11948,7 +14076,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
         return this._load;
       }
 
-      this._load = new Promise(function (resolve) {
+      this._load = new _promise.default(function (resolve) {
         this$1.url = this$1.source.src;
         var ref = this$1;
         var source = ref.source;
@@ -11994,20 +14122,20 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
       }
 
       if (this.bitmap !== null || !window.createImageBitmap) {
-        return Promise.resolve(this);
+        return _promise.default.resolve(this);
       }
 
       this._process = window.createImageBitmap(this.source, 0, 0, this.source.width, this.source.height, {
         premultiplyAlpha: this.premultiplyAlpha ? 'premultiply' : 'none'
       }).then(function (bitmap) {
         if (this$1.destroyed) {
-          return Promise.reject();
+          return _promise.default.reject();
         }
 
         this$1.bitmap = bitmap;
         this$1.update();
         this$1._process = null;
-        return Promise.resolve(this$1);
+        return _promise.default.resolve(this$1);
       });
       return this._process;
     };
@@ -12195,7 +14323,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
       BufferResource.__proto__ = Resource$$1;
     }
 
-    BufferResource.prototype = Object.create(Resource$$1 && Resource$$1.prototype);
+    BufferResource.prototype = (0, _create.default)(Resource$$1 && Resource$$1.prototype);
     BufferResource.prototype.constructor = BufferResource;
     /**
      * Upload the texture to the GPU.
@@ -12540,7 +14668,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
       BaseTexture.__proto__ = EventEmitter$$1;
     }
 
-    BaseTexture.prototype = Object.create(EventEmitter$$1 && EventEmitter$$1.prototype);
+    BaseTexture.prototype = (0, _create.default)(EventEmitter$$1 && EventEmitter$$1.prototype);
     BaseTexture.prototype.constructor = BaseTexture;
     var prototypeAccessors = {
       realWidth: {
@@ -12815,7 +14943,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
         height: height
       });
       var type = buffer instanceof Float32Array ? TYPES.FLOAT : TYPES.UNSIGNED_BYTE;
-      return new BaseTexture(resource, Object.assign(defaultBufferOptions, options || {
+      return new BaseTexture(resource, (0, _assign.default)(defaultBufferOptions, options || {
         width: width,
         height: height,
         type: type
@@ -12879,7 +15007,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
       return null;
     };
 
-    Object.defineProperties(BaseTexture.prototype, prototypeAccessors);
+    (0, _defineProperties.default)(BaseTexture.prototype, prototypeAccessors);
     return BaseTexture;
   }(eventemitter3);
   /**
@@ -12904,7 +15032,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
       var urls;
       var length = source;
 
-      if (Array.isArray(source)) {
+      if ((0, _isArray.default)(source)) {
         urls = source;
         length = source.length;
       }
@@ -12959,7 +15087,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
       ArrayResource.__proto__ = Resource$$1;
     }
 
-    ArrayResource.prototype = Object.create(Resource$$1 && Resource$$1.prototype);
+    ArrayResource.prototype = (0, _create.default)(Resource$$1 && Resource$$1.prototype);
     ArrayResource.prototype.constructor = ArrayResource;
     /**
      * Destroy this BaseImageResource
@@ -13049,12 +15177,12 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
       var promises = resources.map(function (item) {
         return item.load();
       });
-      this._load = Promise.all(promises).then(function () {
+      this._load = _promise.default.all(promises).then(function () {
         var ref = resources[0];
         var width = ref.width;
         var height = ref.height;
         this$1.resize(width, height);
-        return Promise.resolve(this$1);
+        return _promise.default.resolve(this$1);
       });
       return this._load;
     };
@@ -13118,7 +15246,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
       CanvasResource.__proto__ = BaseImageResource$$1;
     }
 
-    CanvasResource.prototype = Object.create(BaseImageResource$$1 && BaseImageResource$$1.prototype);
+    CanvasResource.prototype = (0, _create.default)(BaseImageResource$$1 && BaseImageResource$$1.prototype);
     CanvasResource.prototype.constructor = CanvasResource;
 
     CanvasResource.test = function test(source) {
@@ -13165,7 +15293,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
       CubeResource.__proto__ = ArrayResource$$1;
     }
 
-    CubeResource.prototype = Object.create(ArrayResource$$1 && ArrayResource$$1.prototype);
+    CubeResource.prototype = (0, _create.default)(ArrayResource$$1 && ArrayResource$$1.prototype);
     CubeResource.prototype.constructor = CubeResource;
     /**
      * Add binding
@@ -13272,7 +15400,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
       SVGResource.__proto__ = BaseImageResource$$1;
     }
 
-    SVGResource.prototype = Object.create(BaseImageResource$$1 && BaseImageResource$$1.prototype);
+    SVGResource.prototype = (0, _create.default)(BaseImageResource$$1 && BaseImageResource$$1.prototype);
     SVGResource.prototype.constructor = SVGResource;
 
     SVGResource.prototype.load = function load() {
@@ -13282,7 +15410,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
         return this._load;
       }
 
-      this._load = new Promise(function (resolve) {
+      this._load = new _promise.default(function (resolve) {
         // Save this until after load is finished
         this$1._resolve = function () {
           this$1.resize(this$1.source.width, this$1.source.height);
@@ -13421,8 +15549,8 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
       var size = {};
 
       if (sizeMatch) {
-        size[sizeMatch[1]] = Math.round(parseFloat(sizeMatch[3]));
-        size[sizeMatch[5]] = Math.round(parseFloat(sizeMatch[7]));
+        size[sizeMatch[1]] = Math.round((0, _parseFloat2.default)(sizeMatch[3]));
+        size[sizeMatch[5]] = Math.round((0, _parseFloat2.default)(sizeMatch[7]));
       }
 
       return size;
@@ -13556,7 +15684,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
       VideoResource.__proto__ = BaseImageResource$$1;
     }
 
-    VideoResource.prototype = Object.create(BaseImageResource$$1 && BaseImageResource$$1.prototype);
+    VideoResource.prototype = (0, _create.default)(BaseImageResource$$1 && BaseImageResource$$1.prototype);
     VideoResource.prototype.constructor = VideoResource;
     var prototypeAccessors = {
       autoUpdate: {
@@ -13615,7 +15743,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
         this._onCanPlay();
       }
 
-      this._load = new Promise(function (resolve) {
+      this._load = new _promise.default(function (resolve) {
         if (this$1.valid) {
           resolve(this$1);
         } else {
@@ -13782,7 +15910,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
       return source instanceof HTMLVideoElement || VideoResource.TYPES.indexOf(extension) > -1;
     };
 
-    Object.defineProperties(VideoResource.prototype, prototypeAccessors);
+    (0, _defineProperties.default)(VideoResource.prototype, prototypeAccessors);
     return VideoResource;
   }(BaseImageResource);
   /**
@@ -13993,7 +16121,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
     this.disposeRunner.run(this, false);
   };
 
-  Object.defineProperties(Framebuffer.prototype, prototypeAccessors$1$2);
+  (0, _defineProperties.default)(Framebuffer.prototype, prototypeAccessors$1$2);
   /**
    * A BaseRenderTexture is a special texture that allows any PixiJS display object to be rendered to it.
    *
@@ -14095,7 +16223,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
       BaseRenderTexture.__proto__ = BaseTexture$$1;
     }
 
-    BaseRenderTexture.prototype = Object.create(BaseTexture$$1 && BaseTexture$$1.prototype);
+    BaseRenderTexture.prototype = (0, _create.default)(BaseTexture$$1 && BaseTexture$$1.prototype);
     BaseRenderTexture.prototype.constructor = BaseRenderTexture;
     /**
      * Resizes the BaseRenderTexture.
@@ -14377,7 +16505,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
       Texture.__proto__ = EventEmitter$$1;
     }
 
-    Texture.prototype = Object.create(EventEmitter$$1 && EventEmitter$$1.prototype);
+    Texture.prototype = (0, _create.default)(EventEmitter$$1 && EventEmitter$$1.prototype);
     Texture.prototype.constructor = Texture;
     var prototypeAccessors = {
       frame: {
@@ -14718,7 +16846,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
       return this.orig.height;
     };
 
-    Object.defineProperties(Texture.prototype, prototypeAccessors);
+    (0, _defineProperties.default)(Texture.prototype, prototypeAccessors);
     return Texture;
   }(eventemitter3);
 
@@ -14875,7 +17003,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
       RenderTexture.__proto__ = Texture$$1;
     }
 
-    RenderTexture.prototype = Object.create(Texture$$1 && Texture$$1.prototype);
+    RenderTexture.prototype = (0, _create.default)(Texture$$1 && Texture$$1.prototype);
     RenderTexture.prototype.constructor = RenderTexture;
     /**
      * Resizes the RenderTexture.
@@ -15527,7 +17655,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
       Quad.__proto__ = Geometry$$1;
     }
 
-    Quad.prototype = Object.create(Geometry$$1 && Geometry$$1.prototype);
+    Quad.prototype = (0, _create.default)(Geometry$$1 && Geometry$$1.prototype);
     Quad.prototype.constructor = Quad;
     return Quad;
   }(Geometry);
@@ -15567,7 +17695,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
       QuadUv.__proto__ = Geometry$$1;
     }
 
-    QuadUv.prototype = Object.create(Geometry$$1 && Geometry$$1.prototype);
+    QuadUv.prototype = (0, _create.default)(Geometry$$1 && Geometry$$1.prototype);
     QuadUv.prototype.constructor = QuadUv;
     /**
      * Maps two Rectangle to the quad.
@@ -15862,7 +17990,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
       FilterSystem.__proto__ = System$$1;
     }
 
-    FilterSystem.prototype = Object.create(System$$1 && System$$1.prototype);
+    FilterSystem.prototype = (0, _create.default)(System$$1 && System$$1.prototype);
     FilterSystem.prototype.constructor = FilterSystem;
     /**
      * Adds a new filter to the System.
@@ -16196,7 +18324,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
       ObjectRenderer.__proto__ = System$$1;
     }
 
-    ObjectRenderer.prototype = Object.create(System$$1 && System$$1.prototype);
+    ObjectRenderer.prototype = (0, _create.default)(System$$1 && System$$1.prototype);
     ObjectRenderer.prototype.constructor = ObjectRenderer;
 
     ObjectRenderer.prototype.start = function start() {// set the shader..
@@ -16265,7 +18393,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
       BatchSystem.__proto__ = System$$1;
     }
 
-    BatchSystem.prototype = Object.create(System$$1 && System$$1.prototype);
+    BatchSystem.prototype = (0, _create.default)(System$$1 && System$$1.prototype);
     BatchSystem.prototype.constructor = BatchSystem;
     /**
      * Changes the current renderer to the one given in parameter
@@ -16362,7 +18490,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
       ContextSystem.__proto__ = System$$1;
     }
 
-    ContextSystem.prototype = Object.create(System$$1 && System$$1.prototype);
+    ContextSystem.prototype = (0, _create.default)(System$$1 && System$$1.prototype);
     ContextSystem.prototype.constructor = ContextSystem;
     var prototypeAccessors = {
       isLost: {
@@ -16465,7 +18593,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
       var gl = ref.gl;
 
       if (this.webGLVersion === 1) {
-        Object.assign(this.extensions, {
+        (0, _assign.default)(this.extensions, {
           drawBuffers: gl.getExtension('WEBGL_draw_buffers'),
           depthTexture: gl.getExtension('WEBKIT_WEBGL_depth_texture'),
           floatTexture: gl.getExtension('OES_texture_float'),
@@ -16540,7 +18668,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
       }
     };
 
-    Object.defineProperties(ContextSystem.prototype, prototypeAccessors);
+    (0, _defineProperties.default)(ContextSystem.prototype, prototypeAccessors);
     return ContextSystem;
   }(System);
   /**
@@ -16570,7 +18698,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
       FramebufferSystem.__proto__ = System$$1;
     }
 
-    FramebufferSystem.prototype = Object.create(System$$1 && System$$1.prototype);
+    FramebufferSystem.prototype = (0, _create.default)(System$$1 && System$$1.prototype);
     FramebufferSystem.prototype.constructor = FramebufferSystem;
     var prototypeAccessors = {
       size: {
@@ -16888,7 +19016,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
       }
     };
 
-    Object.defineProperties(FramebufferSystem.prototype, prototypeAccessors);
+    (0, _defineProperties.default)(FramebufferSystem.prototype, prototypeAccessors);
     return FramebufferSystem;
   }(System);
 
@@ -16961,7 +19089,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
       GeometrySystem.__proto__ = System$$1;
     }
 
-    GeometrySystem.prototype = Object.create(System$$1 && System$$1.prototype);
+    GeometrySystem.prototype = (0, _create.default)(System$$1 && System$$1.prototype);
     GeometrySystem.prototype.constructor = GeometrySystem;
     /**
      * Sets up the renderer context and necessary buffers.
@@ -17318,13 +19446,13 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
 
 
     GeometrySystem.prototype.disposeAll = function disposeAll(contextLost) {
-      var all = Object.keys(this.managedGeometries);
+      var all = (0, _keys.default)(this.managedGeometries);
 
       for (var i = 0; i < all.length; i++) {
         this.disposeGeometry(this.managedGeometries[all[i]], contextLost);
       }
 
-      all = Object.keys(this.managedBuffers);
+      all = (0, _keys.default)(this.managedBuffers);
 
       for (var i$1 = 0; i$1 < all.length; i$1++) {
         this.disposeBuffer(this.managedBuffers[all[i$1]], contextLost);
@@ -17637,7 +19765,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
 
   function mapType(gl, type) {
     if (!GL_TABLE) {
-      var typeNames = Object.keys(GL_TO_GLSL_TYPES);
+      var typeNames = (0, _keys.default)(GL_TO_GLSL_TYPES);
       GL_TABLE = {};
 
       for (var i = 0; i < typeNames.length; ++i) {
@@ -18045,7 +20173,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
     return program;
   };
 
-  Object.defineProperties(Program, staticAccessors$3);
+  (0, _defineProperties.default)(Program, staticAccessors$3);
   /**
    * A helper class for shaders
    *
@@ -18132,7 +20260,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
     return new Shader(program, uniforms);
   };
 
-  Object.defineProperties(Shader.prototype, prototypeAccessors$2$1);
+  (0, _defineProperties.default)(Shader.prototype, prototypeAccessors$2$1);
   /* eslint-disable max-len */
 
   var BLEND = 0;
@@ -18311,7 +20439,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
     return state;
   };
 
-  Object.defineProperties(State.prototype, prototypeAccessors$3$1);
+  (0, _defineProperties.default)(State.prototype, prototypeAccessors$3$1);
   var defaultVertex$1 = "attribute vec2 aVertexPosition;\n\nuniform mat3 projectionMatrix;\n\nvarying vec2 vTextureCoord;\n\nuniform vec4 inputSize;\nuniform vec4 outputFrame;\n\nvec4 filterVertexPosition( void )\n{\n    vec2 position = aVertexPosition * max(outputFrame.zw, vec2(0.)) + outputFrame.xy;\n\n    return vec4((projectionMatrix * vec3(position, 1.0)).xy, 0.0, 1.0);\n}\n\nvec2 filterTextureCoord( void )\n{\n    return aVertexPosition * (outputFrame.zw * inputSize.zw);\n}\n\nvoid main(void)\n{\n    gl_Position = filterVertexPosition();\n    vTextureCoord = filterTextureCoord();\n}\n";
   var defaultFragment$1 = "varying vec2 vTextureCoord;\n\nuniform sampler2D uSampler;\n\nvoid main(void){\n   gl_FragColor = texture2D(uSampler, vTextureCoord);\n}\n";
   /**
@@ -18505,7 +20633,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
       Filter.__proto__ = Shader$$1;
     }
 
-    Filter.prototype = Object.create(Shader$$1 && Shader$$1.prototype);
+    Filter.prototype = (0, _create.default)(Shader$$1 && Shader$$1.prototype);
     Filter.prototype.constructor = Filter;
     var prototypeAccessors = {
       blendMode: {
@@ -18578,8 +20706,8 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
       return defaultFragment$1;
     };
 
-    Object.defineProperties(Filter.prototype, prototypeAccessors);
-    Object.defineProperties(Filter, staticAccessors);
+    (0, _defineProperties.default)(Filter.prototype, prototypeAccessors);
+    (0, _defineProperties.default)(Filter, staticAccessors);
     return Filter;
   }(Shader);
   /**
@@ -18741,7 +20869,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
     return true;
   };
 
-  Object.defineProperties(TextureMatrix.prototype, prototypeAccessors$4$1);
+  (0, _defineProperties.default)(TextureMatrix.prototype, prototypeAccessors$4$1);
   /**
    * This handles a Sprite acting as a mask, as opposed to a Graphic.
    *
@@ -18777,7 +20905,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
       SpriteMaskFilter.__proto__ = Filter$$1;
     }
 
-    SpriteMaskFilter.prototype = Object.create(Filter$$1 && Filter$$1.prototype);
+    SpriteMaskFilter.prototype = (0, _create.default)(Filter$$1 && Filter$$1.prototype);
     SpriteMaskFilter.prototype.constructor = SpriteMaskFilter;
     /**
      * Applies the filter
@@ -18876,7 +21004,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
       MaskSystem.__proto__ = System$$1;
     }
 
-    MaskSystem.prototype = Object.create(System$$1 && System$$1.prototype);
+    MaskSystem.prototype = (0, _create.default)(System$$1 && System$$1.prototype);
     MaskSystem.prototype.constructor = MaskSystem;
     /**
      * Applies the Mask and adds it to the current filter stack.
@@ -19040,7 +21168,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
       StencilSystem.__proto__ = System$$1;
     }
 
-    StencilSystem.prototype = Object.create(System$$1 && System$$1.prototype);
+    StencilSystem.prototype = (0, _create.default)(System$$1 && System$$1.prototype);
     StencilSystem.prototype.constructor = StencilSystem;
     /**
      * Changes the mask stack that is used by this System.
@@ -19204,7 +21332,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
       ProjectionSystem.__proto__ = System$$1;
     }
 
-    ProjectionSystem.prototype = Object.create(System$$1 && System$$1.prototype);
+    ProjectionSystem.prototype = (0, _create.default)(System$$1 && System$$1.prototype);
     ProjectionSystem.prototype.constructor = ProjectionSystem;
     /**
      * Updates the projection matrix based on a projection frame (which is a rectangle)
@@ -19329,7 +21457,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
       RenderTextureSystem.__proto__ = System$$1;
     }
 
-    RenderTextureSystem.prototype = Object.create(System$$1 && System$$1.prototype);
+    RenderTextureSystem.prototype = (0, _create.default)(System$$1 && System$$1.prototype);
     RenderTextureSystem.prototype.constructor = RenderTextureSystem;
     /**
      * Bind the current render texture
@@ -19495,7 +21623,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
       ShaderSystem.__proto__ = System$$1;
     }
 
-    ShaderSystem.prototype = Object.create(System$$1 && System$$1.prototype);
+    ShaderSystem.prototype = (0, _create.default)(System$$1 && System$$1.prototype);
     ShaderSystem.prototype.constructor = ShaderSystem;
 
     ShaderSystem.prototype.contextChange = function contextChange(gl) {
@@ -19810,7 +21938,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
       StateSystem.__proto__ = System$$1;
     }
 
-    StateSystem.prototype = Object.create(System$$1 && System$$1.prototype);
+    StateSystem.prototype = (0, _create.default)(System$$1 && System$$1.prototype);
     StateSystem.prototype.constructor = StateSystem;
 
     StateSystem.prototype.contextChange = function contextChange(gl) {
@@ -20083,7 +22211,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
       TextureGCSystem.__proto__ = System$$1;
     }
 
-    TextureGCSystem.prototype = Object.create(System$$1 && System$$1.prototype);
+    TextureGCSystem.prototype = (0, _create.default)(System$$1 && System$$1.prototype);
     TextureGCSystem.prototype.constructor = TextureGCSystem;
     /**
      * Checks to see when the last time a texture was used
@@ -20240,7 +22368,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
       TextureSystem.__proto__ = System$$1;
     }
 
-    TextureSystem.prototype = Object.create(System$$1 && System$$1.prototype);
+    TextureSystem.prototype = (0, _create.default)(System$$1 && System$$1.prototype);
     TextureSystem.prototype.constructor = TextureSystem;
     /**
      * Sets up the renderer context and necessary buffers.
@@ -20525,14 +22653,14 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
       EventEmitter$$1.call(this); // Support for constructor(system, screenWidth, screenHeight, options)
 
       if (typeof options === 'number') {
-        options = Object.assign({
+        options = (0, _assign.default)({
           width: options,
           height: arg2 || settings.RENDER_OPTIONS.height
         }, arg3);
       } // Add the default render options
 
 
-      options = Object.assign({}, settings.RENDER_OPTIONS, options); // Deprecation notice for renderer roundPixels option
+      options = (0, _assign.default)({}, settings.RENDER_OPTIONS, options); // Deprecation notice for renderer roundPixels option
 
       if (options.roundPixels) {
         settings.ROUND_PIXELS = options.roundPixels;
@@ -20670,7 +22798,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
       AbstractRenderer.__proto__ = EventEmitter$$1;
     }
 
-    AbstractRenderer.prototype = Object.create(EventEmitter$$1 && EventEmitter$$1.prototype);
+    AbstractRenderer.prototype = (0, _create.default)(EventEmitter$$1 && EventEmitter$$1.prototype);
     AbstractRenderer.prototype.constructor = AbstractRenderer;
     var prototypeAccessors = {
       width: {
@@ -20821,7 +22949,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
       hex2rgb(value, this._backgroundColorRgba);
     };
 
-    Object.defineProperties(AbstractRenderer.prototype, prototypeAccessors);
+    (0, _defineProperties.default)(AbstractRenderer.prototype, prototypeAccessors);
     return AbstractRenderer;
   }(eventemitter3);
   /**
@@ -21021,7 +23149,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
       Renderer.__proto__ = AbstractRenderer$$1;
     }
 
-    Renderer.prototype = Object.create(AbstractRenderer$$1 && AbstractRenderer$$1.prototype);
+    Renderer.prototype = (0, _create.default)(AbstractRenderer$$1 && AbstractRenderer$$1.prototype);
     Renderer.prototype.constructor = Renderer;
     /**
      * Add a new system to the renderer.
@@ -21218,7 +23346,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
       CubeTexture.__proto__ = BaseTexture$$1;
     }
 
-    CubeTexture.prototype = Object.create(BaseTexture$$1 && BaseTexture$$1.prototype);
+    CubeTexture.prototype = (0, _create.default)(BaseTexture$$1 && BaseTexture$$1.prototype);
     CubeTexture.prototype.constructor = CubeTexture;
 
     CubeTexture.from = function from(resources, options) {
@@ -21267,7 +23395,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
       BatchGeometry.__proto__ = Geometry$$1;
     }
 
-    BatchGeometry.prototype = Object.create(Geometry$$1 && Geometry$$1.prototype);
+    BatchGeometry.prototype = (0, _create.default)(Geometry$$1 && Geometry$$1.prototype);
     BatchGeometry.prototype.constructor = BatchGeometry;
     return BatchGeometry;
   }(Geometry);
@@ -21463,7 +23591,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
       BatchRenderer.__proto__ = ObjectRenderer$$1;
     }
 
-    BatchRenderer.prototype = Object.create(ObjectRenderer$$1 && ObjectRenderer$$1.prototype);
+    BatchRenderer.prototype = (0, _create.default)(ObjectRenderer$$1 && ObjectRenderer$$1.prototype);
     BatchRenderer.prototype.constructor = BatchRenderer;
     /**
      * Sets up the renderer context and necessary buffers.
@@ -21891,7 +24019,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
     var this$1 = this; // Support for constructor(width, height, options, noWebGL, useSharedTicker)
 
     if (typeof options === 'number') {
-      options = Object.assign({
+      options = (0, _assign.default)({
         width: options,
         height: arg2 || settings.RENDER_OPTIONS.height,
         forceCanvas: !!arg4,
@@ -21900,7 +24028,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
     } // The default options
 
 
-    options = Object.assign({
+    options = (0, _assign.default)({
       forceCanvas: false
     }, options);
     /**
@@ -22008,7 +24136,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
     this._options = null;
   };
 
-  Object.defineProperties(Application.prototype, prototypeAccessors$5);
+  (0, _defineProperties.default)(Application.prototype, prototypeAccessors$5);
   /**
    * @memberof PIXI.Application
    * @typedef {object} Plugin
@@ -23169,7 +25297,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
       GraphicsGeometry.__proto__ = BatchGeometry$$1;
     }
 
-    GraphicsGeometry.prototype = Object.create(BatchGeometry$$1 && BatchGeometry$$1.prototype);
+    GraphicsGeometry.prototype = (0, _create.default)(BatchGeometry$$1 && BatchGeometry$$1.prototype);
     GraphicsGeometry.prototype.constructor = GraphicsGeometry;
     var prototypeAccessors = {
       bounds: {
@@ -23796,7 +25924,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
       }
     };
 
-    Object.defineProperties(GraphicsGeometry.prototype, prototypeAccessors);
+    (0, _defineProperties.default)(GraphicsGeometry.prototype, prototypeAccessors);
     return GraphicsGeometry;
   }(BatchGeometry);
   /**
@@ -23829,7 +25957,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
       LineStyle.__proto__ = FillStyle$$1;
     }
 
-    LineStyle.prototype = Object.create(FillStyle$$1 && FillStyle$$1.prototype);
+    LineStyle.prototype = (0, _create.default)(FillStyle$$1 && FillStyle$$1.prototype);
     LineStyle.prototype.constructor = LineStyle;
 
     LineStyle.prototype.clone = function clone() {
@@ -24146,7 +26274,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
       Star.__proto__ = Polygon$$1;
     }
 
-    Star.prototype = Object.create(Polygon$$1 && Polygon$$1.prototype);
+    Star.prototype = (0, _create.default)(Polygon$$1 && Polygon$$1.prototype);
     Star.prototype.constructor = Star;
     return Star;
   }(Polygon);
@@ -24286,7 +26414,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
       Graphics.__proto__ = Container$$1;
     }
 
-    Graphics.prototype = Object.create(Container$$1 && Container$$1.prototype);
+    Graphics.prototype = (0, _create.default)(Container$$1 && Container$$1.prototype);
     Graphics.prototype.constructor = Graphics;
     var prototypeAccessors = {
       blendMode: {
@@ -24462,7 +26590,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
           matrix.invert();
         }
 
-        Object.assign(this._lineStyle, {
+        (0, _assign.default)(this._lineStyle, {
           color: color,
           width: width,
           alpha: alpha,
@@ -24773,7 +26901,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
           matrix.invert();
         }
 
-        Object.assign(this._fillStyle, {
+        (0, _assign.default)(this._fillStyle, {
           color: color,
           alpha: alpha,
           texture: texture,
@@ -24875,7 +27003,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
         points = points.points;
       }
 
-      if (!Array.isArray(points)) {
+      if (!(0, _isArray.default)(points)) {
         // prevents an argument leak deopt
         // see section 3.2: https://github.com/petkaantonov/bluebird/wiki/Optimization-killers#3-managing-arguments
         points = new Array(arguments.length);
@@ -25249,7 +27377,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
       Container$$1.prototype.destroy.call(this, options);
     };
 
-    Object.defineProperties(Graphics.prototype, prototypeAccessors);
+    (0, _defineProperties.default)(Graphics.prototype, prototypeAccessors);
     return Graphics;
   }(Container);
   /**
@@ -25453,7 +27581,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
     this.button = event.button; // event.buttons is not available in all browsers (ie. Safari), but it does have a non-standard
     // event.which property instead, which conveys the same information.
 
-    this.buttons = Number.isInteger(event.buttons) ? event.buttons : event.which;
+    this.buttons = (0, _isInteger.default)(event.buttons) ? event.buttons : event.which;
     this.width = event.width;
     this.height = event.height;
     this.tiltX = event.tiltX;
@@ -25475,7 +27603,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
     this.isPrimary = false;
   };
 
-  Object.defineProperties(InteractionData.prototype, prototypeAccessors$6);
+  (0, _defineProperties.default)(InteractionData.prototype, prototypeAccessors$6);
   /**
    * Event class that mimics native DOM events.
    *
@@ -25675,8 +27803,8 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
     this._doSet(this.constructor.FLAGS.LEFT_DOWN, yn);
   };
 
-  Object.defineProperties(InteractionTrackingData.prototype, prototypeAccessors$1$3);
-  InteractionTrackingData.FLAGS = Object.freeze({
+  (0, _defineProperties.default)(InteractionTrackingData.prototype, prototypeAccessors$1$3);
+  InteractionTrackingData.FLAGS = (0, _freeze.default)({
     NONE: 0,
     OVER: 1 << 0,
     LEFT_DOWN: 1 << 1,
@@ -26433,7 +28561,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
       InteractionManager.__proto__ = EventEmitter$$1;
     }
 
-    InteractionManager.prototype = Object.create(EventEmitter$$1 && EventEmitter$$1.prototype);
+    InteractionManager.prototype = (0, _create.default)(EventEmitter$$1 && EventEmitter$$1.prototype);
     InteractionManager.prototype.constructor = InteractionManager;
     /**
      * Hit tests a point against the display tree, returning the first interactive object that is hit.
@@ -26644,7 +28772,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
       var style = this.cursorStyles[mode]; // only do things if there is a cursor style for it
 
       if (style) {
-        switch (_typeof2(style)) {
+        switch ((0, _typeof3.default)(style)) {
           case 'string':
             // string styles are handled as cursor CSS
             this.interactionDOMElement.style.cursor = style;
@@ -26658,7 +28786,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
           case 'object':
             // if it is an object, assume that it is a dictionary of CSS styles,
             // apply it to the interactionDOMElement
-            Object.assign(this.interactionDOMElement.style, style);
+            (0, _assign.default)(this.interactionDOMElement.style, style);
             break;
         }
       } else if (typeof mode === 'string' && !Object.prototype.hasOwnProperty.call(this.cursorStyles, mode)) {
@@ -27556,7 +29684,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
             descriptor.writable = true;
           }
 
-          Object.defineProperty(target, descriptor.key, descriptor);
+          (0, _defineProperty.default)(target, descriptor.key, descriptor);
         }
       }
 
@@ -28039,7 +30167,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
             descriptor.writable = true;
           }
 
-          Object.defineProperty(target, descriptor.key, descriptor);
+          (0, _defineProperty.default)(target, descriptor.key, descriptor);
         }
       }
 
@@ -28668,16 +30796,16 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
         if (!this.metadata.skipSource) {
           // support for CocoonJS Canvas+ runtime, lacks document.createElement('source')
           if (navigator.isCocoonJS) {
-            this.data.src = Array.isArray(this.url) ? this.url[0] : this.url;
-          } else if (Array.isArray(this.url)) {
+            this.data.src = (0, _isArray.default)(this.url) ? this.url[0] : this.url;
+          } else if ((0, _isArray.default)(this.url)) {
             var mimeTypes = this.metadata.mimeType;
 
             for (var i = 0; i < this.url.length; ++i) {
-              this.data.appendChild(this._createSource(type, this.url[i], Array.isArray(mimeTypes) ? mimeTypes[i] : mimeTypes));
+              this.data.appendChild(this._createSource(type, this.url[i], (0, _isArray.default)(mimeTypes) ? mimeTypes[i] : mimeTypes));
             }
           } else {
             var _mimeTypes = this.metadata.mimeType;
-            this.data.appendChild(this._createSource(type, this.url, Array.isArray(_mimeTypes) ? _mimeTypes[0] : _mimeTypes));
+            this.data.appendChild(this._createSource(type, this.url, (0, _isArray.default)(_mimeTypes) ? _mimeTypes[0] : _mimeTypes));
           }
         }
 
@@ -29262,10 +31390,10 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
     exports.__esModule = true;
     exports.Loader = undefined;
 
-    var _typeof = typeof Symbol === "function" && _typeof2(Symbol.iterator) === "symbol" ? function (obj) {
-      return _typeof2(obj);
+    var _typeof = typeof _symbol.default === "function" && (0, _typeof3.default)(_iterator.default) === "symbol" ? function (obj) {
+      return (0, _typeof3.default)(obj);
     } : function (obj) {
-      return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : _typeof2(obj);
+      return obj && typeof _symbol.default === "function" && obj.constructor === _symbol.default && obj !== _symbol.default.prototype ? "symbol" : (0, _typeof3.default)(obj);
     };
 
     var _createClass = function () {
@@ -29279,7 +31407,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
             descriptor.writable = true;
           }
 
-          Object.defineProperty(target, descriptor.key, descriptor);
+          (0, _defineProperty.default)(target, descriptor.key, descriptor);
         }
       }
 
@@ -29631,7 +31759,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
 
       Loader.prototype.add = function add(name, url, options, cb) {
         // special case of an array of objects or urls
-        if (Array.isArray(name)) {
+        if ((0, _isArray.default)(name)) {
           for (var i = 0; i < name.length; ++i) {
             this.add(name[i]);
           }
@@ -30214,7 +32342,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
             descriptor.writable = true;
           }
 
-          Object.defineProperty(target, descriptor.key, descriptor);
+          (0, _defineProperty.default)(target, descriptor.key, descriptor);
         }
       }
 
@@ -30436,7 +32564,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
             descriptor.writable = true;
           }
 
-          Object.defineProperty(target, descriptor.key, descriptor);
+          (0, _defineProperty.default)(target, descriptor.key, descriptor);
         }
       }
 
@@ -31065,16 +33193,16 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
         if (!this.metadata.skipSource) {
           // support for CocoonJS Canvas+ runtime, lacks document.createElement('source')
           if (navigator.isCocoonJS) {
-            this.data.src = Array.isArray(this.url) ? this.url[0] : this.url;
-          } else if (Array.isArray(this.url)) {
+            this.data.src = (0, _isArray.default)(this.url) ? this.url[0] : this.url;
+          } else if ((0, _isArray.default)(this.url)) {
             var mimeTypes = this.metadata.mimeType;
 
             for (var i = 0; i < this.url.length; ++i) {
-              this.data.appendChild(this._createSource(type, this.url[i], Array.isArray(mimeTypes) ? mimeTypes[i] : mimeTypes));
+              this.data.appendChild(this._createSource(type, this.url[i], (0, _isArray.default)(mimeTypes) ? mimeTypes[i] : mimeTypes));
             }
           } else {
             var _mimeTypes = this.metadata.mimeType;
-            this.data.appendChild(this._createSource(type, this.url, Array.isArray(_mimeTypes) ? _mimeTypes[0] : _mimeTypes));
+            this.data.appendChild(this._createSource(type, this.url, (0, _isArray.default)(_mimeTypes) ? _mimeTypes[0] : _mimeTypes));
           }
         }
 
@@ -31908,7 +34036,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
       Loader.__proto__ = ResourceLoader$$1;
     }
 
-    Loader.prototype = Object.create(ResourceLoader$$1 && ResourceLoader$$1.prototype);
+    Loader.prototype = (0, _create.default)(ResourceLoader$$1 && ResourceLoader$$1.prototype);
     Loader.prototype.constructor = Loader;
     var staticAccessors = {
       shared: {
@@ -31947,12 +34075,12 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
       return shared;
     };
 
-    Object.defineProperties(Loader, staticAccessors);
+    (0, _defineProperties.default)(Loader, staticAccessors);
     return Loader;
   }(lib); // Copy EE3 prototype (mixin)
 
 
-  Object.assign(Loader$2.prototype, eventemitter3.prototype);
+  (0, _assign.default)(Loader$2.prototype, eventemitter3.prototype);
   /**
    * Collection of all installed `use` middleware for Loader.
    *
@@ -32023,7 +34151,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
   var AppLoaderPlugin = function AppLoaderPlugin() {};
 
   AppLoaderPlugin.init = function init(options) {
-    options = Object.assign({
+    options = (0, _assign.default)({
       sharedLoader: false
     }, options);
     /**
@@ -32256,7 +34384,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
       Mesh.__proto__ = Container$$1;
     }
 
-    Mesh.prototype = Object.create(Container$$1 && Container$$1.prototype);
+    Mesh.prototype = (0, _create.default)(Container$$1 && Container$$1.prototype);
     Mesh.prototype.constructor = Mesh;
     var prototypeAccessors = {
       uvBuffer: {
@@ -32593,7 +34721,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
       this.vertexData = null;
     };
 
-    Object.defineProperties(Mesh.prototype, prototypeAccessors);
+    (0, _defineProperties.default)(Mesh.prototype, prototypeAccessors);
     return Mesh;
   }(Container);
   /**
@@ -32626,14 +34754,14 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
         uColor: new Float32Array([1, 1, 1, 1])
       }; // Set defaults
 
-      options = Object.assign({
+      options = (0, _assign.default)({
         tint: 0xFFFFFF,
         alpha: 1,
         pluginName: 'batch'
       }, options);
 
       if (options.uniforms) {
-        Object.assign(uniforms, options.uniforms);
+        (0, _assign.default)(uniforms, options.uniforms);
       }
 
       Shader$$1.call(this, options.program || Program.from(vertex$2, fragment$1), uniforms);
@@ -32676,7 +34804,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
       MeshMaterial.__proto__ = Shader$$1;
     }
 
-    MeshMaterial.prototype = Object.create(Shader$$1 && Shader$$1.prototype);
+    MeshMaterial.prototype = (0, _create.default)(Shader$$1 && Shader$$1.prototype);
     MeshMaterial.prototype.constructor = MeshMaterial;
     var prototypeAccessors = {
       texture: {
@@ -32762,7 +34890,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
       }
     };
 
-    Object.defineProperties(MeshMaterial.prototype, prototypeAccessors);
+    (0, _defineProperties.default)(MeshMaterial.prototype, prototypeAccessors);
     return MeshMaterial;
   }(Shader);
   /**
@@ -32809,7 +34937,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
       MeshGeometry.__proto__ = Geometry$$1;
     }
 
-    MeshGeometry.prototype = Object.create(Geometry$$1 && Geometry$$1.prototype);
+    MeshGeometry.prototype = (0, _create.default)(Geometry$$1 && Geometry$$1.prototype);
     MeshGeometry.prototype.constructor = MeshGeometry;
     var prototypeAccessors = {
       vertexDirtyId: {
@@ -32827,7 +34955,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
       return this.buffers[0]._updateID;
     };
 
-    Object.defineProperties(MeshGeometry.prototype, prototypeAccessors);
+    (0, _defineProperties.default)(MeshGeometry.prototype, prototypeAccessors);
     return MeshGeometry;
   }(Geometry);
 
@@ -32877,7 +35005,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
       PlaneGeometry.__proto__ = MeshGeometry$$1;
     }
 
-    PlaneGeometry.prototype = Object.create(MeshGeometry$$1 && MeshGeometry$$1.prototype);
+    PlaneGeometry.prototype = (0, _create.default)(MeshGeometry$$1 && MeshGeometry$$1.prototype);
     PlaneGeometry.prototype.constructor = PlaneGeometry;
     /**
      * Refreshes plane coordinates
@@ -32964,7 +35092,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
       RopeGeometry.__proto__ = MeshGeometry$$1;
     }
 
-    RopeGeometry.prototype = Object.create(MeshGeometry$$1 && MeshGeometry$$1.prototype);
+    RopeGeometry.prototype = (0, _create.default)(MeshGeometry$$1 && MeshGeometry$$1.prototype);
     RopeGeometry.prototype.constructor = RopeGeometry;
     /**
      * Refreshes Rope indices and uvs
@@ -33122,7 +35250,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
       SimpleRope.__proto__ = Mesh$$1;
     }
 
-    SimpleRope.prototype = Object.create(Mesh$$1 && Mesh$$1.prototype);
+    SimpleRope.prototype = (0, _create.default)(Mesh$$1 && Mesh$$1.prototype);
     SimpleRope.prototype.constructor = SimpleRope;
 
     SimpleRope.prototype._render = function _render(renderer) {
@@ -33168,7 +35296,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
       SimplePlane.__proto__ = Mesh$$1;
     }
 
-    SimplePlane.prototype = Object.create(Mesh$$1 && Mesh$$1.prototype);
+    SimplePlane.prototype = (0, _create.default)(Mesh$$1 && Mesh$$1.prototype);
     SimplePlane.prototype.constructor = SimplePlane;
     var prototypeAccessors = {
       texture: {
@@ -33217,7 +35345,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
       Mesh$$1.prototype._render.call(this, renderer);
     };
 
-    Object.defineProperties(SimplePlane.prototype, prototypeAccessors);
+    (0, _defineProperties.default)(SimplePlane.prototype, prototypeAccessors);
     return SimplePlane;
   }(Mesh);
   /**
@@ -33254,7 +35382,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
       SimpleMesh.__proto__ = Mesh$$1;
     }
 
-    SimpleMesh.prototype = Object.create(Mesh$$1 && Mesh$$1.prototype);
+    SimpleMesh.prototype = (0, _create.default)(Mesh$$1 && Mesh$$1.prototype);
     SimpleMesh.prototype.constructor = SimpleMesh;
     var prototypeAccessors = {
       vertices: {
@@ -33282,7 +35410,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
       Mesh$$1.prototype._render.call(this, renderer);
     };
 
-    Object.defineProperties(SimpleMesh.prototype, prototypeAccessors);
+    (0, _defineProperties.default)(SimpleMesh.prototype, prototypeAccessors);
     return SimpleMesh;
   }(Mesh);
 
@@ -33381,7 +35509,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
       NineSlicePlane.__proto__ = SimplePlane$$1;
     }
 
-    NineSlicePlane.prototype = Object.create(SimplePlane$$1 && SimplePlane$$1.prototype);
+    NineSlicePlane.prototype = (0, _create.default)(SimplePlane$$1 && SimplePlane$$1.prototype);
     NineSlicePlane.prototype.constructor = NineSlicePlane;
     var prototypeAccessors = {
       vertices: {
@@ -33579,7 +35707,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
       this.geometry.buffers[1].update();
     };
 
-    Object.defineProperties(NineSlicePlane.prototype, prototypeAccessors);
+    (0, _defineProperties.default)(NineSlicePlane.prototype, prototypeAccessors);
     return NineSlicePlane;
   }(SimplePlane);
 
@@ -33758,7 +35886,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
       ParticleContainer.__proto__ = Container$$1;
     }
 
-    ParticleContainer.prototype = Object.create(Container$$1 && Container$$1.prototype);
+    ParticleContainer.prototype = (0, _create.default)(Container$$1 && Container$$1.prototype);
     ParticleContainer.prototype.constructor = ParticleContainer;
     var prototypeAccessors = {
       tint: {
@@ -33886,7 +36014,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
       this._bufferUpdateIDs = null;
     };
 
-    Object.defineProperties(ParticleContainer.prototype, prototypeAccessors);
+    (0, _defineProperties.default)(ParticleContainer.prototype, prototypeAccessors);
     return ParticleContainer;
   }(Container);
   /**
@@ -34164,7 +36292,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
       ParticleRenderer.__proto__ = ObjectRenderer$$1;
     }
 
-    ParticleRenderer.prototype = Object.create(ObjectRenderer$$1 && ObjectRenderer$$1.prototype);
+    ParticleRenderer.prototype = (0, _create.default)(ObjectRenderer$$1 && ObjectRenderer$$1.prototype);
     ParticleRenderer.prototype.constructor = ParticleRenderer;
     /**
      * Renders the particle container object.
@@ -34630,7 +36758,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
       Sprite.__proto__ = Container$$1;
     }
 
-    Sprite.prototype = Object.create(Container$$1 && Container$$1.prototype);
+    Sprite.prototype = (0, _create.default)(Container$$1 && Container$$1.prototype);
     Sprite.prototype.constructor = Sprite;
     var prototypeAccessors = {
       roundPixels: {
@@ -35062,7 +37190,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
       }
     };
 
-    Object.defineProperties(Sprite.prototype, prototypeAccessors);
+    (0, _defineProperties.default)(Sprite.prototype, prototypeAccessors);
     return Sprite;
   }(Container);
 
@@ -35813,7 +37941,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
 
     var fontFamilies = this.fontFamily;
 
-    if (!Array.isArray(this.fontFamily)) {
+    if (!(0, _isArray.default)(this.fontFamily)) {
       fontFamilies = this.fontFamily.split(',');
     }
 
@@ -35831,7 +37959,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
     return this.fontStyle + " " + this.fontVariant + " " + this.fontWeight + " " + fontSizeString + " " + fontFamilies.join(',');
   };
 
-  Object.defineProperties(TextStyle.prototype, prototypeAccessors$7);
+  (0, _defineProperties.default)(TextStyle.prototype, prototypeAccessors$7);
   /**
    * Utility function to convert hexadecimal colors to strings, and simply return the color if it's a string.
    * @private
@@ -35860,7 +37988,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
 
 
   function getColor(color) {
-    if (!Array.isArray(color)) {
+    if (!(0, _isArray.default)(color)) {
       return getSingleColor(color);
     } else {
       for (var i = 0; i < color.length; ++i) {
@@ -35881,7 +38009,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
 
 
   function areArraysEqual(array1, array2) {
-    if (!Array.isArray(array1) || !Array.isArray(array2)) {
+    if (!(0, _isArray.default)(array1) || !(0, _isArray.default)(array2)) {
       return false;
     }
 
@@ -35908,7 +38036,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
 
   function deepCopyProperties(target, source, propertyObj) {
     for (var prop in propertyObj) {
-      if (Array.isArray(source[prop])) {
+      if ((0, _isArray.default)(source[prop])) {
         target[prop] = source[prop].slice();
       } else {
         target[prop] = source[prop];
@@ -36657,7 +38785,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
       Text.__proto__ = Sprite$$1;
     }
 
-    Text.prototype = Object.create(Sprite$$1 && Sprite$$1.prototype);
+    Text.prototype = (0, _create.default)(Sprite$$1 && Sprite$$1.prototype);
     Text.prototype.constructor = Text;
     var prototypeAccessors = {
       width: {
@@ -36917,7 +39045,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
 
 
     Text.prototype._generateFillStyle = function _generateFillStyle(style, lines) {
-      if (!Array.isArray(style.fill)) {
+      if (!(0, _isArray.default)(style.fill)) {
         return style.fill;
       } // cocoon on canvas+ cannot generate textures, so use the first colour instead
 
@@ -37018,7 +39146,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
         };
       }
 
-      options = Object.assign({}, defaultDestroyOptions, options);
+      options = (0, _assign.default)({}, defaultDestroyOptions, options);
       Sprite$$1.prototype.destroy.call(this, options); // make sure to reset the the context and canvas.. dont want this hanging around in memory!
 
       this.context = null;
@@ -37134,7 +39262,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
       this.dirty = true;
     };
 
-    Object.defineProperties(Text.prototype, prototypeAccessors);
+    (0, _defineProperties.default)(Text.prototype, prototypeAccessors);
     return Text;
   }(Sprite);
 
@@ -37673,7 +39801,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
       Prepare.__proto__ = BasePrepare$$1;
     }
 
-    Prepare.prototype = Object.create(BasePrepare$$1 && BasePrepare$$1.prototype);
+    Prepare.prototype = (0, _create.default)(BasePrepare$$1 && BasePrepare$$1.prototype);
     Prepare.prototype.constructor = Prepare;
     return Prepare;
   }(BasePrepare);
@@ -37772,7 +39900,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
 
 
   TimeLimiter.prototype.beginFrame = function beginFrame() {
-    this.frameStart = Date.now();
+    this.frameStart = (0, _now.default)();
   };
   /**
    * Checks to see if another item can be uploaded. This should only be called once per item.
@@ -37781,7 +39909,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
 
 
   TimeLimiter.prototype.allowedToUpload = function allowedToUpload() {
-    return Date.now() - this.frameStart < this.maxMilliseconds;
+    return (0, _now.default)() - this.frameStart < this.maxMilliseconds;
   };
 
   var prepare = {
@@ -37917,7 +40045,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
       AnimatedSprite.__proto__ = Sprite$$1;
     }
 
-    AnimatedSprite.prototype = Object.create(Sprite$$1 && Sprite$$1.prototype);
+    AnimatedSprite.prototype = (0, _create.default)(Sprite$$1 && Sprite$$1.prototype);
     AnimatedSprite.prototype.constructor = AnimatedSprite;
     var prototypeAccessors = {
       totalFrames: {
@@ -38188,7 +40316,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
       return currentFrame;
     };
 
-    Object.defineProperties(AnimatedSprite.prototype, prototypeAccessors);
+    (0, _defineProperties.default)(AnimatedSprite.prototype, prototypeAccessors);
     return AnimatedSprite;
   }(Sprite);
 
@@ -38284,7 +40412,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
      * @private
      */
 
-    this._frameKeys = Object.keys(this._frames);
+    this._frameKeys = (0, _keys.default)(this._frames);
     /**
      * Current batch index being processed.
      * @type {number}
@@ -38327,7 +40455,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
 
     if (resolution === null) {
       // Use the scale value or default to 1
-      resolution = scale !== undefined ? parseFloat(scale) : 1;
+      resolution = scale !== undefined ? (0, _parseFloat2.default)(scale) : 1;
     } // For non-1 resolutions, update baseTexture
 
 
@@ -38485,7 +40613,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
     this.baseTexture = null;
   };
 
-  Object.defineProperties(Spritesheet, staticAccessors$4);
+  (0, _defineProperties.default)(Spritesheet, staticAccessors$4);
   /**
    * {@link PIXI.Loader Loader} middleware for loading texture atlases that have been created with
    * TexturePacker or similar JSON-based spritesheet.
@@ -38640,7 +40768,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
       TilingSprite.__proto__ = Sprite$$1;
     }
 
-    TilingSprite.prototype = Object.create(Sprite$$1 && Sprite$$1.prototype);
+    TilingSprite.prototype = (0, _create.default)(Sprite$$1 && Sprite$$1.prototype);
     TilingSprite.prototype.constructor = TilingSprite;
     var prototypeAccessors = {
       clampMargin: {
@@ -38875,7 +41003,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
 
     TilingSprite.fromImage = function fromImage(imageId, width, height, options) {
       // Fallback support for crossorigin, scaleMode parameters
-      if (options && _typeof2(options) !== 'object') {
+      if (options && (0, _typeof3.default)(options) !== 'object') {
         options = {
           scaleMode: arguments[4],
           resourceOptions: {
@@ -38917,7 +41045,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
       this._height = value;
     };
 
-    Object.defineProperties(TilingSprite.prototype, prototypeAccessors);
+    (0, _defineProperties.default)(TilingSprite.prototype, prototypeAccessors);
     return TilingSprite;
   }(Sprite);
 
@@ -38950,7 +41078,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
       TilingSpriteRenderer.__proto__ = ObjectRenderer$$1;
     }
 
-    TilingSpriteRenderer.prototype = Object.create(ObjectRenderer$$1 && ObjectRenderer$$1.prototype);
+    TilingSpriteRenderer.prototype = (0, _create.default)(ObjectRenderer$$1 && ObjectRenderer$$1.prototype);
     TilingSpriteRenderer.prototype.constructor = TilingSpriteRenderer;
     /**
      *
@@ -39192,7 +41320,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
       BitmapText.__proto__ = Container$$1;
     }
 
-    BitmapText.prototype = Object.create(Container$$1 && Container$$1.prototype);
+    BitmapText.prototype = (0, _create.default)(Container$$1 && Container$$1.prototype);
     BitmapText.prototype.constructor = BitmapText;
     var prototypeAccessors = {
       tint: {
@@ -39485,10 +41613,10 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
       if (typeof value === 'string') {
         value = value.split(' ');
         this._font.name = value.length === 1 ? value[0] : value.slice(1).join(' ');
-        this._font.size = value.length >= 2 ? parseInt(value[0], 10) : BitmapText.fonts[this._font.name].size;
+        this._font.size = value.length >= 2 ? (0, _parseInt2.default)(value[0], 10) : BitmapText.fonts[this._font.name].size;
       } else {
         this._font.name = value.name;
-        this._font.size = typeof value.size === 'number' ? value.size : parseInt(value.size, 10);
+        this._font.size = typeof value.size === 'number' ? value.size : (0, _parseInt2.default)(value.size, 10);
       }
 
       this.dirty = true;
@@ -39613,8 +41741,8 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
       var res = getResolutionOfUrl(pages[0].getAttribute('file'), settings.RESOLUTION);
       var pagesTextures = {};
       data.font = info.getAttribute('face');
-      data.size = parseInt(info.getAttribute('size'), 10);
-      data.lineHeight = parseInt(common.getAttribute('lineHeight'), 10) / res;
+      data.size = (0, _parseInt2.default)(info.getAttribute('size'), 10);
+      data.lineHeight = (0, _parseInt2.default)(common.getAttribute('lineHeight'), 10) / res;
       data.chars = {}; // Single texture, convert to list
 
       if (textures instanceof Texture) {
@@ -39634,13 +41762,13 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
 
       for (var i$1 = 0; i$1 < letters.length; i$1++) {
         var letter = letters[i$1];
-        var charCode = parseInt(letter.getAttribute('id'), 10);
+        var charCode = (0, _parseInt2.default)(letter.getAttribute('id'), 10);
         var page = letter.getAttribute('page') || 0;
-        var textureRect = new Rectangle(parseInt(letter.getAttribute('x'), 10) / res + pagesTextures[page].frame.x / res, parseInt(letter.getAttribute('y'), 10) / res + pagesTextures[page].frame.y / res, parseInt(letter.getAttribute('width'), 10) / res, parseInt(letter.getAttribute('height'), 10) / res);
+        var textureRect = new Rectangle((0, _parseInt2.default)(letter.getAttribute('x'), 10) / res + pagesTextures[page].frame.x / res, (0, _parseInt2.default)(letter.getAttribute('y'), 10) / res + pagesTextures[page].frame.y / res, (0, _parseInt2.default)(letter.getAttribute('width'), 10) / res, (0, _parseInt2.default)(letter.getAttribute('height'), 10) / res);
         data.chars[charCode] = {
-          xOffset: parseInt(letter.getAttribute('xoffset'), 10) / res,
-          yOffset: parseInt(letter.getAttribute('yoffset'), 10) / res,
-          xAdvance: parseInt(letter.getAttribute('xadvance'), 10) / res,
+          xOffset: (0, _parseInt2.default)(letter.getAttribute('xoffset'), 10) / res,
+          yOffset: (0, _parseInt2.default)(letter.getAttribute('yoffset'), 10) / res,
+          xAdvance: (0, _parseInt2.default)(letter.getAttribute('xadvance'), 10) / res,
           kerning: {},
           texture: new Texture(pagesTextures[page].baseTexture, textureRect),
           page: page
@@ -39652,9 +41780,9 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
 
       for (var i$2 = 0; i$2 < kernings.length; i$2++) {
         var kerning = kernings[i$2];
-        var first = parseInt(kerning.getAttribute('first'), 10) / res;
-        var second = parseInt(kerning.getAttribute('second'), 10) / res;
-        var amount = parseInt(kerning.getAttribute('amount'), 10) / res;
+        var first = (0, _parseInt2.default)(kerning.getAttribute('first'), 10) / res;
+        var second = (0, _parseInt2.default)(kerning.getAttribute('second'), 10) / res;
+        var amount = (0, _parseInt2.default)(kerning.getAttribute('amount'), 10) / res;
 
         if (data.chars[second]) {
           data.chars[second].kerning[first] = amount;
@@ -39667,7 +41795,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
       return data;
     };
 
-    Object.defineProperties(BitmapText.prototype, prototypeAccessors);
+    (0, _defineProperties.default)(BitmapText.prototype, prototypeAccessors);
     return BitmapText;
   }(Container);
 
@@ -39766,7 +41894,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
     var completed = function completed(page) {
       textures[page.metadata.pageFile] = page.texture;
 
-      if (Object.keys(textures).length === pages.length) {
+      if ((0, _keys.default)(textures).length === pages.length) {
         BitmapFontLoader.parse(resource, textures);
         next();
       }
@@ -39802,7 +41930,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
         var options = {
           crossOrigin: resource.crossOrigin,
           loadType: LoaderResource.LOAD_TYPE.IMAGE,
-          metadata: Object.assign({
+          metadata: (0, _assign.default)({
             pageFile: pageFile
           }, resource.metadata.imageMetadata),
           parentResource: resource
@@ -39871,7 +41999,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
       AlphaFilter.__proto__ = Filter$$1;
     }
 
-    AlphaFilter.prototype = Object.create(Filter$$1 && Filter$$1.prototype);
+    AlphaFilter.prototype = (0, _create.default)(Filter$$1 && Filter$$1.prototype);
     AlphaFilter.prototype.constructor = AlphaFilter;
     var prototypeAccessors = {
       alpha: {
@@ -39894,7 +42022,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
       this.uniforms.uAlpha = value;
     };
 
-    Object.defineProperties(AlphaFilter.prototype, prototypeAccessors);
+    (0, _defineProperties.default)(AlphaFilter.prototype, prototypeAccessors);
     return AlphaFilter;
   }(Filter);
   /*!
@@ -40002,7 +42130,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
       BlurFilterPass.__proto__ = Filter$$1;
     }
 
-    BlurFilterPass.prototype = Object.create(Filter$$1 && Filter$$1.prototype);
+    BlurFilterPass.prototype = (0, _create.default)(Filter$$1 && Filter$$1.prototype);
     BlurFilterPass.prototype.constructor = BlurFilterPass;
     var prototypeAccessors = {
       blur: {
@@ -40094,7 +42222,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
       this.passes = value;
     };
 
-    Object.defineProperties(BlurFilterPass.prototype, prototypeAccessors);
+    (0, _defineProperties.default)(BlurFilterPass.prototype, prototypeAccessors);
     return BlurFilterPass;
   }(Filter);
   /**
@@ -40125,7 +42253,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
       BlurFilter.__proto__ = Filter$$1;
     }
 
-    BlurFilter.prototype = Object.create(Filter$$1 && Filter$$1.prototype);
+    BlurFilter.prototype = (0, _create.default)(Filter$$1 && Filter$$1.prototype);
     BlurFilter.prototype.constructor = BlurFilter;
     var prototypeAccessors = {
       blur: {
@@ -40278,7 +42406,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
       this.updatePadding();
     };
 
-    Object.defineProperties(BlurFilter.prototype, prototypeAccessors);
+    (0, _defineProperties.default)(BlurFilter.prototype, prototypeAccessors);
     return BlurFilter;
   }(Filter);
   /*!
@@ -40323,7 +42451,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
       ColorMatrixFilter.__proto__ = Filter$$1;
     }
 
-    ColorMatrixFilter.prototype = Object.create(Filter$$1 && Filter$$1.prototype);
+    ColorMatrixFilter.prototype = (0, _create.default)(Filter$$1 && Filter$$1.prototype);
     ColorMatrixFilter.prototype.constructor = ColorMatrixFilter;
     var prototypeAccessors = {
       matrix: {
@@ -40775,7 +42903,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
       this.uniforms.uAlpha = value;
     };
 
-    Object.defineProperties(ColorMatrixFilter.prototype, prototypeAccessors);
+    (0, _defineProperties.default)(ColorMatrixFilter.prototype, prototypeAccessors);
     return ColorMatrixFilter;
   }(Filter); // Americanized alias
 
@@ -40837,7 +42965,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
       DisplacementFilter.__proto__ = Filter$$1;
     }
 
-    DisplacementFilter.prototype = Object.create(Filter$$1 && Filter$$1.prototype);
+    DisplacementFilter.prototype = (0, _create.default)(Filter$$1 && Filter$$1.prototype);
     DisplacementFilter.prototype.constructor = DisplacementFilter;
     var prototypeAccessors = {
       map: {
@@ -40875,7 +43003,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
       this.uniforms.mapSampler = value;
     };
 
-    Object.defineProperties(DisplacementFilter.prototype, prototypeAccessors);
+    (0, _defineProperties.default)(DisplacementFilter.prototype, prototypeAccessors);
     return DisplacementFilter;
   }(Filter);
   /*!
@@ -40913,7 +43041,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
       FXAAFilter.__proto__ = Filter$$1;
     }
 
-    FXAAFilter.prototype = Object.create(Filter$$1 && Filter$$1.prototype);
+    FXAAFilter.prototype = (0, _create.default)(Filter$$1 && Filter$$1.prototype);
     FXAAFilter.prototype.constructor = FXAAFilter;
     return FXAAFilter;
   }(Filter);
@@ -40964,7 +43092,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
       NoiseFilter.__proto__ = Filter$$1;
     }
 
-    NoiseFilter.prototype = Object.create(Filter$$1 && Filter$$1.prototype);
+    NoiseFilter.prototype = (0, _create.default)(Filter$$1 && Filter$$1.prototype);
     NoiseFilter.prototype.constructor = NoiseFilter;
     var prototypeAccessors = {
       noise: {
@@ -41005,7 +43133,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
       this.uniforms.uSeed = value;
     };
 
-    Object.defineProperties(NoiseFilter.prototype, prototypeAccessors);
+    (0, _defineProperties.default)(NoiseFilter.prototype, prototypeAccessors);
     return NoiseFilter;
   }(Filter);
   /*!
@@ -41043,7 +43171,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
     this.sprite = null;
   };
 
-  Object.defineProperties(DisplayObject.prototype, {
+  (0, _defineProperties.default)(DisplayObject.prototype, {
     /**
      * Set this to true if you want this display object to be cached as a bitmap.
      * This basically takes a snap shot of the display object as it is at that moment. It can
@@ -41430,7 +43558,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
   var v5 = '5.0.0';
 
   function deprecated(PIXI) {
-    Object.defineProperties(PIXI, {
+    (0, _defineProperties.default)(PIXI, {
       /**
        * @constant {RegExp|string} SVG_SIZE
        * @memberof PIXI
@@ -41548,7 +43676,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
      */
 
     PIXI.extras = {};
-    Object.defineProperties(PIXI.extras, {
+    (0, _defineProperties.default)(PIXI.extras, {
       /**
        * @class PIXI.extras.TilingSprite
        * @see PIXI.TilingSprite
@@ -41597,7 +43725,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
         }
       }
     });
-    Object.defineProperties(PIXI.utils, {
+    (0, _defineProperties.default)(PIXI.utils, {
       /**
        * @function PIXI.utils.getSvgSize
        * @see PIXI.resources.SVGResource.getSize
@@ -41617,7 +43745,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
      */
 
     PIXI.mesh = {};
-    Object.defineProperties(PIXI.mesh, {
+    (0, _defineProperties.default)(PIXI.mesh, {
       /**
        * @class PIXI.mesh.Mesh
        * @see PIXI.SimpleMesh
@@ -41710,7 +43838,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
      */
 
     PIXI.particles = {};
-    Object.defineProperties(PIXI.particles, {
+    (0, _defineProperties.default)(PIXI.particles, {
       /**
        * @class PIXI.particles.ParticleContainer
        * @deprecated since 5.0.0
@@ -41743,7 +43871,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
      */
 
     PIXI.ticker = {};
-    Object.defineProperties(PIXI.ticker, {
+    (0, _defineProperties.default)(PIXI.ticker, {
       /**
        * @class PIXI.ticker.Ticker
        * @deprecated since 5.0.0
@@ -41776,7 +43904,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
      */
 
     PIXI.loaders = {};
-    Object.defineProperties(PIXI.loaders, {
+    (0, _defineProperties.default)(PIXI.loaders, {
       /**
        * @class PIXI.loaders.Loader
        * @see PIXI.Loader
@@ -41937,7 +44065,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
       this.renderAdvanced(renderer);
     };
 
-    Object.defineProperties(PIXI.settings, {
+    (0, _defineProperties.default)(PIXI.settings, {
       /**
        * Default transform type.
        *
@@ -42057,7 +44185,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
       return this.copyTo(p);
     };
 
-    Object.assign(PIXI.systems.FilterSystem.prototype, {
+    (0, _assign.default)(PIXI.systems.FilterSystem.prototype, {
       /**
        * @method PIXI.FilterManager#getRenderTarget
        * @deprecated since 5.0.0
@@ -42078,7 +44206,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
         this.returnFilterTexture(renderTexture);
       }
     });
-    Object.defineProperties(PIXI.RenderTexture.prototype, {
+    (0, _defineProperties.default)(PIXI.RenderTexture.prototype, {
       /**
        * @name PIXI.RenderTexture#sourceFrame
        * @type {PIXI.Rectangle}
@@ -42121,7 +44249,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
       }
 
       if (superclass) BlurXFilter.__proto__ = superclass;
-      BlurXFilter.prototype = Object.create(superclass && superclass.prototype);
+      BlurXFilter.prototype = (0, _create.default)(superclass && superclass.prototype);
       BlurXFilter.prototype.constructor = BlurXFilter;
       return BlurXFilter;
     }(PIXI.filters.BlurFilterPass);
@@ -42142,12 +44270,12 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
       }
 
       if (superclass) BlurYFilter.__proto__ = superclass;
-      BlurYFilter.prototype = Object.create(superclass && superclass.prototype);
+      BlurYFilter.prototype = (0, _create.default)(superclass && superclass.prototype);
       BlurYFilter.prototype.constructor = BlurYFilter;
       return BlurYFilter;
     }(PIXI.filters.BlurFilterPass);
 
-    Object.assign(PIXI.filters, {
+    (0, _assign.default)(PIXI.filters, {
       BlurXFilter: BlurXFilter,
       BlurYFilter: BlurYFilter
     });
@@ -42353,7 +44481,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
       settings: settings,
       utils: utils
     };
-    window.PIXI = Object.assign(PIXI, namespaces, app, constants, core, display, graphics, loaders, math, mesh, meshExtras, particles, sprite, spriteAnimated, spritesheet, spriteTiling, text, textBitmap, ticker); // Deprecations only apply to Window object
+    window.PIXI = (0, _assign.default)(PIXI, namespaces, app, constants, core, display, graphics, loaders, math, mesh, meshExtras, particles, sprite, spriteAnimated, spritesheet, spriteTiling, text, textBitmap, ticker); // Deprecations only apply to Window object
 
     deprecated(PIXI);
   }
@@ -42467,7 +44595,7 @@ function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.itera
     value: true
   });
 });
-},{"buffer":"../node_modules/buffer/index.js"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"@babel/runtime-corejs2/core-js/date/now":"../node_modules/@babel/runtime-corejs2/core-js/date/now.js","@babel/runtime-corejs2/core-js/symbol/iterator":"../node_modules/@babel/runtime-corejs2/core-js/symbol/iterator.js","@babel/runtime-corejs2/core-js/symbol":"../node_modules/@babel/runtime-corejs2/core-js/symbol.js","@babel/runtime-corejs2/core-js/object/freeze":"../node_modules/@babel/runtime-corejs2/core-js/object/freeze.js","@babel/runtime-corejs2/core-js/number/is-integer":"../node_modules/@babel/runtime-corejs2/core-js/number/is-integer.js","@babel/runtime-corejs2/core-js/promise":"../node_modules/@babel/runtime-corejs2/core-js/promise.js","@babel/runtime-corejs2/core-js/object/assign":"../node_modules/@babel/runtime-corejs2/core-js/object/assign.js","@babel/runtime-corejs2/core-js/parse-float":"../node_modules/@babel/runtime-corejs2/core-js/parse-float.js","@babel/runtime-corejs2/core-js/object/define-properties":"../node_modules/@babel/runtime-corejs2/core-js/object/define-properties.js","@babel/runtime-corejs2/core-js/object/get-own-property-descriptor":"../node_modules/@babel/runtime-corejs2/core-js/object/get-own-property-descriptor.js","@babel/runtime-corejs2/core-js/object/define-property":"../node_modules/@babel/runtime-corejs2/core-js/object/define-property.js","@babel/runtime-corejs2/core-js/object/keys":"../node_modules/@babel/runtime-corejs2/core-js/object/keys.js","@babel/runtime-corejs2/core-js/array/is-array":"../node_modules/@babel/runtime-corejs2/core-js/array/is-array.js","@babel/runtime-corejs2/core-js/parse-int":"../node_modules/@babel/runtime-corejs2/core-js/parse-int.js","@babel/runtime-corejs2/core-js/object/get-own-property-symbols":"../node_modules/@babel/runtime-corejs2/core-js/object/get-own-property-symbols.js","@babel/runtime-corejs2/core-js/object/create":"../node_modules/@babel/runtime-corejs2/core-js/object/create.js","@babel/runtime-corejs2/helpers/typeof":"../node_modules/@babel/runtime-corejs2/helpers/typeof.js","buffer":"../node_modules/buffer/index.js"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -42494,7 +44622,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53241" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51107" + '/');
 
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);

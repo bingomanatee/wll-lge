@@ -3,7 +3,6 @@ import ArticleEditView from './ArticleEditView';
 import userStore from '../../models/user';
 import articleStore from '../../models/articles';
 import _ from 'lodash';
-import 'babel-polyfill';
 
 export default class ArticleEditContainer extends Component {
   constructor(props) {

@@ -63,6 +63,9 @@ font-size: 1.2rem;
 :hover {
 text-decoration: underline;
 }
+&.unpublished {
+text-decoration: line-through
+}
 `;
 
 export const UserIcon = sc.div`

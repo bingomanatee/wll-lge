@@ -21,9 +21,11 @@ const CategoryView = ({ category, isAdmin, toggleEdit, isEditing, categoryArticl
     <PageHead>{_.get(category, 'title')}</PageHead>
     <ArticleListWrapper>
       <ArticleList>
-        {categoryArticles.map(a => (<ArticleItem
-          to={'/article/' + a.path}
-          key={a.path}>{a.title}</ArticleItem>))}
+        {categoryArticles.filter(a => a.published || isAdmin)
+          .map(a => (<ArticleItem
+            to={'/article/' + a.path}
+            className={a.published ? '' : 'unpublished'}
+            key={a.path}>{a.title}</ArticleItem>))}
       </ArticleList>
     </ArticleListWrapper>
     {isEditing && <CategoryEdit category={category} />}

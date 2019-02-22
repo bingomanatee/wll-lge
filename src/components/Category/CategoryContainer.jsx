@@ -4,7 +4,6 @@ import axios from 'axios';
 
 import categories from '../../models/categories';
 import userStore from '../../models/user';
-import ArticleView from "../Article/ArticleView";
 
 const API_URL = process.env.API_URL;
 
@@ -12,36 +11,21 @@ export default class CategoryContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      directory: props.match.params.directory,
       category: {},
+      categories: [],
       categoryArticles: [],
-      loaded: false, catLoaded: false
+      loaded:
+        false, catLoaded:
+        false
     };
   }
 
   componentDidMount() {
-    if (!this.state.loaded && this.state.directory) {
-      const directory = decodeURIComponent(this.state.directory);
-      axios.get(
-        API_URL + '/articles').then(result => {
-        let articles = result.data.filter(a => {
-          return a.published && a.directory === directory;
-        });
-        this.setState({categoryArticles: articles, loaded: true});
-      })
-        .catch(err => {
-          console.log('cannot get article', err);
-        });
-    }
-
     this._catSub = categories.subscribe(({state}) => {
-      let directory = decodeURIComponent(this.state.directory);
       if (state.categories) {
-        let matches = state.categories.filter(c => c.directory === directory);
-        if (matches.length) {
-          console.log('category: ', matches);
-          this.setState({category: matches[0], catLoaded: true});
-        }
+        this.setState({categories: state.categories, catLoaded: true}, () => {
+          this.reflectCurrentCat();
+        });
       }
     });
 
@@ -51,6 +35,37 @@ export default class CategoryContainer extends Component {
         isAdmin: state.isAdmin
       });
     });
+
+    this._histUnListener = this.props.history.listen(() => {
+      requestAnimationFrame(() => {
+        this.reflectCurrentCat()
+      });
+    });
+  }
+
+  coomponentWillUnmount() {
+    if (this._histUnListener) {
+      this._histUnListener();
+    }
+  }
+
+  reflectCurrentCat() {
+    let directory = decodeURIComponent(this.props.match.params.directory);
+
+    console.log('RCC: ', directory);
+    let matches = this.state.categories.filter(c => c.directory === directory);
+    this.setState({directory, category: matches[0]});
+
+    axios.get(
+      API_URL + '/articles').then(result => {
+      let articles = result.data.filter(a => {
+        return a.directory === directory;
+      });
+      this.setState({categoryArticles: articles, loaded: true});
+    })
+      .catch(err => {
+        console.log('cannot get article', err);
+      });
   }
 
   toggleEdit() {
