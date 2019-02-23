@@ -56,6 +56,8 @@ class Monitor {
           _onEnter: function () {
             if (!self.background) {
               self.background = new Backgrounder(self, this);
+            } else {
+              self.background.start();
             }
             this.transition('BG_STARTED');
           },
@@ -72,17 +74,30 @@ class Monitor {
             if (self.background) {
               self.background.resize();
             }
+          },
+          _end: function () {
+            this.transition('BG_STOPPING');
+            this.transition('BG_STOPPED');
+            this.transition('BG_NONE');
           }
         }, // ----- END BG_STARTED
         BG_STOPPING: {
           _onEnter: function () {
+            if (self.background) {
+              self.background.stop();
+            }
             this.transition('BG_STOPPED');
-          }
+          },
+          _start: 'BG_STARTING',
         }, // ----- END BG_STOPPING
         BG_STOPPED: {
-          _onEnter: function () {
-            this.transition('BG_NONE');
-          }
+          _resize: function () {
+            if (self.background) {
+              self.background.resize();
+            }
+          },
+          _start: 'BG_STARTING',
+          _end: 'BG_NONE'
         }, // ----- END BG_STOPPED
       }// ------ end states
       ,
@@ -92,15 +107,22 @@ class Monitor {
       stop: function () {
         this.handle('_stop');
       },
+      end: function() {
+        this.handle('_end');
+      },
       resize: function () {
         this.handle('_resize');
       }
     });
 
     const resizeEnd = _.debounce(() => {
+      console.log('resizing end event');
       this.status.resize();
+      this.status.start();
     }, 500);
     addEvent(window, 'resize', () => {
+      console.log('resizing event');
+      this.status.stop();
       resizeEnd();
     });
 

@@ -4,13 +4,16 @@ import axios from 'axios';
 
 import categories from '../../models/categories';
 import userStore from '../../models/user';
+import articlesStore from '../../models/articles';
 
 const API_URL = process.env.API_URL;
 
 export default class CategoryContainer extends Component {
   constructor(props) {
     super(props);
+    let directory = decodeURIComponent(this.props.match.params.directory);
     this.state = {
+      directory,
       category: {},
       categories: [],
       categoryArticles: [],
@@ -38,7 +41,7 @@ export default class CategoryContainer extends Component {
 
     this._histUnListener = this.props.history.listen(() => {
       requestAnimationFrame(() => {
-        this.reflectCurrentCat()
+        this.reflectCurrentCat();
       });
     });
   }
@@ -51,20 +54,12 @@ export default class CategoryContainer extends Component {
 
   reflectCurrentCat() {
     let directory = decodeURIComponent(this.props.match.params.directory);
-
-    console.log('RCC: ', directory);
     let matches = this.state.categories.filter(c => c.directory === directory);
     this.setState({directory, category: matches[0]});
-
-    axios.get(
-      API_URL + '/articles').then(result => {
-      let articles = result.data.filter(a => {
-        return a.directory === directory;
-      });
-      this.setState({categoryArticles: articles, loaded: true});
-    })
-      .catch(err => {
-        console.log('cannot get article', err);
+    articlesStore.actions.getCategoryArticles(directory)
+      .then(() => {
+        console.log('category articles!', articlesStore.state.categoryArticles);
+        this.setState({categoryArticles: articlesStore.state.categoryArticles, loaded: true});
       });
   }
 
@@ -82,6 +77,7 @@ export default class CategoryContainer extends Component {
   }
 
   render() {
+    console.log('rendering category:', this.state);
     return (
       <CategoryView
         toggleEdit={() => this.toggleEdit()}

@@ -126,6 +126,12 @@ flex-direction: column;
 align-items: stretch;
 `;
 
+export const TableBox = sc.div`
+display: flex;
+flex-direction: column;
+align-items: stretch;
+`;
+
 export const Text = sc.div`
 font-family: 'Cormorant Garamond',Georgia,serif;
 font-size: 1.1rem;

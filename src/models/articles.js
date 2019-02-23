@@ -7,9 +7,11 @@ const API_URL = process.env.API_URL;
 const asPath = (input) => {
   if (!input) {
     return '';
-  } else if (_.isObject(input) && input.path) {
+  }
+  else if (_.isObject(input) && input.path) {
     return input.path;
-  } else {
+  }
+  else {
     return _.toString(input);
   }
 };
@@ -24,18 +26,29 @@ function articleUrl(path) {
 const articles = new Store({
   state: {},
   actions: {
-    saveArticle(store, article, apiToken, sub) {
+    getCategoryArticles(store, directory, accessToken, sub) {
+      return axios.get(
+        API_URL + '/articles', {
+          headers: {
+            'access_token': accessToken,
+            'sub': sub,
+          },
+        })
+        .then(result => result.data.filter(a => a.directory === directory))
+        .then(da => store.actions.setCategoryArticles(da));
+    },
+    saveArticle(store, article, accessToken, sub) {
       return axios({
         method: 'PUT',
         url: articleUrl(article),
         headers: {
-          'access_token': apiToken,
+          'access_token': accessToken,
           'sub': sub,
         },
         data: article
       })
         .then(() => {
-          if (store.state.currentArticle && store.state.currentArticle.path === article.path){
+          if (store.state.currentArticle && store.state.currentArticle.path === article.path) {
             store.actions.getArticle(article.path);
           }
         }).catch((err) => {
@@ -54,15 +67,21 @@ const articles = new Store({
           console.log('cannot get article', err);
           this.setCurrentArticle(false);
         });
+    },
+    getHomepageArticles(store, sub = '', apiToken = '') {
+      return axios.get(API_URL + '/homepage-articles',
+        {
+          headers: {
+            'access_token': apiToken,
+            'sub': sub,
+          },
+        })
+        .then((response) => store.actions.setHomepageArticles(response.data));
     }
   },
-  starter: ({actions}) => {
-    axios.get('https://wonderland-labs.herokuapp.com/api/homepage-articles')
-      .then((response) => {
-        actions.setHomepageArticles(response.data);
-      });
-  }
+  starter: ({actions}) => actions.getHomepageArticles()
 }).addProp('homepageArticles', {start: []})
+  .addProp('categoryArticles', {start: []})
   .addProp('articles', {start: []})
   .addProp('currentArticle', {start: false});
 

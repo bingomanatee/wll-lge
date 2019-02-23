@@ -59,13 +59,11 @@ class Backgrounder {
     this.fsm = fsm;
     console.log('new background');
     this.cycle = 0;
-    monitor.timer.add((time) => this.update(time));
+    this._update = (time) => this.update(time);
+    this.makeApp();
   }
 
-  start() {
-    console.log('Backgrounder.start', this.fsm.state);
-    this.game = getGame();
-    this.gameTimer = setInterval(() => this.move(), 500);
+  makeApp() {
     let container = document.getElementById('site-background');
     container.innerHTML = ''; // wipe out any old canvas -- should be done in stop but just in case.
     this.app = new PIXI.Application({
@@ -82,15 +80,27 @@ class Backgrounder {
     const blur = new PIXI.filters.BlurFilter();
     this.o.filters = [blur];
     this.app.stage.addChild(this.o);
+  }
+
+  start() {
+    console.log('Backgrounder.start', this.fsm.state);
     this.resize();
     this.draw();
+    this.startGame();
+    this.monitor.timer.add(this._update);
+  }
+
+  startGame() {
+    if (this.gameTimer) clearInterval(this.gameTimer);
+    this.game = getGame();
+    this.gameTimer = setInterval(() => this.move(), 800);
   }
 
   setSize(x, y) {
+    console.log('--- resizing to ', x, y);
     this._size = {width: x, height: y};
     this.sizes = [x, y];
     this.xy = {x, y};
-    console.log('--- resizing to ', x, y);
     this.app.renderer.resize(x, y);
     this.o.position.set(this.relX(0.5), this.relY(0.5));
   }
@@ -104,7 +114,7 @@ class Backgrounder {
     blurrer.blur = blur;
     this.o.filters = [blurrer];
     this.o.angle = this.rotAngle;
-    if (this.pieces) this.pieces.children.forEach(p => p.angle = -this.rotAngle)
+    if (this.pieces) this.pieces.children.forEach(p => p.angle = -this.rotAngle);
   }
 
   get rotAngle() {
@@ -136,11 +146,15 @@ class Backgrounder {
 
   stop() {
     console.log('Backgrounder.stop', this.fsm.state);
+    clearInterval(this.gameTimer);
+    this.monitor.timer.remove(this._update);
+    this.game = null;
   }
 
   kill() {
     console.log('Backgrounder.kill', this.fsm.state);
     this.stop();
+    this.app.destroy();
   }
 
   get width() {
@@ -199,6 +213,7 @@ class Backgrounder {
   }
 
   move() {
+    //@TODO: more of a difference engine
     if (!this.game) {
       return;
     }

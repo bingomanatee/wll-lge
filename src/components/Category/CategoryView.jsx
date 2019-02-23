@@ -16,7 +16,7 @@ import CategoryEdit from '../CategoryEdit';
 
 const noop = a => a;
 
-const CategoryView = ({ category, isAdmin, toggleEdit, isEditing, categoryArticles }) => (
+const CategoryView = ({ category, isAdmin, toggleEdit, isEditing, directory, categoryArticles }) => (
   <div>
     <PageHead>{_.get(category, 'title')}</PageHead>
     <ArticleListWrapper>
@@ -25,10 +25,10 @@ const CategoryView = ({ category, isAdmin, toggleEdit, isEditing, categoryArticl
           .map(a => (<ArticleItem
             to={'/article/' + a.path}
             className={a.published ? '' : 'unpublished'}
-            key={a.path}>{a.title}</ArticleItem>))}
+            key={a.path}>{a.title} {!a.published && <i>hidden</i>}</ArticleItem>))}
       </ArticleList>
     </ArticleListWrapper>
-    {isEditing && <CategoryEdit category={category} />}
+    {isEditing && <CategoryEdit directory={directory} />}
     {isAdmin && <ButtonList>
       <EditButton data-sc-type='ButtonList' onClick={toggleEdit}>
         {isEditing ? 'Cancel' : 'Edit'}

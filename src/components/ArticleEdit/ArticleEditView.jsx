@@ -18,14 +18,14 @@ const ArticleEditView = ({content, title, save,
     <FormItem>
       <FormLabel>&nbsp;</FormLabel>
       <CheckboxWrapper onClick={togglePublished}>
-        <input type="checkbox" checked={published} onClick={togglePublished}/>
+        <input type="checkbox" checked={published} onChange={togglePublished}/>
         Published
       </CheckboxWrapper>
     </FormItem>
     <FormItem>
       <FormLabel>&nbsp;</FormLabel>
       <CheckboxWrapper onClick={toggleOnHomepage}>
-        <input type="checkbox" checked={onHomepage} onClick={toggleOnHomepage}/>
+        <input type="checkbox" checked={onHomepage} onChange={toggleOnHomepage}/>
       On Home Page
       </CheckboxWrapper>
     </FormItem>
