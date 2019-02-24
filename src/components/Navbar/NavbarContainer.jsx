@@ -34,11 +34,17 @@ export default class NavbarContainer extends Component {
     console.log('go to category', title);
   }
 
+  get categories() {
+    if (!this.state.categories) return [];
+    if (!this.state.isAdmin) return this.state.categories.filter(c => c.published);
+    return this.state.categories.slice(0);
+  }
+
   render() {
     const props = { ...this.props };
     delete props.children;
     return (
-      <NavbarView {...this.state} gotoCategory={(name) => this.gotoCategory(name)}>
+      <NavbarView {...this.state} categories={this.categories} gotoCategory={(name) => this.gotoCategory(name)}>
       </NavbarView>
     );
   }

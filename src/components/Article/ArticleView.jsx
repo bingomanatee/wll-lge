@@ -3,15 +3,25 @@ import pt from 'prop-types';
 import marked from 'marked';
 import {ArticleFrame, PageHead, Text, ButtonList, FuzzyBox, EditButton} from '../style';
 import ArticleEdit from '../ArticleEdit';
+import {Link} from 'react-router-dom' ;
+import encodePath from '../../js/encodePath';
 
-const ArticleView = ({loaded, title, content, isAdmin, isEditing, toggleEdit, path}) => {
+const headline = (category) => {
+  if (!category) return '';
+  const url = '/category/' + encodePath(category.directory);
+  console.log('url:', url);
+  return <Link to={url}>
+    {category.title}:&nbsp;
+  </Link>;
+};
+
+const ArticleView = ({loaded, category, title, content, isAdmin, isEditing, toggleEdit, path}) => {
   if (!loaded) {
     return '';
   }
-  console.log('rendering content: ', content.substr(0, 20), '...', content.substr(-100));
   return (
     <div>
-      <PageHead>{title}</PageHead>
+      <PageHead>{headline(category)}{title}</PageHead>
       <ArticleFrame>
         <FuzzyBox>
           {!isEditing && <Text dangerouslySetInnerHTML={{__html: marked(content)}}/>}

@@ -1,6 +1,7 @@
 import {Store} from '@wonderlandlabs/looking-glass-engine';
 import axios from 'axios';
 import _ from 'lodash';
+import encodePath from '../js/encodePath';
 
 const API_URL = process.env.API_URL;
 
@@ -16,8 +17,6 @@ const asPath = (input) => {
   }
 };
 
-const encodePath = (path) => encodeURIComponent(path).replace(/\./g, '%2E');
-
 function articleUrl(path) {
   const shortPath = encodePath(asPath(path));
   return `${API_URL}/articles/${shortPath}.json`;
@@ -28,13 +27,13 @@ const articles = new Store({
   actions: {
     getCategoryArticles(store, directory, accessToken, sub) {
       return axios.get(
-        API_URL + '/articles', {
+        API_URL + '/categories/' + encodePath(directory), {
           headers: {
             'access_token': accessToken,
             'sub': sub,
           },
         })
-        .then(result => result.data.filter(a => a.directory === directory))
+        .then(result => result.data.articles)
         .then(da => store.actions.setCategoryArticles(da));
     },
     saveArticle(store, article, accessToken, sub) {

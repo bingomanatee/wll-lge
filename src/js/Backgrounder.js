@@ -26,6 +26,8 @@ const pieceMap = new Map([
   ['N', 'white_horse'],
   ['q', 'black_queen'],
   ['Q', 'white_queen'],
+  ['B', 'white_bishop'],
+  ['b', 'black_bishop'],
   ['1', [false]],
   ['2', [false, false]],
   ['3', [false, false, false]],

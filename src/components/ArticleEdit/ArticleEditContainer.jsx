@@ -67,7 +67,9 @@ export default class ArticleEditContainer extends Component {
   }
 
   togglePublished() {
-    this.setState({published: !this.state.published});
+    let onHomepage = this.state.onHomepage;
+    if (this.state.published) onHomepage = false; // remove hidden articles from homepage
+    this.setState({published: !this.state.published, onHomepage});
   }
 
   toggleOnHomepage() {

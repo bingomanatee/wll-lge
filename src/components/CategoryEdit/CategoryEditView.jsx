@@ -13,6 +13,8 @@ import {
   TableBox
 } from '../style';
 
+import Toggle from '../Toggle';
+
 const noop = a => a;
 
 const CategoryEditView = ({ categoryArticles }) => (
@@ -35,8 +37,8 @@ const CategoryEditView = ({ categoryArticles }) => (
               <td>{a.title}</td>
               <td>{a.directory}</td>
               <td>{a.intro || '--'}</td>
-              <td>{a.published? 'YES': ''}</td>
-              <td>{a.on_homepage? 'YES': ''}</td>
+              <td><Toggle field="published" article={a} /></td>
+              <td><Toggle field="onHomepage" article={a} /></td>
             </tr>))}
           </tbody>
         </table>

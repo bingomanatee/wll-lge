@@ -3,6 +3,7 @@ import ArticleView from './ArticleView';
 
 import userStore from '../../models/user';
 import articleStore from '../../models/articles';
+import categoryStore from '../../models/categories';
 
 export default class ArticleContainer extends Component {
   constructor(props) {
@@ -14,7 +15,15 @@ export default class ArticleContainer extends Component {
     if (!this.state.loaded && this.state.path) {
       articleStore.actions.getArticle(this.state.path)
         .then(() => {
-          this.setState({...articleStore.state.currentArticle, loaded: true});
+          const article = articleStore.state.currentArticle;
+          const directory = article.directory;
+          if (directory) {
+            categoryStore.actions.getCategory(directory)
+              .then(() => {
+                this.setState(categoryStore.state);
+              });
+          }
+          this.setState({...article, loaded: true});
         })
         .catch(err => {
           console.log('cannot get article', err);

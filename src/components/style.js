@@ -67,6 +67,33 @@ text-decoration: underline;
 text-decoration: line-through
 }
 `;
+export const ArticleText = sc(Link)`
+display: block;
+text-decoration: none;
+background: transparent;
+color: white;
+font-family: 'Merriweather Sans', sans-serif;
+font-weight: 200;
+font-size: 1rem;
+color: white !important;
+padding: 0.2rem 0.5rem;
+margin: 0.333rem 0.25rem;
+margin-left: -0.666rem;
+@media(max-width: ${SMALL_NAV}) {
+padding: 2px;
+margin: 0;
+}
+@media(min-width: ${LARGE_NAV}) {
+padding: 0.5rem 1rem;
+font-size: 1.2rem;
+}
+:hover {
+text-decoration: underline;
+}
+&.unpublished {
+text-decoration: line-through
+}
+`;
 
 export const UserIcon = sc.div`
 display: inline-block;
@@ -101,6 +128,16 @@ background-color: ${BUTTON_MASK};
 @media(max-width: ${SMALL_NAV}) {
 font-size: 1rem;
 padding: 0;
+}
+a {
+text-decoration: none;
+color: rgba(255,255,255,0.8);
+text-shadow: none;
+font-weight: 200;
+font-size: 0.95em;
+:hover {
+  text-decoration: underline;
+}
 }
 `;
 
@@ -239,19 +276,41 @@ border-radius: 1px;
 flex-grow: 1.25;
 `;
 
+export const ToggleButton = sc.button`
+background-color: ${(props) => {
+    const active = ('data-on' in props) ? props['data-on'] : null;
+    if (active === null) return 'grey';
+    if (active) return 'darkgreen';
+    return 'darkred';
+  }};
+font-size: 1rem;
+color: white;
+text-transform: uppercase;
+outline: none;
+width: 60px;
+tex-align: center;
+padding: 0.5rem 1rem;
+-webkit-appearance: none;
+-moz-appearance: none;
+border: 1px solid rgba(0,0,0,0);
+:hover {
+color: yellow;
+}
+`;
+
 export const EditButton = sc.button`
 background-color: black;
 font-size: 1rem;
 color: ${LIGHT_GREY};
 text-transform: uppercase;
 outline: none;
+border: 1px solid rgba(0,0,0,0);
 padding: 0.5rem 1rem;
 -webkit-appearance: none;
 -moz-appearance: none;
 :hover {
 color: white;
 background-color: blue;
-border: 1px solid rgba(0,0,0,0);
 }
 `;
 

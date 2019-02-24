@@ -52741,7 +52741,7 @@ module.exports = {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.CategoryList = exports.Line = exports.CategoryView = exports.EditButton = exports.CheckboxWrapper = exports.Input = exports.FormLabel = exports.FormItem = exports.ButtonList = exports.UserButton = exports.NavbarFrame = exports.Text = exports.TableBox = exports.FuzzyBox = exports.ArticleFrame = exports.PageHead = exports.ContentEditor = exports.UserIcon = exports.ArticleItem = exports.ArticleList = exports.ArticleListWrapper = exports.SiteHeadline = void 0;
+exports.CategoryList = exports.Line = exports.CategoryView = exports.EditButton = exports.ToggleButton = exports.CheckboxWrapper = exports.Input = exports.FormLabel = exports.FormItem = exports.ButtonList = exports.UserButton = exports.NavbarFrame = exports.Text = exports.TableBox = exports.FuzzyBox = exports.ArticleFrame = exports.PageHead = exports.ContentEditor = exports.UserIcon = exports.ArticleText = exports.ArticleItem = exports.ArticleList = exports.ArticleListWrapper = exports.SiteHeadline = void 0;
 
 var _taggedTemplateLiteral2 = _interopRequireDefault(require("@babel/runtime-corejs2/helpers/taggedTemplateLiteral"));
 
@@ -52753,8 +52753,28 @@ var _constants = require("../constants");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _templateObject22() {
+function _templateObject24() {
   var data = (0, _taggedTemplateLiteral2.default)(["\nclear: both;\nmargin:0.5rem 1rem ;\nflex-wrap: wrap;\npadding: 0 1rem;\ndisplay: flex;\nflex-direction: row;\njustify-content: center;\n"]);
+
+  _templateObject24 = function _templateObject24() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject23() {
+  var data = (0, _taggedTemplateLiteral2.default)(["\nborder-top: 1px solid black;\nmargin: 0.5rem 0;\n"]);
+
+  _templateObject23 = function _templateObject23() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject22() {
+  var data = (0, _taggedTemplateLiteral2.default)(["\nbackground-color: ", ";\ncolor: black;\ndisplay: block;\npadding: 0.2rem 0.333rem;\ntext-decoration: none;\ntext-align: center;\ntext-transform: uppercase;\nfont-family: 'Merriweather Sans', sans-serif;\nfont-weight: 800;\nline-height: 100%;\nmargin-right: 1rem;\nwhite-space: nowrap;\nfont-size: 1rem;\n@media(max-width: ", ") {\nfont-size: 0.8rem;\n}\n@media(min-width: ", ") {\npadding: 0.5rem 0.5rem;\nfont-size: 1.2rem;\n}\n:hover {\ncolor: white;\n}\n"]);
 
   _templateObject22 = function _templateObject22() {
     return data;
@@ -52764,7 +52784,7 @@ function _templateObject22() {
 }
 
 function _templateObject21() {
-  var data = (0, _taggedTemplateLiteral2.default)(["\nborder-top: 1px solid black;\nmargin: 0.5rem 0;\n"]);
+  var data = (0, _taggedTemplateLiteral2.default)(["\nbackground-color: black;\nfont-size: 1rem;\ncolor: ", ";\ntext-transform: uppercase;\noutline: none;\nborder: 1px solid rgba(0,0,0,0);\npadding: 0.5rem 1rem;\n-webkit-appearance: none;\n-moz-appearance: none;\n:hover {\ncolor: white;\nbackground-color: blue;\n}\n"]);
 
   _templateObject21 = function _templateObject21() {
     return data;
@@ -52774,7 +52794,7 @@ function _templateObject21() {
 }
 
 function _templateObject20() {
-  var data = (0, _taggedTemplateLiteral2.default)(["\nbackground-color: ", ";\ncolor: black;\ndisplay: block;\npadding: 0.2rem 0.333rem;\ntext-decoration: none;\ntext-align: center;\ntext-transform: uppercase;\nfont-family: 'Merriweather Sans', sans-serif;\nfont-weight: 800;\nline-height: 100%;\nmargin-right: 1rem;\nwhite-space: nowrap;\nfont-size: 1rem;\n@media(max-width: ", ") {\nfont-size: 0.8rem;\n}\n@media(min-width: ", ") {\npadding: 0.5rem 0.5rem;\nfont-size: 1.2rem;\n}\n:hover {\ncolor: white;\n}\n"]);
+  var data = (0, _taggedTemplateLiteral2.default)(["\nbackground-color: ", ";\nfont-size: 1rem;\ncolor: white;\ntext-transform: uppercase;\noutline: none;\nwidth: 60px;\ntex-align: center;\npadding: 0.5rem 1rem;\n-webkit-appearance: none;\n-moz-appearance: none;\nborder: 1px solid rgba(0,0,0,0);\n:hover {\ncolor: yellow;\n}\n"]);
 
   _templateObject20 = function _templateObject20() {
     return data;
@@ -52784,7 +52804,7 @@ function _templateObject20() {
 }
 
 function _templateObject19() {
-  var data = (0, _taggedTemplateLiteral2.default)(["\nbackground-color: black;\nfont-size: 1rem;\ncolor: ", ";\ntext-transform: uppercase;\noutline: none;\npadding: 0.5rem 1rem;\n-webkit-appearance: none;\n-moz-appearance: none;\n:hover {\ncolor: white;\nbackground-color: blue;\nborder: 1px solid rgba(0,0,0,0);\n}\n"]);
+  var data = (0, _taggedTemplateLiteral2.default)(["\nfont-weight: 600;\npadding: 0.25rem;\nborder: 1px solid black;\nborder-radius: 1px;\nflex-grow: 1.25;\n"]);
 
   _templateObject19 = function _templateObject19() {
     return data;
@@ -52794,7 +52814,7 @@ function _templateObject19() {
 }
 
 function _templateObject18() {
-  var data = (0, _taggedTemplateLiteral2.default)(["\nfont-weight: 600;\npadding: 0.25rem;\nborder: 1px solid black;\nborder-radius: 1px;\nflex-grow: 1.25;\n"]);
+  var data = (0, _taggedTemplateLiteral2.default)(["\npadding: 0.25rem;\nborder: 1px solid black;\nborder-radius: 1px;\nflex-grow: 1.25;\nfont-size: 1.25rem;\nfont-family: 'Courier New', Monaco, Courier, monospace;\n@media(min-width: ", ") {\nfont-size: 1.75rem;\n}\n"]);
 
   _templateObject18 = function _templateObject18() {
     return data;
@@ -52804,7 +52824,7 @@ function _templateObject18() {
 }
 
 function _templateObject17() {
-  var data = (0, _taggedTemplateLiteral2.default)(["\npadding: 0.25rem;\nborder: 1px solid black;\nborder-radius: 1px;\nflex-grow: 1.25;\nfont-size: 1.25rem;\nfont-family: 'Courier New', Monaco, Courier, monospace;\n@media(min-width: ", ") {\nfont-size: 1.75rem;\n}\n"]);
+  var data = (0, _taggedTemplateLiteral2.default)(["\nfont-weight: 600;\npadding: 0.25rem;\nflex-grow: 1;\ntext-align: right;\nmargin-right: 2rem;\n"]);
 
   _templateObject17 = function _templateObject17() {
     return data;
@@ -52814,7 +52834,7 @@ function _templateObject17() {
 }
 
 function _templateObject16() {
-  var data = (0, _taggedTemplateLiteral2.default)(["\nfont-weight: 600;\npadding: 0.25rem;\nflex-grow: 1;\ntext-align: right;\nmargin-right: 2rem;\n"]);
+  var data = (0, _taggedTemplateLiteral2.default)(["\ndisplay: flex;\nflex-direction: row;\njustify-content: space-between;\nalign-items: baseline;\nmargin-bottom: 0.5rem;\nfont-family: 'Merriweather Sans', sans-serif;\n"]);
 
   _templateObject16 = function _templateObject16() {
     return data;
@@ -52824,7 +52844,7 @@ function _templateObject16() {
 }
 
 function _templateObject15() {
-  var data = (0, _taggedTemplateLiteral2.default)(["\ndisplay: flex;\nflex-direction: row;\njustify-content: space-between;\nalign-items: baseline;\nmargin-bottom: 0.5rem;\nfont-family: 'Merriweather Sans', sans-serif;\n"]);
+  var data = (0, _taggedTemplateLiteral2.default)(["\ndisplay: flex;\nflex-direction: row;\njustify-content: space-around;\npadding: 0 0.5rem;\nclear: both;\nmargin: 1rem;\nwidth: 100%;\n"]);
 
   _templateObject15 = function _templateObject15() {
     return data;
@@ -52834,7 +52854,7 @@ function _templateObject15() {
 }
 
 function _templateObject14() {
-  var data = (0, _taggedTemplateLiteral2.default)(["\ndisplay: flex;\nflex-direction: row;\njustify-content: space-around;\npadding: 0 0.5rem;\nclear: both;\nmargin: 1rem;\nwidth: 100%;\n"]);
+  var data = (0, _taggedTemplateLiteral2.default)(["\nbackground-color: ", ";\ncolor: black;\ndisplay: flex;\nflex-direction: row;\nalign-items: center;\npadding: 0rem 0.25rem;\ntext-decoration: none;\ntext-align: center;\nfont-family: 'Merriweather Sans', sans-serif;\nfont-weight: 400;\nfont-size: 0.8rem;\nline-height: 100%;\nmargin-right: 1rem;\nwhite-space: nowrap;\n@media(min-width: ", ") {\nfont-size: 1rem;\n}\n:hover {\ncolor: white;\n}\n"]);
 
   _templateObject14 = function _templateObject14() {
     return data;
@@ -52844,7 +52864,7 @@ function _templateObject14() {
 }
 
 function _templateObject13() {
-  var data = (0, _taggedTemplateLiteral2.default)(["\nbackground-color: ", ";\ncolor: black;\ndisplay: flex;\nflex-direction: row;\nalign-items: center;\npadding: 0rem 0.25rem;\ntext-decoration: none;\ntext-align: center;\nfont-family: 'Merriweather Sans', sans-serif;\nfont-weight: 400;\nfont-size: 0.8rem;\nline-height: 100%;\nmargin-right: 1rem;\nwhite-space: nowrap;\n@media(min-width: ", ") {\nfont-size: 1rem;\n}\n:hover {\ncolor: white;\n}\n"]);
+  var data = (0, _taggedTemplateLiteral2.default)(["\nflex: 0;\nmargin-top: 4px;\n"]);
 
   _templateObject13 = function _templateObject13() {
     return data;
@@ -52854,7 +52874,7 @@ function _templateObject13() {
 }
 
 function _templateObject12() {
-  var data = (0, _taggedTemplateLiteral2.default)(["\nflex: 0;\nmargin-top: 4px;\n"]);
+  var data = (0, _taggedTemplateLiteral2.default)(["\nfont-family: 'Cormorant Garamond',Georgia,serif;\nfont-size: 1.1rem;\npre {\nfont-size: 0.8rem;\n@media(min-width: ", ") {\nfont-size: 1rem;\n}\n}\nh1, h2, h3, h4, h5, h6 {\nfont-family: ", ";\nfont-size: 1rem;\npadding: 0;\nmargin: 0;\n}\nh1 {\nfont-size: 1.75rem;\ntext-shadow: 2px 2px 2px black;\ncolor: white;\ntext-transform: uppercase;\nmargin-bottom: 0.5rem;\n}\nh2 {\ntext-shadow: 2px 2px 2px white;\nfont-size: 1.5rem;\nmargin-bottom: 0.25rem;\n}\n@media(min-width: ", ") {\nfont-size: 1.25rem;\n}\n"]);
 
   _templateObject12 = function _templateObject12() {
     return data;
@@ -52864,7 +52884,7 @@ function _templateObject12() {
 }
 
 function _templateObject11() {
-  var data = (0, _taggedTemplateLiteral2.default)(["\nfont-family: 'Cormorant Garamond',Georgia,serif;\nfont-size: 1.1rem;\npre {\nfont-size: 0.8rem;\n@media(min-width: ", ") {\nfont-size: 1rem;\n}\n}\nh1, h2, h3, h4, h5, h6 {\nfont-family: ", ";\nfont-size: 1rem;\npadding: 0;\nmargin: 0;\n}\nh1 {\nfont-size: 1.75rem;\ntext-shadow: 2px 2px 2px black;\ncolor: white;\ntext-transform: uppercase;\nmargin-bottom: 0.5rem;\n}\nh2 {\ntext-shadow: 2px 2px 2px white;\nfont-size: 1.5rem;\nmargin-bottom: 0.25rem;\n}\n@media(min-width: ", ") {\nfont-size: 1.25rem;\n}\n"]);
+  var data = (0, _taggedTemplateLiteral2.default)(["\ndisplay: flex;\nflex-direction: column;\nalign-items: stretch;\n"]);
 
   _templateObject11 = function _templateObject11() {
     return data;
@@ -52874,7 +52894,7 @@ function _templateObject11() {
 }
 
 function _templateObject10() {
-  var data = (0, _taggedTemplateLiteral2.default)(["\ndisplay: flex;\nflex-direction: column;\nalign-items: stretch;\n"]);
+  var data = (0, _taggedTemplateLiteral2.default)(["\npadding: 0.5rem 2rem;\nbackground-color: ", ";\n-webkit-box-shadow: 0px 0px ", " ", " ", ";\n-moz-box-shadow: 0px 0px ", " ", " ", ";\nbox-shadow: 0px 0px ", " ", " ", ";\ndisplay: flex;\nflex-direction: column;\nalign-items: stretch;\n"]);
 
   _templateObject10 = function _templateObject10() {
     return data;
@@ -52884,7 +52904,7 @@ function _templateObject10() {
 }
 
 function _templateObject9() {
-  var data = (0, _taggedTemplateLiteral2.default)(["\npadding: 0.5rem 2rem;\nbackground-color: ", ";\n-webkit-box-shadow: 0px 0px ", " ", " ", ";\n-moz-box-shadow: 0px 0px ", " ", " ", ";\nbox-shadow: 0px 0px ", " ", " ", ";\ndisplay: flex;\nflex-direction: column;\nalign-items: stretch;\n"]);
+  var data = (0, _taggedTemplateLiteral2.default)(["\npadding: 2rem 3rem;\npadding-top: 0; \n@media(max-width: ", ") {\npadding: 0;\n}\n"]);
 
   _templateObject9 = function _templateObject9() {
     return data;
@@ -52894,7 +52914,7 @@ function _templateObject9() {
 }
 
 function _templateObject8() {
-  var data = (0, _taggedTemplateLiteral2.default)(["\npadding: 2rem 3rem;\npadding-top: 0; \n@media(max-width: ", ") {\npadding: 0;\n}\n"]);
+  var data = (0, _taggedTemplateLiteral2.default)(["\nfont-family: ", ";\ncolor: white;\nfont-weight: 800;\nfont-size: 2rem;\ntext-align: center;\ntext-transform: uppercase;\nmargins: 0;\n  padding: 0 4rem;\ntext-shadow: 2px 2px 2px #000000;\nbackground-color: ", ";\n@media(max-width: ", ") {\nfont-size: 1rem;\npadding: 0;\n}\na {\ntext-decoration: none;\ncolor: rgba(255,255,255,0.8);\ntext-shadow: none;\nfont-weight: 200;\nfont-size: 0.95em;\n:hover {\n  text-decoration: underline;\n}\n}\n"]);
 
   _templateObject8 = function _templateObject8() {
     return data;
@@ -52904,7 +52924,7 @@ function _templateObject8() {
 }
 
 function _templateObject7() {
-  var data = (0, _taggedTemplateLiteral2.default)(["\nfont-family: ", ";\ncolor: white;\nfont-weight: 800;\nfont-size: 2rem;\ntext-align: center;\ntext-transform: uppercase;\nmargins: 0;\n  padding: 0 4rem;\ntext-shadow: 2px 2px 2px #000000;\nbackground-color: ", ";\n@media(max-width: ", ") {\nfont-size: 1rem;\npadding: 0;\n}\n"]);
+  var data = (0, _taggedTemplateLiteral2.default)(["\nheight: 60vh;\npadding: 1rem;\nfont-size: 1.25rem;\nfont-family: 'Courier New', Monaco, Courier, monospace;\n@media(min-width: ", ") {\nfont-size: 1.75rem;\n}\n"]);
 
   _templateObject7 = function _templateObject7() {
     return data;
@@ -52914,7 +52934,7 @@ function _templateObject7() {
 }
 
 function _templateObject6() {
-  var data = (0, _taggedTemplateLiteral2.default)(["\nheight: 60vh;\npadding: 1rem;\nfont-size: 1.25rem;\nfont-family: 'Courier New', Monaco, Courier, monospace;\n@media(min-width: ", ") {\nfont-size: 1.75rem;\n}\n"]);
+  var data = (0, _taggedTemplateLiteral2.default)(["\ndisplay: inline-block;\nheight: 1.5rem;\nwidth: 1.5rem;\nbackground: url(", ");\nbackground-size: cover;\nmargin-right: 0.2rem;\n"]);
 
   _templateObject6 = function _templateObject6() {
     return data;
@@ -52924,7 +52944,7 @@ function _templateObject6() {
 }
 
 function _templateObject5() {
-  var data = (0, _taggedTemplateLiteral2.default)(["\ndisplay: inline-block;\nheight: 1.5rem;\nwidth: 1.5rem;\nbackground: url(", ");\nbackground-size: cover;\nmargin-right: 0.2rem;\n"]);
+  var data = (0, _taggedTemplateLiteral2.default)(["\ndisplay: block;\ntext-decoration: none;\nbackground: transparent;\ncolor: white;\nfont-family: 'Merriweather Sans', sans-serif;\nfont-weight: 200;\nfont-size: 1rem;\ncolor: white !important;\npadding: 0.2rem 0.5rem;\nmargin: 0.333rem 0.25rem;\nmargin-left: -0.666rem;\n@media(max-width: ", ") {\npadding: 2px;\nmargin: 0;\n}\n@media(min-width: ", ") {\npadding: 0.5rem 1rem;\nfont-size: 1.2rem;\n}\n:hover {\ntext-decoration: underline;\n}\n&.unpublished {\ntext-decoration: line-through\n}\n"]);
 
   _templateObject5 = function _templateObject5() {
     return data;
@@ -52992,78 +53012,89 @@ var ArticleList = _styledComponents.default.div(_templateObject3(), _constants.S
 exports.ArticleList = ArticleList;
 var ArticleItem = (0, _styledComponents.default)(_reactRouterDom.Link)(_templateObject4(), ARTICLE_LINK_BACK, _constants.SMALL_NAV, _constants.LARGE_NAV);
 exports.ArticleItem = ArticleItem;
+var ArticleText = (0, _styledComponents.default)(_reactRouterDom.Link)(_templateObject5(), _constants.SMALL_NAV, _constants.LARGE_NAV);
+exports.ArticleText = ArticleText;
 
-var UserIcon = _styledComponents.default.div(_templateObject5(), function (props) {
+var UserIcon = _styledComponents.default.div(_templateObject6(), function (props) {
   return props.picture;
 });
 
 exports.UserIcon = UserIcon;
 
-var ContentEditor = _styledComponents.default.textarea(_templateObject6(), _constants.LARGE_NAV);
+var ContentEditor = _styledComponents.default.textarea(_templateObject7(), _constants.LARGE_NAV);
 
 exports.ContentEditor = ContentEditor;
 
-var PageHead = _styledComponents.default.h1(_templateObject7(), HEADLINE_FONT, BUTTON_MASK, _constants.SMALL_NAV);
+var PageHead = _styledComponents.default.h1(_templateObject8(), HEADLINE_FONT, BUTTON_MASK, _constants.SMALL_NAV);
 
 exports.PageHead = PageHead;
 
-var ArticleFrame = _styledComponents.default.article(_templateObject8(), _constants.SMALL_NAV);
+var ArticleFrame = _styledComponents.default.article(_templateObject9(), _constants.SMALL_NAV);
 
 exports.ArticleFrame = ArticleFrame;
 var n1 = '4px';
 var n2 = '4px';
 
-var FuzzyBox = _styledComponents.default.div(_templateObject9(), CONTENT_MASK, n1, n2, CONTENT_MASK, n1, n2, CONTENT_MASK, n1, n2, CONTENT_MASK);
+var FuzzyBox = _styledComponents.default.div(_templateObject10(), CONTENT_MASK, n1, n2, CONTENT_MASK, n1, n2, CONTENT_MASK, n1, n2, CONTENT_MASK);
 
 exports.FuzzyBox = FuzzyBox;
 
-var TableBox = _styledComponents.default.div(_templateObject10());
+var TableBox = _styledComponents.default.div(_templateObject11());
 
 exports.TableBox = TableBox;
 
-var Text = _styledComponents.default.div(_templateObject11(), _constants.LARGE_NAV, HEADLINE_FONT, _constants.LARGE_NAV);
+var Text = _styledComponents.default.div(_templateObject12(), _constants.LARGE_NAV, HEADLINE_FONT, _constants.LARGE_NAV);
 
 exports.Text = Text;
 
-var NavbarFrame = _styledComponents.default.div(_templateObject12());
+var NavbarFrame = _styledComponents.default.div(_templateObject13());
 
 exports.NavbarFrame = NavbarFrame;
 
-var UserButton = _styledComponents.default.div(_templateObject13(), BUTTON_MASK, _constants.SMALL_NAV);
+var UserButton = _styledComponents.default.div(_templateObject14(), BUTTON_MASK, _constants.SMALL_NAV);
 
 exports.UserButton = UserButton;
 
-var ButtonList = _styledComponents.default.div(_templateObject14());
+var ButtonList = _styledComponents.default.div(_templateObject15());
 
 exports.ButtonList = ButtonList;
 
-var FormItem = _styledComponents.default.div(_templateObject15());
+var FormItem = _styledComponents.default.div(_templateObject16());
 
 exports.FormItem = FormItem;
 
-var FormLabel = _styledComponents.default.div(_templateObject16());
+var FormLabel = _styledComponents.default.div(_templateObject17());
 
 exports.FormLabel = FormLabel;
 
-var Input = _styledComponents.default.input(_templateObject17(), _constants.LARGE_NAV);
+var Input = _styledComponents.default.input(_templateObject18(), _constants.LARGE_NAV);
 
 exports.Input = Input;
 
-var CheckboxWrapper = _styledComponents.default.div(_templateObject18());
+var CheckboxWrapper = _styledComponents.default.div(_templateObject19());
 
 exports.CheckboxWrapper = CheckboxWrapper;
 
-var EditButton = _styledComponents.default.button(_templateObject19(), LIGHT_GREY);
+var ToggleButton = _styledComponents.default.button(_templateObject20(), function (props) {
+  var active = 'data-on' in props ? props['data-on'] : null;
+  if (active === null) return 'grey';
+  if (active) return 'darkgreen';
+  return 'darkred';
+});
+
+exports.ToggleButton = ToggleButton;
+
+var EditButton = _styledComponents.default.button(_templateObject21(), LIGHT_GREY);
 
 exports.EditButton = EditButton;
-var CategoryView = (0, _styledComponents.default)(_reactRouterDom.Link)(_templateObject20(), BUTTON_MASK, _constants.SMALL_NAV, _constants.LARGE_NAV);
+var CategoryView = (0, _styledComponents.default)(_reactRouterDom.Link)(_templateObject22(), BUTTON_MASK, _constants.SMALL_NAV, _constants.LARGE_NAV);
 exports.CategoryView = CategoryView;
 
-var Line = _styledComponents.default.hr(_templateObject21());
+var Line = _styledComponents.default.hr(_templateObject23());
 
 exports.Line = Line;
 
-var CategoryList = _styledComponents.default.div(_templateObject22());
+var CategoryList = _styledComponents.default.div(_templateObject24());
 
 exports.CategoryList = CategoryList;
 },{"@babel/runtime-corejs2/helpers/taggedTemplateLiteral":"../node_modules/@babel/runtime-corejs2/helpers/taggedTemplateLiteral.js","styled-components":"../node_modules/styled-components/dist/styled-components.browser.esm.js","react-router-dom":"../node_modules/react-router-dom/es/index.js","../constants":"constants.json"}],"components/Navbar/NavbarView.jsx":[function(require,module,exports) {
@@ -72838,7 +72869,20 @@ module.exports.default = axios;
 
 },{"./utils":"../node_modules/axios/lib/utils.js","./helpers/bind":"../node_modules/axios/lib/helpers/bind.js","./core/Axios":"../node_modules/axios/lib/core/Axios.js","./defaults":"../node_modules/axios/lib/defaults.js","./cancel/Cancel":"../node_modules/axios/lib/cancel/Cancel.js","./cancel/CancelToken":"../node_modules/axios/lib/cancel/CancelToken.js","./cancel/isCancel":"../node_modules/axios/lib/cancel/isCancel.js","./helpers/spread":"../node_modules/axios/lib/helpers/spread.js"}],"../node_modules/axios/index.js":[function(require,module,exports) {
 module.exports = require('./lib/axios');
-},{"./lib/axios":"../node_modules/axios/lib/axios.js"}],"models/categories.js":[function(require,module,exports) {
+},{"./lib/axios":"../node_modules/axios/lib/axios.js"}],"js/encodePath.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _default = function _default(path) {
+  return encodeURIComponent(path).replace(/\./g, '%2E');
+};
+
+exports.default = _default;
+},{}],"models/categories.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -72850,27 +72894,46 @@ var _lookingGlassEngine = require("@wonderlandlabs/looking-glass-engine");
 
 var _axios = _interopRequireDefault(require("axios"));
 
+var _encodePath = _interopRequireDefault(require("../js/encodePath"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+var API_URL = "http://localhost:7070/api";
 var categories = new _lookingGlassEngine.Store({
   state: {},
+  actions: {
+    getCategory: function getCategory(store, directory, accessToken, sub) {
+      return _axios.default.get(API_URL + '/categories/' + (0, _encodePath.default)(directory), {
+        headers: {
+          'access_token': accessToken,
+          'sub': sub
+        }
+      }).then(function (result) {
+        return result.data;
+      }).then(function (da) {
+        store.actions.setCategory(da);
+      });
+    }
+  },
   starter: function starter(_ref) {
     var actions = _ref.actions;
 
-    _axios.default.get('https://wonderland-labs.herokuapp.com/api/categories').then(function (_ref2) {
+    _axios.default.get(API_URL + '/categories').then(function (_ref2) {
       var data = _ref2.data;
       actions.setCategories(data);
     });
   }
 }).addProp('categories', {
   start: []
+}).addProp('category', {
+  start: false
 }).addProp('current', {
   start: false
 });
 categories.start();
 var _default = categories;
 exports.default = _default;
-},{"@wonderlandlabs/looking-glass-engine":"../node_modules/@wonderlandlabs/looking-glass-engine/build/index.js","axios":"../node_modules/axios/index.js"}],"components/Navbar/NavbarContainer.jsx":[function(require,module,exports) {
+},{"@wonderlandlabs/looking-glass-engine":"../node_modules/@wonderlandlabs/looking-glass-engine/build/index.js","axios":"../node_modules/axios/index.js","../js/encodePath":"js/encodePath.js"}],"components/Navbar/NavbarContainer.jsx":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -72965,10 +73028,20 @@ function (_Component) {
       var props = (0, _objectSpread2.default)({}, this.props);
       delete props.children;
       return _react.default.createElement(_NavbarView.default, (0, _extends2.default)({}, this.state, {
+        categories: this.categories,
         gotoCategory: function gotoCategory(name) {
           return _this3.gotoCategory(name);
         }
       }));
+    }
+  }, {
+    key: "categories",
+    get: function get() {
+      if (!this.state.categories) return [];
+      if (!this.state.isAdmin) return this.state.categories.filter(function (c) {
+        return c.published;
+      });
+      return this.state.categories.slice(0);
     }
   }]);
   return NavbarContainer;
@@ -73042,10 +73115,10 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var HomepageView = function HomepageView(state) {
   return _react.default.createElement(_style.ArticleListWrapper, null, _react.default.createElement(_style.ArticleList, null, state.homepageArticles.map(function (a) {
-    return _react.default.createElement(_style.ArticleItem, {
+    return _react.default.createElement(_react.default.Fragment, null, _react.default.createElement(_style.ArticleItem, {
       to: '/article/' + a.path,
       key: a.path
-    }, a.title);
+    }, a.title), a.description && _react.default.createElement(_style.ArticleText, null, a.description));
   })));
 };
 
@@ -73071,6 +73144,8 @@ var _axios = _interopRequireDefault(require("axios"));
 
 var _lodash = _interopRequireDefault(require("lodash"));
 
+var _encodePath = _interopRequireDefault(require("../js/encodePath"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var API_URL = "http://localhost:7070/api";
@@ -73085,12 +73160,8 @@ var asPath = function asPath(input) {
   }
 };
 
-var encodePath = function encodePath(path) {
-  return encodeURIComponent(path).replace(/\./g, '%2E');
-};
-
 function articleUrl(path) {
-  var shortPath = encodePath(asPath(path));
+  var shortPath = (0, _encodePath.default)(asPath(path));
   return "".concat(API_URL, "/articles/").concat(shortPath, ".json");
 }
 
@@ -73098,15 +73169,13 @@ var articles = new _lookingGlassEngine.Store({
   state: {},
   actions: {
     getCategoryArticles: function getCategoryArticles(store, directory, accessToken, sub) {
-      return _axios.default.get(API_URL + '/articles', {
+      return _axios.default.get(API_URL + '/categories/' + (0, _encodePath.default)(directory), {
         headers: {
           'access_token': accessToken,
           'sub': sub
         }
       }).then(function (result) {
-        return result.data.filter(function (a) {
-          return a.directory === directory;
-        });
+        return result.data.articles;
       }).then(function (da) {
         return store.actions.setCategoryArticles(da);
       });
@@ -73169,7 +73238,7 @@ var articles = new _lookingGlassEngine.Store({
 articles.start();
 var _default = articles;
 exports.default = _default;
-},{"@wonderlandlabs/looking-glass-engine":"../node_modules/@wonderlandlabs/looking-glass-engine/build/index.js","axios":"../node_modules/axios/index.js","lodash":"../node_modules/lodash/lodash.js"}],"../node_modules/core-js/library/fn/json/stringify.js":[function(require,module,exports) {
+},{"@wonderlandlabs/looking-glass-engine":"../node_modules/@wonderlandlabs/looking-glass-engine/build/index.js","axios":"../node_modules/axios/index.js","lodash":"../node_modules/lodash/lodash.js","../js/encodePath":"js/encodePath.js"}],"../node_modules/core-js/library/fn/json/stringify.js":[function(require,module,exports) {
 var core = require('../../modules/_core');
 var $JSON = core.JSON || (core.JSON = { stringify: JSON.stringify });
 module.exports = function stringify(it) { // eslint-disable-line no-unused-vars
@@ -80872,8 +80941,12 @@ function (_Component) {
   }, {
     key: "togglePublished",
     value: function togglePublished() {
+      var onHomepage = this.state.onHomepage;
+      if (this.state.published) onHomepage = false; // remove hidden articles from homepage
+
       this.setState({
-        published: !this.state.published
+        published: !this.state.published,
+        onHomepage: onHomepage
       });
     }
   }, {
@@ -80982,10 +81055,24 @@ var _style = require("../style");
 
 var _ArticleEdit = _interopRequireDefault(require("../ArticleEdit"));
 
+var _reactRouterDom = require("react-router-dom");
+
+var _encodePath = _interopRequireDefault(require("../../js/encodePath"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var headline = function headline(category) {
+  if (!category) return '';
+  var url = '/category/' + (0, _encodePath.default)(category.directory);
+  console.log('url:', url);
+  return _react.default.createElement(_reactRouterDom.Link, {
+    to: url
+  }, category.title, ":\xA0");
+};
 
 var ArticleView = function ArticleView(_ref) {
   var loaded = _ref.loaded,
+      category = _ref.category,
       title = _ref.title,
       content = _ref.content,
       isAdmin = _ref.isAdmin,
@@ -80997,8 +81084,7 @@ var ArticleView = function ArticleView(_ref) {
     return '';
   }
 
-  console.log('rendering content: ', content.substr(0, 20), '...', content.substr(-100));
-  return _react.default.createElement("div", null, _react.default.createElement(_style.PageHead, null, title), _react.default.createElement(_style.ArticleFrame, null, _react.default.createElement(_style.FuzzyBox, null, !isEditing && _react.default.createElement(_style.Text, {
+  return _react.default.createElement("div", null, _react.default.createElement(_style.PageHead, null, headline(category), title), _react.default.createElement(_style.ArticleFrame, null, _react.default.createElement(_style.FuzzyBox, null, !isEditing && _react.default.createElement(_style.Text, {
     dangerouslySetInnerHTML: {
       __html: (0, _marked.default)(content)
     }
@@ -81024,7 +81110,7 @@ ArticleView.defaultProps = {
 };
 var _default = ArticleView;
 exports.default = _default;
-},{"react":"../node_modules/react/index.js","prop-types":"../node_modules/prop-types/index.js","marked":"../node_modules/marked/lib/marked.js","../style":"components/style.js","../ArticleEdit":"components/ArticleEdit/index.js"}],"components/Article/ArticleContainer.jsx":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","prop-types":"../node_modules/prop-types/index.js","marked":"../node_modules/marked/lib/marked.js","../style":"components/style.js","../ArticleEdit":"components/ArticleEdit/index.js","react-router-dom":"../node_modules/react-router-dom/es/index.js","../../js/encodePath":"js/encodePath.js"}],"components/Article/ArticleContainer.jsx":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -81053,6 +81139,8 @@ var _ArticleView = _interopRequireDefault(require("./ArticleView"));
 var _user = _interopRequireDefault(require("../../models/user"));
 
 var _articles = _interopRequireDefault(require("../../models/articles"));
+
+var _categories = _interopRequireDefault(require("../../models/categories"));
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
 
@@ -81085,7 +81173,16 @@ function (_Component) {
 
       if (!this.state.loaded && this.state.path) {
         _articles.default.actions.getArticle(this.state.path).then(function () {
-          _this2.setState((0, _objectSpread2.default)({}, _articles.default.state.currentArticle, {
+          var article = _articles.default.state.currentArticle;
+          var directory = article.directory;
+
+          if (directory) {
+            _categories.default.actions.getCategory(directory).then(function () {
+              _this2.setState(_categories.default.state);
+            });
+          }
+
+          _this2.setState((0, _objectSpread2.default)({}, article, {
             loaded: true
           }));
         }).catch(function (err) {
@@ -81138,7 +81235,7 @@ function (_Component) {
 }(_react.Component);
 
 exports.default = ArticleContainer;
-},{"@babel/runtime-corejs2/helpers/extends":"../node_modules/@babel/runtime-corejs2/helpers/extends.js","@babel/runtime-corejs2/helpers/objectSpread":"../node_modules/@babel/runtime-corejs2/helpers/objectSpread.js","@babel/runtime-corejs2/helpers/classCallCheck":"../node_modules/@babel/runtime-corejs2/helpers/classCallCheck.js","@babel/runtime-corejs2/helpers/createClass":"../node_modules/@babel/runtime-corejs2/helpers/createClass.js","@babel/runtime-corejs2/helpers/possibleConstructorReturn":"../node_modules/@babel/runtime-corejs2/helpers/possibleConstructorReturn.js","@babel/runtime-corejs2/helpers/getPrototypeOf":"../node_modules/@babel/runtime-corejs2/helpers/getPrototypeOf.js","@babel/runtime-corejs2/helpers/inherits":"../node_modules/@babel/runtime-corejs2/helpers/inherits.js","react":"../node_modules/react/index.js","./ArticleView":"components/Article/ArticleView.jsx","../../models/user":"models/user.js","../../models/articles":"models/articles.js"}],"components/Article/extend.js":[function(require,module,exports) {
+},{"@babel/runtime-corejs2/helpers/extends":"../node_modules/@babel/runtime-corejs2/helpers/extends.js","@babel/runtime-corejs2/helpers/objectSpread":"../node_modules/@babel/runtime-corejs2/helpers/objectSpread.js","@babel/runtime-corejs2/helpers/classCallCheck":"../node_modules/@babel/runtime-corejs2/helpers/classCallCheck.js","@babel/runtime-corejs2/helpers/createClass":"../node_modules/@babel/runtime-corejs2/helpers/createClass.js","@babel/runtime-corejs2/helpers/possibleConstructorReturn":"../node_modules/@babel/runtime-corejs2/helpers/possibleConstructorReturn.js","@babel/runtime-corejs2/helpers/getPrototypeOf":"../node_modules/@babel/runtime-corejs2/helpers/getPrototypeOf.js","@babel/runtime-corejs2/helpers/inherits":"../node_modules/@babel/runtime-corejs2/helpers/inherits.js","react":"../node_modules/react/index.js","./ArticleView":"components/Article/ArticleView.jsx","../../models/user":"models/user.js","../../models/articles":"models/articles.js","../../models/categories":"models/categories.js"}],"components/Article/extend.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -81187,7 +81284,7 @@ var ArticleContainerHOC = (0, _extend.default)(_ArticleContainer.default);
 exports.ArticleContainerHOC = ArticleContainerHOC;
 var _default = ArticleContainerHOC;
 exports.default = _default;
-},{"./ArticleContainer":"components/Article/ArticleContainer.jsx","./ArticleView":"components/Article/ArticleView.jsx","./extend":"components/Article/extend.js"}],"components/CategoryEdit/CategoryEditView.jsx":[function(require,module,exports) {
+},{"./ArticleContainer":"components/Article/ArticleContainer.jsx","./ArticleView":"components/Article/ArticleView.jsx","./extend":"components/Article/extend.js"}],"components/Toggle/ToggleView.jsx":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -81207,12 +81304,157 @@ var noop = function noop(a) {
   return a;
 };
 
+var ToggleView = function ToggleView(_ref) {
+  var article = _ref.article,
+      field = _ref.field;
+  if (!(field && article)) return '';
+  var active = article[field];
+  return _react.default.createElement(_style.ToggleButton, {
+    "data-on": active
+  }, active ? 'YES' : 'NO');
+};
+
+var _default = ToggleView;
+exports.default = _default;
+},{"react":"../node_modules/react/index.js","prop-types":"../node_modules/prop-types/index.js","../style":"components/style.js"}],"components/Toggle/ToggleContainer.jsx":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _objectSpread2 = _interopRequireDefault(require("@babel/runtime-corejs2/helpers/objectSpread"));
+
+var _classCallCheck2 = _interopRequireDefault(require("@babel/runtime-corejs2/helpers/classCallCheck"));
+
+var _createClass2 = _interopRequireDefault(require("@babel/runtime-corejs2/helpers/createClass"));
+
+var _possibleConstructorReturn2 = _interopRequireDefault(require("@babel/runtime-corejs2/helpers/possibleConstructorReturn"));
+
+var _getPrototypeOf2 = _interopRequireDefault(require("@babel/runtime-corejs2/helpers/getPrototypeOf"));
+
+var _inherits2 = _interopRequireDefault(require("@babel/runtime-corejs2/helpers/inherits"));
+
+var _react = _interopRequireWildcard(require("react"));
+
+var _ToggleView = _interopRequireDefault(require("./ToggleView"));
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var ToggleContainer =
+/*#__PURE__*/
+function (_Component) {
+  (0, _inherits2.default)(ToggleContainer, _Component);
+
+  function ToggleContainer(props) {
+    var _this;
+
+    (0, _classCallCheck2.default)(this, ToggleContainer);
+    _this = (0, _possibleConstructorReturn2.default)(this, (0, _getPrototypeOf2.default)(ToggleContainer).call(this, props));
+    _this.state = (0, _objectSpread2.default)({}, props);
+    return _this;
+  }
+
+  (0, _createClass2.default)(ToggleContainer, [{
+    key: "render",
+    value: function render() {
+      return _react.default.createElement(_ToggleView.default, this.state);
+    }
+  }]);
+  return ToggleContainer;
+}(_react.Component);
+
+exports.default = ToggleContainer;
+},{"@babel/runtime-corejs2/helpers/objectSpread":"../node_modules/@babel/runtime-corejs2/helpers/objectSpread.js","@babel/runtime-corejs2/helpers/classCallCheck":"../node_modules/@babel/runtime-corejs2/helpers/classCallCheck.js","@babel/runtime-corejs2/helpers/createClass":"../node_modules/@babel/runtime-corejs2/helpers/createClass.js","@babel/runtime-corejs2/helpers/possibleConstructorReturn":"../node_modules/@babel/runtime-corejs2/helpers/possibleConstructorReturn.js","@babel/runtime-corejs2/helpers/getPrototypeOf":"../node_modules/@babel/runtime-corejs2/helpers/getPrototypeOf.js","@babel/runtime-corejs2/helpers/inherits":"../node_modules/@babel/runtime-corejs2/helpers/inherits.js","react":"../node_modules/react/index.js","./ToggleView":"components/Toggle/ToggleView.jsx"}],"components/Toggle/extend.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+/**
+ * allows you to merge in router, redux, etc.
+ *
+ * @param component {Component}
+ * @returns {Component}
+ */
+var _default = function _default(component) {
+  return component;
+};
+
+exports.default = _default;
+},{}],"components/Toggle/index.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+Object.defineProperty(exports, "ToggleContainer", {
+  enumerable: true,
+  get: function () {
+    return _ToggleContainer.default;
+  }
+});
+Object.defineProperty(exports, "ToggleView", {
+  enumerable: true,
+  get: function () {
+    return _ToggleView.default;
+  }
+});
+exports.ToggleContainerHOC = exports.ToggleViewHOC = exports.default = void 0;
+
+var _ToggleContainer = _interopRequireDefault(require("./ToggleContainer"));
+
+var _ToggleView = _interopRequireDefault(require("./ToggleView"));
+
+var _extend = _interopRequireDefault(require("./extend"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var ToggleViewHOC = (0, _extend.default)(_ToggleView.default);
+exports.ToggleViewHOC = ToggleViewHOC;
+var ToggleContainerHOC = (0, _extend.default)(_ToggleContainer.default);
+exports.ToggleContainerHOC = ToggleContainerHOC;
+var _default = ToggleContainerHOC;
+exports.default = _default;
+},{"./ToggleContainer":"components/Toggle/ToggleContainer.jsx","./ToggleView":"components/Toggle/ToggleView.jsx","./extend":"components/Toggle/extend.js"}],"components/CategoryEdit/CategoryEditView.jsx":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireDefault(require("react"));
+
+var _propTypes = _interopRequireDefault(require("prop-types"));
+
+var _style = require("../style");
+
+var _Toggle = _interopRequireDefault(require("../Toggle"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var noop = function noop(a) {
+  return a;
+};
+
 var CategoryEditView = function CategoryEditView(_ref) {
   var categoryArticles = _ref.categoryArticles;
   return _react.default.createElement("div", null, _react.default.createElement(_style.PageHead, null, "Category Articles"), _react.default.createElement(_style.FuzzyBox, null, _react.default.createElement(_style.TableBox, null, _react.default.createElement("table", null, _react.default.createElement("thead", null, _react.default.createElement("tr", null, _react.default.createElement("th", null, "Title"), _react.default.createElement("th", null, "Directory"), _react.default.createElement("th", null, "Intro"), _react.default.createElement("th", null, "Published"), _react.default.createElement("th", null, "On Homepage"))), _react.default.createElement("tbody", null, categoryArticles.map(function (a) {
     return _react.default.createElement("tr", {
       key: a.id
-    }, _react.default.createElement("td", null, a.title), _react.default.createElement("td", null, a.directory), _react.default.createElement("td", null, a.intro || '--'), _react.default.createElement("td", null, a.published ? 'YES' : ''), _react.default.createElement("td", null, a.on_homepage ? 'YES' : ''));
+    }, _react.default.createElement("td", null, a.title), _react.default.createElement("td", null, a.directory), _react.default.createElement("td", null, a.intro || '--'), _react.default.createElement("td", null, _react.default.createElement(_Toggle.default, {
+      field: "published",
+      article: a
+    })), _react.default.createElement("td", null, _react.default.createElement(_Toggle.default, {
+      field: "onHomepage",
+      article: a
+    })));
   }))))));
 };
 
@@ -81226,7 +81468,7 @@ CategoryEditView.defaultProps = {
 };
 var _default = CategoryEditView;
 exports.default = _default;
-},{"react":"../node_modules/react/index.js","prop-types":"../node_modules/prop-types/index.js","../style":"components/style.js"}],"components/CategoryEdit/CategoryEditContainer.jsx":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","prop-types":"../node_modules/prop-types/index.js","../style":"components/style.js","../Toggle":"components/Toggle/index.js"}],"components/CategoryEdit/CategoryEditContainer.jsx":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -81614,7 +81856,6 @@ function (_Component) {
     value: function render() {
       var _this4 = this;
 
-      console.log('rendering category:', this.state);
       return _react.default.createElement(_CategoryView.default, (0, _extends2.default)({
         toggleEdit: function toggleEdit() {
           return _this4.toggleEdit();
@@ -87965,7 +88206,7 @@ function getGame() {
   return _lodash.default.uniq(boards);
 }
 
-var pieceMap = new _map.default([['p', 'black_pawn'], ['P', 'white_pawn'], ['k', 'black_king'], ['K', 'white_king'], ['black', 'black_bishop'], ['BLACK', 'white_bishop'], ['n', 'black_horse'], ['N', 'white_horse'], ['q', 'black_queen'], ['Q', 'white_queen'], ['1', [false]], ['2', [false, false]], ['3', [false, false, false]], ['4', [false, false, false, false]], ['5', [false, false, false, false, false]], ['6', [false, false, false, false, false, false]], ['7', [false, false, false, false, false, false, false]], ['8', [false, false, false, false, false, false, false, false]]]);
+var pieceMap = new _map.default([['p', 'black_pawn'], ['P', 'white_pawn'], ['k', 'black_king'], ['K', 'white_king'], ['black', 'black_bishop'], ['BLACK', 'white_bishop'], ['n', 'black_horse'], ['N', 'white_horse'], ['q', 'black_queen'], ['Q', 'white_queen'], ['B', 'white_bishop'], ['b', 'black_bishop'], ['1', [false]], ['2', [false, false]], ['3', [false, false, false]], ['4', [false, false, false, false]], ['5', [false, false, false, false, false]], ['6', [false, false, false, false, false, false]], ['7', [false, false, false, false, false, false, false]], ['8', [false, false, false, false, false, false, false, false]]]);
 
 function rowToPieces(row) {
   var pieces = row.split('').map(function (key) {

@@ -77,7 +77,6 @@ export default class CategoryContainer extends Component {
   }
 
   render() {
-    console.log('rendering category:', this.state);
     return (
       <CategoryView
         toggleEdit={() => this.toggleEdit()}
