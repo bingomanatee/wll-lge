@@ -14,14 +14,15 @@ export default class HomepageContainer extends Component {
   }
 
   componentDidMount() {
+    this._mounted = true;
     this._artSub = articles.subscribe(({state}) => {
-      this.setState(state);
+      if (this._mounted) this.setState(state);
     });
 
     this._userSub = userStore.subscribe(({state}) => {
       const {sub, accessToken} = state;
       if (sub !== this.state.sub || accessToken !== this.state.accessToken) {
-        this.setState({
+        if (this._mounted) this.setState({
           sub, accessToken
         }, () => {
           articles.actions.getHomepageArticles(sub, accessToken);
@@ -33,6 +34,7 @@ export default class HomepageContainer extends Component {
   componentWillUnmount() {
     if (this._artSub) this._artSub.unsubscribe();
     if (this._userSub) this._userSub.unsubscribe();
+    this._mounted = false;
   }
 
   render() {

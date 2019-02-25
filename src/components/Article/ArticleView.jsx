@@ -15,7 +15,7 @@ const headline = (category) => {
   </Link>;
 };
 
-const ArticleView = ({loaded, category, title, content, isAdmin, isEditing, toggleEdit, path}) => {
+const ArticleView = ({loaded, onSave, category, title, content, isAdmin, isEditing, toggleEdit, path}) => {
   if (!loaded) {
     return '';
   }
@@ -25,7 +25,7 @@ const ArticleView = ({loaded, category, title, content, isAdmin, isEditing, togg
       <ArticleFrame>
         <FuzzyBox>
           {!isEditing && <Text dangerouslySetInnerHTML={{__html: marked(content)}}/>}
-          {isEditing && <ArticleEdit path={path} onSave={toggleEdit}/>}
+          {isEditing && <ArticleEdit path={path} onSave={onSave}/>}
           {isAdmin && <ButtonList>
             <EditButton data-sc-type='ButtonList' onClick={toggleEdit}>
               {isEditing ? 'Cancel' : 'Edit'}

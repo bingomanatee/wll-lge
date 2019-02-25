@@ -52741,7 +52741,7 @@ module.exports = {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.CategoryList = exports.Line = exports.CategoryView = exports.EditButton = exports.ToggleButton = exports.CheckboxWrapper = exports.Input = exports.FormLabel = exports.FormItem = exports.ButtonList = exports.UserButton = exports.NavbarFrame = exports.Text = exports.TableBox = exports.FuzzyBox = exports.ArticleFrame = exports.PageHead = exports.ContentEditor = exports.UserIcon = exports.ArticleText = exports.ArticleItem = exports.ArticleList = exports.ArticleListWrapper = exports.SiteHeadline = void 0;
+exports.CategoryList = exports.Line = exports.CategoryView = exports.EditButton = exports.ToggleButton = exports.CheckboxWrapper = exports.Select = exports.Input = exports.FormContent = exports.FormContainer = exports.FormLabel = exports.FormItem = exports.ButtonList = exports.UserButton = exports.NavbarFrame = exports.Text = exports.TableBox = exports.FuzzyBox = exports.ArticleFrame = exports.PageHead = exports.ContentEditor = exports.UserIcon = exports.ArticleText = exports.ArticleItem = exports.ArticleList = exports.ArticleItemWrapper = exports.ArticleListWrapper = exports.SiteHeadline = void 0;
 
 var _taggedTemplateLiteral2 = _interopRequireDefault(require("@babel/runtime-corejs2/helpers/taggedTemplateLiteral"));
 
@@ -52753,8 +52753,48 @@ var _constants = require("../constants");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _templateObject28() {
+  var data = (0, _taggedTemplateLiteral2.default)(["\nclear: both;\nmargin:0.5rem 0 ;\nflex-wrap: wrap;\npadding: 0 1rem;\ndisplay: flex;\nflex-direction: row;\njustify-content: center;\nbackground: rgba(200,200,200,0.6);\n"]);
+
+  _templateObject28 = function _templateObject28() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject27() {
+  var data = (0, _taggedTemplateLiteral2.default)(["\nborder-top: 1px solid black;\nmargin: 0.5rem 0;\n"]);
+
+  _templateObject27 = function _templateObject27() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject26() {
+  var data = (0, _taggedTemplateLiteral2.default)(["\ncolor: black;\ndisplay: block;\npadding: 0.2rem 0.333rem;\ntext-decoration: none;\ntext-align: center;\nfont-family: 'Merriweather Sans', sans-serif;\nfont-weight: 100;\nline-height: 100%;\nmargin-right: 1rem;\nwhite-space: nowrap;\nfont-size: 1rem;\n@media(max-width: ", ") {\nfont-size: 0.8rem;\n}\n@media(min-width: ", ") {\npadding: 0.5rem 0.5rem;\nfont-size: 1.2rem;\n}\n:hover {\ncolor: white;\n}\n"]);
+
+  _templateObject26 = function _templateObject26() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject25() {
+  var data = (0, _taggedTemplateLiteral2.default)(["\nbackground-color: black;\nfont-size: 1rem;\ncolor: ", ";\ntext-transform: uppercase;\noutline: none;\nborder: 1px solid rgba(0,0,0,0);\npadding: 0.5rem 1rem;\n-webkit-appearance: none;\n-moz-appearance: none;\n:hover {\ncolor: white;\nbackground-color: blue;\n}\n"]);
+
+  _templateObject25 = function _templateObject25() {
+    return data;
+  };
+
+  return data;
+}
+
 function _templateObject24() {
-  var data = (0, _taggedTemplateLiteral2.default)(["\nclear: both;\nmargin:0.5rem 1rem ;\nflex-wrap: wrap;\npadding: 0 1rem;\ndisplay: flex;\nflex-direction: row;\njustify-content: center;\n"]);
+  var data = (0, _taggedTemplateLiteral2.default)(["\nbackground-color: ", ";\nfont-size: 1rem;\ncolor: white;\ntext-transform: uppercase;\noutline: none;\nwidth: 60px;\ntex-align: center;\npadding: 0.5rem 1rem;\n-webkit-appearance: none;\n-moz-appearance: none;\nborder: 1px solid rgba(0,0,0,0);\n:hover {\ncolor: yellow;\n}\n"]);
 
   _templateObject24 = function _templateObject24() {
     return data;
@@ -52764,7 +52804,7 @@ function _templateObject24() {
 }
 
 function _templateObject23() {
-  var data = (0, _taggedTemplateLiteral2.default)(["\nborder-top: 1px solid black;\nmargin: 0.5rem 0;\n"]);
+  var data = (0, _taggedTemplateLiteral2.default)(["\nfont-weight: 600;\npadding: 0.25rem;\nborder: 1px solid black;\nborder-radius: 1px;\nflex-grow: 1.25;\n"]);
 
   _templateObject23 = function _templateObject23() {
     return data;
@@ -52774,7 +52814,7 @@ function _templateObject23() {
 }
 
 function _templateObject22() {
-  var data = (0, _taggedTemplateLiteral2.default)(["\nbackground-color: ", ";\ncolor: black;\ndisplay: block;\npadding: 0.2rem 0.333rem;\ntext-decoration: none;\ntext-align: center;\ntext-transform: uppercase;\nfont-family: 'Merriweather Sans', sans-serif;\nfont-weight: 800;\nline-height: 100%;\nmargin-right: 1rem;\nwhite-space: nowrap;\nfont-size: 1rem;\n@media(max-width: ", ") {\nfont-size: 0.8rem;\n}\n@media(min-width: ", ") {\npadding: 0.5rem 0.5rem;\nfont-size: 1.2rem;\n}\n:hover {\ncolor: white;\n}\n"]);
+  var data = (0, _taggedTemplateLiteral2.default)(["\npadding: 0.25rem;\nborder: 1px solid black;\nborder-radius: 1px;\nfont-size: 1.25rem;\nfont-family: 'Courier New', Monaco, Courier, monospace;\n@media(min-width: ", ") {\nfont-size: 1.75rem;\n}\n"]);
 
   _templateObject22 = function _templateObject22() {
     return data;
@@ -52784,7 +52824,7 @@ function _templateObject22() {
 }
 
 function _templateObject21() {
-  var data = (0, _taggedTemplateLiteral2.default)(["\nbackground-color: black;\nfont-size: 1rem;\ncolor: ", ";\ntext-transform: uppercase;\noutline: none;\nborder: 1px solid rgba(0,0,0,0);\npadding: 0.5rem 1rem;\n-webkit-appearance: none;\n-moz-appearance: none;\n:hover {\ncolor: white;\nbackground-color: blue;\n}\n"]);
+  var data = (0, _taggedTemplateLiteral2.default)(["\npadding: 0.25rem;\nborder: 1px solid black;\nborder-radius: 1px;\nwidth: 100%;\nfont-size: 1.25rem;\nfont-family: 'Courier New', Monaco, Courier, monospace;\n@media(min-width: ", ") {\nfont-size: 1.75rem;\n}\n"]);
 
   _templateObject21 = function _templateObject21() {
     return data;
@@ -52794,7 +52834,7 @@ function _templateObject21() {
 }
 
 function _templateObject20() {
-  var data = (0, _taggedTemplateLiteral2.default)(["\nbackground-color: ", ";\nfont-size: 1rem;\ncolor: white;\ntext-transform: uppercase;\noutline: none;\nwidth: 60px;\ntex-align: center;\npadding: 0.5rem 1rem;\n-webkit-appearance: none;\n-moz-appearance: none;\nborder: 1px solid rgba(0,0,0,0);\n:hover {\ncolor: yellow;\n}\n"]);
+  var data = (0, _taggedTemplateLiteral2.default)(["\nwidth: 80%;\n"]);
 
   _templateObject20 = function _templateObject20() {
     return data;
@@ -52804,7 +52844,7 @@ function _templateObject20() {
 }
 
 function _templateObject19() {
-  var data = (0, _taggedTemplateLiteral2.default)(["\nfont-weight: 600;\npadding: 0.25rem;\nborder: 1px solid black;\nborder-radius: 1px;\nflex-grow: 1.25;\n"]);
+  var data = (0, _taggedTemplateLiteral2.default)(["\nwidth: 100%;\n"]);
 
   _templateObject19 = function _templateObject19() {
     return data;
@@ -52814,7 +52854,7 @@ function _templateObject19() {
 }
 
 function _templateObject18() {
-  var data = (0, _taggedTemplateLiteral2.default)(["\npadding: 0.25rem;\nborder: 1px solid black;\nborder-radius: 1px;\nflex-grow: 1.25;\nfont-size: 1.25rem;\nfont-family: 'Courier New', Monaco, Courier, monospace;\n@media(min-width: ", ") {\nfont-size: 1.75rem;\n}\n"]);
+  var data = (0, _taggedTemplateLiteral2.default)(["\nfont-weight: 600;\npadding: 0.25rem;\ntext-align: right;\nmargin-right: 2rem;\nwhite-space: nowrap;\nfont-family: 'Merriweather Sans', sans-serif;\n"]);
 
   _templateObject18 = function _templateObject18() {
     return data;
@@ -52824,7 +52864,7 @@ function _templateObject18() {
 }
 
 function _templateObject17() {
-  var data = (0, _taggedTemplateLiteral2.default)(["\nfont-weight: 600;\npadding: 0.25rem;\nflex-grow: 1;\ntext-align: right;\nmargin-right: 2rem;\n"]);
+  var data = (0, _taggedTemplateLiteral2.default)(["\nmargin-bottom: 0.5rem;\nfont-family: 'Merriweather Sans', sans-serif;\n"]);
 
   _templateObject17 = function _templateObject17() {
     return data;
@@ -52834,7 +52874,7 @@ function _templateObject17() {
 }
 
 function _templateObject16() {
-  var data = (0, _taggedTemplateLiteral2.default)(["\ndisplay: flex;\nflex-direction: row;\njustify-content: space-between;\nalign-items: baseline;\nmargin-bottom: 0.5rem;\nfont-family: 'Merriweather Sans', sans-serif;\n"]);
+  var data = (0, _taggedTemplateLiteral2.default)(["\ndisplay: flex;\nflex-direction: row;\njustify-content: space-around;\npadding: 0 0.5rem;\nclear: both;\nmargin: 1rem;\nwidth: 100%;\n"]);
 
   _templateObject16 = function _templateObject16() {
     return data;
@@ -52844,7 +52884,7 @@ function _templateObject16() {
 }
 
 function _templateObject15() {
-  var data = (0, _taggedTemplateLiteral2.default)(["\ndisplay: flex;\nflex-direction: row;\njustify-content: space-around;\npadding: 0 0.5rem;\nclear: both;\nmargin: 1rem;\nwidth: 100%;\n"]);
+  var data = (0, _taggedTemplateLiteral2.default)(["\nbackground-color: ", ";\ncolor: black;\ndisplay: flex;\nflex-direction: row;\nalign-items: center;\npadding: 0rem 0.25rem;\ntext-decoration: none;\ntext-align: center;\nfont-family: 'Merriweather Sans', sans-serif;\nfont-weight: 400;\nfont-size: 0.8rem;\nline-height: 100%;\nmargin-right: 1rem;\nwhite-space: nowrap;\n@media(min-width: ", ") {\nfont-size: 1rem;\n}\n:hover {\ncolor: white;\n}\n"]);
 
   _templateObject15 = function _templateObject15() {
     return data;
@@ -52854,7 +52894,7 @@ function _templateObject15() {
 }
 
 function _templateObject14() {
-  var data = (0, _taggedTemplateLiteral2.default)(["\nbackground-color: ", ";\ncolor: black;\ndisplay: flex;\nflex-direction: row;\nalign-items: center;\npadding: 0rem 0.25rem;\ntext-decoration: none;\ntext-align: center;\nfont-family: 'Merriweather Sans', sans-serif;\nfont-weight: 400;\nfont-size: 0.8rem;\nline-height: 100%;\nmargin-right: 1rem;\nwhite-space: nowrap;\n@media(min-width: ", ") {\nfont-size: 1rem;\n}\n:hover {\ncolor: white;\n}\n"]);
+  var data = (0, _taggedTemplateLiteral2.default)(["\nflex: 0;\nmargin-top: 4px;\n"]);
 
   _templateObject14 = function _templateObject14() {
     return data;
@@ -52864,7 +52904,7 @@ function _templateObject14() {
 }
 
 function _templateObject13() {
-  var data = (0, _taggedTemplateLiteral2.default)(["\nflex: 0;\nmargin-top: 4px;\n"]);
+  var data = (0, _taggedTemplateLiteral2.default)(["\nfont-family: 'Cormorant Garamond',Georgia,serif;\nfont-size: 1.1rem;\npre {\nfont-size: 0.8rem;\n@media(min-width: ", ") {\nfont-size: 1rem;\n}\n}\nh1, h2, h3, h4, h5, h6 {\nfont-family: ", ";\nfont-size: 1rem;\npadding: 0;\nmargin: 0;\n}\nh1 {\nfont-size: 1.75rem;\ntext-shadow: 2px 2px 2px black;\ncolor: white;\ntext-transform: uppercase;\nmargin-bottom: 0.5rem;\n}\nh2 {\ntext-shadow: 2px 2px 2px white;\nfont-size: 1.5rem;\nmargin-bottom: 0.25rem;\n}\n@media(min-width: ", ") {\nfont-size: 1.25rem;\n}\n"]);
 
   _templateObject13 = function _templateObject13() {
     return data;
@@ -52874,7 +52914,7 @@ function _templateObject13() {
 }
 
 function _templateObject12() {
-  var data = (0, _taggedTemplateLiteral2.default)(["\nfont-family: 'Cormorant Garamond',Georgia,serif;\nfont-size: 1.1rem;\npre {\nfont-size: 0.8rem;\n@media(min-width: ", ") {\nfont-size: 1rem;\n}\n}\nh1, h2, h3, h4, h5, h6 {\nfont-family: ", ";\nfont-size: 1rem;\npadding: 0;\nmargin: 0;\n}\nh1 {\nfont-size: 1.75rem;\ntext-shadow: 2px 2px 2px black;\ncolor: white;\ntext-transform: uppercase;\nmargin-bottom: 0.5rem;\n}\nh2 {\ntext-shadow: 2px 2px 2px white;\nfont-size: 1.5rem;\nmargin-bottom: 0.25rem;\n}\n@media(min-width: ", ") {\nfont-size: 1.25rem;\n}\n"]);
+  var data = (0, _taggedTemplateLiteral2.default)(["\ndisplay: flex;\nflex-direction: column;\nalign-items: stretch;\n"]);
 
   _templateObject12 = function _templateObject12() {
     return data;
@@ -52884,7 +52924,7 @@ function _templateObject12() {
 }
 
 function _templateObject11() {
-  var data = (0, _taggedTemplateLiteral2.default)(["\ndisplay: flex;\nflex-direction: column;\nalign-items: stretch;\n"]);
+  var data = (0, _taggedTemplateLiteral2.default)(["\npadding: 0.5rem 2rem;\nbackground-color: ", ";\n-webkit-box-shadow: 0px 0px ", " ", " ", ";\n-moz-box-shadow: 0px 0px ", " ", " ", ";\nbox-shadow: 0px 0px ", " ", " ", ";\ndisplay: flex;\nflex-direction: column;\nalign-items: stretch;\n"]);
 
   _templateObject11 = function _templateObject11() {
     return data;
@@ -52894,7 +52934,7 @@ function _templateObject11() {
 }
 
 function _templateObject10() {
-  var data = (0, _taggedTemplateLiteral2.default)(["\npadding: 0.5rem 2rem;\nbackground-color: ", ";\n-webkit-box-shadow: 0px 0px ", " ", " ", ";\n-moz-box-shadow: 0px 0px ", " ", " ", ";\nbox-shadow: 0px 0px ", " ", " ", ";\ndisplay: flex;\nflex-direction: column;\nalign-items: stretch;\n"]);
+  var data = (0, _taggedTemplateLiteral2.default)(["\npadding: 2rem 3rem;\npadding-top: 0; \n@media(max-width: ", ") {\npadding: 0;\n}\n"]);
 
   _templateObject10 = function _templateObject10() {
     return data;
@@ -52904,7 +52944,7 @@ function _templateObject10() {
 }
 
 function _templateObject9() {
-  var data = (0, _taggedTemplateLiteral2.default)(["\npadding: 2rem 3rem;\npadding-top: 0; \n@media(max-width: ", ") {\npadding: 0;\n}\n"]);
+  var data = (0, _taggedTemplateLiteral2.default)(["\nfont-family: ", ";\ncolor: white;\nfont-weight: 800;\nfont-size: 2rem;\ntext-align: center;\ntext-transform: uppercase;\nmargins: 0;\n  padding: 0 4rem;\ntext-shadow: 2px 2px 2px #000000;\n@media(max-width: ", ") {\nfont-size: 1rem;\npadding: 0;\n}\na {\ntext-decoration: none;\ncolor: rgba(255,255,255,0.8);\ntext-shadow: none;\nfont-weight: 200;\nfont-size: 0.95em;\n:hover {\n  text-decoration: underline;\n}\n}\n"]);
 
   _templateObject9 = function _templateObject9() {
     return data;
@@ -52914,7 +52954,7 @@ function _templateObject9() {
 }
 
 function _templateObject8() {
-  var data = (0, _taggedTemplateLiteral2.default)(["\nfont-family: ", ";\ncolor: white;\nfont-weight: 800;\nfont-size: 2rem;\ntext-align: center;\ntext-transform: uppercase;\nmargins: 0;\n  padding: 0 4rem;\ntext-shadow: 2px 2px 2px #000000;\nbackground-color: ", ";\n@media(max-width: ", ") {\nfont-size: 1rem;\npadding: 0;\n}\na {\ntext-decoration: none;\ncolor: rgba(255,255,255,0.8);\ntext-shadow: none;\nfont-weight: 200;\nfont-size: 0.95em;\n:hover {\n  text-decoration: underline;\n}\n}\n"]);
+  var data = (0, _taggedTemplateLiteral2.default)(["\nheight: 40vh;\npadding: 1rem;\nfont-size: 1.25rem;\nfont-family: 'Courier New', Monaco, Courier, monospace;\n@media(min-width: ", ") {\nfont-size: 1.75rem;\n}\n"]);
 
   _templateObject8 = function _templateObject8() {
     return data;
@@ -52924,7 +52964,7 @@ function _templateObject8() {
 }
 
 function _templateObject7() {
-  var data = (0, _taggedTemplateLiteral2.default)(["\nheight: 60vh;\npadding: 1rem;\nfont-size: 1.25rem;\nfont-family: 'Courier New', Monaco, Courier, monospace;\n@media(min-width: ", ") {\nfont-size: 1.75rem;\n}\n"]);
+  var data = (0, _taggedTemplateLiteral2.default)(["\ndisplay: inline-block;\nheight: 1.5rem;\nwidth: 1.5rem;\nbackground: url(", ");\nbackground-size: cover;\nmargin-right: 0.2rem;\n"]);
 
   _templateObject7 = function _templateObject7() {
     return data;
@@ -52934,7 +52974,7 @@ function _templateObject7() {
 }
 
 function _templateObject6() {
-  var data = (0, _taggedTemplateLiteral2.default)(["\ndisplay: inline-block;\nheight: 1.5rem;\nwidth: 1.5rem;\nbackground: url(", ");\nbackground-size: cover;\nmargin-right: 0.2rem;\n"]);
+  var data = (0, _taggedTemplateLiteral2.default)(["\ndisplay: none;\nposition: absolute;\nleft: 2rem;\ntop: 1.5rem;\nwidth: 20rem;\ntext-decoration: none;\nbackground: white;\nborder-radius: 2px;\nz-index: 1000;\ncolor: white;\nfont-family: 'Merriweather Sans', sans-serif;\nfont-weight: 200;\nfont-size: 1rem;\ncolor: black;\npadding: 0.2rem 0.5rem;\nmargin: 0.333rem 0.25rem;\nmargin-left: -0.666rem;\n@media(max-width: ", ") {\npadding: 2px;\nmargin: 0;\n}\n@media(min-width: ", ") {\npadding: 0.5rem 1rem;\nfont-size: 1.1rem;\n}\n"]);
 
   _templateObject6 = function _templateObject6() {
     return data;
@@ -52944,7 +52984,7 @@ function _templateObject6() {
 }
 
 function _templateObject5() {
-  var data = (0, _taggedTemplateLiteral2.default)(["\ndisplay: block;\ntext-decoration: none;\nbackground: transparent;\ncolor: white;\nfont-family: 'Merriweather Sans', sans-serif;\nfont-weight: 200;\nfont-size: 1rem;\ncolor: white !important;\npadding: 0.2rem 0.5rem;\nmargin: 0.333rem 0.25rem;\nmargin-left: -0.666rem;\n@media(max-width: ", ") {\npadding: 2px;\nmargin: 0;\n}\n@media(min-width: ", ") {\npadding: 0.5rem 1rem;\nfont-size: 1.2rem;\n}\n:hover {\ntext-decoration: underline;\n}\n&.unpublished {\ntext-decoration: line-through\n}\n"]);
+  var data = (0, _taggedTemplateLiteral2.default)(["\ndisplay: block;\ntext-decoration: none;\nposition: relative;\nbackground: ", ";\ncolor: white;\nfont-family: 'Merriweather Sans', sans-serif;\nfont-weight: 300;\nfont-size: 1rem;\ncolor: white !important;\npadding: 0.2rem 0.5rem;\nmargin: 0.333rem 0.25rem;\n@media(max-width: ", ") {\npadding: 2px;\nmargin: 0;\n}\n@media(min-width: ", ") {\npadding: 0.5rem 1rem;\nfont-size: 1.1rem;\n}\n:hover {\ntext-decoration: underline;\ndiv[data-role='text'] {\ndisplay: block;\n}\n}\n&.unpublished {\ntext-decoration: line-through\n}\n"]);
 
   _templateObject5 = function _templateObject5() {
     return data;
@@ -52954,7 +52994,7 @@ function _templateObject5() {
 }
 
 function _templateObject4() {
-  var data = (0, _taggedTemplateLiteral2.default)(["\ndisplay: block;\ntext-decoration: none;\nbackground: ", ";\ncolor: white;\nfont-family: 'Merriweather Sans', sans-serif;\nfont-weight: 300;\nfont-size: 1rem;\ncolor: white !important;\npadding: 0.2rem 0.5rem;\nmargin: 0.333rem 0.25rem;\n@media(max-width: ", ") {\npadding: 2px;\nmargin: 0;\n}\n@media(min-width: ", ") {\npadding: 0.5rem 1rem;\nfont-size: 1.2rem;\n}\n:hover {\ntext-decoration: underline;\n}\n&.unpublished {\ntext-decoration: line-through\n}\n"]);
+  var data = (0, _taggedTemplateLiteral2.default)(["\n@media(min-width: ", ") {\ndisplay: flex;\nflex-direction: row;\njustify-content: center;\nflex-wrap: wrap;\noverflow: visible;\n}\n"]);
 
   _templateObject4 = function _templateObject4() {
     return data;
@@ -52964,7 +53004,7 @@ function _templateObject4() {
 }
 
 function _templateObject3() {
-  var data = (0, _taggedTemplateLiteral2.default)(["\n@media(min-width: ", ") {\ndisplay: flex;\nflex-direction: row;\njustify-content: center;\nflex-wrap: wrap;\n}\n"]);
+  var data = (0, _taggedTemplateLiteral2.default)(["\nposition: absolute;\nflex-grow: 1;\n"]);
 
   _templateObject3 = function _templateObject3() {
     return data;
@@ -52974,7 +53014,7 @@ function _templateObject3() {
 }
 
 function _templateObject2() {
-  var data = (0, _taggedTemplateLiteral2.default)(["\nwidth: 100%;\n@media(min-width: 800px) {\noverflow-y: auto\n}"]);
+  var data = (0, _taggedTemplateLiteral2.default)(["\nwidth: 100%;\n@media(min-width: 800px) {\noverflow-y: visible\n}"]);
 
   _templateObject2 = function _templateObject2() {
     return data;
@@ -52984,7 +53024,7 @@ function _templateObject2() {
 }
 
 function _templateObject() {
-  var data = (0, _taggedTemplateLiteral2.default)(["\ntext-align: center;\ntext-transform: uppercase;\nfont-family: ", ";\ncolor: black;\nfont-weight: 300;\nfont-size: 2rem;\nmargin: 0;\npadding: 0;\nline-height: 100%;\nbackground-color: ", ";\ntext-shadow: 2px 2px 2px #FFFFFF;\n@media(max-width: 800px) {\n  font-size: 1rem;\n  font-weight: 800;\n}\n"]);
+  var data = (0, _taggedTemplateLiteral2.default)(["\ntext-align: center;\ntext-transform: uppercase;\nfont-family: ", ";\ncolor: black;\nfont-weight: 300;\nfont-size: 2rem;\nmargin: 0;\npadding: 0;\nline-height: 100%;\ntext-shadow: 1px 1px 2px #FFFFFF;\n@media(max-width: 800px) {\n  font-size: 1rem;\n  font-weight: 800;\n}\n"]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -52993,13 +53033,13 @@ function _templateObject() {
   return data;
 }
 
-var BUTTON_MASK = 'rgba(200,200,200,0.666)';
+var BUTTON_MASK = 'rgba(200,200,200,0.333)';
 var CONTENT_MASK = 'rgb(255,255,255)';
 var LIGHT_GREY = 'rgb(200,200,200)';
 var ARTICLE_LINK_BACK = 'rgba(128,128,128,0.95)';
 var HEADLINE_FONT = '\'Merriweather Sans\', sans-serif';
 
-var SiteHeadline = _styledComponents.default.h1(_templateObject(), HEADLINE_FONT, BUTTON_MASK);
+var SiteHeadline = _styledComponents.default.h1(_templateObject(), HEADLINE_FONT);
 
 exports.SiteHeadline = SiteHeadline;
 
@@ -53007,75 +53047,93 @@ var ArticleListWrapper = _styledComponents.default.div(_templateObject2());
 
 exports.ArticleListWrapper = ArticleListWrapper;
 
-var ArticleList = _styledComponents.default.div(_templateObject3(), _constants.SMALL_NAV);
+var ArticleItemWrapper = _styledComponents.default.div(_templateObject3());
+
+exports.ArticleItemWrapper = ArticleItemWrapper;
+
+var ArticleList = _styledComponents.default.div(_templateObject4(), _constants.SMALL_NAV);
 
 exports.ArticleList = ArticleList;
-var ArticleItem = (0, _styledComponents.default)(_reactRouterDom.Link)(_templateObject4(), ARTICLE_LINK_BACK, _constants.SMALL_NAV, _constants.LARGE_NAV);
+var ArticleItem = (0, _styledComponents.default)(_reactRouterDom.Link)(_templateObject5(), ARTICLE_LINK_BACK, _constants.SMALL_NAV, _constants.LARGE_NAV);
 exports.ArticleItem = ArticleItem;
-var ArticleText = (0, _styledComponents.default)(_reactRouterDom.Link)(_templateObject5(), _constants.SMALL_NAV, _constants.LARGE_NAV);
+
+var ArticleText = _styledComponents.default.div(_templateObject6(), _constants.SMALL_NAV, _constants.LARGE_NAV);
+
 exports.ArticleText = ArticleText;
 
-var UserIcon = _styledComponents.default.div(_templateObject6(), function (props) {
+var UserIcon = _styledComponents.default.div(_templateObject7(), function (props) {
   return props.picture;
 });
 
 exports.UserIcon = UserIcon;
 
-var ContentEditor = _styledComponents.default.textarea(_templateObject7(), _constants.LARGE_NAV);
+var ContentEditor = _styledComponents.default.textarea(_templateObject8(), _constants.LARGE_NAV);
 
 exports.ContentEditor = ContentEditor;
 
-var PageHead = _styledComponents.default.h1(_templateObject8(), HEADLINE_FONT, BUTTON_MASK, _constants.SMALL_NAV);
+var PageHead = _styledComponents.default.h1(_templateObject9(), HEADLINE_FONT, _constants.SMALL_NAV);
 
 exports.PageHead = PageHead;
 
-var ArticleFrame = _styledComponents.default.article(_templateObject9(), _constants.SMALL_NAV);
+var ArticleFrame = _styledComponents.default.article(_templateObject10(), _constants.SMALL_NAV);
 
 exports.ArticleFrame = ArticleFrame;
 var n1 = '4px';
 var n2 = '4px';
 
-var FuzzyBox = _styledComponents.default.div(_templateObject10(), CONTENT_MASK, n1, n2, CONTENT_MASK, n1, n2, CONTENT_MASK, n1, n2, CONTENT_MASK);
+var FuzzyBox = _styledComponents.default.div(_templateObject11(), CONTENT_MASK, n1, n2, CONTENT_MASK, n1, n2, CONTENT_MASK, n1, n2, CONTENT_MASK);
 
 exports.FuzzyBox = FuzzyBox;
 
-var TableBox = _styledComponents.default.div(_templateObject11());
+var TableBox = _styledComponents.default.div(_templateObject12());
 
 exports.TableBox = TableBox;
 
-var Text = _styledComponents.default.div(_templateObject12(), _constants.LARGE_NAV, HEADLINE_FONT, _constants.LARGE_NAV);
+var Text = _styledComponents.default.div(_templateObject13(), _constants.LARGE_NAV, HEADLINE_FONT, _constants.LARGE_NAV);
 
 exports.Text = Text;
 
-var NavbarFrame = _styledComponents.default.div(_templateObject13());
+var NavbarFrame = _styledComponents.default.div(_templateObject14());
 
 exports.NavbarFrame = NavbarFrame;
 
-var UserButton = _styledComponents.default.div(_templateObject14(), BUTTON_MASK, _constants.SMALL_NAV);
+var UserButton = _styledComponents.default.div(_templateObject15(), BUTTON_MASK, _constants.SMALL_NAV);
 
 exports.UserButton = UserButton;
 
-var ButtonList = _styledComponents.default.div(_templateObject15());
+var ButtonList = _styledComponents.default.div(_templateObject16());
 
 exports.ButtonList = ButtonList;
 
-var FormItem = _styledComponents.default.div(_templateObject16());
+var FormItem = _styledComponents.default.tr(_templateObject17());
 
 exports.FormItem = FormItem;
 
-var FormLabel = _styledComponents.default.div(_templateObject17());
+var FormLabel = _styledComponents.default.th(_templateObject18());
 
 exports.FormLabel = FormLabel;
 
-var Input = _styledComponents.default.input(_templateObject18(), _constants.LARGE_NAV);
+var FormContainer = _styledComponents.default.table(_templateObject19());
+
+exports.FormContainer = FormContainer;
+
+var FormContent = _styledComponents.default.td(_templateObject20());
+
+exports.FormContent = FormContent;
+
+var Input = _styledComponents.default.input(_templateObject21(), _constants.LARGE_NAV);
 
 exports.Input = Input;
 
-var CheckboxWrapper = _styledComponents.default.div(_templateObject19());
+var Select = _styledComponents.default.select(_templateObject22(), _constants.LARGE_NAV);
+
+exports.Select = Select;
+
+var CheckboxWrapper = _styledComponents.default.div(_templateObject23());
 
 exports.CheckboxWrapper = CheckboxWrapper;
 
-var ToggleButton = _styledComponents.default.button(_templateObject20(), function (props) {
+var ToggleButton = _styledComponents.default.button(_templateObject24(), function (props) {
   var active = 'data-on' in props ? props['data-on'] : null;
   if (active === null) return 'grey';
   if (active) return 'darkgreen';
@@ -53084,17 +53142,17 @@ var ToggleButton = _styledComponents.default.button(_templateObject20(), functio
 
 exports.ToggleButton = ToggleButton;
 
-var EditButton = _styledComponents.default.button(_templateObject21(), LIGHT_GREY);
+var EditButton = _styledComponents.default.button(_templateObject25(), LIGHT_GREY);
 
 exports.EditButton = EditButton;
-var CategoryView = (0, _styledComponents.default)(_reactRouterDom.Link)(_templateObject22(), BUTTON_MASK, _constants.SMALL_NAV, _constants.LARGE_NAV);
+var CategoryView = (0, _styledComponents.default)(_reactRouterDom.Link)(_templateObject26(), _constants.SMALL_NAV, _constants.LARGE_NAV);
 exports.CategoryView = CategoryView;
 
-var Line = _styledComponents.default.hr(_templateObject23());
+var Line = _styledComponents.default.hr(_templateObject27());
 
 exports.Line = Line;
 
-var CategoryList = _styledComponents.default.div(_templateObject24());
+var CategoryList = _styledComponents.default.div(_templateObject28());
 
 exports.CategoryList = CategoryList;
 },{"@babel/runtime-corejs2/helpers/taggedTemplateLiteral":"../node_modules/@babel/runtime-corejs2/helpers/taggedTemplateLiteral.js","styled-components":"../node_modules/styled-components/dist/styled-components.browser.esm.js","react-router-dom":"../node_modules/react-router-dom/es/index.js","../constants":"constants.json"}],"components/Navbar/NavbarView.jsx":[function(require,module,exports) {
@@ -53120,7 +53178,17 @@ var NavbarView = function NavbarView(_ref) {
       isAdmin = _ref.isAdmin,
       isEditing = _ref.isEditing,
       userStore = _ref.userStore;
-  return _react.default.createElement(_style.NavbarFrame, null, _react.default.createElement(_style.SiteHeadline, null, "Wonderland Labs"), _react.default.createElement(_style.CategoryList, null, _react.default.createElement(_style.CategoryView, {
+  return _react.default.createElement(_style.NavbarFrame, {
+    "data-tag": "navbar-frame"
+  }, _react.default.createElement(_style.CategoryList, {
+    style: {
+      background: 'transparent'
+    }
+  }, user && _react.default.createElement(_style.UserButton, null, _react.default.createElement(_style.UserIcon, user), user.name), _react.default.createElement(_style.UserButton, {
+    onClick: function onClick() {
+      !user ? userStore.actions.logIn() : userStore.actions.logOut();
+    }
+  }, user ? 'sign out' : 'sign in'), isAdmin && _react.default.createElement(_style.UserButton, null, "Administer")), _react.default.createElement(_style.SiteHeadline, null, "Wonderland Labs"), _react.default.createElement(_style.CategoryList, null, _react.default.createElement(_style.CategoryView, {
     key: "home",
     to: "/"
   }, "Home"), categories && categories.filter(function (cat) {
@@ -53133,11 +53201,7 @@ var NavbarView = function NavbarView(_ref) {
         return gotoCategory(cat);
       }
     }, cat.title);
-  })), _react.default.createElement(_style.Line, null), _react.default.createElement(_style.CategoryList, null, user && _react.default.createElement(_style.UserButton, null, _react.default.createElement(_style.UserIcon, user), user.name), _react.default.createElement(_style.UserButton, {
-    onClick: function onClick() {
-      !user ? userStore.actions.logIn() : userStore.actions.logOut();
-    }
-  }, user ? 'sign out' : 'sign in'), isAdmin && _react.default.createElement(_style.UserButton, null, "Administer")));
+  })), _react.default.createElement(_style.Line, null));
 };
 
 NavbarView.propTypes = {
@@ -72933,312 +72997,7 @@ var categories = new _lookingGlassEngine.Store({
 categories.start();
 var _default = categories;
 exports.default = _default;
-},{"@wonderlandlabs/looking-glass-engine":"../node_modules/@wonderlandlabs/looking-glass-engine/build/index.js","axios":"../node_modules/axios/index.js","../js/encodePath":"js/encodePath.js"}],"components/Navbar/NavbarContainer.jsx":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-
-var _extends2 = _interopRequireDefault(require("@babel/runtime-corejs2/helpers/extends"));
-
-var _objectSpread2 = _interopRequireDefault(require("@babel/runtime-corejs2/helpers/objectSpread"));
-
-var _classCallCheck2 = _interopRequireDefault(require("@babel/runtime-corejs2/helpers/classCallCheck"));
-
-var _createClass2 = _interopRequireDefault(require("@babel/runtime-corejs2/helpers/createClass"));
-
-var _possibleConstructorReturn2 = _interopRequireDefault(require("@babel/runtime-corejs2/helpers/possibleConstructorReturn"));
-
-var _getPrototypeOf2 = _interopRequireDefault(require("@babel/runtime-corejs2/helpers/getPrototypeOf"));
-
-var _inherits2 = _interopRequireDefault(require("@babel/runtime-corejs2/helpers/inherits"));
-
-var _react = _interopRequireWildcard(require("react"));
-
-var _NavbarView = _interopRequireDefault(require("./NavbarView"));
-
-var _categories = _interopRequireDefault(require("../../models/categories"));
-
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var NavbarContainer =
-/*#__PURE__*/
-function (_Component) {
-  (0, _inherits2.default)(NavbarContainer, _Component);
-
-  function NavbarContainer(props) {
-    var _this;
-
-    (0, _classCallCheck2.default)(this, NavbarContainer);
-    _this = (0, _possibleConstructorReturn2.default)(this, (0, _getPrototypeOf2.default)(NavbarContainer).call(this, props));
-    _this.state = {
-      categories: [],
-      user: false,
-      userStore: props.userStore
-    };
-    return _this;
-  }
-
-  (0, _createClass2.default)(NavbarContainer, [{
-    key: "componentDidMount",
-    value: function componentDidMount() {
-      var _this2 = this;
-
-      this._catSub = _categories.default.subscribe(function (_ref) {
-        var state = _ref.state;
-
-        _this2.setState({
-          categories: state.categories || []
-        });
-      });
-
-      if (this.props.userStore) {
-        this._userSub = this.props.userStore.subscribe(function (_ref2) {
-          var state = _ref2.state;
-          console.log('nav: store state:', state);
-
-          _this2.setState({
-            user: state.user || false,
-            isAdmin: state.isAdmin
-          });
-        });
-      }
-    }
-  }, {
-    key: "componentWillUnmount",
-    value: function componentWillUnmount() {
-      if (this._catSub) this._catSub.unsubscribe();
-      if (this._userSub) this._userSub.unsubscribe();
-    }
-  }, {
-    key: "gotoCategory",
-    value: function gotoCategory(_ref3) {
-      var title = _ref3.title;
-      console.log('go to category', title);
-    }
-  }, {
-    key: "render",
-    value: function render() {
-      var _this3 = this;
-
-      var props = (0, _objectSpread2.default)({}, this.props);
-      delete props.children;
-      return _react.default.createElement(_NavbarView.default, (0, _extends2.default)({}, this.state, {
-        categories: this.categories,
-        gotoCategory: function gotoCategory(name) {
-          return _this3.gotoCategory(name);
-        }
-      }));
-    }
-  }, {
-    key: "categories",
-    get: function get() {
-      if (!this.state.categories) return [];
-      if (!this.state.isAdmin) return this.state.categories.filter(function (c) {
-        return c.published;
-      });
-      return this.state.categories.slice(0);
-    }
-  }]);
-  return NavbarContainer;
-}(_react.Component);
-
-exports.default = NavbarContainer;
-},{"@babel/runtime-corejs2/helpers/extends":"../node_modules/@babel/runtime-corejs2/helpers/extends.js","@babel/runtime-corejs2/helpers/objectSpread":"../node_modules/@babel/runtime-corejs2/helpers/objectSpread.js","@babel/runtime-corejs2/helpers/classCallCheck":"../node_modules/@babel/runtime-corejs2/helpers/classCallCheck.js","@babel/runtime-corejs2/helpers/createClass":"../node_modules/@babel/runtime-corejs2/helpers/createClass.js","@babel/runtime-corejs2/helpers/possibleConstructorReturn":"../node_modules/@babel/runtime-corejs2/helpers/possibleConstructorReturn.js","@babel/runtime-corejs2/helpers/getPrototypeOf":"../node_modules/@babel/runtime-corejs2/helpers/getPrototypeOf.js","@babel/runtime-corejs2/helpers/inherits":"../node_modules/@babel/runtime-corejs2/helpers/inherits.js","react":"../node_modules/react/index.js","./NavbarView":"components/Navbar/NavbarView.jsx","../../models/categories":"models/categories.js"}],"components/Navbar/extend.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-
-var _reactRouterDom = require("react-router-dom");
-
-var _default = function _default(component) {
-  return (0, _reactRouterDom.withRouter)(component);
-};
-
-exports.default = _default;
-},{"react-router-dom":"../node_modules/react-router-dom/es/index.js"}],"components/Navbar/index.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-Object.defineProperty(exports, "NavbarContainer", {
-  enumerable: true,
-  get: function () {
-    return _NavbarContainer.default;
-  }
-});
-Object.defineProperty(exports, "NavbarView", {
-  enumerable: true,
-  get: function () {
-    return _NavbarView.default;
-  }
-});
-exports.NavbarContainerHOC = exports.NavbarViewHOC = exports.default = void 0;
-
-var _NavbarContainer = _interopRequireDefault(require("./NavbarContainer"));
-
-var _NavbarView = _interopRequireDefault(require("./NavbarView"));
-
-var _extend = _interopRequireDefault(require("./extend"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var NavbarViewHOC = (0, _extend.default)(_NavbarView.default);
-exports.NavbarViewHOC = NavbarViewHOC;
-var NavbarContainerHOC = (0, _extend.default)(_NavbarContainer.default);
-exports.NavbarContainerHOC = NavbarContainerHOC;
-var _default = NavbarContainerHOC;
-exports.default = _default;
-},{"./NavbarContainer":"components/Navbar/NavbarContainer.jsx","./NavbarView":"components/Navbar/NavbarView.jsx","./extend":"components/Navbar/extend.js"}],"components/Homepage/HomepageView.jsx":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-
-var _react = _interopRequireDefault(require("react"));
-
-var _propTypes = _interopRequireDefault(require("prop-types"));
-
-var _style = require("../style");
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var HomepageView = function HomepageView(state) {
-  return _react.default.createElement(_style.ArticleListWrapper, null, _react.default.createElement(_style.ArticleList, null, state.homepageArticles.map(function (a) {
-    return _react.default.createElement(_react.default.Fragment, null, _react.default.createElement(_style.ArticleItem, {
-      to: '/article/' + a.path,
-      key: a.path
-    }, a.title), a.description && _react.default.createElement(_style.ArticleText, null, a.description));
-  })));
-};
-
-HomepageView.propTypes = {
-  homepageArticles: _propTypes.default.array
-};
-HomepageView.defaultProps = {
-  homepageArticles: []
-};
-var _default = HomepageView;
-exports.default = _default;
-},{"react":"../node_modules/react/index.js","prop-types":"../node_modules/prop-types/index.js","../style":"components/style.js"}],"models/articles.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-
-var _lookingGlassEngine = require("@wonderlandlabs/looking-glass-engine");
-
-var _axios = _interopRequireDefault(require("axios"));
-
-var _lodash = _interopRequireDefault(require("lodash"));
-
-var _encodePath = _interopRequireDefault(require("../js/encodePath"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var API_URL = "http://localhost:7070/api";
-
-var asPath = function asPath(input) {
-  if (!input) {
-    return '';
-  } else if (_lodash.default.isObject(input) && input.path) {
-    return input.path;
-  } else {
-    return _lodash.default.toString(input);
-  }
-};
-
-function articleUrl(path) {
-  var shortPath = (0, _encodePath.default)(asPath(path));
-  return "".concat(API_URL, "/articles/").concat(shortPath, ".json");
-}
-
-var articles = new _lookingGlassEngine.Store({
-  state: {},
-  actions: {
-    getCategoryArticles: function getCategoryArticles(store, directory, accessToken, sub) {
-      return _axios.default.get(API_URL + '/categories/' + (0, _encodePath.default)(directory), {
-        headers: {
-          'access_token': accessToken,
-          'sub': sub
-        }
-      }).then(function (result) {
-        return result.data.articles;
-      }).then(function (da) {
-        return store.actions.setCategoryArticles(da);
-      });
-    },
-    saveArticle: function saveArticle(store, article, accessToken, sub) {
-      return (0, _axios.default)({
-        method: 'PUT',
-        url: articleUrl(article),
-        headers: {
-          'access_token': accessToken,
-          'sub': sub
-        },
-        data: article
-      }).then(function () {
-        if (store.state.currentArticle && store.state.currentArticle.path === article.path) {
-          store.actions.getArticle(article.path);
-        }
-      }).catch(function (err) {
-        console.log('error creating articles:', err);
-      });
-    },
-    // todo: safety check
-    getArticle: function getArticle(store, path) {
-      var _this = this;
-
-      return _axios.default.get(API_URL + '/articles/' + encodeURIComponent(path)).then(function (result) {
-        store.actions.setCurrentArticle(result.data);
-      }).catch(function (err) {
-        console.log('cannot get article', err);
-
-        _this.setCurrentArticle(false);
-      });
-    },
-    getHomepageArticles: function getHomepageArticles(store) {
-      var sub = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
-      var apiToken = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '';
-      return _axios.default.get(API_URL + '/homepage-articles', {
-        headers: {
-          'access_token': apiToken,
-          'sub': sub
-        }
-      }).then(function (response) {
-        return store.actions.setHomepageArticles(response.data);
-      });
-    }
-  },
-  starter: function starter(_ref) {
-    var actions = _ref.actions;
-    return actions.getHomepageArticles();
-  }
-}).addProp('homepageArticles', {
-  start: []
-}).addProp('categoryArticles', {
-  start: []
-}).addProp('articles', {
-  start: []
-}).addProp('currentArticle', {
-  start: false
-});
-articles.start();
-var _default = articles;
-exports.default = _default;
-},{"@wonderlandlabs/looking-glass-engine":"../node_modules/@wonderlandlabs/looking-glass-engine/build/index.js","axios":"../node_modules/axios/index.js","lodash":"../node_modules/lodash/lodash.js","../js/encodePath":"js/encodePath.js"}],"../node_modules/core-js/library/fn/json/stringify.js":[function(require,module,exports) {
+},{"@wonderlandlabs/looking-glass-engine":"../node_modules/@wonderlandlabs/looking-glass-engine/build/index.js","axios":"../node_modules/axios/index.js","../js/encodePath":"js/encodePath.js"}],"../node_modules/core-js/library/fn/json/stringify.js":[function(require,module,exports) {
 var core = require('../../modules/_core');
 var $JSON = core.JSON || (core.JSON = { stringify: JSON.stringify });
 module.exports = function stringify(it) { // eslint-disable-line no-unused-vars
@@ -78142,11 +77901,12 @@ var userStore = new _lookingGlassEngine.Store({
         accessToken = store.state.accessToken;
       }
 
-      if (accessToken) {
+      if (accessToken && accessToken !== 'null') {
         return new _promise.default(function (done, fail) {
           webAuth.client.userInfo(accessToken, function (err, user) {
             if (err) {
               console.log('error getting user:', err);
+              store.actions.clearUser();
               return fail(err);
             }
 
@@ -78195,15 +77955,1618 @@ if (window.location.hash.includes('access_token')) {
 
     console.log('getting user from ', authResult);
     localStorage.setItem('auth0.accessToken', authResult.accessToken);
-    userStore.actions.getUserInfo(authResult.accessToken);
+    userStore.actions.getUserInfo(authResult.accessToken).catch(function (error) {
+      console.log('error parsing hash:', error);
+    });
   });
 } else if (userStore.state.accessToken) {
-  userStore.actions.getUserInfo();
+  userStore.actions.getUserInfo().catch(function (error) {
+    console.log('error with access token:', error);
+    localStorage.setItem('auth0.accessToken', null);
+    localStorage.setItem('auth0.user', null);
+  });
 }
 
 var _default = userStore;
 exports.default = _default;
-},{"@babel/runtime-corejs2/helpers/objectSpread":"../node_modules/@babel/runtime-corejs2/helpers/objectSpread.js","@babel/runtime-corejs2/core-js/json/stringify":"../node_modules/@babel/runtime-corejs2/core-js/json/stringify.js","@babel/runtime-corejs2/core-js/promise":"../node_modules/@babel/runtime-corejs2/core-js/promise.js","auth0-js":"../node_modules/auth0-js/dist/auth0.min.esm.js","@wonderlandlabs/looking-glass-engine":"../node_modules/@wonderlandlabs/looking-glass-engine/build/index.js","lodash":"../node_modules/lodash/lodash.js","axios":"../node_modules/axios/index.js"}],"components/Homepage/HomepageContainer.jsx":[function(require,module,exports) {
+},{"@babel/runtime-corejs2/helpers/objectSpread":"../node_modules/@babel/runtime-corejs2/helpers/objectSpread.js","@babel/runtime-corejs2/core-js/json/stringify":"../node_modules/@babel/runtime-corejs2/core-js/json/stringify.js","@babel/runtime-corejs2/core-js/promise":"../node_modules/@babel/runtime-corejs2/core-js/promise.js","auth0-js":"../node_modules/auth0-js/dist/auth0.min.esm.js","@wonderlandlabs/looking-glass-engine":"../node_modules/@wonderlandlabs/looking-glass-engine/build/index.js","lodash":"../node_modules/lodash/lodash.js","axios":"../node_modules/axios/index.js"}],"components/Navbar/NavbarContainer.jsx":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _extends2 = _interopRequireDefault(require("@babel/runtime-corejs2/helpers/extends"));
+
+var _objectSpread2 = _interopRequireDefault(require("@babel/runtime-corejs2/helpers/objectSpread"));
+
+var _classCallCheck2 = _interopRequireDefault(require("@babel/runtime-corejs2/helpers/classCallCheck"));
+
+var _createClass2 = _interopRequireDefault(require("@babel/runtime-corejs2/helpers/createClass"));
+
+var _possibleConstructorReturn2 = _interopRequireDefault(require("@babel/runtime-corejs2/helpers/possibleConstructorReturn"));
+
+var _getPrototypeOf2 = _interopRequireDefault(require("@babel/runtime-corejs2/helpers/getPrototypeOf"));
+
+var _inherits2 = _interopRequireDefault(require("@babel/runtime-corejs2/helpers/inherits"));
+
+var _react = _interopRequireWildcard(require("react"));
+
+var _NavbarView = _interopRequireDefault(require("./NavbarView"));
+
+var _categories = _interopRequireDefault(require("../../models/categories"));
+
+var _user = _interopRequireDefault(require("../../models/user"));
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var NavbarContainer =
+/*#__PURE__*/
+function (_Component) {
+  (0, _inherits2.default)(NavbarContainer, _Component);
+
+  function NavbarContainer(props) {
+    var _this;
+
+    (0, _classCallCheck2.default)(this, NavbarContainer);
+    _this = (0, _possibleConstructorReturn2.default)(this, (0, _getPrototypeOf2.default)(NavbarContainer).call(this, props));
+    _this.state = {
+      categories: [],
+      user: false,
+      userStore: _user.default
+    };
+    return _this;
+  }
+
+  (0, _createClass2.default)(NavbarContainer, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      var _this2 = this;
+
+      this._mounted = true;
+      this._catSub = _categories.default.subscribe(function (_ref) {
+        var state = _ref.state;
+
+        _this2.setState({
+          categories: state.categories || []
+        });
+      });
+      this._userSub = _user.default.subscribe(function (_ref2) {
+        var state = _ref2.state;
+        if (_this2._mounted) _this2.setState({
+          user: state.user || false,
+          isAdmin: state.isAdmin
+        });
+      });
+    }
+  }, {
+    key: "componentWillUnmount",
+    value: function componentWillUnmount() {
+      this._mounted = false;
+      if (this._catSub) this._catSub.unsubscribe();
+      if (this._userSub) this._userSub.unsubscribe();
+    }
+  }, {
+    key: "gotoCategory",
+    value: function gotoCategory(_ref3) {
+      var title = _ref3.title;
+      console.log('go to category', title);
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var _this3 = this;
+
+      var props = (0, _objectSpread2.default)({}, this.props);
+      delete props.children;
+      return _react.default.createElement(_NavbarView.default, (0, _extends2.default)({}, this.state, {
+        categories: this.categories,
+        gotoCategory: function gotoCategory(name) {
+          return _this3.gotoCategory(name);
+        }
+      }));
+    }
+  }, {
+    key: "categories",
+    get: function get() {
+      if (!this.state.categories) return [];
+      if (!this.state.isAdmin) return this.state.categories.filter(function (c) {
+        return c.published;
+      });
+      return this.state.categories.slice(0);
+    }
+  }]);
+  return NavbarContainer;
+}(_react.Component);
+
+exports.default = NavbarContainer;
+},{"@babel/runtime-corejs2/helpers/extends":"../node_modules/@babel/runtime-corejs2/helpers/extends.js","@babel/runtime-corejs2/helpers/objectSpread":"../node_modules/@babel/runtime-corejs2/helpers/objectSpread.js","@babel/runtime-corejs2/helpers/classCallCheck":"../node_modules/@babel/runtime-corejs2/helpers/classCallCheck.js","@babel/runtime-corejs2/helpers/createClass":"../node_modules/@babel/runtime-corejs2/helpers/createClass.js","@babel/runtime-corejs2/helpers/possibleConstructorReturn":"../node_modules/@babel/runtime-corejs2/helpers/possibleConstructorReturn.js","@babel/runtime-corejs2/helpers/getPrototypeOf":"../node_modules/@babel/runtime-corejs2/helpers/getPrototypeOf.js","@babel/runtime-corejs2/helpers/inherits":"../node_modules/@babel/runtime-corejs2/helpers/inherits.js","react":"../node_modules/react/index.js","./NavbarView":"components/Navbar/NavbarView.jsx","../../models/categories":"models/categories.js","../../models/user":"models/user.js"}],"components/Navbar/extend.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _reactRouterDom = require("react-router-dom");
+
+var _default = function _default(component) {
+  return (0, _reactRouterDom.withRouter)(component);
+};
+
+exports.default = _default;
+},{"react-router-dom":"../node_modules/react-router-dom/es/index.js"}],"components/Navbar/index.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+Object.defineProperty(exports, "NavbarContainer", {
+  enumerable: true,
+  get: function () {
+    return _NavbarContainer.default;
+  }
+});
+Object.defineProperty(exports, "NavbarView", {
+  enumerable: true,
+  get: function () {
+    return _NavbarView.default;
+  }
+});
+exports.NavbarContainerHOC = exports.NavbarViewHOC = exports.default = void 0;
+
+var _NavbarContainer = _interopRequireDefault(require("./NavbarContainer"));
+
+var _NavbarView = _interopRequireDefault(require("./NavbarView"));
+
+var _extend = _interopRequireDefault(require("./extend"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var NavbarViewHOC = (0, _extend.default)(_NavbarView.default);
+exports.NavbarViewHOC = NavbarViewHOC;
+var NavbarContainerHOC = (0, _extend.default)(_NavbarContainer.default);
+exports.NavbarContainerHOC = NavbarContainerHOC;
+var _default = NavbarContainerHOC;
+exports.default = _default;
+},{"./NavbarContainer":"components/Navbar/NavbarContainer.jsx","./NavbarView":"components/Navbar/NavbarView.jsx","./extend":"components/Navbar/extend.js"}],"components/ArticleLinks/ArticleLinksView.jsx":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireDefault(require("react"));
+
+var _propTypes = _interopRequireDefault(require("prop-types"));
+
+var _style = require("../style");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var ArticleLinksView = function ArticleLinksView(_ref) {
+  var articles = _ref.articles;
+  return _react.default.createElement(_style.ArticleList, null, articles.reduce(function (m, a) {
+    return m.concat([_react.default.createElement(_style.ArticleItem, {
+      key: a.path,
+      to: '/article/' + a.path
+    }, a.title, _react.default.createElement(_style.ArticleText, {
+      "data-role": "text"
+    }, a.description || ''))]);
+  }, []));
+};
+
+ArticleLinksView.propTypes = {
+  articles: _propTypes.default.array
+};
+ArticleLinksView.defaultProps = {
+  articles: []
+};
+var _default = ArticleLinksView;
+exports.default = _default;
+},{"react":"../node_modules/react/index.js","prop-types":"../node_modules/prop-types/index.js","../style":"components/style.js"}],"components/ArticleLinks/ArticleLinksContainer.jsx":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _extends2 = _interopRequireDefault(require("@babel/runtime-corejs2/helpers/extends"));
+
+var _objectSpread2 = _interopRequireDefault(require("@babel/runtime-corejs2/helpers/objectSpread"));
+
+var _classCallCheck2 = _interopRequireDefault(require("@babel/runtime-corejs2/helpers/classCallCheck"));
+
+var _createClass2 = _interopRequireDefault(require("@babel/runtime-corejs2/helpers/createClass"));
+
+var _possibleConstructorReturn2 = _interopRequireDefault(require("@babel/runtime-corejs2/helpers/possibleConstructorReturn"));
+
+var _getPrototypeOf2 = _interopRequireDefault(require("@babel/runtime-corejs2/helpers/getPrototypeOf"));
+
+var _inherits2 = _interopRequireDefault(require("@babel/runtime-corejs2/helpers/inherits"));
+
+var _react = _interopRequireWildcard(require("react"));
+
+var _ArticleLinksView = _interopRequireDefault(require("./ArticleLinksView"));
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var ArticleLinksContainer =
+/*#__PURE__*/
+function (_Component) {
+  (0, _inherits2.default)(ArticleLinksContainer, _Component);
+
+  function ArticleLinksContainer(props) {
+    var _this;
+
+    (0, _classCallCheck2.default)(this, ArticleLinksContainer);
+    _this = (0, _possibleConstructorReturn2.default)(this, (0, _getPrototypeOf2.default)(ArticleLinksContainer).call(this, props));
+    _this.state = {};
+    return _this;
+  }
+
+  (0, _createClass2.default)(ArticleLinksContainer, [{
+    key: "render",
+    value: function render() {
+      var _this2 = this;
+
+      var props = (0, _objectSpread2.default)({}, this.props);
+      delete props.children;
+      return _react.default.createElement(_ArticleLinksView.default, (0, _extends2.default)({}, props, this.state, {
+        setArticleLinksFoo: function setArticleLinksFoo(value) {
+          return _this2.setArticleLinksFoo(value);
+        }
+      }));
+    }
+  }]);
+  return ArticleLinksContainer;
+}(_react.Component);
+
+exports.default = ArticleLinksContainer;
+},{"@babel/runtime-corejs2/helpers/extends":"../node_modules/@babel/runtime-corejs2/helpers/extends.js","@babel/runtime-corejs2/helpers/objectSpread":"../node_modules/@babel/runtime-corejs2/helpers/objectSpread.js","@babel/runtime-corejs2/helpers/classCallCheck":"../node_modules/@babel/runtime-corejs2/helpers/classCallCheck.js","@babel/runtime-corejs2/helpers/createClass":"../node_modules/@babel/runtime-corejs2/helpers/createClass.js","@babel/runtime-corejs2/helpers/possibleConstructorReturn":"../node_modules/@babel/runtime-corejs2/helpers/possibleConstructorReturn.js","@babel/runtime-corejs2/helpers/getPrototypeOf":"../node_modules/@babel/runtime-corejs2/helpers/getPrototypeOf.js","@babel/runtime-corejs2/helpers/inherits":"../node_modules/@babel/runtime-corejs2/helpers/inherits.js","react":"../node_modules/react/index.js","./ArticleLinksView":"components/ArticleLinks/ArticleLinksView.jsx"}],"components/ArticleLinks/extend.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+/**
+ * allows you to merge in router, redux, etc.
+ *
+ * @param component {Component}
+ * @returns {Component}
+ */
+var _default = function _default(component) {
+  return component;
+};
+
+exports.default = _default;
+},{}],"components/ArticleLinks/index.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+Object.defineProperty(exports, "ArticleLinksContainer", {
+  enumerable: true,
+  get: function () {
+    return _ArticleLinksContainer.default;
+  }
+});
+Object.defineProperty(exports, "ArticleLinksView", {
+  enumerable: true,
+  get: function () {
+    return _ArticleLinksView.default;
+  }
+});
+exports.ArticleLinksContainerHOC = exports.ArticleLinksViewHOC = exports.default = void 0;
+
+var _ArticleLinksContainer = _interopRequireDefault(require("./ArticleLinksContainer"));
+
+var _ArticleLinksView = _interopRequireDefault(require("./ArticleLinksView"));
+
+var _extend = _interopRequireDefault(require("./extend"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var ArticleLinksViewHOC = (0, _extend.default)(_ArticleLinksView.default);
+exports.ArticleLinksViewHOC = ArticleLinksViewHOC;
+var ArticleLinksContainerHOC = (0, _extend.default)(_ArticleLinksContainer.default);
+exports.ArticleLinksContainerHOC = ArticleLinksContainerHOC;
+var _default = ArticleLinksContainerHOC;
+exports.default = _default;
+},{"./ArticleLinksContainer":"components/ArticleLinks/ArticleLinksContainer.jsx","./ArticleLinksView":"components/ArticleLinks/ArticleLinksView.jsx","./extend":"components/ArticleLinks/extend.js"}],"components/Homepage/HomepageView.jsx":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireDefault(require("react"));
+
+var _propTypes = _interopRequireDefault(require("prop-types"));
+
+var _style = require("../style");
+
+var _ArticleLinks = _interopRequireDefault(require("../ArticleLinks"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var HomepageView = function HomepageView(_ref) {
+  var homepageArticles = _ref.homepageArticles;
+  return _react.default.createElement(_style.ArticleListWrapper, null, _react.default.createElement(_ArticleLinks.default, {
+    articles: homepageArticles
+  }));
+};
+
+HomepageView.propTypes = {
+  homepageArticles: _propTypes.default.array
+};
+HomepageView.defaultProps = {
+  homepageArticles: []
+};
+var _default = HomepageView;
+exports.default = _default;
+},{"react":"../node_modules/react/index.js","prop-types":"../node_modules/prop-types/index.js","../style":"components/style.js","../ArticleLinks":"components/ArticleLinks/index.js"}],"../node_modules/is/index.js":[function(require,module,exports) {
+/* globals window, HTMLElement */
+
+'use strict';
+
+/**!
+ * is
+ * the definitive JavaScript type testing library
+ *
+ * @copyright 2013-2014 Enrico Marino / Jordan Harband
+ * @license MIT
+ */
+
+var objProto = Object.prototype;
+var owns = objProto.hasOwnProperty;
+var toStr = objProto.toString;
+var symbolValueOf;
+if (typeof Symbol === 'function') {
+  symbolValueOf = Symbol.prototype.valueOf;
+}
+var bigIntValueOf;
+if (typeof BigInt === 'function') {
+  bigIntValueOf = BigInt.prototype.valueOf;
+}
+var isActualNaN = function (value) {
+  return value !== value;
+};
+var NON_HOST_TYPES = {
+  'boolean': 1,
+  number: 1,
+  string: 1,
+  undefined: 1
+};
+
+var base64Regex = /^([A-Za-z0-9+/]{4})*([A-Za-z0-9+/]{4}|[A-Za-z0-9+/]{3}=|[A-Za-z0-9+/]{2}==)$/;
+var hexRegex = /^[A-Fa-f0-9]+$/;
+
+/**
+ * Expose `is`
+ */
+
+var is = {};
+
+/**
+ * Test general.
+ */
+
+/**
+ * is.type
+ * Test if `value` is a type of `type`.
+ *
+ * @param {*} value value to test
+ * @param {String} type type
+ * @return {Boolean} true if `value` is a type of `type`, false otherwise
+ * @api public
+ */
+
+is.a = is.type = function (value, type) {
+  return typeof value === type;
+};
+
+/**
+ * is.defined
+ * Test if `value` is defined.
+ *
+ * @param {*} value value to test
+ * @return {Boolean} true if 'value' is defined, false otherwise
+ * @api public
+ */
+
+is.defined = function (value) {
+  return typeof value !== 'undefined';
+};
+
+/**
+ * is.empty
+ * Test if `value` is empty.
+ *
+ * @param {*} value value to test
+ * @return {Boolean} true if `value` is empty, false otherwise
+ * @api public
+ */
+
+is.empty = function (value) {
+  var type = toStr.call(value);
+  var key;
+
+  if (type === '[object Array]' || type === '[object Arguments]' || type === '[object String]') {
+    return value.length === 0;
+  }
+
+  if (type === '[object Object]') {
+    for (key in value) {
+      if (owns.call(value, key)) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  return !value;
+};
+
+/**
+ * is.equal
+ * Test if `value` is equal to `other`.
+ *
+ * @param {*} value value to test
+ * @param {*} other value to compare with
+ * @return {Boolean} true if `value` is equal to `other`, false otherwise
+ */
+
+is.equal = function equal(value, other) {
+  if (value === other) {
+    return true;
+  }
+
+  var type = toStr.call(value);
+  var key;
+
+  if (type !== toStr.call(other)) {
+    return false;
+  }
+
+  if (type === '[object Object]') {
+    for (key in value) {
+      if (!is.equal(value[key], other[key]) || !(key in other)) {
+        return false;
+      }
+    }
+    for (key in other) {
+      if (!is.equal(value[key], other[key]) || !(key in value)) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  if (type === '[object Array]') {
+    key = value.length;
+    if (key !== other.length) {
+      return false;
+    }
+    while (key--) {
+      if (!is.equal(value[key], other[key])) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  if (type === '[object Function]') {
+    return value.prototype === other.prototype;
+  }
+
+  if (type === '[object Date]') {
+    return value.getTime() === other.getTime();
+  }
+
+  return false;
+};
+
+/**
+ * is.hosted
+ * Test if `value` is hosted by `host`.
+ *
+ * @param {*} value to test
+ * @param {*} host host to test with
+ * @return {Boolean} true if `value` is hosted by `host`, false otherwise
+ * @api public
+ */
+
+is.hosted = function (value, host) {
+  var type = typeof host[value];
+  return type === 'object' ? !!host[value] : !NON_HOST_TYPES[type];
+};
+
+/**
+ * is.instance
+ * Test if `value` is an instance of `constructor`.
+ *
+ * @param {*} value value to test
+ * @return {Boolean} true if `value` is an instance of `constructor`
+ * @api public
+ */
+
+is.instance = is['instanceof'] = function (value, constructor) {
+  return value instanceof constructor;
+};
+
+/**
+ * is.nil / is.null
+ * Test if `value` is null.
+ *
+ * @param {*} value value to test
+ * @return {Boolean} true if `value` is null, false otherwise
+ * @api public
+ */
+
+is.nil = is['null'] = function (value) {
+  return value === null;
+};
+
+/**
+ * is.undef / is.undefined
+ * Test if `value` is undefined.
+ *
+ * @param {*} value value to test
+ * @return {Boolean} true if `value` is undefined, false otherwise
+ * @api public
+ */
+
+is.undef = is.undefined = function (value) {
+  return typeof value === 'undefined';
+};
+
+/**
+ * Test arguments.
+ */
+
+/**
+ * is.args
+ * Test if `value` is an arguments object.
+ *
+ * @param {*} value value to test
+ * @return {Boolean} true if `value` is an arguments object, false otherwise
+ * @api public
+ */
+
+is.args = is.arguments = function (value) {
+  var isStandardArguments = toStr.call(value) === '[object Arguments]';
+  var isOldArguments = !is.array(value) && is.arraylike(value) && is.object(value) && is.fn(value.callee);
+  return isStandardArguments || isOldArguments;
+};
+
+/**
+ * Test array.
+ */
+
+/**
+ * is.array
+ * Test if 'value' is an array.
+ *
+ * @param {*} value value to test
+ * @return {Boolean} true if `value` is an array, false otherwise
+ * @api public
+ */
+
+is.array = Array.isArray || function (value) {
+  return toStr.call(value) === '[object Array]';
+};
+
+/**
+ * is.arguments.empty
+ * Test if `value` is an empty arguments object.
+ *
+ * @param {*} value value to test
+ * @return {Boolean} true if `value` is an empty arguments object, false otherwise
+ * @api public
+ */
+is.args.empty = function (value) {
+  return is.args(value) && value.length === 0;
+};
+
+/**
+ * is.array.empty
+ * Test if `value` is an empty array.
+ *
+ * @param {*} value value to test
+ * @return {Boolean} true if `value` is an empty array, false otherwise
+ * @api public
+ */
+is.array.empty = function (value) {
+  return is.array(value) && value.length === 0;
+};
+
+/**
+ * is.arraylike
+ * Test if `value` is an arraylike object.
+ *
+ * @param {*} value value to test
+ * @return {Boolean} true if `value` is an arguments object, false otherwise
+ * @api public
+ */
+
+is.arraylike = function (value) {
+  return !!value && !is.bool(value)
+    && owns.call(value, 'length')
+    && isFinite(value.length)
+    && is.number(value.length)
+    && value.length >= 0;
+};
+
+/**
+ * Test boolean.
+ */
+
+/**
+ * is.bool
+ * Test if `value` is a boolean.
+ *
+ * @param {*} value value to test
+ * @return {Boolean} true if `value` is a boolean, false otherwise
+ * @api public
+ */
+
+is.bool = is['boolean'] = function (value) {
+  return toStr.call(value) === '[object Boolean]';
+};
+
+/**
+ * is.false
+ * Test if `value` is false.
+ *
+ * @param {*} value value to test
+ * @return {Boolean} true if `value` is false, false otherwise
+ * @api public
+ */
+
+is['false'] = function (value) {
+  return is.bool(value) && Boolean(Number(value)) === false;
+};
+
+/**
+ * is.true
+ * Test if `value` is true.
+ *
+ * @param {*} value value to test
+ * @return {Boolean} true if `value` is true, false otherwise
+ * @api public
+ */
+
+is['true'] = function (value) {
+  return is.bool(value) && Boolean(Number(value)) === true;
+};
+
+/**
+ * Test date.
+ */
+
+/**
+ * is.date
+ * Test if `value` is a date.
+ *
+ * @param {*} value value to test
+ * @return {Boolean} true if `value` is a date, false otherwise
+ * @api public
+ */
+
+is.date = function (value) {
+  return toStr.call(value) === '[object Date]';
+};
+
+/**
+ * is.date.valid
+ * Test if `value` is a valid date.
+ *
+ * @param {*} value value to test
+ * @returns {Boolean} true if `value` is a valid date, false otherwise
+ */
+is.date.valid = function (value) {
+  return is.date(value) && !isNaN(Number(value));
+};
+
+/**
+ * Test element.
+ */
+
+/**
+ * is.element
+ * Test if `value` is an html element.
+ *
+ * @param {*} value value to test
+ * @return {Boolean} true if `value` is an HTML Element, false otherwise
+ * @api public
+ */
+
+is.element = function (value) {
+  return value !== undefined
+    && typeof HTMLElement !== 'undefined'
+    && value instanceof HTMLElement
+    && value.nodeType === 1;
+};
+
+/**
+ * Test error.
+ */
+
+/**
+ * is.error
+ * Test if `value` is an error object.
+ *
+ * @param {*} value value to test
+ * @return {Boolean} true if `value` is an error object, false otherwise
+ * @api public
+ */
+
+is.error = function (value) {
+  return toStr.call(value) === '[object Error]';
+};
+
+/**
+ * Test function.
+ */
+
+/**
+ * is.fn / is.function (deprecated)
+ * Test if `value` is a function.
+ *
+ * @param {*} value value to test
+ * @return {Boolean} true if `value` is a function, false otherwise
+ * @api public
+ */
+
+is.fn = is['function'] = function (value) {
+  var isAlert = typeof window !== 'undefined' && value === window.alert;
+  if (isAlert) {
+    return true;
+  }
+  var str = toStr.call(value);
+  return str === '[object Function]' || str === '[object GeneratorFunction]' || str === '[object AsyncFunction]';
+};
+
+/**
+ * Test number.
+ */
+
+/**
+ * is.number
+ * Test if `value` is a number.
+ *
+ * @param {*} value value to test
+ * @return {Boolean} true if `value` is a number, false otherwise
+ * @api public
+ */
+
+is.number = function (value) {
+  return toStr.call(value) === '[object Number]';
+};
+
+/**
+ * is.infinite
+ * Test if `value` is positive or negative infinity.
+ *
+ * @param {*} value value to test
+ * @return {Boolean} true if `value` is positive or negative Infinity, false otherwise
+ * @api public
+ */
+is.infinite = function (value) {
+  return value === Infinity || value === -Infinity;
+};
+
+/**
+ * is.decimal
+ * Test if `value` is a decimal number.
+ *
+ * @param {*} value value to test
+ * @return {Boolean} true if `value` is a decimal number, false otherwise
+ * @api public
+ */
+
+is.decimal = function (value) {
+  return is.number(value) && !isActualNaN(value) && !is.infinite(value) && value % 1 !== 0;
+};
+
+/**
+ * is.divisibleBy
+ * Test if `value` is divisible by `n`.
+ *
+ * @param {Number} value value to test
+ * @param {Number} n dividend
+ * @return {Boolean} true if `value` is divisible by `n`, false otherwise
+ * @api public
+ */
+
+is.divisibleBy = function (value, n) {
+  var isDividendInfinite = is.infinite(value);
+  var isDivisorInfinite = is.infinite(n);
+  var isNonZeroNumber = is.number(value) && !isActualNaN(value) && is.number(n) && !isActualNaN(n) && n !== 0;
+  return isDividendInfinite || isDivisorInfinite || (isNonZeroNumber && value % n === 0);
+};
+
+/**
+ * is.integer
+ * Test if `value` is an integer.
+ *
+ * @param value to test
+ * @return {Boolean} true if `value` is an integer, false otherwise
+ * @api public
+ */
+
+is.integer = is['int'] = function (value) {
+  return is.number(value) && !isActualNaN(value) && value % 1 === 0;
+};
+
+/**
+ * is.maximum
+ * Test if `value` is greater than 'others' values.
+ *
+ * @param {Number} value value to test
+ * @param {Array} others values to compare with
+ * @return {Boolean} true if `value` is greater than `others` values
+ * @api public
+ */
+
+is.maximum = function (value, others) {
+  if (isActualNaN(value)) {
+    throw new TypeError('NaN is not a valid value');
+  } else if (!is.arraylike(others)) {
+    throw new TypeError('second argument must be array-like');
+  }
+  var len = others.length;
+
+  while (--len >= 0) {
+    if (value < others[len]) {
+      return false;
+    }
+  }
+
+  return true;
+};
+
+/**
+ * is.minimum
+ * Test if `value` is less than `others` values.
+ *
+ * @param {Number} value value to test
+ * @param {Array} others values to compare with
+ * @return {Boolean} true if `value` is less than `others` values
+ * @api public
+ */
+
+is.minimum = function (value, others) {
+  if (isActualNaN(value)) {
+    throw new TypeError('NaN is not a valid value');
+  } else if (!is.arraylike(others)) {
+    throw new TypeError('second argument must be array-like');
+  }
+  var len = others.length;
+
+  while (--len >= 0) {
+    if (value > others[len]) {
+      return false;
+    }
+  }
+
+  return true;
+};
+
+/**
+ * is.nan
+ * Test if `value` is not a number.
+ *
+ * @param {*} value value to test
+ * @return {Boolean} true if `value` is not a number, false otherwise
+ * @api public
+ */
+
+is.nan = function (value) {
+  return !is.number(value) || value !== value;
+};
+
+/**
+ * is.even
+ * Test if `value` is an even number.
+ *
+ * @param {Number} value value to test
+ * @return {Boolean} true if `value` is an even number, false otherwise
+ * @api public
+ */
+
+is.even = function (value) {
+  return is.infinite(value) || (is.number(value) && value === value && value % 2 === 0);
+};
+
+/**
+ * is.odd
+ * Test if `value` is an odd number.
+ *
+ * @param {Number} value value to test
+ * @return {Boolean} true if `value` is an odd number, false otherwise
+ * @api public
+ */
+
+is.odd = function (value) {
+  return is.infinite(value) || (is.number(value) && value === value && value % 2 !== 0);
+};
+
+/**
+ * is.ge
+ * Test if `value` is greater than or equal to `other`.
+ *
+ * @param {Number} value value to test
+ * @param {Number} other value to compare with
+ * @return {Boolean}
+ * @api public
+ */
+
+is.ge = function (value, other) {
+  if (isActualNaN(value) || isActualNaN(other)) {
+    throw new TypeError('NaN is not a valid value');
+  }
+  return !is.infinite(value) && !is.infinite(other) && value >= other;
+};
+
+/**
+ * is.gt
+ * Test if `value` is greater than `other`.
+ *
+ * @param {Number} value value to test
+ * @param {Number} other value to compare with
+ * @return {Boolean}
+ * @api public
+ */
+
+is.gt = function (value, other) {
+  if (isActualNaN(value) || isActualNaN(other)) {
+    throw new TypeError('NaN is not a valid value');
+  }
+  return !is.infinite(value) && !is.infinite(other) && value > other;
+};
+
+/**
+ * is.le
+ * Test if `value` is less than or equal to `other`.
+ *
+ * @param {Number} value value to test
+ * @param {Number} other value to compare with
+ * @return {Boolean} if 'value' is less than or equal to 'other'
+ * @api public
+ */
+
+is.le = function (value, other) {
+  if (isActualNaN(value) || isActualNaN(other)) {
+    throw new TypeError('NaN is not a valid value');
+  }
+  return !is.infinite(value) && !is.infinite(other) && value <= other;
+};
+
+/**
+ * is.lt
+ * Test if `value` is less than `other`.
+ *
+ * @param {Number} value value to test
+ * @param {Number} other value to compare with
+ * @return {Boolean} if `value` is less than `other`
+ * @api public
+ */
+
+is.lt = function (value, other) {
+  if (isActualNaN(value) || isActualNaN(other)) {
+    throw new TypeError('NaN is not a valid value');
+  }
+  return !is.infinite(value) && !is.infinite(other) && value < other;
+};
+
+/**
+ * is.within
+ * Test if `value` is within `start` and `finish`.
+ *
+ * @param {Number} value value to test
+ * @param {Number} start lower bound
+ * @param {Number} finish upper bound
+ * @return {Boolean} true if 'value' is is within 'start' and 'finish'
+ * @api public
+ */
+is.within = function (value, start, finish) {
+  if (isActualNaN(value) || isActualNaN(start) || isActualNaN(finish)) {
+    throw new TypeError('NaN is not a valid value');
+  } else if (!is.number(value) || !is.number(start) || !is.number(finish)) {
+    throw new TypeError('all arguments must be numbers');
+  }
+  var isAnyInfinite = is.infinite(value) || is.infinite(start) || is.infinite(finish);
+  return isAnyInfinite || (value >= start && value <= finish);
+};
+
+/**
+ * Test object.
+ */
+
+/**
+ * is.object
+ * Test if `value` is an object.
+ *
+ * @param {*} value value to test
+ * @return {Boolean} true if `value` is an object, false otherwise
+ * @api public
+ */
+is.object = function (value) {
+  return toStr.call(value) === '[object Object]';
+};
+
+/**
+ * is.primitive
+ * Test if `value` is a primitive.
+ *
+ * @param {*} value value to test
+ * @return {Boolean} true if `value` is a primitive, false otherwise
+ * @api public
+ */
+is.primitive = function isPrimitive(value) {
+  if (!value) {
+    return true;
+  }
+  if (typeof value === 'object' || is.object(value) || is.fn(value) || is.array(value)) {
+    return false;
+  }
+  return true;
+};
+
+/**
+ * is.hash
+ * Test if `value` is a hash - a plain object literal.
+ *
+ * @param {*} value value to test
+ * @return {Boolean} true if `value` is a hash, false otherwise
+ * @api public
+ */
+
+is.hash = function (value) {
+  return is.object(value) && value.constructor === Object && !value.nodeType && !value.setInterval;
+};
+
+/**
+ * Test regexp.
+ */
+
+/**
+ * is.regexp
+ * Test if `value` is a regular expression.
+ *
+ * @param {*} value value to test
+ * @return {Boolean} true if `value` is a regexp, false otherwise
+ * @api public
+ */
+
+is.regexp = function (value) {
+  return toStr.call(value) === '[object RegExp]';
+};
+
+/**
+ * Test string.
+ */
+
+/**
+ * is.string
+ * Test if `value` is a string.
+ *
+ * @param {*} value value to test
+ * @return {Boolean} true if 'value' is a string, false otherwise
+ * @api public
+ */
+
+is.string = function (value) {
+  return toStr.call(value) === '[object String]';
+};
+
+/**
+ * Test base64 string.
+ */
+
+/**
+ * is.base64
+ * Test if `value` is a valid base64 encoded string.
+ *
+ * @param {*} value value to test
+ * @return {Boolean} true if 'value' is a base64 encoded string, false otherwise
+ * @api public
+ */
+
+is.base64 = function (value) {
+  return is.string(value) && (!value.length || base64Regex.test(value));
+};
+
+/**
+ * Test base64 string.
+ */
+
+/**
+ * is.hex
+ * Test if `value` is a valid hex encoded string.
+ *
+ * @param {*} value value to test
+ * @return {Boolean} true if 'value' is a hex encoded string, false otherwise
+ * @api public
+ */
+
+is.hex = function (value) {
+  return is.string(value) && (!value.length || hexRegex.test(value));
+};
+
+/**
+ * is.symbol
+ * Test if `value` is an ES6 Symbol
+ *
+ * @param {*} value value to test
+ * @return {Boolean} true if `value` is a Symbol, false otherise
+ * @api public
+ */
+
+is.symbol = function (value) {
+  return typeof Symbol === 'function' && toStr.call(value) === '[object Symbol]' && typeof symbolValueOf.call(value) === 'symbol';
+};
+
+/**
+ * is.bigint
+ * Test if `value` is an ES-proposed BigInt
+ *
+ * @param {*} value value to test
+ * @return {Boolean} true if `value` is a BigInt, false otherise
+ * @api public
+ */
+
+is.bigint = function (value) {
+  // eslint-disable-next-line valid-typeof
+  return typeof BigInt === 'function' && toStr.call(value) === '[object BigInt]' && typeof bigIntValueOf.call(value) === 'bigint';
+};
+
+module.exports = is;
+
+},{}],"../node_modules/@wonderlandlabs/inspector/build/index.js":[function(require,module,exports) {
+var define;
+(function(a,b){'object'==typeof exports&&'object'==typeof module?module.exports=b():'function'==typeof define&&define.amd?define('inspector',[],b):'object'==typeof exports?exports.inspector=b():a.inspector=b()})('undefined'==typeof self?this:self,function(){return function(a){function b(d){if(c[d])return c[d].exports;var e=c[d]={i:d,l:!1,exports:{}};return a[d].call(e.exports,e,e.exports,b),e.l=!0,e.exports}var c={};return b.m=a,b.c=c,b.d=function(a,c,d){b.o(a,c)||Object.defineProperty(a,c,{configurable:!1,enumerable:!0,get:d})},b.n=function(a){var c=a&&a.__esModule?function(){return a['default']}:function(){return a};return b.d(c,'a',c),c},b.o=function(a,b){return Object.prototype.hasOwnProperty.call(a,b)},b.p='',b(b.s=0)}([function(a,b,c){a.exports=c(1)},function(a,b,c){'use strict';Object.defineProperty(b,'__esModule',{value:!0});var d=c(2),e=c.n(d),f=c(3),g=c.n(f),h=function(){function a(a,b){var c=[],d=!0,e=!1,f=void 0;try{for(var g,h=a[Symbol.iterator]();!(d=(g=h.next()).done)&&(c.push(g.value),!(b&&c.length===b));d=!0);}catch(a){e=!0,f=a}finally{try{!d&&h['return']&&h['return']()}finally{if(e)throw f}}return c}return function(b,c){if(Array.isArray(b))return b;if(Symbol.iterator in Object(b))return a(b,c);throw new TypeError('Invalid attempt to destructure non-iterable instance')}}(),i=(a)=>{a.factory('collector',({ifFn:a,strToFn:b,Is:c})=>(d,e=!1)=>{let f=d;if('function'==typeof d&&(f=[d]),!Array.isArray(f))throw new Error('collector must receive array');if(!f.length)return()=>!1;f=f.map((d)=>Array.isArray(d)?a(...d):c.string(d)?b(d):d);const g=(a)=>f.map((b)=>{try{return b(a)}catch(a){throw console.log('error in test ',b,a),a}});if(!e)return g;if(Array.isArray(e))return(a)=>{const b=g(a);var d=h(e,2);const f=d[0],i=d[1];return b.reduce(f,c.function(i)?i():i)};if('function'==typeof e)return(a)=>{const b=g(a);return b.reduce(e)};const i=(a)=>g(a).filter((b)=>!1!==b);return'and'===e?(a)=>f.reduce((b,c)=>{if(!b)return b;const d=c(a);return!1!==d&&[...b,d]},[]):'or'===e?(a)=>f.reduce((b,d)=>b?b:(c.function(d)||console.log('collector test is not a function: ',d),d(a)),!1):(a)=>{const b=i(a);return!!(0<b.length)&&b}})},j=(a)=>{a.factory('customFunctions',()=>new Map),a.factory('defineCustomFunction',({customFunctions:a,Is:b})=>(c,d)=>{if(!(c&&b.string(c)))throw new Error(`bad define name: ${c}`);if(!(d&&b.function(d)))throw new Error(`bad define function for ${c}`);a.set(c,d)}),a.factory('clearCustomFunctions',({customFunctions:a})=>()=>a.clear()),a.factory('strToFn',({customFunctions:a,Is:b})=>(c)=>{if(!(c&&b.string(c)))throw new Error(`bad strToFn name: ${c}`);if(a.has(c))return a.get(c);if(b[c])return b[c];throw new Error(`bad function string: ${c}`)})},k=(a)=>{a.factory('parseTests',({Is:a})=>(b,c)=>{let d;if(Array.isArray(b))d=c?b.map((b)=>a.function(b)||a.string(b)?[b,!1,c]:b):b;else if(a.object(b)){if(!c)throw new Error('cannot take an object as a validator without an onFail');d=Object.keys(b).map((a)=>[b[a],!1,c])}else('function'==typeof b||a.string(b))&&(d=c?[[b,!1,c]]:[b]);return d})},l=(a)=>{a.factory('argsToArray',()=>(...a)=>Array.isArray(a[0])?a[0]:a),a.factory('andFn',({collector:a,argsToArray:b})=>(...c)=>a(b(c),'and')),a.factory('orFn',({collector:a,argsToArray:b})=>(...c)=>a(b(c),'or'))};const m=/^fn:/;var n=(a)=>{a.factory('ifFn',({strToFn:a,Is:b})=>(c,d=!1,e=!1)=>{let f=c;if(b.string(c)&&(!e&&!d&&(e=`not an ${f}`),f=a(c)),!d&&!e)return f;let g=b.function(d)?d:b.string(d)&&m.test(d)?a(d.replace(m,'')):()=>d;let h;if(h=b.function(e)?e:b.string(e)&&m.test(e)?a(e.replace(m,'')):()=>e,!b.function(f))throw console.log('bad rule ',f,c,d,e),new Error('bad rule');return(a)=>{const b=f(a);return b?g(a,b):h(a,b)}})};const o=Symbol('required is not set'),p=Symbol('variable is absent');var q=(a)=>{a.factory('validator',({ifFn:a,collector:b,Is:c,parseTests:d})=>(e,f={})=>{var g=f.required;const h=g===void 0?o:g;var i=f.onFail;const j=d(e,i!==void 0&&i);if(!Array.isArray(j))throw console.log('tests not turned into an array:',e,j),new Error('cannot array-ify ',e);const k=j.map((b)=>Array.isArray(b)?a(...b):a(b));let l;if(!h)l=(c)=>b([a((b)=>b,p),b(k,'or')],'and')(c)[1]||!1;else if(h===o)l=b(k,'or');else{const a=c.string(h)?h:'required';k.unshift([(b)=>b,!1,a]),l=b(k,'or')}return(a)=>{let b=l(a);return b&&!Array.isArray(b)&&(b=[b]),b}})},r=()=>{const a=new e.a;return a.constant('Is',g.a),i(a),j(a),l(a),k(a),n(a),q(a),a};c.d(b,'ifFn',function(){return t}),c.d(b,'collector',function(){return u}),c.d(b,'validator',function(){return v}),c.d(b,'andFn',function(){return w}),c.d(b,'orFn',function(){return x}),c.d(b,'defineCustomFunction',function(){return y}),c.d(b,'factory',function(){return z});var s=r().container;const t=s.ifFn,u=s.collector,v=s.validator,w=s.andFn,x=s.orFn,y=s.defineCustomFunction,z=()=>r().container;b['default']=v},function(a){a.exports=require('bottlejs')},function(a){a.exports=require('is')}])});
+
+},{"bottlejs":"../node_modules/bottlejs/dist/bottle.js","is":"../node_modules/is/index.js"}],"../node_modules/@wonderlandlabs/propper/build/index.js":[function(require,module,exports) {
+module.exports =
+/******/ (function(modules) { // webpackBootstrap
+/******/ 	// The module cache
+/******/ 	var installedModules = {};
+/******/
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/
+/******/ 		// Check if module is in cache
+/******/ 		if(installedModules[moduleId]) {
+/******/ 			return installedModules[moduleId].exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = installedModules[moduleId] = {
+/******/ 			i: moduleId,
+/******/ 			l: false,
+/******/ 			exports: {}
+/******/ 		};
+/******/
+/******/ 		// Execute the module function
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/
+/******/ 		// Flag the module as loaded
+/******/ 		module.l = true;
+/******/
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/
+/******/
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = modules;
+/******/
+/******/ 	// expose the module cache
+/******/ 	__webpack_require__.c = installedModules;
+/******/
+/******/ 	// define getter function for harmony exports
+/******/ 	__webpack_require__.d = function(exports, name, getter) {
+/******/ 		if(!__webpack_require__.o(exports, name)) {
+/******/ 			Object.defineProperty(exports, name, {
+/******/ 				configurable: false,
+/******/ 				enumerable: true,
+/******/ 				get: getter
+/******/ 			});
+/******/ 		}
+/******/ 	};
+/******/
+/******/ 	// getDefaultExport function for compatibility with non-harmony modules
+/******/ 	__webpack_require__.n = function(module) {
+/******/ 		var getter = module && module.__esModule ?
+/******/ 			function getDefault() { return module['default']; } :
+/******/ 			function getModuleExports() { return module; };
+/******/ 		__webpack_require__.d(getter, 'a', getter);
+/******/ 		return getter;
+/******/ 	};
+/******/
+/******/ 	// Object.prototype.hasOwnProperty.call
+/******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
+/******/
+/******/ 	// __webpack_public_path__
+/******/ 	__webpack_require__.p = "";
+/******/
+/******/ 	// Load entry module and return exports
+/******/ 	return __webpack_require__(__webpack_require__.s = 0);
+/******/ })
+/************************************************************************/
+/******/ ([
+/* 0 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(1);
+
+
+/***/ }),
+/* 1 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+
+// EXTERNAL MODULE: external "is"
+var external__is_ = __webpack_require__(2);
+var external__is__default = /*#__PURE__*/__webpack_require__.n(external__is_);
+
+// EXTERNAL MODULE: external "@wonderlandlabs/inspector"
+var inspector_ = __webpack_require__(3);
+var inspector__default = /*#__PURE__*/__webpack_require__.n(inspector_);
+
+// EXTERNAL MODULE: external "lodash.get"
+var external__lodash_get_ = __webpack_require__(4);
+var external__lodash_get__default = /*#__PURE__*/__webpack_require__.n(external__lodash_get_);
+
+// CONCATENATED MODULE: ./src/utils.js
+
+
+const compact = a => a.filter(v => v);
+
+const popObject = (obj, field, def) => {
+  if (field in obj) {
+    const out = obj[field];
+    delete obj[field];
+    return out;
+  }
+  return def;
+};
+
+
+// CONCATENATED MODULE: ./src/Propper.js
+
+
+
+
+const DEFAULT_DEFAULTS = name => ({
+  onInvalid(value, error) {
+    console.log(`error: setting ${name}`, error, value);
+  }
+});
+
+const throwOnInvalid = (value, error) => {
+  const err = new Error(error);
+  err.value = value;
+  throw err;
+};
+
+class Propper_Propper {
+  constructor(BaseClass, options = {}, defaults = DEFAULT_DEFAULTS) {
+    Object.assign(this, options);
+    this.defaults = defaults;
+    this.BaseClass = BaseClass;
+  }
+
+  addProp(name, options = {}) {
+    const defaults = external__is__default.a.function(this.defaults) ? this.defaults(name, options) : this.defaults;
+    const def = Object.assign({}, defaults || {}, options);
+    const tests = compact([popObject(def, 'type', null), ...popObject(def, 'tests', [])]);
+    const required = popObject(def, 'required', null);
+    const onChange = popObject(def, 'onChange');
+    const enumerable = popObject(def, 'enumerable', false);
+    let onInvalid = popObject(def, 'onInvalid', throwOnInvalid);
+
+    if (onInvalid === 'throw') {
+      onInvalid = throwOnInvalid;
+    }
+
+    const defaultValue = popObject(def, 'defaultValue', null);
+    let defaultFn = defaultValue;
+    if (!external__is__default.a.function(defaultValue)) {
+      defaultFn = () => defaultValue;
+    }
+    const localName = popObject(def, 'localName', `_${name}`);
+    let validation = false;
+    if (tests.length || required) {
+      switch (required) {
+        case true:
+          validation = Object(inspector_["validator"])(tests, { required });
+          break;
+
+        case false:
+          validation = Object(inspector_["validator"])(tests, { required });
+          break;
+
+        default:
+          validation = Object(inspector_["validator"])(tests, {});
+      }
+    }
+
+    const propDef = {
+      configurable: false,
+      enumerable,
+      get() {
+        if (!(localName in this)) {
+          this[localName] = defaultFn();
+        }
+        return this[localName];
+      },
+      set(value) {
+        if (localName in this) {
+          if (this[localName] === value) {
+            return;
+          }
+        }
+        if (localName in this) {
+          const lastVal = this[localName];
+          this[localName] = value;
+          if (onChange) {
+            onChange.bind(this)(value, lastVal);
+          }
+        } else {
+          this[localName] = value;
+          if (onChange) {
+            onChange.bind(this)(value);
+          }
+        }
+      }
+    };
+
+    if (validation) {
+      Object.assign(propDef, {
+        set(value) {
+          if (localName in this) {
+            if (this[localName] === value) {
+              return;
+            }
+          }
+          const error = validation(value);
+          if (error) {
+            onInvalid(value, error, this);
+            return;
+          }
+          const lastVal = this[localName];
+          this[localName] = value;
+          if (onChange) {
+            onChange.bind(this)(value, lastVal);
+          }
+        }
+      });
+    }
+
+    Object.defineProperty(this.BaseClass.prototype, name, propDef);
+
+    return this;
+  }
+
+  set defaults(value = {}) {
+    this._defaults = Object.assign({}, value);
+  }
+
+  get defaults() {
+    return this._defaults;
+  }
+}
+
+/* harmony default export */ var src_Propper = (Propper_Propper);
+// CONCATENATED MODULE: ./src/index.js
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "propInjector", function() { return propInjector; });
+/* concated harmony reexport */__webpack_require__.d(__webpack_exports__, "Propper", function() { return src_Propper; });
+
+
+const propInjector = (classDef, options = {}) => new src_Propper(classDef, options);
+
+/* harmony default export */ var src = __webpack_exports__["default"] = (propInjector);
+
+
+
+/***/ }),
+/* 2 */
+/***/ (function(module, exports) {
+
+module.exports = require("is");
+
+/***/ }),
+/* 3 */
+/***/ (function(module, exports) {
+
+module.exports = require("@wonderlandlabs/inspector");
+
+/***/ }),
+/* 4 */
+/***/ (function(module, exports) {
+
+module.exports = require("lodash.get");
+
+/***/ })
+/******/ ]);
+
+},{"is":"../node_modules/is/index.js","@wonderlandlabs/inspector":"../node_modules/@wonderlandlabs/inspector/build/index.js","lodash.get":"../node_modules/lodash.get/index.js"}],"models/articles.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = exports.Article = void 0;
+
+var _objectSpread2 = _interopRequireDefault(require("@babel/runtime-corejs2/helpers/objectSpread"));
+
+var _classCallCheck2 = _interopRequireDefault(require("@babel/runtime-corejs2/helpers/classCallCheck"));
+
+var _lookingGlassEngine = require("@wonderlandlabs/looking-glass-engine");
+
+var _axios = _interopRequireDefault(require("axios"));
+
+var _lodash = _interopRequireDefault(require("lodash"));
+
+var _propper = _interopRequireDefault(require("@wonderlandlabs/propper"));
+
+var _encodePath = _interopRequireDefault(require("../js/encodePath"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var API_URL = "http://localhost:7070/api";
+
+var asPath = function asPath(input) {
+  if (!input) {
+    return '';
+  } else if (_lodash.default.isObject(input) && input.path) {
+    return input.path;
+  } else {
+    return _lodash.default.toString(input);
+  }
+};
+
+function articleUrl(path) {
+  var shortPath = (0, _encodePath.default)(asPath(path));
+  return "".concat(API_URL, "/articles/").concat(shortPath, ".json");
+}
+
+var articles = new _lookingGlassEngine.Store({
+  state: {},
+  actions: {
+    getCategoryArticles: function getCategoryArticles(store, directory, accessToken, sub) {
+      return _axios.default.get(API_URL + '/categories/' + (0, _encodePath.default)(directory), {
+        headers: {
+          'access_token': accessToken,
+          'sub': sub
+        }
+      }).then(function (result) {
+        return result.data.articles;
+      }).then(function (da) {
+        return store.actions.setCategoryArticles(da);
+      });
+    },
+    saveArticle: function saveArticle(store, article, accessToken, sub) {
+      return (0, _axios.default)({
+        method: 'PUT',
+        url: articleUrl(article),
+        headers: {
+          'access_token': accessToken,
+          'sub': sub
+        },
+        data: article
+      }).then(function () {
+        if (store.state.currentArticle && store.state.currentArticle.path === article.path) {
+          store.actions.getArticle(article.path);
+        }
+      }).catch(function (err) {
+        console.log('error creating articles:', err);
+      });
+    },
+    // todo: safety check
+    getArticle: function getArticle(store, path) {
+      var _this = this;
+
+      return _axios.default.get(API_URL + '/articles/' + encodeURIComponent(path)).then(function (result) {
+        store.actions.setCurrentArticle(result.data);
+      }).catch(function (err) {
+        console.log('cannot get article', err);
+
+        _this.setCurrentArticle(false);
+      });
+    },
+    getHomepageArticles: function getHomepageArticles(store) {
+      var sub = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
+      var apiToken = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '';
+      return _axios.default.get(API_URL + '/homepage-articles', {
+        headers: {
+          'access_token': apiToken,
+          'sub': sub
+        }
+      }).then(function (response) {
+        return store.actions.setHomepageArticles(response.data);
+      });
+    }
+  },
+  starter: function starter(_ref) {
+    var actions = _ref.actions;
+    return actions.getHomepageArticles();
+  }
+}).addProp('homepageArticles', {
+  start: []
+}).addProp('categoryArticles', {
+  start: []
+}).addProp('articles', {
+  start: []
+}).addProp('currentArticle', {
+  start: false
+});
+articles.start();
+
+var Article = function Article() {
+  (0, _classCallCheck2.default)(this, Article);
+};
+
+exports.Article = Article;
+
+function errMgr(name) {
+  return {
+    onInvalid: function onInvalid(value, error, article) {
+      if (article) article.errors[name] = error;
+    },
+    onChange: function onChange() {
+      delete this.errors[name];
+    }
+  };
+}
+
+(0, _propper.default)(Article).addProp('errors', {
+  defaultValue: function defaultValue() {
+    return {};
+  },
+  type: 'object'
+}).addProp('content', (0, _objectSpread2.default)({
+  required: true,
+  type: 'string'
+}, errMgr('content'))).addProp('published', (0, _objectSpread2.default)({
+  defaultValue: function defaultValue() {
+    return true;
+  },
+  type: 'boolean'
+}, errMgr('published'))).addProp('onHomepage', (0, _objectSpread2.default)({
+  defaultValue: function defaultValue() {
+    return true;
+  },
+  type: 'boolean'
+}, errMgr('onHomepage'))).addProp('title', (0, _objectSpread2.default)({
+  required: true,
+  type: 'string'
+}, errMgr('title'))).addProp('filename', (0, _objectSpread2.default)({
+  required: true,
+  type: 'string'
+}, errMgr('title'))).addProp('directory', (0, _objectSpread2.default)({
+  required: true,
+  type: 'string'
+}, errMgr('title')));
+var _default = articles;
+exports.default = _default;
+},{"@babel/runtime-corejs2/helpers/objectSpread":"../node_modules/@babel/runtime-corejs2/helpers/objectSpread.js","@babel/runtime-corejs2/helpers/classCallCheck":"../node_modules/@babel/runtime-corejs2/helpers/classCallCheck.js","@wonderlandlabs/looking-glass-engine":"../node_modules/@wonderlandlabs/looking-glass-engine/build/index.js","axios":"../node_modules/axios/index.js","lodash":"../node_modules/lodash/lodash.js","@wonderlandlabs/propper":"../node_modules/@wonderlandlabs/propper/build/index.js","../js/encodePath":"js/encodePath.js"}],"components/Homepage/HomepageContainer.jsx":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -78256,10 +79619,10 @@ function (_Component) {
     value: function componentDidMount() {
       var _this2 = this;
 
+      this._mounted = true;
       this._artSub = _articles.default.subscribe(function (_ref) {
         var state = _ref.state;
-
-        _this2.setState(state);
+        if (_this2._mounted) _this2.setState(state);
       });
       this._userSub = _user.default.subscribe(function (_ref2) {
         var state = _ref2.state;
@@ -78267,7 +79630,7 @@ function (_Component) {
             accessToken = state.accessToken;
 
         if (sub !== _this2.state.sub || accessToken !== _this2.state.accessToken) {
-          _this2.setState({
+          if (_this2._mounted) _this2.setState({
             sub: sub,
             accessToken: accessToken
           }, function () {
@@ -78281,6 +79644,7 @@ function (_Component) {
     value: function componentWillUnmount() {
       if (this._artSub) this._artSub.unsubscribe();
       if (this._userSub) this._userSub.unsubscribe();
+      this._mounted = false;
     }
   }, {
     key: "render",
@@ -80901,7 +82265,7 @@ function (_Component) {
 
               case 15:
                 console.log('asserting new version of  article: ', _articles.default.state.currentArticle);
-                this.setState(_articles.default.state.currentArticle); // @TODO: inspect result for match
+                this.setState(newArticle); // @TODO: inspect result for match
 
                 if (this.props.onSave) this.props.onSave();
 
@@ -81072,6 +82436,7 @@ var headline = function headline(category) {
 
 var ArticleView = function ArticleView(_ref) {
   var loaded = _ref.loaded,
+      onSave = _ref.onSave,
       category = _ref.category,
       title = _ref.title,
       content = _ref.content,
@@ -81090,7 +82455,7 @@ var ArticleView = function ArticleView(_ref) {
     }
   }), isEditing && _react.default.createElement(_ArticleEdit.default, {
     path: path,
-    onSave: toggleEdit
+    onSave: onSave
   }), isAdmin && _react.default.createElement(_style.ButtonList, null, _react.default.createElement(_style.EditButton, {
     "data-sc-type": "ButtonList",
     onClick: toggleEdit
@@ -81172,22 +82537,7 @@ function (_Component) {
       var _this2 = this;
 
       if (!this.state.loaded && this.state.path) {
-        _articles.default.actions.getArticle(this.state.path).then(function () {
-          var article = _articles.default.state.currentArticle;
-          var directory = article.directory;
-
-          if (directory) {
-            _categories.default.actions.getCategory(directory).then(function () {
-              _this2.setState(_categories.default.state);
-            });
-          }
-
-          _this2.setState((0, _objectSpread2.default)({}, article, {
-            loaded: true
-          }));
-        }).catch(function (err) {
-          console.log('cannot get article', err);
-        });
+        this.loadArticle();
       }
 
       this._userSub = _user.default.subscribe(function (_ref) {
@@ -81197,6 +82547,28 @@ function (_Component) {
           user: state.user,
           isAdmin: state.isAdmin
         });
+      });
+    }
+  }, {
+    key: "loadArticle",
+    value: function loadArticle() {
+      var _this3 = this;
+
+      _articles.default.actions.getArticle(this.state.path).then(function () {
+        var article = _articles.default.state.currentArticle;
+        var directory = article.directory;
+
+        if (directory) {
+          _categories.default.actions.getCategory(directory).then(function () {
+            _this3.setState(_categories.default.state);
+          });
+        }
+
+        _this3.setState((0, _objectSpread2.default)({}, article, {
+          loaded: true
+        }));
+      }).catch(function (err) {
+        console.log('cannot get article', err);
       });
     }
   }, {
@@ -81220,13 +82592,22 @@ function (_Component) {
       }
     }
   }, {
+    key: "onSave",
+    value: function onSave() {
+      this.loadArticle();
+      this.toggleEdit();
+    }
+  }, {
     key: "render",
     value: function render() {
-      var _this3 = this;
+      var _this4 = this;
 
       return _react.default.createElement(_ArticleView.default, (0, _extends2.default)({}, this.state, {
+        onSave: function onSave() {
+          return _this4.onSave();
+        },
         toggleEdit: function toggleEdit() {
-          return _this3.toggleEdit();
+          return _this4.toggleEdit();
         }
       }), " ");
     }
@@ -81665,6 +83046,8 @@ var _style = require("../style");
 
 var _CategoryEdit = _interopRequireDefault(require("../CategoryEdit"));
 
+var _ArticleLinks = _interopRequireDefault(require("../ArticleLinks"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var noop = function noop(a) {
@@ -81678,14 +83061,10 @@ var CategoryView = function CategoryView(_ref) {
       isEditing = _ref.isEditing,
       directory = _ref.directory,
       categoryArticles = _ref.categoryArticles;
-  return _react.default.createElement("div", null, _react.default.createElement(_style.PageHead, null, _lodash.default.get(category, 'title')), _react.default.createElement(_style.ArticleListWrapper, null, _react.default.createElement(_style.ArticleList, null, categoryArticles.filter(function (a) {
-    return a.published || isAdmin;
-  }).map(function (a) {
-    return _react.default.createElement(_style.ArticleItem, {
-      to: '/article/' + a.path,
-      className: a.published ? '' : 'unpublished',
-      key: a.path
-    }, a.title, " ", !a.published && _react.default.createElement("i", null, "hidden"));
+  return _react.default.createElement("div", null, _react.default.createElement(_style.PageHead, null, _lodash.default.get(category, 'title')), _react.default.createElement(_style.ArticleListWrapper, null, _react.default.createElement(_style.ArticleList, null, _react.default.createElement(_ArticleLinks.default, {
+    articles: categoryArticles.filter(function (a) {
+      return a.published || isAdmin;
+    })
   }))), isEditing && _react.default.createElement(_CategoryEdit.default, {
     directory: directory
   }), isAdmin && _react.default.createElement(_style.ButtonList, null, _react.default.createElement(_style.EditButton, {
@@ -81710,7 +83089,7 @@ CategoryView.defaultProps = {
 };
 var _default = CategoryView;
 exports.default = _default;
-},{"react":"../node_modules/react/index.js","lodash":"../node_modules/lodash/lodash.js","prop-types":"../node_modules/prop-types/index.js","../style":"components/style.js","../CategoryEdit":"components/CategoryEdit/index.js"}],"components/Category/CategoryContainer.jsx":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","lodash":"../node_modules/lodash/lodash.js","prop-types":"../node_modules/prop-types/index.js","../style":"components/style.js","../CategoryEdit":"components/CategoryEdit/index.js","../ArticleLinks":"components/ArticleLinks/index.js"}],"components/Category/CategoryContainer.jsx":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -81920,7 +83299,713 @@ var CategoryContainerHOC = (0, _extend.default)(_CategoryContainer.default);
 exports.CategoryContainerHOC = CategoryContainerHOC;
 var _default = CategoryContainerHOC;
 exports.default = _default;
-},{"./CategoryContainer":"components/Category/CategoryContainer.jsx","./CategoryView":"components/Category/CategoryView.jsx","./extend":"components/Category/extend.js"}],"components/App/App.jsx":[function(require,module,exports) {
+},{"./CategoryContainer":"components/Category/CategoryContainer.jsx","./CategoryView":"components/Category/CategoryView.jsx","./extend":"components/Category/extend.js"}],"components/CategoryChooser/CategoryChooserView.jsx":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireDefault(require("react"));
+
+var _propTypes = _interopRequireDefault(require("prop-types"));
+
+var _style = require("../style");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var noop = function noop(a) {
+  return a;
+};
+
+var CategoryChooserView = function CategoryChooserView(_ref) {
+  var value = _ref.value,
+      categories = _ref.categories,
+      onChange = _ref.onChange;
+  return _react.default.createElement(_style.Select, {
+    value: value,
+    onChange: onChange
+  }, categories.map(function (cat) {
+    return _react.default.createElement("option", {
+      key: cat.directory,
+      value: cat.directory
+    }, cat.title);
+  }));
+};
+
+CategoryChooserView.propTypes = {
+  value: _propTypes.default.string,
+  categories: _propTypes.default.array,
+  onChange: _propTypes.default.func
+};
+CategoryChooserView.defaultProps = {
+  value: '',
+  categories: [],
+  onChange: noop
+};
+var _default = CategoryChooserView;
+exports.default = _default;
+},{"react":"../node_modules/react/index.js","prop-types":"../node_modules/prop-types/index.js","../style":"components/style.js"}],"components/CategoryChooser/CategoryChooserContainer.jsx":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _extends2 = _interopRequireDefault(require("@babel/runtime-corejs2/helpers/extends"));
+
+var _classCallCheck2 = _interopRequireDefault(require("@babel/runtime-corejs2/helpers/classCallCheck"));
+
+var _createClass2 = _interopRequireDefault(require("@babel/runtime-corejs2/helpers/createClass"));
+
+var _possibleConstructorReturn2 = _interopRequireDefault(require("@babel/runtime-corejs2/helpers/possibleConstructorReturn"));
+
+var _getPrototypeOf2 = _interopRequireDefault(require("@babel/runtime-corejs2/helpers/getPrototypeOf"));
+
+var _inherits2 = _interopRequireDefault(require("@babel/runtime-corejs2/helpers/inherits"));
+
+var _react = _interopRequireWildcard(require("react"));
+
+var _lodash = _interopRequireDefault(require("lodash"));
+
+var _CategoryChooserView = _interopRequireDefault(require("./CategoryChooserView"));
+
+var _categories = _interopRequireDefault(require("../../models/categories"));
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var CategoryChooserContainer =
+/*#__PURE__*/
+function (_Component) {
+  (0, _inherits2.default)(CategoryChooserContainer, _Component);
+
+  function CategoryChooserContainer(props) {
+    var _this;
+
+    (0, _classCallCheck2.default)(this, CategoryChooserContainer);
+    _this = (0, _possibleConstructorReturn2.default)(this, (0, _getPrototypeOf2.default)(CategoryChooserContainer).call(this, props));
+    _this.state = {
+      value: '',
+      categories: []
+    };
+    return _this;
+  }
+
+  (0, _createClass2.default)(CategoryChooserContainer, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      var _this2 = this;
+
+      this._mounted = true;
+      this._cSub = _categories.default.subscribe(function (_ref) {
+        var state = _ref.state;
+
+        _this2._digestCatState(state);
+      });
+    }
+  }, {
+    key: "componentWillUnmount",
+    value: function componentWillUnmount() {
+      if (this._cSub) this._cSub.unsubscribe();
+      this._mounted = false;
+    }
+  }, {
+    key: "_digestCatState",
+    value: function _digestCatState(state) {
+      var categories = _lodash.default.get(state, 'categories', []);
+
+      this.setState({
+        categories: categories
+      });
+    }
+  }, {
+    key: "onChange",
+    value: function onChange(value) {
+      console.log('selected: ', value);
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var _this3 = this;
+
+      return _react.default.createElement(_CategoryChooserView.default, (0, _extends2.default)({}, this.state, {
+        onChange: function onChange(value) {
+          return _this3.onChange(value);
+        }
+      }));
+    }
+  }]);
+  return CategoryChooserContainer;
+}(_react.Component);
+
+exports.default = CategoryChooserContainer;
+},{"@babel/runtime-corejs2/helpers/extends":"../node_modules/@babel/runtime-corejs2/helpers/extends.js","@babel/runtime-corejs2/helpers/classCallCheck":"../node_modules/@babel/runtime-corejs2/helpers/classCallCheck.js","@babel/runtime-corejs2/helpers/createClass":"../node_modules/@babel/runtime-corejs2/helpers/createClass.js","@babel/runtime-corejs2/helpers/possibleConstructorReturn":"../node_modules/@babel/runtime-corejs2/helpers/possibleConstructorReturn.js","@babel/runtime-corejs2/helpers/getPrototypeOf":"../node_modules/@babel/runtime-corejs2/helpers/getPrototypeOf.js","@babel/runtime-corejs2/helpers/inherits":"../node_modules/@babel/runtime-corejs2/helpers/inherits.js","react":"../node_modules/react/index.js","lodash":"../node_modules/lodash/lodash.js","./CategoryChooserView":"components/CategoryChooser/CategoryChooserView.jsx","../../models/categories":"models/categories.js"}],"components/CategoryChooser/extend.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+/**
+ * allows you to merge in router, redux, etc.
+ *
+ * @param component {Component}
+ * @returns {Component}
+ */
+var _default = function _default(component) {
+  return component;
+};
+
+exports.default = _default;
+},{}],"components/CategoryChooser/index.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+Object.defineProperty(exports, "CategoryChooserContainer", {
+  enumerable: true,
+  get: function () {
+    return _CategoryChooserContainer.default;
+  }
+});
+Object.defineProperty(exports, "CategoryChooserView", {
+  enumerable: true,
+  get: function () {
+    return _CategoryChooserView.default;
+  }
+});
+exports.CategoryChooserContainerHOC = exports.CategoryChooserViewHOC = exports.default = void 0;
+
+var _CategoryChooserContainer = _interopRequireDefault(require("./CategoryChooserContainer"));
+
+var _CategoryChooserView = _interopRequireDefault(require("./CategoryChooserView"));
+
+var _extend = _interopRequireDefault(require("./extend"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var CategoryChooserViewHOC = (0, _extend.default)(_CategoryChooserView.default);
+exports.CategoryChooserViewHOC = CategoryChooserViewHOC;
+var CategoryChooserContainerHOC = (0, _extend.default)(_CategoryChooserContainer.default);
+exports.CategoryChooserContainerHOC = CategoryChooserContainerHOC;
+var _default = CategoryChooserContainerHOC;
+exports.default = _default;
+},{"./CategoryChooserContainer":"components/CategoryChooser/CategoryChooserContainer.jsx","./CategoryChooserView":"components/CategoryChooser/CategoryChooserView.jsx","./extend":"components/CategoryChooser/extend.js"}],"components/FormErrors/FormErrorsContainer.jsx":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _objectSpread2 = _interopRequireDefault(require("@babel/runtime-corejs2/helpers/objectSpread"));
+
+var _classCallCheck2 = _interopRequireDefault(require("@babel/runtime-corejs2/helpers/classCallCheck"));
+
+var _createClass2 = _interopRequireDefault(require("@babel/runtime-corejs2/helpers/createClass"));
+
+var _possibleConstructorReturn2 = _interopRequireDefault(require("@babel/runtime-corejs2/helpers/possibleConstructorReturn"));
+
+var _getPrototypeOf2 = _interopRequireDefault(require("@babel/runtime-corejs2/helpers/getPrototypeOf"));
+
+var _inherits2 = _interopRequireDefault(require("@babel/runtime-corejs2/helpers/inherits"));
+
+var _react = _interopRequireWildcard(require("react"));
+
+var _lodash = _interopRequireDefault(require("lodash"));
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var FormErrorsContainer =
+/*#__PURE__*/
+function (_Component) {
+  (0, _inherits2.default)(FormErrorsContainer, _Component);
+
+  function FormErrorsContainer(props) {
+    (0, _classCallCheck2.default)(this, FormErrorsContainer);
+    return (0, _possibleConstructorReturn2.default)(this, (0, _getPrototypeOf2.default)(FormErrorsContainer).call(this, props));
+  }
+
+  (0, _createClass2.default)(FormErrorsContainer, [{
+    key: "setFormErrorsFoo",
+    value: function setFormErrorsFoo(value) {
+      return this.setState({
+        formErrorsFoo: value
+      });
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var _this$props = (0, _objectSpread2.default)({}, this.props),
+          field = _this$props.field,
+          errors = _this$props.errors;
+
+      var error = _lodash.default.get(errors, field, false);
+
+      console.log('field: ', field, 'error:', error);
+
+      if (_lodash.default.isArray(error)) {
+        error = _react.default.createElement("tr", null, _react.default.createElement("td", null, "\xA0"), _react.default.createElement("td", null, error.map(function (msg) {
+          return _react.default.createElement("p", {
+            key: msg
+          }, field, ": ", msg);
+        })));
+      }
+
+      return error || false;
+    }
+  }]);
+  return FormErrorsContainer;
+}(_react.Component);
+
+exports.default = FormErrorsContainer;
+},{"@babel/runtime-corejs2/helpers/objectSpread":"../node_modules/@babel/runtime-corejs2/helpers/objectSpread.js","@babel/runtime-corejs2/helpers/classCallCheck":"../node_modules/@babel/runtime-corejs2/helpers/classCallCheck.js","@babel/runtime-corejs2/helpers/createClass":"../node_modules/@babel/runtime-corejs2/helpers/createClass.js","@babel/runtime-corejs2/helpers/possibleConstructorReturn":"../node_modules/@babel/runtime-corejs2/helpers/possibleConstructorReturn.js","@babel/runtime-corejs2/helpers/getPrototypeOf":"../node_modules/@babel/runtime-corejs2/helpers/getPrototypeOf.js","@babel/runtime-corejs2/helpers/inherits":"../node_modules/@babel/runtime-corejs2/helpers/inherits.js","react":"../node_modules/react/index.js","lodash":"../node_modules/lodash/lodash.js"}],"components/FormErrors/extend.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+/**
+ * allows you to merge in router, redux, etc.
+ *
+ * @param component {Component}
+ * @returns {Component}
+ */
+var _default = function _default(component) {
+  return component;
+};
+
+exports.default = _default;
+},{}],"components/FormErrors/index.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+Object.defineProperty(exports, "FormErrorsContainer", {
+  enumerable: true,
+  get: function () {
+    return _FormErrorsContainer.default;
+  }
+});
+exports.FormErrorsContainerHOC = exports.default = void 0;
+
+var _FormErrorsContainer = _interopRequireDefault(require("./FormErrorsContainer"));
+
+var _extend = _interopRequireDefault(require("./extend"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var FormErrorsContainerHOC = (0, _extend.default)(_FormErrorsContainer.default);
+exports.FormErrorsContainerHOC = FormErrorsContainerHOC;
+var _default = FormErrorsContainerHOC;
+exports.default = _default;
+},{"./FormErrorsContainer":"components/FormErrors/FormErrorsContainer.jsx","./extend":"components/FormErrors/extend.js"}],"components/NewArticle/NewArticleView.jsx":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireDefault(require("react"));
+
+var _propTypes = _interopRequireDefault(require("prop-types"));
+
+var _style = require("../style");
+
+var _CategoryChooser = _interopRequireDefault(require("../CategoryChooser"));
+
+var _FormErrors = _interopRequireDefault(require("../FormErrors"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var noop = function noop(a) {
+  return a;
+};
+
+var NewArticleView = function NewArticleView(_ref) {
+  var title = _ref.title,
+      content = _ref.content,
+      published = _ref.published,
+      onHomepage = _ref.onHomepage,
+      category = _ref.category,
+      filename = _ref.filename,
+      errors = _ref.errors,
+      togglePublished = _ref.togglePublished,
+      toggleOnHomepage = _ref.toggleOnHomepage,
+      setFilename = _ref.setFilename,
+      setTitle = _ref.setTitle,
+      setContent = _ref.setContent,
+      setCategory = _ref.setCategory,
+      save = _ref.save;
+  return _react.default.createElement(_style.ArticleFrame, null, _react.default.createElement(_style.PageHead, null, "New Article"), _react.default.createElement(_style.FuzzyBox, null, _react.default.createElement(_style.FormContainer, null, _react.default.createElement("tbody", null, _react.default.createElement(_style.FormItem, null, _react.default.createElement(_style.FormLabel, null, "Title"), _react.default.createElement(_style.FormContent, null, _react.default.createElement(_style.Input, {
+    type: "text",
+    value: title,
+    onChange: function onChange(event) {
+      return setTitle(event.target.value);
+    }
+  }))), _react.default.createElement(_FormErrors.default, {
+    field: "title",
+    errors: errors
+  }), _react.default.createElement(_style.FormItem, null, _react.default.createElement(_style.FormLabel, null, "Filename"), _react.default.createElement(_style.FormContent, null, _react.default.createElement(_style.Input, {
+    type: "text",
+    value: filename,
+    onChange: function onChange(event) {
+      return setFilename(event.target.value);
+    }
+  }))), _react.default.createElement(_FormErrors.default, {
+    field: "filename",
+    errors: errors
+  }), _react.default.createElement(_style.FormItem, null, _react.default.createElement(_style.FormLabel, null, "Category"), _react.default.createElement(_style.FormContent, null, _react.default.createElement(_CategoryChooser.default, {
+    value: category,
+    onChange: setCategory
+  }))), _react.default.createElement(_FormErrors.default, {
+    field: "category",
+    errors: errors
+  }), _react.default.createElement(_style.FormItem, null, _react.default.createElement(_style.FormLabel, null, "\xA0"), _react.default.createElement(_style.FormContent, {
+    "data-type": "FormContent"
+  }, _react.default.createElement(_style.CheckboxWrapper, null, _react.default.createElement("div", {
+    onClick: togglePublished
+  }, _react.default.createElement("input", {
+    type: "checkbox",
+    checked: published,
+    onChange: togglePublished
+  }), "Published"), _react.default.createElement("div", {
+    onClick: toggleOnHomepage
+  }, _react.default.createElement("input", {
+    type: "checkbox",
+    checked: onHomepage,
+    onChange: toggleOnHomepage
+  }), "On Home Page")))), _react.default.createElement(_FormErrors.default, {
+    field: "published",
+    errors: errors
+  }), _react.default.createElement(_FormErrors.default, {
+    field: "onHomepage",
+    errors: errors
+  }), _react.default.createElement(_FormErrors.default, {
+    field: "content",
+    errors: errors
+  }))), _react.default.createElement(_style.ContentEditor, {
+    name: "article-content",
+    value: content,
+    onChange: function onChange(event) {
+      return setContent(event.target.value);
+    },
+    rows: "20"
+  }), _react.default.createElement(_style.ButtonList, null, _react.default.createElement(_style.EditButton, {
+    onClick: save
+  }, "Save"))));
+};
+
+NewArticleView.propTypes = {
+  newArticleFoo: _propTypes.default.string,
+  setNewArticleFoo: _propTypes.default.func
+};
+NewArticleView.defaultProps = {
+  newArticleFoo: '',
+  setNewArticleFoo: noop
+};
+var _default = NewArticleView;
+exports.default = _default;
+},{"react":"../node_modules/react/index.js","prop-types":"../node_modules/prop-types/index.js","../style":"components/style.js","../CategoryChooser":"components/CategoryChooser/index.js","../FormErrors":"components/FormErrors/index.js"}],"components/NewArticle/NewArticleContainer.jsx":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _extends2 = _interopRequireDefault(require("@babel/runtime-corejs2/helpers/extends"));
+
+var _objectSpread2 = _interopRequireDefault(require("@babel/runtime-corejs2/helpers/objectSpread"));
+
+var _assign = _interopRequireDefault(require("@babel/runtime-corejs2/core-js/object/assign"));
+
+var _promise = _interopRequireDefault(require("@babel/runtime-corejs2/core-js/promise"));
+
+var _classCallCheck2 = _interopRequireDefault(require("@babel/runtime-corejs2/helpers/classCallCheck"));
+
+var _createClass2 = _interopRequireDefault(require("@babel/runtime-corejs2/helpers/createClass"));
+
+var _possibleConstructorReturn2 = _interopRequireDefault(require("@babel/runtime-corejs2/helpers/possibleConstructorReturn"));
+
+var _getPrototypeOf2 = _interopRequireDefault(require("@babel/runtime-corejs2/helpers/getPrototypeOf"));
+
+var _inherits2 = _interopRequireDefault(require("@babel/runtime-corejs2/helpers/inherits"));
+
+var _react = _interopRequireWildcard(require("react"));
+
+var _lodash = _interopRequireDefault(require("lodash"));
+
+var _NewArticleView = _interopRequireDefault(require("./NewArticleView"));
+
+var _articles = require("../../models/articles");
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var NewArticleContainer =
+/*#__PURE__*/
+function (_Component) {
+  (0, _inherits2.default)(NewArticleContainer, _Component);
+
+  function NewArticleContainer(props) {
+    var _this;
+
+    (0, _classCallCheck2.default)(this, NewArticleContainer);
+    _this = (0, _possibleConstructorReturn2.default)(this, (0, _getPrototypeOf2.default)(NewArticleContainer).call(this, props));
+    _this.state = {
+      published: true,
+      onHomepage: false,
+      content: '',
+      title: 'New Article',
+      errors: false,
+      filename: 'new_filename'
+    };
+    return _this;
+  }
+
+  (0, _createClass2.default)(NewArticleContainer, [{
+    key: "setContent",
+    value: function setContent(content) {
+      var _this2 = this;
+
+      this.setState({
+        content: content,
+        errors: false
+      }, function () {
+        return _this2.validate();
+      });
+    }
+  }, {
+    key: "setFilename",
+    value: function setFilename(filename) {
+      var _this3 = this;
+
+      this.setState({
+        filename: filename,
+        errors: false
+      }, function () {
+        return _this3.validate();
+      });
+    }
+  }, {
+    key: "setTitle",
+    value: function setTitle(title) {
+      var _this4 = this;
+
+      this.setState({
+        title: title,
+        errors: false
+      }, function () {
+        return _this4.validate();
+      });
+    }
+  }, {
+    key: "setCategory",
+    value: function setCategory(category) {
+      var _this5 = this;
+
+      this.setState({
+        category: category,
+        errors: false
+      }, function () {
+        return _this5.validate();
+      });
+    }
+  }, {
+    key: "togglePublished",
+    value: function togglePublished() {
+      var _this6 = this;
+
+      this.setState({
+        published: !this.state.published,
+        errors: false
+      }, function () {
+        return _this6.validate();
+      });
+    }
+  }, {
+    key: "toggleOnHomepage",
+    value: function toggleOnHomepage() {
+      var _this7 = this;
+
+      this.setState({
+        onHomepage: !this.state.onHomepage,
+        errors: false
+      }, function () {
+        return _this7.validate();
+      });
+    }
+  }, {
+    key: "save",
+    value: function save() {
+      var _this8 = this;
+
+      console.log('saving');
+      this.validate().then(function (errors) {
+        if (errors) {
+          console.log('save:errors:', errors);
+
+          _this8.setState({
+            errors: errors
+          });
+        } else {
+          console.log('can save');
+        }
+      }).catch(function (err) {
+        console.log('error validating:', err);
+      });
+    }
+  }, {
+    key: "componentDidMount",
+    value: function componentDidMount() {}
+  }, {
+    key: "validate",
+    value: function validate() {
+      var _this9 = this;
+
+      return new _promise.default(function (done) {
+        var data = _lodash.default.pick(_this9.state, 'content,title,published,onHomepage,filename,category'.split(','));
+
+        try {
+          var article = new _articles.Article();
+          (0, _assign.default)(article, data);
+          var errors = false;
+
+          if (!_lodash.default.isEmpty(article.errors)) {
+            errors = (0, _objectSpread2.default)({}, article.errors);
+          }
+
+          if (_this9._mounted) {
+            _this9.setState({
+              errors: errors
+            }, function () {
+              return done(errors);
+            });
+          } else {
+            done(errors);
+          }
+        } catch (errors) {
+          if (_this9._mounted) {
+            _this9.setState({
+              errors: errors
+            }, function () {
+              return done(errors);
+            });
+          } else {
+            done(errors);
+          }
+        }
+      });
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var _this10 = this;
+
+      var props = (0, _objectSpread2.default)({}, this.props);
+      delete props.children;
+
+      if (this.state.errors) {
+        console.log('errors in state: ', this.state.errors);
+      }
+
+      return _react.default.createElement(_NewArticleView.default, (0, _extends2.default)({}, this.state, {
+        setContent: function setContent(content) {
+          return _this10.setContent(content);
+        },
+        setFilename: function setFilename(filename) {
+          return _this10.setFilename(filename);
+        },
+        setTitle: function setTitle(title) {
+          return _this10.setTitle(title);
+        },
+        setCategory: function setCategory(category) {
+          return _this10.setCategory(category);
+        },
+        toggleOnHomepage: function toggleOnHomepage() {
+          return _this10.toggleOnHomepage();
+        },
+        togglePublished: function togglePublished() {
+          return _this10.togglePublished();
+        },
+        save: function save() {
+          return _this10.save();
+        }
+      }));
+    }
+  }]);
+  return NewArticleContainer;
+}(_react.Component);
+
+exports.default = NewArticleContainer;
+},{"@babel/runtime-corejs2/helpers/extends":"../node_modules/@babel/runtime-corejs2/helpers/extends.js","@babel/runtime-corejs2/helpers/objectSpread":"../node_modules/@babel/runtime-corejs2/helpers/objectSpread.js","@babel/runtime-corejs2/core-js/object/assign":"../node_modules/@babel/runtime-corejs2/core-js/object/assign.js","@babel/runtime-corejs2/core-js/promise":"../node_modules/@babel/runtime-corejs2/core-js/promise.js","@babel/runtime-corejs2/helpers/classCallCheck":"../node_modules/@babel/runtime-corejs2/helpers/classCallCheck.js","@babel/runtime-corejs2/helpers/createClass":"../node_modules/@babel/runtime-corejs2/helpers/createClass.js","@babel/runtime-corejs2/helpers/possibleConstructorReturn":"../node_modules/@babel/runtime-corejs2/helpers/possibleConstructorReturn.js","@babel/runtime-corejs2/helpers/getPrototypeOf":"../node_modules/@babel/runtime-corejs2/helpers/getPrototypeOf.js","@babel/runtime-corejs2/helpers/inherits":"../node_modules/@babel/runtime-corejs2/helpers/inherits.js","react":"../node_modules/react/index.js","lodash":"../node_modules/lodash/lodash.js","./NewArticleView":"components/NewArticle/NewArticleView.jsx","../../models/articles":"models/articles.js"}],"components/NewArticle/extend.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+/**
+ * allows you to merge in router, redux, etc.
+ *
+ * @param component {Component}
+ * @returns {Component}
+ */
+var _default = function _default(component) {
+  return component;
+};
+
+exports.default = _default;
+},{}],"components/NewArticle/index.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+Object.defineProperty(exports, "NewArticleContainer", {
+  enumerable: true,
+  get: function () {
+    return _NewArticleContainer.default;
+  }
+});
+Object.defineProperty(exports, "NewArticleView", {
+  enumerable: true,
+  get: function () {
+    return _NewArticleView.default;
+  }
+});
+exports.NewArticleContainerHOC = exports.NewArticleViewHOC = exports.default = void 0;
+
+var _NewArticleContainer = _interopRequireDefault(require("./NewArticleContainer"));
+
+var _NewArticleView = _interopRequireDefault(require("./NewArticleView"));
+
+var _extend = _interopRequireDefault(require("./extend"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var NewArticleViewHOC = (0, _extend.default)(_NewArticleView.default);
+exports.NewArticleViewHOC = NewArticleViewHOC;
+var NewArticleContainerHOC = (0, _extend.default)(_NewArticleContainer.default);
+exports.NewArticleContainerHOC = NewArticleContainerHOC;
+var _default = NewArticleContainerHOC;
+exports.default = _default;
+},{"./NewArticleContainer":"components/NewArticle/NewArticleContainer.jsx","./NewArticleView":"components/NewArticle/NewArticleView.jsx","./extend":"components/NewArticle/extend.js"}],"components/App/App.jsx":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -81955,6 +84040,8 @@ var _Homepage = _interopRequireDefault(require("../Homepage"));
 var _Article = _interopRequireDefault(require("../Article"));
 
 var _Category = _interopRequireDefault(require("../Category"));
+
+var _NewArticle = _interopRequireDefault(require("../NewArticle"));
 
 var _user = _interopRequireDefault(require("../../models/user"));
 
@@ -82022,6 +84109,9 @@ function (_Component) {
       }), _react.default.createElement(_reactRouterDom.Route, {
         path: "/category/:directory*",
         component: _Category.default
+      }), _react.default.createElement(_reactRouterDom.Route, {
+        path: "/new-article",
+        component: _NewArticle.default
       })))));
     }
   }]);
@@ -82029,7 +84119,7 @@ function (_Component) {
 }(_react.Component);
 
 exports.default = App;
-},{"@babel/runtime-corejs2/helpers/classCallCheck":"../node_modules/@babel/runtime-corejs2/helpers/classCallCheck.js","@babel/runtime-corejs2/helpers/createClass":"../node_modules/@babel/runtime-corejs2/helpers/createClass.js","@babel/runtime-corejs2/helpers/possibleConstructorReturn":"../node_modules/@babel/runtime-corejs2/helpers/possibleConstructorReturn.js","@babel/runtime-corejs2/helpers/getPrototypeOf":"../node_modules/@babel/runtime-corejs2/helpers/getPrototypeOf.js","@babel/runtime-corejs2/helpers/inherits":"../node_modules/@babel/runtime-corejs2/helpers/inherits.js","@babel/runtime-corejs2/helpers/taggedTemplateLiteral":"../node_modules/@babel/runtime-corejs2/helpers/taggedTemplateLiteral.js","react":"../node_modules/react/index.js","lodash":"../node_modules/lodash/lodash.js","react-router-dom":"../node_modules/react-router-dom/es/index.js","styled-components":"../node_modules/styled-components/dist/styled-components.browser.esm.js","../Navbar":"components/Navbar/index.js","../Homepage":"components/Homepage/index.js","../Article":"components/Article/index.js","../Category":"components/Category/index.js","../../models/user":"models/user.js"}],"../node_modules/machina/lib/machina.js":[function(require,module,exports) {
+},{"@babel/runtime-corejs2/helpers/classCallCheck":"../node_modules/@babel/runtime-corejs2/helpers/classCallCheck.js","@babel/runtime-corejs2/helpers/createClass":"../node_modules/@babel/runtime-corejs2/helpers/createClass.js","@babel/runtime-corejs2/helpers/possibleConstructorReturn":"../node_modules/@babel/runtime-corejs2/helpers/possibleConstructorReturn.js","@babel/runtime-corejs2/helpers/getPrototypeOf":"../node_modules/@babel/runtime-corejs2/helpers/getPrototypeOf.js","@babel/runtime-corejs2/helpers/inherits":"../node_modules/@babel/runtime-corejs2/helpers/inherits.js","@babel/runtime-corejs2/helpers/taggedTemplateLiteral":"../node_modules/@babel/runtime-corejs2/helpers/taggedTemplateLiteral.js","react":"../node_modules/react/index.js","lodash":"../node_modules/lodash/lodash.js","react-router-dom":"../node_modules/react-router-dom/es/index.js","styled-components":"../node_modules/styled-components/dist/styled-components.browser.esm.js","../Navbar":"components/Navbar/index.js","../Homepage":"components/Homepage/index.js","../Article":"components/Article/index.js","../Category":"components/Category/index.js","../NewArticle":"components/NewArticle/index.js","../../models/user":"models/user.js"}],"../node_modules/machina/lib/machina.js":[function(require,module,exports) {
 var define;
 /*!
  *  * machina - A library for creating powerful and flexible finite state machines. Loosely inspired by Erlang/OTP's gen_fsm behavior.
@@ -82931,7 +85021,19 @@ var define;
 });
 
 ;
-},{"lodash":"../node_modules/lodash/lodash.js"}],"../node_modules/core-js/library/modules/_validate-collection.js":[function(require,module,exports) {
+},{"lodash":"../node_modules/lodash/lodash.js"}],"../node_modules/core-js/library/modules/es6.date.now.js":[function(require,module,exports) {
+// 20.3.3.1 / 15.9.4.4 Date.now()
+var $export = require('./_export');
+
+$export($export.S, 'Date', { now: function () { return new Date().getTime(); } });
+
+},{"./_export":"../node_modules/core-js/library/modules/_export.js"}],"../node_modules/core-js/library/fn/date/now.js":[function(require,module,exports) {
+require('../../modules/es6.date.now');
+module.exports = require('../../modules/_core').Date.now;
+
+},{"../../modules/es6.date.now":"../node_modules/core-js/library/modules/es6.date.now.js","../../modules/_core":"../node_modules/core-js/library/modules/_core.js"}],"../node_modules/@babel/runtime-corejs2/core-js/date/now.js":[function(require,module,exports) {
+module.exports = require("core-js/library/fn/date/now");
+},{"core-js/library/fn/date/now":"../node_modules/core-js/library/fn/date/now.js"}],"../node_modules/core-js/library/modules/_validate-collection.js":[function(require,module,exports) {
 var isObject = require('./_is-object');
 module.exports = function (it, TYPE) {
   if (!isObject(it) || it._t !== TYPE) throw TypeError('Incompatible receiver, ' + TYPE + ' required!');
@@ -88177,6 +90279,8 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
+var _now = _interopRequireDefault(require("@babel/runtime-corejs2/core-js/date/now"));
+
 var _classCallCheck2 = _interopRequireDefault(require("@babel/runtime-corejs2/helpers/classCallCheck"));
 
 var _createClass2 = _interopRequireDefault(require("@babel/runtime-corejs2/helpers/createClass"));
@@ -88195,7 +90299,7 @@ function getGame() {
   var chess = new _chess.Chess();
   var boards = [];
 
-  while (!chess.game_over()) {
+  while (!chess.game_over() && boards.length < 20) {
     boards.push(chess.fen());
     var moves = chess.moves();
     var move = moves[Math.floor(Math.random() * moves.length)];
@@ -88203,7 +90307,7 @@ function getGame() {
   }
 
   boards.push(chess.fen());
-  return _lodash.default.uniq(boards);
+  return boards;
 }
 
 var pieceMap = new _map.default([['p', 'black_pawn'], ['P', 'white_pawn'], ['k', 'black_king'], ['K', 'white_king'], ['black', 'black_bishop'], ['BLACK', 'white_bishop'], ['n', 'black_horse'], ['N', 'white_horse'], ['q', 'black_queen'], ['Q', 'white_queen'], ['B', 'white_bishop'], ['b', 'black_bishop'], ['1', [false]], ['2', [false, false]], ['3', [false, false, false]], ['4', [false, false, false, false]], ['5', [false, false, false, false, false]], ['6', [false, false, false, false, false, false]], ['7', [false, false, false, false, false, false, false]], ['8', [false, false, false, false, false, false, false, false]]]);
@@ -88222,25 +90326,17 @@ function moveToPieces(move) {
 var WHITE = (0, _chromaJs.default)(255, 255, 255).num();
 var BLACK = (0, _chromaJs.default)(0, 0, 0).num();
 var SQUARE1 = (0, _chromaJs.default)(102, 102, 102).num();
-var SQUARE2 = (0, _chromaJs.default)(204, 204, 204).num();
+var SQUARE2 = (0, _chromaJs.default)(51, 51, 51).num();
 var TIME_MAX = 8000;
 
 var Backgrounder =
 /*#__PURE__*/
 function () {
   function Backgrounder(monitor, fsm) {
-    var _this = this;
-
     (0, _classCallCheck2.default)(this, Backgrounder);
     this.monitor = monitor;
     this.fsm = fsm;
-    console.log('new background');
     this.cycle = 0;
-
-    this._update = function (time) {
-      return _this.update(time);
-    };
-
     this.makeApp();
   }
 
@@ -88255,40 +90351,32 @@ function () {
         resolution: devicePixelRatio
       });
       container.appendChild(this.app.view);
-      this.o = new PIXI.Container();
+      this.o = new PIXI.Container(); //this.o.filters = [new PIXI.filters.BlurFilter({blur: 10})];
+
       this.o.position.set(this.relX(0.5), this.relY(0.5));
       this.board = new PIXI.Container();
       this.o.addChild(this.board);
       this.pieces = new PIXI.Container();
       this.o.addChild(this.pieces);
-      var blur = new PIXI.filters.BlurFilter();
-      this.o.filters = [blur];
       this.app.stage.addChild(this.o);
     }
   }, {
     key: "start",
     value: function start() {
-      console.log('Backgrounder.start', this.fsm.state);
+      this.started = true;
       this.resize();
       this.draw();
       this.startGame();
-      this.monitor.timer.add(this._update);
     }
   }, {
     key: "startGame",
     value: function startGame() {
-      var _this2 = this;
-
-      if (this.gameTimer) clearInterval(this.gameTimer);
       this.game = getGame();
-      this.gameTimer = setInterval(function () {
-        return _this2.move();
-      }, 800);
+      this.lastMoveTime = (0, _now.default)();
     }
   }, {
     key: "setSize",
     value: function setSize(x, y) {
-      console.log('--- resizing to ', x, y);
       this._size = {
         width: x,
         height: y
@@ -88304,37 +90392,39 @@ function () {
   }, {
     key: "update",
     value: function update(time) {
-      var _this3 = this;
+      var _this = this;
 
       this.cycle += time;
       this.cycle %= TIME_MAX;
-      this.o.scale.set(this.scale, this.scale);
       var blurrer = new PIXI.filters.BlurFilter();
-      var blur = 6 * this.scale - 2;
+      var blur = 10 * this.scale - 2;
       blurrer.blur = blur;
       this.o.filters = [blurrer];
       this.o.angle = this.rotAngle;
+      this.o.scale.set(this.scale + 0.75, this.scale + 0.75);
       if (this.pieces) this.pieces.children.forEach(function (p) {
-        return p.angle = -_this3.rotAngle;
+        return p.angle = -_this.rotAngle;
       });
+      var s = (0, _now.default)();
+      var since = s - this.lastMoveTime;
+
+      if (since > 1200) {
+        this.move();
+        this.lastMoveTime = s;
+      }
     }
   }, {
     key: "resize",
     value: function resize() {
-      var _this4 = this;
-
+      console.log('resizing');
       var container = document.getElementById('site-background');
       this.setSize(container.clientWidth, container.clientHeight);
-      requestAnimationFrame(function () {
-        _this4.draw();
-      });
     }
   }, {
     key: "stop",
     value: function stop() {
+      this.started = false;
       console.log('Backgrounder.stop', this.fsm.state);
-      clearInterval(this.gameTimer);
-      this.monitor.timer.remove(this._update);
       this.game = null;
     }
   }, {
@@ -88399,13 +90489,14 @@ function () {
   }, {
     key: "move",
     value: function move() {
-      var _this5 = this;
+      var _this2 = this;
 
       //@TODO: more of a difference engine
       if (!this.game) {
         return;
       }
 
+      var startTime = (0, _now.default)();
       var nextMove = this.game.shift();
       this.game.push(nextMove);
       var pieces = moveToPieces(nextMove);
@@ -88418,10 +90509,11 @@ function () {
             var i = r - 3.5;
             var j = c - 3.5;
             sprite.anchor.set(0.5);
-            sprite.scale.set(ss / 200 * _this5.scale);
+            sprite.scale.set(ss / 200 * _this2.scale);
             sprite.position.set(i * ss, j * ss);
+            sprite.angle = -_this2.rotAngle;
 
-            _this5.pieces.addChild(sprite);
+            _this2.pieces.addChild(sprite);
           }
         });
       });
@@ -88475,7 +90567,7 @@ function () {
 
 var _default = Backgrounder;
 exports.default = _default;
-},{"@babel/runtime-corejs2/helpers/classCallCheck":"../node_modules/@babel/runtime-corejs2/helpers/classCallCheck.js","@babel/runtime-corejs2/helpers/createClass":"../node_modules/@babel/runtime-corejs2/helpers/createClass.js","@babel/runtime-corejs2/core-js/map":"../node_modules/@babel/runtime-corejs2/core-js/map.js","lodash":"../node_modules/lodash/lodash.js","chroma-js":"../node_modules/chroma-js/chroma.js","chess.js":"../node_modules/chess.js/chess.js"}],"js/background.js":[function(require,module,exports) {
+},{"@babel/runtime-corejs2/core-js/date/now":"../node_modules/@babel/runtime-corejs2/core-js/date/now.js","@babel/runtime-corejs2/helpers/classCallCheck":"../node_modules/@babel/runtime-corejs2/helpers/classCallCheck.js","@babel/runtime-corejs2/helpers/createClass":"../node_modules/@babel/runtime-corejs2/helpers/createClass.js","@babel/runtime-corejs2/core-js/map":"../node_modules/@babel/runtime-corejs2/core-js/map.js","lodash":"../node_modules/lodash/lodash.js","chroma-js":"../node_modules/chroma-js/chroma.js","chess.js":"../node_modules/chess.js/chess.js"}],"js/background.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -88511,9 +90603,17 @@ var Monitor = function Monitor() {
   var _this = this;
 
   (0, _classCallCheck2.default)(this, Monitor);
+  console.log('new monitor');
   var self = this;
-  this.timer = new PIXI.Ticker();
+  this.timer = new PIXI.Ticker({
+    minFPS: 20
+  });
   this.timer.start();
+  this.timer.add(function (delta) {
+    if (_this.background && _this.background.started) {
+      _this.background.update(delta);
+    }
+  });
   this.status = new _machina.Fsm({
     namespace: 'monitor',
     initialState: 'BG_NONE',
@@ -88548,6 +90648,7 @@ var Monitor = function Monitor() {
       BG_STARTING: {
         _onEnter: function _onEnter() {
           if (!self.background) {
+            console.log('new background');
             self.background = new _Backgrounder.default(self, this);
           } else {
             self.background.start();
@@ -88561,7 +90662,7 @@ var Monitor = function Monitor() {
       BG_STARTED: {
         _stop: 'BG_STOPPING',
         _onEnter: function _onEnter() {
-          if (self.background) {
+          if (self.background && !self.background.started) {
             self.background.start();
           }
         },
@@ -88579,7 +90680,7 @@ var Monitor = function Monitor() {
       // ----- END BG_STARTED
       BG_STOPPING: {
         _onEnter: function _onEnter() {
-          if (self.background) {
+          if (self.background && self.background.started) {
             self.background.stop();
           }
 
@@ -88604,7 +90705,16 @@ var Monitor = function Monitor() {
       this.handle('_start');
     },
     stop: function stop() {
-      this.handle('_stop');
+      console.log('stopping if status ', this.status);
+
+      switch (this.status) {
+        case 'BG_STARTED':
+          this.handle('_stop');
+          break;
+
+        default:
+          console.log('no change');
+      }
     },
     end: function end() {
       this.handle('_end');
@@ -88613,22 +90723,9 @@ var Monitor = function Monitor() {
       this.handle('_resize');
     }
   });
-
-  var resizeEnd = _lodash.default.debounce(function () {
-    console.log('resizing end event');
-
-    _this.status.resize();
-
-    _this.status.start();
-  }, 500);
-
-  addEvent(window, 'resize', function () {
-    console.log('resizing event');
-
-    _this.status.stop();
-
-    resizeEnd();
-  });
+  addEvent(window, 'resize', _lodash.default.debounce(function () {
+    return _this.status.resize();
+  }, 500));
   this.status.on('transition', function (_ref) {
     var fromState = _ref.fromState,
         toState = _ref.toState;
@@ -88681,7 +90778,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52612" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "62464" + '/');
 
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);

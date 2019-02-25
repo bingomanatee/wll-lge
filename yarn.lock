@@ -809,6 +809,16 @@
     lodash.groupby "^4.6.0"
     rxjs "^6.3.3"
 
+"@wonderlandlabs/propper@2.0.4":
+  version "2.0.4"
+  resolved "https://registry.yarnpkg.com/@wonderlandlabs/propper/-/propper-2.0.4.tgz#c5cdf7febb02a78f39db4c9d3db8b1f38e9fa75d"
+  integrity sha512-tQdnk069suGP6IsUbwnbEX4TJ7PiMMbH5dx94h+z2o9aD2T5QoC72qx5o1IY4liMshRzQpa+xN/0fxmMCrObTQ==
+  dependencies:
+    "@wonderlandlabs/inspector" "^1.0.4"
+    is "^3.2.1"
+    lodash.compact "^3.0.1"
+    lodash.get "^4.4.2"
+
 "@wonderlandlabs/propper@^2.0.3":
   version "2.0.3"
   resolved "https://registry.yarnpkg.com/@wonderlandlabs/propper/-/propper-2.0.3.tgz#61bbd0bbf401bb5cc404322fbdd4291a95a0fc5d"
@@ -2099,15 +2109,6 @@ clap@^1.0.9:
   integrity sha512-4CoL/A3hf90V3VIEjeuhSvlGFEHKzOz+Wfc2IVZc+FaUgU0ZQafJTP49fvnULipOPcAfqhyI2duwQyns6xqjYA==
   dependencies:
     chalk "^1.1.3"
-
-class-propper@^1.0.5:
-  version "1.0.5"
-  resolved "https://registry.yarnpkg.com/class-propper/-/class-propper-1.0.5.tgz#9387a029ca32f8e779eac71e40052bcdc61df070"
-  integrity sha512-mjPkInPl3QSP1iSPYfWKw3puDN1BvRGkaW6KO2ziwGOztxDyAp/8sDtGqF2ynjQKyrJ66bazf3MotK53tr11cQ==
-  dependencies:
-    is "^3.2.1"
-    lodash.compact "^3.0.1"
-    lodash.get "^4.4.2"
 
 class-utils@^0.3.5:
   version "0.3.6"

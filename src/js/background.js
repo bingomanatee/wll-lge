@@ -20,9 +20,15 @@ var addEvent = function (object, type, callback) {
 class Monitor {
 
   constructor() {
+    console.log('new monitor');
     const self = this;
-    this.timer = new PIXI.Ticker();
+    this.timer = new PIXI.Ticker({minFPS: 20});
     this.timer.start();
+    this.timer.add((delta) => {
+      if (this.background && this.background.started) {
+        this.background.update(delta);
+      }
+    });
     this.status = new Fsm({
       namespace: 'monitor',
       initialState: 'BG_NONE',
@@ -55,8 +61,10 @@ class Monitor {
         BG_STARTING: {
           _onEnter: function () {
             if (!self.background) {
+              console.log('new background');
               self.background = new Backgrounder(self, this);
-            } else {
+            }
+            else {
               self.background.start();
             }
             this.transition('BG_STARTED');
@@ -66,7 +74,7 @@ class Monitor {
         BG_STARTED: {
           _stop: 'BG_STOPPING',
           _onEnter: function () {
-            if (self.background) {
+            if (self.background && (!self.background.started)) {
               self.background.start();
             }
           },
@@ -83,7 +91,7 @@ class Monitor {
         }, // ----- END BG_STARTED
         BG_STOPPING: {
           _onEnter: function () {
-            if (self.background) {
+            if (self.background && self.background.started) {
               self.background.stop();
             }
             this.transition('BG_STOPPED');
@@ -105,9 +113,17 @@ class Monitor {
         this.handle('_start');
       },
       stop: function () {
-        this.handle('_stop');
+        console.log('stopping if status ', this.status);
+        switch (this.status) {
+        case 'BG_STARTED':
+          this.handle('_stop');
+          break;
+
+        default:
+          console.log('no change');
+        }
       },
-      end: function() {
+      end: function () {
         this.handle('_end');
       },
       resize: function () {
@@ -115,16 +131,7 @@ class Monitor {
       }
     });
 
-    const resizeEnd = _.debounce(() => {
-      console.log('resizing end event');
-      this.status.resize();
-      this.status.start();
-    }, 500);
-    addEvent(window, 'resize', () => {
-      console.log('resizing event');
-      this.status.stop();
-      resizeEnd();
-    });
+    addEvent(window, 'resize', _.debounce(() => this.status.resize(), 500));
 
     this.status.on('transition', ({fromState, toState}) => {
       console.log('monitor transition: ', fromState, '...', toState);

@@ -5,14 +5,14 @@ import {Chess} from 'chess.js';
 function getGame() {
   var chess = new Chess();
   let boards = [];
-  while (!chess.game_over()) {
+  while (!chess.game_over() && (boards.length < 20)) {
     boards.push(chess.fen());
     var moves = chess.moves();
     var move = moves[Math.floor(Math.random() * moves.length)];
     chess.move(move);
   }
   boards.push(chess.fen());
-  return _.uniq(boards);
+  return boards;
 }
 
 const pieceMap = new Map([
@@ -52,16 +52,14 @@ function moveToPieces(move) {
 const WHITE = c(255, 255, 255).num();
 const BLACK = c(0, 0, 0).num();
 const SQUARE1 = c(102, 102, 102).num();
-const SQUARE2 = c(204, 204, 204).num();
+const SQUARE2 = c(51, 51, 51).num();
 const TIME_MAX = 8000;
 
 class Backgrounder {
   constructor(monitor, fsm) {
     this.monitor = monitor;
     this.fsm = fsm;
-    console.log('new background');
     this.cycle = 0;
-    this._update = (time) => this.update(time);
     this.makeApp();
   }
 
@@ -74,32 +72,28 @@ class Backgrounder {
     });
     container.appendChild(this.app.view);
     this.o = new PIXI.Container();
+    //this.o.filters = [new PIXI.filters.BlurFilter({blur: 10})];
     this.o.position.set(this.relX(0.5), this.relY(0.5));
     this.board = new PIXI.Container();
     this.o.addChild(this.board);
     this.pieces = new PIXI.Container();
     this.o.addChild(this.pieces);
-    const blur = new PIXI.filters.BlurFilter();
-    this.o.filters = [blur];
     this.app.stage.addChild(this.o);
   }
 
   start() {
-    console.log('Backgrounder.start', this.fsm.state);
+    this.started = true;
     this.resize();
     this.draw();
     this.startGame();
-    this.monitor.timer.add(this._update);
   }
 
   startGame() {
-    if (this.gameTimer) clearInterval(this.gameTimer);
     this.game = getGame();
-    this.gameTimer = setInterval(() => this.move(), 800);
+    this.lastMoveTime = Date.now();
   }
 
   setSize(x, y) {
-    console.log('--- resizing to ', x, y);
     this._size = {width: x, height: y};
     this.sizes = [x, y];
     this.xy = {x, y};
@@ -110,13 +104,19 @@ class Backgrounder {
   update(time) {
     this.cycle += time;
     this.cycle %= TIME_MAX;
-    this.o.scale.set(this.scale, this.scale);
     let blurrer = new PIXI.filters.BlurFilter();
-    const blur = 6 * this.scale - 2;
+    const blur = 10 * this.scale - 2;
     blurrer.blur = blur;
     this.o.filters = [blurrer];
     this.o.angle = this.rotAngle;
+    this.o.scale.set(this.scale + 0.75,this.scale + 0.75);
     if (this.pieces) this.pieces.children.forEach(p => p.angle = -this.rotAngle);
+    const s = Date.now();
+    const since = s - this.lastMoveTime;
+    if (since > 1200) {
+      this.move();
+      this.lastMoveTime = s;
+    }
   }
 
   get rotAngle() {
@@ -139,17 +139,14 @@ class Backgrounder {
   }
 
   resize() {
+    console.log('resizing');
     let container = document.getElementById('site-background');
     this.setSize(container.clientWidth, container.clientHeight);
-    requestAnimationFrame(() => {
-      this.draw();
-    });
   }
 
   stop() {
+    this.started = false;
     console.log('Backgrounder.stop', this.fsm.state);
-    clearInterval(this.gameTimer);
-    this.monitor.timer.remove(this._update);
     this.game = null;
   }
 
@@ -219,6 +216,8 @@ class Backgrounder {
     if (!this.game) {
       return;
     }
+
+    let startTime = Date.now();
     let nextMove = this.game.shift();
     this.game.push(nextMove);
     let pieces = moveToPieces(nextMove);
@@ -235,6 +234,7 @@ class Backgrounder {
           sprite.anchor.set(0.5);
           sprite.scale.set(ss/200 * this.scale);
           sprite.position.set(i * ss, j * ss);
+          sprite.angle = -this.rotAngle;
           this.pieces.addChild(sprite);
         }
       });

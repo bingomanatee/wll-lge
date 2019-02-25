@@ -71,11 +71,12 @@ let userStore = new Store({
         accessToken = store.state.accessToken;
       }
 
-      if (accessToken) {
+      if (accessToken && (accessToken !== 'null')) {
         return new Promise((done, fail) => {
           webAuth.client.userInfo(accessToken, function (err, user) {
             if (err) {
               console.log('error getting user:', err);
+              store.actions.clearUser();
               return fail(err);
             }
 
@@ -119,10 +120,18 @@ if (window.location.hash.includes('access_token')) {
     }
     console.log('getting user from ', authResult);
     localStorage.setItem('auth0.accessToken', authResult.accessToken);
-    userStore.actions.getUserInfo(authResult.accessToken);
+    userStore.actions.getUserInfo(authResult.accessToken)
+      .catch((error) => {
+        console.log('error parsing hash:', error);
+      });
   });
 } else if (userStore.state.accessToken) {
-  userStore.actions.getUserInfo();
+  userStore.actions.getUserInfo()
+    .catch((error) => {
+      console.log('error with access token:', error);
+      localStorage.setItem('auth0.accessToken', null);
+      localStorage.setItem('auth0.user', null);
+    });
 }
 
 export default userStore;

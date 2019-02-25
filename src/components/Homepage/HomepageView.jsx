@@ -1,18 +1,11 @@
 import React from 'react';
 import pt from 'prop-types';
-import {ArticleListWrapper, ArticleList, ArticleItem, ArticleText} from '../style';
-
-const HomepageView = (state) => {
+import {ArticleListWrapper} from '../style';
+import ArticleLinks from '../ArticleLinks';
+const HomepageView = ({homepageArticles}) => {
   return (
     <ArticleListWrapper>
-      <ArticleList>
-        {state.homepageArticles.map(a => (<React.Fragment>
-          <ArticleItem
-            to={'/article/' + a.path}
-            key={a.path}>{a.title}</ArticleItem>
-          {a.description && <ArticleText>{a.description}</ArticleText>}
-        </React.Fragment>))}
-      </ArticleList>
+      <ArticleLinks articles={homepageArticles} />
     </ArticleListWrapper>
   );
 };

@@ -50,7 +50,7 @@ export default class ArticleEditContainer extends Component {
     await articleStore.actions.saveArticle(newArticle, userStore.state.acessToken, userStore.state.sub);
     await articleStore.actions.getArticle(this.state.path);
     console.log('asserting new version of  article: ', articleStore.state.currentArticle);
-    this.setState(articleStore.state.currentArticle);// @TODO: inspect result for match
+    this.setState(newArticle);// @TODO: inspect result for match
     if (this.props.onSave) this.props.onSave();
   }
 

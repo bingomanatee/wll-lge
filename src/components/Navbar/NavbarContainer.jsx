@@ -2,30 +2,30 @@ import React, { Component } from 'react';
 import NavbarView from './NavbarView';
 
 import categories from '../../models/categories';
+import userStore from '../../models/user';
 
 export default class NavbarContainer extends Component {
   constructor(props) {
     super(props);
-    this.state = {categories:[], user: false, userStore: props.userStore};
+    this.state = {categories:[], user: false, userStore};
   }
 
   componentDidMount() {
+    this._mounted = true;
     this._catSub = categories.subscribe(({state}) => {
       this.setState({categories: state.categories || []});
     });
 
-    if (this.props.userStore) {
-      this._userSub = this.props.userStore.subscribe(({state}) => {
-        console.log('nav: store state:', state);
-        this.setState({
-          user: state.user || false,
-          isAdmin: state.isAdmin,
-        });
+    this._userSub = userStore.subscribe(({state}) => {
+      if (this._mounted) this.setState({
+        user: state.user || false,
+        isAdmin: state.isAdmin,
       });
-    }
+    });
   }
 
   componentWillUnmount(){
+    this._mounted = false;
     if (this._catSub) this._catSub.unsubscribe();
     if (this._userSub) this._userSub.unsubscribe();
   }

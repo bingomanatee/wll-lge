@@ -3,22 +3,19 @@ const path = require('path');
 const minimist = require('minimist');
 const _ = require('lodash');
 
-const { Validator } = require('class-propper');
+const {validator} = require('@wonderlandlabs/inspector');
 const rename = require('gulp-rename');
 const modify = require('gulp-modify-file');
 
 const template = folder => path.resolve(__dirname, 'templates', `${folder}/**/*`);
 
-const containerNameValidator = new Validator([
-  new Validator('string', 'name must be a string'),
-  new Validator(s => s.length < 1, 'name must be nonempty'),
-]);
+const containerNameValidator = validator('string', {required: true});
 
 gulp.task('component', () => {
   const { name } = minimist(process.argv.slice(2));
   const cName = _.upperFirst(name);
   const lcName = _.lowerFirst(name);
-  const err = containerNameValidator.try(name);
+  const err = containerNameValidator(name);
   if (err) throw new Error(err);
 
   const source = template('component');
@@ -26,13 +23,13 @@ gulp.task('component', () => {
   console.log(`============== writing component ${name} from ${source} to ${dest}`);
   try {
     return gulp.src(source)
-     .pipe(rename((file) => {
-       // eslint-disable-next-line no-param-reassign
-       file.basename = file.basename.replace(/^ComponentName/, `${cName}`);
-       return file;
-     }))
-     .pipe(modify(text => text.replace(/ComponentName/g, cName)
-       .replace(/componentName/g, lcName)))
+      .pipe(rename((file) => {
+        // eslint-disable-next-line no-param-reassign
+        file.basename = file.basename.replace(/^ComponentName/, `${cName}`);
+        return file;
+      }))
+      .pipe(modify(text => text.replace(/ComponentName/g, cName)
+        .replace(/componentName/g, lcName)))
       .pipe(gulp.dest(dest));
   } catch (err) {
     console.log('error: ', err);

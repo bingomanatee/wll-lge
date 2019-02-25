@@ -7,6 +7,7 @@ import Navbar from '../Navbar';
 import Homepage from '../Homepage';
 import Article from '../Article';
 import Category from '../Category';
+import NewArticle from '../NewArticle';
 
 import userStore from '../../models/user';
 
@@ -38,6 +39,7 @@ export default class App extends Component {
               <Route path="/" exact component={Homepage}/>
               <Route path="/article/:path*" component={Article}/>
               <Route path="/category/:directory*" component={Category}/>
+              <Route path="/new-article" component={NewArticle} />
             </Switch>
           </Content>
         </SiteFrame>

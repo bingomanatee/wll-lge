@@ -13,21 +13,7 @@ export default class ArticleContainer extends Component {
 
   componentDidMount() {
     if (!this.state.loaded && this.state.path) {
-      articleStore.actions.getArticle(this.state.path)
-        .then(() => {
-          const article = articleStore.state.currentArticle;
-          const directory = article.directory;
-          if (directory) {
-            categoryStore.actions.getCategory(directory)
-              .then(() => {
-                this.setState(categoryStore.state);
-              });
-          }
-          this.setState({...article, loaded: true});
-        })
-        .catch(err => {
-          console.log('cannot get article', err);
-        });
+      this.loadArticle();
     }
 
     this._userSub = userStore.subscribe(({state}) => {
@@ -36,6 +22,24 @@ export default class ArticleContainer extends Component {
         isAdmin: state.isAdmin
       });
     });
+  }
+
+  loadArticle() {
+    articleStore.actions.getArticle(this.state.path)
+      .then(() => {
+        const article = articleStore.state.currentArticle;
+        const directory = article.directory;
+        if (directory) {
+          categoryStore.actions.getCategory(directory)
+            .then(() => {
+              this.setState(categoryStore.state);
+            });
+        }
+        this.setState({...article, loaded: true});
+      })
+      .catch(err => {
+        console.log('cannot get article', err);
+      });
   }
 
   toggleEdit() {
@@ -51,9 +55,16 @@ export default class ArticleContainer extends Component {
     }
   }
 
+  onSave(){
+    this.loadArticle();
+    this.toggleEdit();
+  }
+
   render() {
     return (
-      <ArticleView {...this.state} toggleEdit={() => this.toggleEdit()}> </ArticleView>
+      <ArticleView {...this.state}
+        onSave={() => this.onSave()}
+        toggleEdit={() => this.toggleEdit()}> </ArticleView>
     );
   }
 }

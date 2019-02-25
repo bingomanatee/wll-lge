@@ -13,6 +13,7 @@ import {
   Text
 } from '../style';
 import CategoryEdit from '../CategoryEdit';
+import ArticleLinks from "../ArticleLinks";
 
 const noop = a => a;
 
@@ -21,11 +22,7 @@ const CategoryView = ({ category, isAdmin, toggleEdit, isEditing, directory, cat
     <PageHead>{_.get(category, 'title')}</PageHead>
     <ArticleListWrapper>
       <ArticleList>
-        {categoryArticles.filter(a => a.published || isAdmin)
-          .map(a => (<ArticleItem
-            to={'/article/' + a.path}
-            className={a.published ? '' : 'unpublished'}
-            key={a.path}>{a.title} {!a.published && <i>hidden</i>}</ArticleItem>))}
+        <ArticleLinks articles={categoryArticles.filter(a => a.published || isAdmin)} />
       </ArticleList>
     </ArticleListWrapper>
     {isEditing && <CategoryEdit directory={directory} />}

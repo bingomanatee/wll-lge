@@ -2,7 +2,7 @@ import sc from 'styled-components';
 import {Link} from 'react-router-dom';
 import {SMALL_NAV, LARGE_NAV} from '../constants';
 
-const BUTTON_MASK = 'rgba(200,200,200,0.666)';
+const BUTTON_MASK = 'rgba(200,200,200,0.333)';
 const CONTENT_MASK = 'rgb(255,255,255)';
 const LIGHT_GREY = 'rgb(200,200,200)';
 const ARTICLE_LINK_BACK = 'rgba(128,128,128,0.95)';
@@ -18,8 +18,7 @@ font-size: 2rem;
 margin: 0;
 padding: 0;
 line-height: 100%;
-background-color: ${BUTTON_MASK};
-text-shadow: 2px 2px 2px #FFFFFF;
+text-shadow: 1px 1px 2px #FFFFFF;
 @media(max-width: 800px) {
   font-size: 1rem;
   font-weight: 800;
@@ -29,8 +28,13 @@ text-shadow: 2px 2px 2px #FFFFFF;
 export const ArticleListWrapper = sc.div`
 width: 100%;
 @media(min-width: 800px) {
-overflow-y: auto
+overflow-y: visible
 }`;
+
+export const ArticleItemWrapper = sc.div`
+position: absolute;
+flex-grow: 1;
+`;
 
 export const ArticleList = sc.div`
 @media(min-width: ${SMALL_NAV}) {
@@ -38,12 +42,14 @@ display: flex;
 flex-direction: row;
 justify-content: center;
 flex-wrap: wrap;
+overflow: visible;
 }
 `;
 
 export const ArticleItem = sc(Link)`
 display: block;
 text-decoration: none;
+position: relative;
 background: ${ARTICLE_LINK_BACK};
 color: white;
 font-family: 'Merriweather Sans', sans-serif;
@@ -58,24 +64,33 @@ margin: 0;
 }
 @media(min-width: ${LARGE_NAV}) {
 padding: 0.5rem 1rem;
-font-size: 1.2rem;
+font-size: 1.1rem;
 }
 :hover {
 text-decoration: underline;
+div[data-role='text'] {
+display: block;
+}
 }
 &.unpublished {
 text-decoration: line-through
 }
 `;
-export const ArticleText = sc(Link)`
-display: block;
+export const ArticleText = sc.div`
+display: none;
+position: absolute;
+left: 2rem;
+top: 1.5rem;
+width: 20rem;
 text-decoration: none;
-background: transparent;
+background: white;
+border-radius: 2px;
+z-index: 1000;
 color: white;
 font-family: 'Merriweather Sans', sans-serif;
 font-weight: 200;
 font-size: 1rem;
-color: white !important;
+color: black;
 padding: 0.2rem 0.5rem;
 margin: 0.333rem 0.25rem;
 margin-left: -0.666rem;
@@ -85,13 +100,7 @@ margin: 0;
 }
 @media(min-width: ${LARGE_NAV}) {
 padding: 0.5rem 1rem;
-font-size: 1.2rem;
-}
-:hover {
-text-decoration: underline;
-}
-&.unpublished {
-text-decoration: line-through
+font-size: 1.1rem;
 }
 `;
 
@@ -105,7 +114,7 @@ margin-right: 0.2rem;
 `;
 
 export const ContentEditor = sc.textarea`
-height: 60vh;
+height: 40vh;
 padding: 1rem;
 font-size: 1.25rem;
 font-family: 'Courier New', Monaco, Courier, monospace;
@@ -124,7 +133,6 @@ text-transform: uppercase;
 margins: 0;
   padding: 0 4rem;
 text-shadow: 2px 2px 2px #000000;
-background-color: ${BUTTON_MASK};
 @media(max-width: ${SMALL_NAV}) {
 font-size: 1rem;
 padding: 0;
@@ -240,28 +248,43 @@ width: 100%;
 `;
 
 
-export const FormItem = sc.div`
-display: flex;
-flex-direction: row;
-justify-content: space-between;
-align-items: baseline;
+export const FormItem = sc.tr`
 margin-bottom: 0.5rem;
 font-family: 'Merriweather Sans', sans-serif;
 `;
 
-export const FormLabel = sc.div`
+export const FormLabel = sc.th`
 font-weight: 600;
 padding: 0.25rem;
-flex-grow: 1;
 text-align: right;
 margin-right: 2rem;
+white-space: nowrap;
+font-family: 'Merriweather Sans', sans-serif;
+`;
+
+export const FormContainer = sc.table`
+width: 100%;
+`;
+
+export const FormContent= sc.td`
+width: 80%;
 `;
 
 export const Input = sc.input`
 padding: 0.25rem;
 border: 1px solid black;
 border-radius: 1px;
-flex-grow: 1.25;
+width: 100%;
+font-size: 1.25rem;
+font-family: 'Courier New', Monaco, Courier, monospace;
+@media(min-width: ${LARGE_NAV}) {
+font-size: 1.75rem;
+}
+`;
+export const Select = sc.select`
+padding: 0.25rem;
+border: 1px solid black;
+border-radius: 1px;
 font-size: 1.25rem;
 font-family: 'Courier New', Monaco, Courier, monospace;
 @media(min-width: ${LARGE_NAV}) {
@@ -315,15 +338,13 @@ background-color: blue;
 `;
 
 export const CategoryView = sc(Link)`
-background-color: ${BUTTON_MASK};
 color: black;
 display: block;
 padding: 0.2rem 0.333rem;
 text-decoration: none;
 text-align: center;
-text-transform: uppercase;
 font-family: 'Merriweather Sans', sans-serif;
-font-weight: 800;
+font-weight: 100;
 line-height: 100%;
 margin-right: 1rem;
 white-space: nowrap;
@@ -347,11 +368,12 @@ margin: 0.5rem 0;
 
 export const CategoryList = sc.div`
 clear: both;
-margin:0.5rem 1rem ;
+margin:0.5rem 0 ;
 flex-wrap: wrap;
 padding: 0 1rem;
 display: flex;
 flex-direction: row;
 justify-content: center;
+background: rgba(200,200,200,0.6);
 `;
 

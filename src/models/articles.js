@@ -1,6 +1,8 @@
 import {Store} from '@wonderlandlabs/looking-glass-engine';
 import axios from 'axios';
 import _ from 'lodash';
+import propper from '@wonderlandlabs/propper';
+
 import encodePath from '../js/encodePath';
 
 const API_URL = process.env.API_URL;
@@ -85,5 +87,56 @@ const articles = new Store({
   .addProp('currentArticle', {start: false});
 
 articles.start();
+
+export class Article {
+}
+
+function errMgr(name){
+  return {
+    onInvalid: function (value, error, article) {
+      if (article) article.errors[name] = error;
+    },
+    onChange: function () {
+      delete this.errors[name];
+    }
+  };
+}
+
+propper(Article)
+  .addProp('errors', {
+    defaultValue: () => ({}),
+    type: 'object'
+  })
+  .addProp('content', {
+    required: true,
+    type: 'string',
+    ...errMgr('content')
+  })
+  .addProp('published', {
+    defaultValue: () => true,
+    type: 'boolean',
+    ...errMgr('published')
+  })
+  .addProp('onHomepage', {
+    defaultValue: () => true,
+    type: 'boolean',
+    ...errMgr('onHomepage')
+  })
+  .addProp('title', {
+    required: true,
+    type: 'string',
+    ... errMgr('title')
+  })
+  .addProp('filename', {
+    required: true,
+    type: 'string',
+    ... errMgr('title')
+  })
+  .addProp('directory', {
+    required: true,
+    type: 'string',
+    ... errMgr('title')
+  });
+
 
 export default articles;
