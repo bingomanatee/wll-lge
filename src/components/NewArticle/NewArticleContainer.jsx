@@ -3,6 +3,8 @@ import _ from 'lodash';
 
 import NewArticleView from './NewArticleView';
 import {Article} from '../../models/articles';
+import userStore from '../../models/user';
+import encodePath from '../../js/encodePath';
 
 export default class NewArticleContainer extends Component {
   constructor(props) {
@@ -29,8 +31,8 @@ export default class NewArticleContainer extends Component {
     this.setState({title, errors: false}, () => this.validate());
   }
 
-  setCategory(category) {
-    this.setState({category, errors: false}, () => this.validate());
+  setCategory(directory) {
+    this.setState({directory, errors: false}, () => this.validate());
   }
 
   togglePublished() {
@@ -43,14 +45,24 @@ export default class NewArticleContainer extends Component {
 
   save() {
     console.log('saving');
+    const {accessToken, sub} = userStore.state;
+    if (!(sub && accessToken)){
+      console.log('cannot save - not logged in');
+      return;
+    }
     this.validate()
       .then((errors) => {
         if (errors) {
           console.log('save:errors:', errors);
-          this.setState({errors})
+          this.setState({errors});
         }
         else {
           console.log('can save');
+          const article =  this.article();
+          article.save(accessToken, sub, true)
+            .then(() => {
+              this.props.history.push('/article/' + (article.path));
+            });
         }
       })
       .catch((err) => {
@@ -58,12 +70,17 @@ export default class NewArticleContainer extends Component {
       });
   }
 
+  article() {
+    let data = _.pick(this.state, 'content,title,published,onHomepage,filename,directory'.split(','));
+    return new Article(data);
+  }
+
   componentDidMount() {
   }
 
   validate() {
     return new Promise((done) => {
-      let data = _.pick(this.state, 'content,title,published,onHomepage,filename,category'.split(','));
+      let data = _.pick(this.state, 'content,title,published,onHomepage,filename,directory'.split(','));
       try {
         let article = new Article();
         Object.assign(article, data);

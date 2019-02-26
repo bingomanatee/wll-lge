@@ -25,11 +25,18 @@ export default class CategoryChooserContainer extends Component {
 
   _digestCatState(state){
     let categories = _.get(state, 'categories', []);
-    this.setState({categories});
+    if (categories.length)
+      this.setState({categories, value: categories[0].directory}, () => {
+        this.onChange(categories[0].directory);
+      });
   }
 
   onChange(value) {
-    console.log('selected: ', value);
+    this.setState({value});
+    if (this.props.onChange) {
+      console.log('setting category to ', value);
+      this.props.onChange(value);
+    }
   }
 
   render() {

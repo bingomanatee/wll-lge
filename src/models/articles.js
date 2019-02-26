@@ -6,6 +6,7 @@ import propper from '@wonderlandlabs/propper';
 import encodePath from '../js/encodePath';
 
 const API_URL = process.env.API_URL;
+const MD_SUFFIX = /\.md$/;
 
 const asPath = (input) => {
   if (!input) {
@@ -50,17 +51,32 @@ const articles = new Store({
       })
         .then(() => {
           if (store.state.currentArticle && store.state.currentArticle.path === article.path) {
-            store.actions.getArticle(article.path);
+            return store.actions.getArticle(article.path);
+          }
+        }).catch((err) => {
+          console.log('error creating articles:', err);
+        });
+    }, // todo: safety check
+    newArticle(store, article, accessToken, sub) {
+      return axios({
+        method: 'POST',
+        url: API_URL + '/articles',
+        headers: {
+          'access_token': accessToken,
+          'sub': sub,
+        },
+        data: article
+      })
+        .then(() => {
+          if (store.state.currentArticle && store.state.currentArticle.path === article.path) {
+            return store.actions.getArticle(article.path);
           }
         }).catch((err) => {
           console.log('error creating articles:', err);
         });
     }, // todo: safety check
     getArticle(store, path) {
-      return axios.get(
-        API_URL + '/articles/'
-        + encodeURIComponent(path)
-      )
+      return axios.get(API_URL + '/articles/' + encodeURIComponent(path))
         .then(result => {
           store.actions.setCurrentArticle(result.data);
         })
@@ -89,6 +105,35 @@ const articles = new Store({
 articles.start();
 
 export class Article {
+  constructor(props) {
+    if (props && _.isObject(props)) {
+      Object.assign(this, props);
+    }
+  }
+
+  get isValid() {
+    return _.isEmpty(this.errors);
+  }
+
+  // like path, but without .md extension
+  get rootPath() {
+    return ((this.directory? (this.directory + '/') : '') + this.filename.replace(MD_SUFFIX, ''));
+  }
+
+  get path() {
+    return ((this.directory? (this.directory + '/') : '') + this.filename.replace(MD_SUFFIX, '') + '.md');
+  }
+
+  toJSON() {
+    let j = _.pick(this, 'filename,title,content,directory,published,onHomepage,description,path'.split(','));
+    return j;
+  }
+
+  save(token, sub, isNew = false) {
+    const j = this.toJSON();
+    console.log('saving ------', j);
+    return isNew ? articles.actions.newArticle(j, token, sub) :  articles.actions.saveArticle(j, token, sub);
+  }
 }
 
 function errMgr(name){
@@ -109,6 +154,11 @@ propper(Article)
   })
   .addProp('content', {
     required: true,
+    type: 'string',
+    ...errMgr('content')
+  })
+  .addProp('description', {
+    defaultValue: '',
     type: 'string',
     ...errMgr('content')
   })

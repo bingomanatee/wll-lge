@@ -52741,7 +52741,7 @@ module.exports = {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.CategoryList = exports.Line = exports.CategoryView = exports.EditButton = exports.ToggleButton = exports.CheckboxWrapper = exports.Select = exports.Input = exports.FormContent = exports.FormContainer = exports.FormLabel = exports.FormItem = exports.ButtonList = exports.UserButton = exports.NavbarFrame = exports.Text = exports.TableBox = exports.FuzzyBox = exports.ArticleFrame = exports.PageHead = exports.ContentEditor = exports.UserIcon = exports.ArticleText = exports.ArticleItem = exports.ArticleList = exports.ArticleItemWrapper = exports.ArticleListWrapper = exports.SiteHeadline = void 0;
+exports.UserLink = exports.CategoryList = exports.Line = exports.CategoryView = exports.EditButton = exports.ToggleButton = exports.CheckboxWrapper = exports.Select = exports.Input = exports.FormContent = exports.FormContainer = exports.FormLabel = exports.FormItem = exports.ButtonList = exports.UserButton = exports.NavbarFrame = exports.Text = exports.TableBox = exports.FuzzyBox = exports.ArticleFrame = exports.PageHead = exports.ContentEditor = exports.UserIcon = exports.ArticleText = exports.ArticleItem = exports.ArticleList = exports.ArticleItemWrapper = exports.ArticleListWrapper = exports.SiteHeadline = void 0;
 
 var _taggedTemplateLiteral2 = _interopRequireDefault(require("@babel/runtime-corejs2/helpers/taggedTemplateLiteral"));
 
@@ -52752,6 +52752,16 @@ var _reactRouterDom = require("react-router-dom");
 var _constants = require("../constants");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _templateObject29() {
+  var data = (0, _taggedTemplateLiteral2.default)(["\ncolor: black;\ndisplay: block;\npadding: 0.2rem 0.333rem;\nbackground: rgba(200,200,200,0.6);\ntext-decoration: none;\ntext-align: center;\nfont-family: 'Merriweather Sans', sans-serif;\nfont-weight: 100;\nline-height: 100%;\nmargin-right: 1rem;\nwhite-space: nowrap;\nfont-size: 1rem;\n@media(max-width: ", ") {\nfont-size: 0.8rem;\n}\n@media(min-width: ", ") {\npadding: 0.5rem 0.5rem;\nfont-size: 1.2rem;\n}\n:hover {\ncolor: white;\n}\n"]);
+
+  _templateObject29 = function _templateObject29() {
+    return data;
+  };
+
+  return data;
+}
 
 function _templateObject28() {
   var data = (0, _taggedTemplateLiteral2.default)(["\nclear: both;\nmargin:0.5rem 0 ;\nflex-wrap: wrap;\npadding: 0 1rem;\ndisplay: flex;\nflex-direction: row;\njustify-content: center;\nbackground: rgba(200,200,200,0.6);\n"]);
@@ -53155,6 +53165,8 @@ exports.Line = Line;
 var CategoryList = _styledComponents.default.div(_templateObject28());
 
 exports.CategoryList = CategoryList;
+var UserLink = (0, _styledComponents.default)(_reactRouterDom.Link)(_templateObject29(), _constants.SMALL_NAV, _constants.LARGE_NAV);
+exports.UserLink = UserLink;
 },{"@babel/runtime-corejs2/helpers/taggedTemplateLiteral":"../node_modules/@babel/runtime-corejs2/helpers/taggedTemplateLiteral.js","styled-components":"../node_modules/styled-components/dist/styled-components.browser.esm.js","react-router-dom":"../node_modules/react-router-dom/es/index.js","../constants":"constants.json"}],"components/Navbar/NavbarView.jsx":[function(require,module,exports) {
 "use strict";
 
@@ -53188,7 +53200,9 @@ var NavbarView = function NavbarView(_ref) {
     onClick: function onClick() {
       !user ? userStore.actions.logIn() : userStore.actions.logOut();
     }
-  }, user ? 'sign out' : 'sign in'), isAdmin && _react.default.createElement(_style.UserButton, null, "Administer")), _react.default.createElement(_style.SiteHeadline, null, "Wonderland Labs"), _react.default.createElement(_style.CategoryList, null, _react.default.createElement(_style.CategoryView, {
+  }, user ? 'sign out' : 'sign in'), isAdmin && _react.default.createElement(_style.UserButton, null, "Administer"), isAdmin && _react.default.createElement(_style.UserLink, {
+    to: "/new-article"
+  }, "New Article")), _react.default.createElement(_style.SiteHeadline, null, "Wonderland Labs"), _react.default.createElement(_style.CategoryList, null, _react.default.createElement(_style.CategoryView, {
     key: "home",
     to: "/"
   }, "Home"), categories && categories.filter(function (cat) {
@@ -79416,7 +79430,11 @@ exports.default = exports.Article = void 0;
 
 var _objectSpread2 = _interopRequireDefault(require("@babel/runtime-corejs2/helpers/objectSpread"));
 
+var _assign = _interopRequireDefault(require("@babel/runtime-corejs2/core-js/object/assign"));
+
 var _classCallCheck2 = _interopRequireDefault(require("@babel/runtime-corejs2/helpers/classCallCheck"));
+
+var _createClass2 = _interopRequireDefault(require("@babel/runtime-corejs2/helpers/createClass"));
 
 var _lookingGlassEngine = require("@wonderlandlabs/looking-glass-engine");
 
@@ -79431,6 +79449,7 @@ var _encodePath = _interopRequireDefault(require("../js/encodePath"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var API_URL = "http://localhost:7070/api";
+var MD_SUFFIX = /\.md$/;
 
 var asPath = function asPath(input) {
   if (!input) {
@@ -79473,7 +79492,25 @@ var articles = new _lookingGlassEngine.Store({
         data: article
       }).then(function () {
         if (store.state.currentArticle && store.state.currentArticle.path === article.path) {
-          store.actions.getArticle(article.path);
+          return store.actions.getArticle(article.path);
+        }
+      }).catch(function (err) {
+        console.log('error creating articles:', err);
+      });
+    },
+    // todo: safety check
+    newArticle: function newArticle(store, article, accessToken, sub) {
+      return (0, _axios.default)({
+        method: 'POST',
+        url: API_URL + '/articles',
+        headers: {
+          'access_token': accessToken,
+          'sub': sub
+        },
+        data: article
+      }).then(function () {
+        if (store.state.currentArticle && store.state.currentArticle.path === article.path) {
+          return store.actions.getArticle(article.path);
         }
       }).catch(function (err) {
         console.log('error creating articles:', err);
@@ -79519,9 +79556,51 @@ var articles = new _lookingGlassEngine.Store({
 });
 articles.start();
 
-var Article = function Article() {
-  (0, _classCallCheck2.default)(this, Article);
-};
+var Article =
+/*#__PURE__*/
+function () {
+  function Article(props) {
+    (0, _classCallCheck2.default)(this, Article);
+
+    if (props && _lodash.default.isObject(props)) {
+      (0, _assign.default)(this, props);
+    }
+  }
+
+  (0, _createClass2.default)(Article, [{
+    key: "toJSON",
+    value: function toJSON() {
+      var j = _lodash.default.pick(this, 'filename,title,content,directory,published,onHomepage,description,path'.split(','));
+
+      return j;
+    }
+  }, {
+    key: "save",
+    value: function save(token, sub) {
+      var isNew = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
+      var j = this.toJSON();
+      console.log('saving ------', j);
+      return isNew ? articles.actions.newArticle(j, token, sub) : articles.actions.saveArticle(j, token, sub);
+    }
+  }, {
+    key: "isValid",
+    get: function get() {
+      return _lodash.default.isEmpty(this.errors);
+    } // like path, but without .md extension
+
+  }, {
+    key: "rootPath",
+    get: function get() {
+      return (this.directory ? this.directory + '/' : '') + this.filename.replace(MD_SUFFIX, '');
+    }
+  }, {
+    key: "path",
+    get: function get() {
+      return (this.directory ? this.directory + '/' : '') + this.filename.replace(MD_SUFFIX, '') + '.md';
+    }
+  }]);
+  return Article;
+}();
 
 exports.Article = Article;
 
@@ -79543,6 +79622,9 @@ function errMgr(name) {
   type: 'object'
 }).addProp('content', (0, _objectSpread2.default)({
   required: true,
+  type: 'string'
+}, errMgr('content'))).addProp('description', (0, _objectSpread2.default)({
+  defaultValue: '',
   type: 'string'
 }, errMgr('content'))).addProp('published', (0, _objectSpread2.default)({
   defaultValue: function defaultValue() {
@@ -79566,7 +79648,7 @@ function errMgr(name) {
 }, errMgr('title')));
 var _default = articles;
 exports.default = _default;
-},{"@babel/runtime-corejs2/helpers/objectSpread":"../node_modules/@babel/runtime-corejs2/helpers/objectSpread.js","@babel/runtime-corejs2/helpers/classCallCheck":"../node_modules/@babel/runtime-corejs2/helpers/classCallCheck.js","@wonderlandlabs/looking-glass-engine":"../node_modules/@wonderlandlabs/looking-glass-engine/build/index.js","axios":"../node_modules/axios/index.js","lodash":"../node_modules/lodash/lodash.js","@wonderlandlabs/propper":"../node_modules/@wonderlandlabs/propper/build/index.js","../js/encodePath":"js/encodePath.js"}],"components/Homepage/HomepageContainer.jsx":[function(require,module,exports) {
+},{"@babel/runtime-corejs2/helpers/objectSpread":"../node_modules/@babel/runtime-corejs2/helpers/objectSpread.js","@babel/runtime-corejs2/core-js/object/assign":"../node_modules/@babel/runtime-corejs2/core-js/object/assign.js","@babel/runtime-corejs2/helpers/classCallCheck":"../node_modules/@babel/runtime-corejs2/helpers/classCallCheck.js","@babel/runtime-corejs2/helpers/createClass":"../node_modules/@babel/runtime-corejs2/helpers/createClass.js","@wonderlandlabs/looking-glass-engine":"../node_modules/@wonderlandlabs/looking-glass-engine/build/index.js","axios":"../node_modules/axios/index.js","lodash":"../node_modules/lodash/lodash.js","@wonderlandlabs/propper":"../node_modules/@wonderlandlabs/propper/build/index.js","../js/encodePath":"js/encodePath.js"}],"components/Homepage/HomepageContainer.jsx":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -83322,16 +83404,18 @@ var noop = function noop(a) {
 var CategoryChooserView = function CategoryChooserView(_ref) {
   var value = _ref.value,
       categories = _ref.categories,
-      onChange = _ref.onChange;
-  return _react.default.createElement(_style.Select, {
+      _onChange = _ref.onChange;
+  return _react.default.createElement("div", null, _react.default.createElement(_style.Select, {
     value: value,
-    onChange: onChange
+    onChange: function onChange(event) {
+      return _onChange(event.target.value);
+    }
   }, categories.map(function (cat) {
     return _react.default.createElement("option", {
       key: cat.directory,
       value: cat.directory
     }, cat.title);
-  }));
+  })), _react.default.createElement("p", null, "Value : ", value));
 };
 
 CategoryChooserView.propTypes = {
@@ -83416,25 +83500,37 @@ function (_Component) {
   }, {
     key: "_digestCatState",
     value: function _digestCatState(state) {
+      var _this3 = this;
+
       var categories = _lodash.default.get(state, 'categories', []);
 
-      this.setState({
-        categories: categories
+      if (categories.length) this.setState({
+        categories: categories,
+        value: categories[0].directory
+      }, function () {
+        _this3.onChange(categories[0].directory);
       });
     }
   }, {
     key: "onChange",
     value: function onChange(value) {
-      console.log('selected: ', value);
+      this.setState({
+        value: value
+      });
+
+      if (this.props.onChange) {
+        console.log('setting category to ', value);
+        this.props.onChange(value);
+      }
     }
   }, {
     key: "render",
     value: function render() {
-      var _this3 = this;
+      var _this4 = this;
 
       return _react.default.createElement(_CategoryChooserView.default, (0, _extends2.default)({}, this.state, {
         onChange: function onChange(value) {
-          return _this3.onChange(value);
+          return _this4.onChange(value);
         }
       }));
     }
@@ -83752,6 +83848,10 @@ var _NewArticleView = _interopRequireDefault(require("./NewArticleView"));
 
 var _articles = require("../../models/articles");
 
+var _user = _interopRequireDefault(require("../../models/user"));
+
+var _encodePath = _interopRequireDefault(require("../../js/encodePath"));
+
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -83815,11 +83915,11 @@ function (_Component) {
     }
   }, {
     key: "setCategory",
-    value: function setCategory(category) {
+    value: function setCategory(directory) {
       var _this5 = this;
 
       this.setState({
-        category: category,
+        directory: directory,
         errors: false
       }, function () {
         return _this5.validate();
@@ -83855,6 +83955,15 @@ function (_Component) {
       var _this8 = this;
 
       console.log('saving');
+      var _userStore$state = _user.default.state,
+          accessToken = _userStore$state.accessToken,
+          sub = _userStore$state.sub;
+
+      if (!(sub && accessToken)) {
+        console.log('cannot save - not logged in');
+        return;
+      }
+
       this.validate().then(function (errors) {
         if (errors) {
           console.log('save:errors:', errors);
@@ -83864,10 +83973,23 @@ function (_Component) {
           });
         } else {
           console.log('can save');
+
+          var article = _this8.article();
+
+          article.save(accessToken, sub, true).then(function () {
+            _this8.props.history.push('/article/' + article.path);
+          });
         }
       }).catch(function (err) {
         console.log('error validating:', err);
       });
+    }
+  }, {
+    key: "article",
+    value: function article() {
+      var data = _lodash.default.pick(this.state, 'content,title,published,onHomepage,filename,directory'.split(','));
+
+      return new _articles.Article(data);
     }
   }, {
     key: "componentDidMount",
@@ -83878,7 +84000,7 @@ function (_Component) {
       var _this9 = this;
 
       return new _promise.default(function (done) {
-        var data = _lodash.default.pick(_this9.state, 'content,title,published,onHomepage,filename,category'.split(','));
+        var data = _lodash.default.pick(_this9.state, 'content,title,published,onHomepage,filename,directory'.split(','));
 
         try {
           var article = new _articles.Article();
@@ -83952,7 +84074,7 @@ function (_Component) {
 }(_react.Component);
 
 exports.default = NewArticleContainer;
-},{"@babel/runtime-corejs2/helpers/extends":"../node_modules/@babel/runtime-corejs2/helpers/extends.js","@babel/runtime-corejs2/helpers/objectSpread":"../node_modules/@babel/runtime-corejs2/helpers/objectSpread.js","@babel/runtime-corejs2/core-js/object/assign":"../node_modules/@babel/runtime-corejs2/core-js/object/assign.js","@babel/runtime-corejs2/core-js/promise":"../node_modules/@babel/runtime-corejs2/core-js/promise.js","@babel/runtime-corejs2/helpers/classCallCheck":"../node_modules/@babel/runtime-corejs2/helpers/classCallCheck.js","@babel/runtime-corejs2/helpers/createClass":"../node_modules/@babel/runtime-corejs2/helpers/createClass.js","@babel/runtime-corejs2/helpers/possibleConstructorReturn":"../node_modules/@babel/runtime-corejs2/helpers/possibleConstructorReturn.js","@babel/runtime-corejs2/helpers/getPrototypeOf":"../node_modules/@babel/runtime-corejs2/helpers/getPrototypeOf.js","@babel/runtime-corejs2/helpers/inherits":"../node_modules/@babel/runtime-corejs2/helpers/inherits.js","react":"../node_modules/react/index.js","lodash":"../node_modules/lodash/lodash.js","./NewArticleView":"components/NewArticle/NewArticleView.jsx","../../models/articles":"models/articles.js"}],"components/NewArticle/extend.js":[function(require,module,exports) {
+},{"@babel/runtime-corejs2/helpers/extends":"../node_modules/@babel/runtime-corejs2/helpers/extends.js","@babel/runtime-corejs2/helpers/objectSpread":"../node_modules/@babel/runtime-corejs2/helpers/objectSpread.js","@babel/runtime-corejs2/core-js/object/assign":"../node_modules/@babel/runtime-corejs2/core-js/object/assign.js","@babel/runtime-corejs2/core-js/promise":"../node_modules/@babel/runtime-corejs2/core-js/promise.js","@babel/runtime-corejs2/helpers/classCallCheck":"../node_modules/@babel/runtime-corejs2/helpers/classCallCheck.js","@babel/runtime-corejs2/helpers/createClass":"../node_modules/@babel/runtime-corejs2/helpers/createClass.js","@babel/runtime-corejs2/helpers/possibleConstructorReturn":"../node_modules/@babel/runtime-corejs2/helpers/possibleConstructorReturn.js","@babel/runtime-corejs2/helpers/getPrototypeOf":"../node_modules/@babel/runtime-corejs2/helpers/getPrototypeOf.js","@babel/runtime-corejs2/helpers/inherits":"../node_modules/@babel/runtime-corejs2/helpers/inherits.js","react":"../node_modules/react/index.js","lodash":"../node_modules/lodash/lodash.js","./NewArticleView":"components/NewArticle/NewArticleView.jsx","../../models/articles":"models/articles.js","../../models/user":"models/user.js","../../js/encodePath":"js/encodePath.js"}],"components/NewArticle/extend.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {

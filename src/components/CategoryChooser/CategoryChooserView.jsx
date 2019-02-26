@@ -6,9 +6,12 @@ import {Select} from '../style';
 const noop = a => a;
 
 const CategoryChooserView = ({value, categories, onChange}) => (
-  <Select value={value} onChange={onChange}>
-    {categories.map(cat => (<option key={cat.directory} value={cat.directory}>{cat.title}</option>))}
-  </Select>
+  <div>
+    <Select value={value} onChange={(event) => onChange(event.target.value)}>
+      {categories.map(cat => (<option key={cat.directory} value={cat.directory}>{cat.title}</option>))}
+    </Select>
+    <p>Value : {value}</p>
+  </div>
 );
 
 CategoryChooserView.propTypes = {

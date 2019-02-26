@@ -377,3 +377,28 @@ justify-content: center;
 background: rgba(200,200,200,0.6);
 `;
 
+
+export const UserLink = sc(Link)`
+color: black;
+display: block;
+padding: 0.2rem 0.333rem;
+background: rgba(200,200,200,0.6);
+text-decoration: none;
+text-align: center;
+font-family: 'Merriweather Sans', sans-serif;
+font-weight: 100;
+line-height: 100%;
+margin-right: 1rem;
+white-space: nowrap;
+font-size: 1rem;
+@media(max-width: ${SMALL_NAV}) {
+font-size: 0.8rem;
+}
+@media(min-width: ${LARGE_NAV}) {
+padding: 0.5rem 0.5rem;
+font-size: 1.2rem;
+}
+:hover {
+color: white;
+}
+`;
