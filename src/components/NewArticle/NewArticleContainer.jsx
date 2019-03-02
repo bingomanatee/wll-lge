@@ -6,6 +6,8 @@ import {Article} from '../../models/articles';
 import userStore from '../../models/user';
 import encodePath from '../../js/encodePath';
 
+const ARTICLE_FIELDS = 'content,title,published,onHomepage,filename,directory'.split(',');
+
 export default class NewArticleContainer extends Component {
   constructor(props) {
     super(props);
@@ -15,7 +17,9 @@ export default class NewArticleContainer extends Component {
       content: '',
       title: 'New Article',
       errors: false,
-      filename: 'new_filename'
+      filename: 'new_filename',
+      exists: false,
+      sameTitle: false,
     };
   }
 
@@ -24,15 +28,46 @@ export default class NewArticleContainer extends Component {
   }
 
   setFilename(filename) {
-    this.setState({filename, errors: false}, () => this.validate());
+    this.setState({filename, errors: false}, () => {
+      this.checkPath();
+      this.validate();
+    });
   }
 
   setTitle(title) {
-    this.setState({title, errors: false}, () => this.validate());
+    this.setState({title, errors: false}, () => {
+      this.validate();
+      this.checkTitle();
+    });
   }
 
   setCategory(directory) {
-    this.setState({directory, errors: false}, () => this.validate());
+    this.setState({directory, errors: false}, () => {
+      this.validate();
+      this.checkPath();
+      this.checkTitle();
+    });
+  }
+
+  checkPath(){
+    if (!this.article) {
+      this.setState({exists: false});
+      return;
+    }
+
+    this.article().isExists()
+      .then((exists) => {
+        this.setState({exists});
+      });
+  }
+
+  async checkTitle() {
+    let sameTitle = false;
+    if (this.state.directory && this.state.title) {
+      const articles = await Article.forDirectory(this.state.directory);
+      sameTitle = !!_.find(articles, {title: this.state.title});
+    }
+    this.setState({sameTitle});
   }
 
   togglePublished() {
@@ -45,11 +80,13 @@ export default class NewArticleContainer extends Component {
 
   save() {
     console.log('saving');
+
     const {accessToken, sub} = userStore.state;
     if (!(sub && accessToken)){
       console.log('cannot save - not logged in');
       return;
     }
+
     this.validate()
       .then((errors) => {
         if (errors) {
@@ -61,7 +98,7 @@ export default class NewArticleContainer extends Component {
           const article =  this.article();
           article.save(accessToken, sub, true)
             .then(() => {
-              this.props.history.push('/article/' + (article.path));
+              this.props.history.push('/article/' + encodePath(article.path));
             });
         }
       })
@@ -71,45 +108,27 @@ export default class NewArticleContainer extends Component {
   }
 
   article() {
-    let data = _.pick(this.state, 'content,title,published,onHomepage,filename,directory'.split(','));
-    return new Article(data);
-  }
-
-  componentDidMount() {
+    let data = _.pick(this.state, ARTICLE_FIELDS);
+    return new Article(data, !this.state.exists);
   }
 
   validate() {
     return new Promise((done) => {
-      let data = _.pick(this.state, 'content,title,published,onHomepage,filename,directory'.split(','));
-      try {
-        let article = new Article();
-        Object.assign(article, data);
-        let errors = false;
-        if (!_.isEmpty(article.errors)) {
-          errors = {...article.errors};
-        }
-        if (this._mounted) {
-          this.setState({errors}, () => done(errors));
-        } else {
-          done(errors);
-        }
-      } catch (errors) {
-        if (this._mounted) {
-          this.setState({errors}, () => done(errors));
-        }
-        else {
-          done(errors);
-        }
+      const article =  this.article();
+      let errors = false;
+      if (!_.isEmpty(article.errors)) {
+        errors = {...article.errors};
+      }
+      if (this._mounted) {
+        this.setState({errors}, () => done(errors));
+      } else {
+        done(errors);
       }
     });
   }
 
   render() {
-    const props = {...this.props};
-    delete props.children;
-    if (this.state.errors) {
-      console.log('errors in state: ', this.state.errors);
-    }
+    console.log('directory --- ', this.state.directory);
     return (
       <NewArticleView {...this.state}
         setContent={(content) => this.setContent(content)}

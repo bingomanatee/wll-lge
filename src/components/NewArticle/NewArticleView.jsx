@@ -21,9 +21,9 @@ import FormErrors from '../FormErrors';
 const noop = a => a;
 
 const NewArticleView = ({
-  title, content, published, onHomepage, category, filename, errors,
+  title, content, published, onHomepage, directory, filename, errors,
   togglePublished, toggleOnHomepage,
-  setFilename, setTitle, setContent, setCategory,
+  setFilename, setTitle, setContent, setCategory, exists, sameTitle,
   save
 }) => (
   <ArticleFrame>
@@ -37,21 +37,28 @@ const NewArticleView = ({
               <Input type="text" value={title} onChange={(event) => setTitle(event.target.value)}/>
             </FormContent>
           </FormItem>
-          <FormErrors field="title" errors={errors} />
+          <FormErrors field="title" errors={errors}/>
+          {sameTitle && !exists && <FormErrors field="sameTitle"
+            errors={({sameTitle: [`there is already an article named '${title}' in '${directory || ''}'.`]})}
+            level="warn" />}
           <FormItem>
             <FormLabel>Filename</FormLabel>
             <FormContent>
               <Input type="text" value={filename} onChange={(event) => setFilename(event.target.value)}/>
             </FormContent>
           </FormItem>
-          <FormErrors field="filename" errors={errors} />
+          <FormErrors field="filename" errors={errors}/>
           <FormItem>
             <FormLabel>Category</FormLabel>
             <FormContent>
-              <CategoryChooser value={category} onChange={setCategory}/>
+              <CategoryChooser value={directory} onChange={setCategory}/>
             </FormContent>
           </FormItem>
-          <FormErrors field="category" errors={errors} />
+          <FormErrors field="category" errors={errors}/>
+          {exists &&
+        <FormErrors field="exists"
+          errors={({exists: [`there is already an article named '${filename}' in '${directory || ''}'.`]})}
+          level="warn"/>}
           <FormItem>
             <FormLabel>&nbsp;</FormLabel>
             <FormContent data-type="FormContent">
@@ -68,9 +75,9 @@ const NewArticleView = ({
             </FormContent>
           </FormItem>
 
-          <FormErrors field="published" errors={errors} />
-          <FormErrors field="onHomepage" errors={errors} />
-          <FormErrors field="content" errors={errors} />
+          <FormErrors field="published" errors={errors}/>
+          <FormErrors field="onHomepage" errors={errors}/>
+          <FormErrors field="content" errors={errors}/>
         </tbody>
       </FormContainer>
       <ContentEditor

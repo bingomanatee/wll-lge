@@ -10,7 +10,6 @@ const CategoryChooserView = ({value, categories, onChange}) => (
     <Select value={value} onChange={(event) => onChange(event.target.value)}>
       {categories.map(cat => (<option key={cat.directory} value={cat.directory}>{cat.title}</option>))}
     </Select>
-    <p>Value : {value}</p>
   </div>
 );
 

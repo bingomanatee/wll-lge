@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import _ from 'lodash';
+import {FormError} from '../style';
 
 export default class FormErrorsContainer extends Component {
   constructor(props) {
@@ -11,15 +12,15 @@ export default class FormErrorsContainer extends Component {
   }
 
   render() {
-    const {field, errors } = { ...this.props };
+    const {field, errors, level } = { ...this.props };
     let error = _.get(errors, field, false);
     console.log('field: ', field, 'error:', error);
     if (_.isArray(error)){
       error =
         (
           <tr>
-            <td>&nbsp;</td>
-            <td>{error.map(msg => <p key={msg}>{field}: {msg}</p>)}</td>
+            <th>&nbsp;</th>
+            <td>{error.map(msg => <FormError level={level || 'error'} key={msg}>{field}: {msg}</FormError>)}</td>
           </tr>
         );
     }

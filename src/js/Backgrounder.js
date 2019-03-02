@@ -2,6 +2,12 @@ import _ from 'lodash';
 import c from 'chroma-js';
 import {Chess} from 'chess.js';
 
+if (window.hasBackgroundDrawn) {
+  return;
+}
+
+window.hasBackgroundDrawn = true;
+
 function getGame() {
   var chess = new Chess();
   let boards = [];

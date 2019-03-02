@@ -261,6 +261,17 @@ margin-right: 2rem;
 white-space: nowrap;
 font-family: 'Merriweather Sans', sans-serif;
 `;
+export const FormError = sc.th`
+font-weight: 300;
+padding: 0.25rem;
+text-align: right;
+white-space: nowrap;
+font-family: 'Merriweather Sans', sans-serif;
+color: ${({level}) => {
+    if (level === 'war') return 'darkorange';
+    return 'darkred';
+  }};
+`;
 
 export const FormContainer = sc.table`
 width: 100%;

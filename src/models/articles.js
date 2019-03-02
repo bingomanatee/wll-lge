@@ -76,7 +76,7 @@ const articles = new Store({
         });
     }, // todo: safety check
     getArticle(store, path) {
-      return axios.get(API_URL + '/articles/' + encodeURIComponent(path))
+      return axios.get(API_URL + '/articles/' + (/[%]/.test(path) ? path :  encodePath(path)))
         .then(result => {
           store.actions.setCurrentArticle(result.data);
         })
@@ -105,9 +105,17 @@ const articles = new Store({
 articles.start();
 
 export class Article {
-  constructor(props) {
+  constructor(props, isNew = true) {
+    if (props === true || props === false) {
+      isNew = props;
+      props = {};
+    }
+
+    this.isNew = isNew;
     if (props && _.isObject(props)) {
-      Object.assign(this, props);
+      let data = {...props};
+      delete data.path; // it is computed
+      Object.assign(this, data);
     }
   }
 
@@ -129,10 +137,89 @@ export class Article {
     return j;
   }
 
-  save(token, sub, isNew = false) {
-    const j = this.toJSON();
-    console.log('saving ------', j);
-    return isNew ? articles.actions.newArticle(j, token, sub) :  articles.actions.saveArticle(j, token, sub);
+  save(token, sub, isNew = null) {
+    if (isNew !== null) this.isNew = isNew;
+    return this.isNew ? this.insert( token, sub) :  this.update(token, sub);
+  }
+
+  /** ********** METHODS ********** */
+
+  isExists() {
+    return Article.exists(this.path);
+  }
+
+  async insert(token, sub) {
+    /** todo: overwrite protection */
+    await axios({
+      method: 'POST',
+      url: articleUrl(this),
+      headers: {
+        'access_token': token,
+        'sub': sub,
+      },
+      data: this.toJSON()
+    });
+    // re-write local data with remote data
+    await this.get(true);
+    this.isNew = false;
+    return this;
+  }
+
+  async update(token, sub) {
+    await axios({
+      method: 'PUT',
+      url: articleUrl(this),
+      headers: {
+        'access_token': token,
+        'sub': sub,
+      },
+      data: this.toJSON()
+    });
+    // re-write local data with remote data
+    await this.get(true);
+    this.isNew = false;
+    return this;
+  }
+
+  /**
+   * returns a new article with
+   * @returns {Promise<Article>} a new article unless true is passed in.
+   */
+  async load(replace = false) {
+    const result = await axios.get(API_URL + '/articles/' +  encodePath(this.path));
+    let data = {...result.data};
+    if (data.path !== this.path) throw new Error('bad article returned for ', + this.path);
+    delete data.path;
+
+    if (replace) {
+      return Object.assign(this, data);
+    }
+    return new Article(data);
+  }
+
+  static async get(path) {
+    const result = await axios.get(API_URL + '/articles/' +  (/[%]/.test(path) ? path : encodePath(path)));
+    return new Article(result.data);
+  }
+
+  static async exists(path) {
+    try {
+      let article = await Article.get(path);
+      console.log('exists test article: ', article);
+      return !!article;
+    } catch (err) {
+      console.log('exists test err: ', err);
+      return false;
+    }
+  }
+
+  static async forDirectory(directory) {
+    if (!directory) throw new Error('cannot poll empty directory');
+    const {data} = await axios.get( API_URL + '/categories/' + encodePath(directory));
+    if (data) {
+      return data.articles.map(a => new Article(a));
+    }
+    return [];
   }
 }
 
@@ -143,7 +230,7 @@ function errMgr(name){
     },
     onChange: function () {
       delete this.errors[name];
-    }
+    },
   };
 }
 
