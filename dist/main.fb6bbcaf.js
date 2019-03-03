@@ -52934,7 +52934,7 @@ function _templateObject14() {
 }
 
 function _templateObject13() {
-  var data = (0, _taggedTemplateLiteral2.default)(["\nfont-family: 'Cormorant Garamond',Georgia,serif;\nfont-size: 1.1rem;\npre {\nfont-size: 0.8rem;\n@media(min-width: ", ") {\nfont-size: 1rem;\n}\n}\nh1, h2, h3, h4, h5, h6 {\nfont-family: ", ";\nfont-size: 1rem;\npadding: 0;\nmargin: 0;\n}\nh1 {\nfont-size: 1.75rem;\ntext-shadow: 2px 2px 2px black;\ncolor: white;\ntext-transform: uppercase;\nmargin-bottom: 0.5rem;\n}\nh2 {\ntext-shadow: 2px 2px 2px white;\nfont-size: 1.5rem;\nmargin-bottom: 0.25rem;\n}\n@media(min-width: ", ") {\nfont-size: 1.25rem;\n}\n"]);
+  var data = (0, _taggedTemplateLiteral2.default)(["\nfont-family: 'Cormorant Garamond',Georgia,serif;\nfont-size: 1.1rem;\npre {\nfont-size: 0.8rem;\n@media(min-width: ", ") {\nfont-size: 1rem;\n}\n}\nh1, h2, h3, h4, h5, h6 {\nfont-family: ", ";\nfont-size: 1rem;\npadding: 0;\nmargin: 0;\n}\nh1 {\nfont-size: 1.75rem;\ntext-shadow: none;\ncolor: black;\ntext-transform: uppercase;\nmargin-bottom: 0.5rem;\n}\nh2 {\ntext-shadow: 2px 2px 2px white;\nfont-size: 1.5rem;\nmargin-bottom: 0.25rem;\n}\n@media(min-width: ", ") {\nfont-size: 1.25rem;\n}\n"]);
 
   _templateObject13 = function _templateObject13() {
     return data;
@@ -80514,7 +80514,7 @@ function () {
 
               case 2:
                 _context2.next = 4;
-                return this.get(true);
+                return this.load(true);
 
               case 4:
                 this.isNew = false;
@@ -84076,8 +84076,13 @@ function (_Component) {
 
           var article = _this9.article();
 
-          article.save(accessToken, sub, true).then(function () {
+          article.save(accessToken, sub, !_this9.state.exists).then(function () {
+            console.log('writing....');
+            eval('debugger');
+
             _this9.props.history.push('/article/' + (0, _encodePath.default)(article.path));
+          }).catch(function (err) {
+            console.log('error saving: ', err);
           });
         }
       }).catch(function (err) {

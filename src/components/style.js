@@ -194,8 +194,8 @@ margin: 0;
 }
 h1 {
 font-size: 1.75rem;
-text-shadow: 2px 2px 2px black;
-color: white;
+text-shadow: none;
+color: black;
 text-transform: uppercase;
 margin-bottom: 0.5rem;
 }

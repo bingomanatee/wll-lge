@@ -183,7 +183,7 @@ export class Article {
       data: this.toJSON()
     });
     // re-write local data with remote data
-    await this.get(true);
+    await this.load(true);
     this.isNew = false;
     return this;
   }

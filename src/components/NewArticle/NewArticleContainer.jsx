@@ -110,10 +110,15 @@ export default class NewArticleContainer extends Component {
         else {
           console.log('can save');
           const article = this.article();
-          article.save(accessToken, sub, true)
+          article.save(accessToken, sub, !this.state.exists)
             .then(() => {
+              console.log('writing....');
+              eval('debugger');
               this.props.history.push('/article/' + encodePath(article.path));
-            });
+            })
+            .catch((err)=> {
+              console.log('error saving: ', err);
+            })
         }
       })
       .catch((err) => {
