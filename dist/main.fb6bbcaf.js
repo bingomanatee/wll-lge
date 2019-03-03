@@ -52741,7 +52741,7 @@ module.exports = {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.UserLink = exports.CategoryList = exports.Line = exports.CategoryView = exports.EditButton = exports.ToggleButton = exports.CheckboxWrapper = exports.Select = exports.Input = exports.FormContent = exports.FormContainer = exports.FormError = exports.FormLabel = exports.FormItem = exports.ButtonList = exports.UserButton = exports.NavbarFrame = exports.Text = exports.TableBox = exports.FuzzyBox = exports.ArticleFrame = exports.PageHead = exports.ContentEditor = exports.UserIcon = exports.ArticleText = exports.ArticleItem = exports.ArticleList = exports.ArticleItemWrapper = exports.ArticleListWrapper = exports.SiteHeadline = void 0;
+exports.UserLink = exports.CategoryList = exports.Line = exports.CategoryView = exports.EditLink = exports.EditButton = exports.ToggleButton = exports.CheckboxWrapper = exports.Select = exports.Input = exports.FormContent = exports.FormContainer = exports.FormError = exports.FormLabel = exports.FormItem = exports.ButtonList = exports.UserButton = exports.NavbarFrame = exports.Text = exports.TableBox = exports.FuzzyBox = exports.ArticleFrame = exports.PageHead = exports.ContentEditor = exports.UserIcon = exports.ArticleText = exports.ArticleItem = exports.ArticleList = exports.ArticleItemWrapper = exports.ArticleListWrapper = exports.SiteHeadline = void 0;
 
 var _taggedTemplateLiteral2 = _interopRequireDefault(require("@babel/runtime-corejs2/helpers/taggedTemplateLiteral"));
 
@@ -52753,8 +52753,18 @@ var _constants = require("../constants");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _templateObject30() {
+function _templateObject31() {
   var data = (0, _taggedTemplateLiteral2.default)(["\ncolor: black;\ndisplay: block;\npadding: 0.2rem 0.333rem;\nbackground: rgba(200,200,200,0.6);\ntext-decoration: none;\ntext-align: center;\nfont-family: 'Merriweather Sans', sans-serif;\nfont-weight: 100;\nline-height: 100%;\nmargin-right: 1rem;\nwhite-space: nowrap;\nfont-size: 1rem;\n@media(max-width: ", ") {\nfont-size: 0.8rem;\n}\n@media(min-width: ", ") {\npadding: 0.5rem 0.5rem;\nfont-size: 1.2rem;\n}\n:hover {\ncolor: white;\n}\n"]);
+
+  _templateObject31 = function _templateObject31() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject30() {
+  var data = (0, _taggedTemplateLiteral2.default)(["\nclear: both;\nmargin:0.5rem 0 ;\nflex-wrap: wrap;\npadding: 0 1rem;\ndisplay: flex;\nflex-direction: row;\njustify-content: center;\nbackground: rgba(200,200,200,0.6);\n"]);
 
   _templateObject30 = function _templateObject30() {
     return data;
@@ -52764,7 +52774,7 @@ function _templateObject30() {
 }
 
 function _templateObject29() {
-  var data = (0, _taggedTemplateLiteral2.default)(["\nclear: both;\nmargin:0.5rem 0 ;\nflex-wrap: wrap;\npadding: 0 1rem;\ndisplay: flex;\nflex-direction: row;\njustify-content: center;\nbackground: rgba(200,200,200,0.6);\n"]);
+  var data = (0, _taggedTemplateLiteral2.default)(["\nborder-top: 1px solid black;\nmargin: 0.5rem 0;\n"]);
 
   _templateObject29 = function _templateObject29() {
     return data;
@@ -52774,7 +52784,7 @@ function _templateObject29() {
 }
 
 function _templateObject28() {
-  var data = (0, _taggedTemplateLiteral2.default)(["\nborder-top: 1px solid black;\nmargin: 0.5rem 0;\n"]);
+  var data = (0, _taggedTemplateLiteral2.default)(["\ncolor: black;\ndisplay: block;\npadding: 0.2rem 0.333rem;\ntext-decoration: none;\ntext-align: center;\nfont-family: 'Merriweather Sans', sans-serif;\nfont-weight: 100;\nline-height: 100%;\nmargin-right: 1rem;\nwhite-space: nowrap;\nfont-size: 1rem;\n@media(max-width: ", ") {\nfont-size: 0.8rem;\n}\n@media(min-width: ", ") {\npadding: 0.5rem 0.5rem;\nfont-size: 1.2rem;\n}\n:hover {\ncolor: white;\n}\n"]);
 
   _templateObject28 = function _templateObject28() {
     return data;
@@ -52784,7 +52794,7 @@ function _templateObject28() {
 }
 
 function _templateObject27() {
-  var data = (0, _taggedTemplateLiteral2.default)(["\ncolor: black;\ndisplay: block;\npadding: 0.2rem 0.333rem;\ntext-decoration: none;\ntext-align: center;\nfont-family: 'Merriweather Sans', sans-serif;\nfont-weight: 100;\nline-height: 100%;\nmargin-right: 1rem;\nwhite-space: nowrap;\nfont-size: 1rem;\n@media(max-width: ", ") {\nfont-size: 0.8rem;\n}\n@media(min-width: ", ") {\npadding: 0.5rem 0.5rem;\nfont-size: 1.2rem;\n}\n:hover {\ncolor: white;\n}\n"]);
+  var data = (0, _taggedTemplateLiteral2.default)(["\nbackground-color: black;\nfont-family: 'Merriweather Sans', sans-serif;\nfont-size: 1rem;\ntext-decoration: none;\ncolor: ", ";\ntext-transform: uppercase;\noutline: none;\nborder: 1px solid rgba(0,0,0,0);\npadding: 0.5rem 1rem;\n-webkit-appearance: none;\n-moz-appearance: none;\n:hover {\ncolor: white;\nbackground-color: blue;\n}\n"]);
 
   _templateObject27 = function _templateObject27() {
     return data;
@@ -52794,7 +52804,7 @@ function _templateObject27() {
 }
 
 function _templateObject26() {
-  var data = (0, _taggedTemplateLiteral2.default)(["\nbackground-color: black;\nfont-size: 1rem;\ncolor: ", ";\ntext-transform: uppercase;\noutline: none;\nborder: 1px solid rgba(0,0,0,0);\npadding: 0.5rem 1rem;\n-webkit-appearance: none;\n-moz-appearance: none;\n:hover {\ncolor: white;\nbackground-color: blue;\n}\n"]);
+  var data = (0, _taggedTemplateLiteral2.default)(["\nbackground-color: black;\nfont-family: 'Merriweather Sans', sans-serif;\nfont-size: 1rem;\ncolor: ", ";\ntext-decoration: none;\ntext-transform: uppercase;\noutline: none;\nborder: 1px solid rgba(0,0,0,0);\npadding: 0.5rem 1rem;\n-webkit-appearance: none;\n-moz-appearance: none;\n:hover {\ncolor: white;\nbackground-color: blue;\n}\n"]);
 
   _templateObject26 = function _templateObject26() {
     return data;
@@ -52864,7 +52874,7 @@ function _templateObject20() {
 }
 
 function _templateObject19() {
-  var data = (0, _taggedTemplateLiteral2.default)(["\nfont-weight: 300;\npadding: 0.25rem;\ntext-align: right;\nwhite-space: nowrap;\nfont-family: 'Merriweather Sans', sans-serif;\ncolor: ", ";\n"]);
+  var data = (0, _taggedTemplateLiteral2.default)(["\nfont-weight: 300;\npadding: 0;\nmargin: 0;\ntext-align: left;\nwhite-space: nowrap;\nfont-family: 'Merriweather Sans', sans-serif;\ncolor: ", ";\n"]);
 
   _templateObject19 = function _templateObject19() {
     return data;
@@ -53044,7 +53054,7 @@ function _templateObject2() {
 }
 
 function _templateObject() {
-  var data = (0, _taggedTemplateLiteral2.default)(["\ntext-align: center;\ntext-transform: uppercase;\nfont-family: ", ";\ncolor: black;\nfont-weight: 300;\nfont-size: 2rem;\nmargin: 0;\npadding: 0;\nline-height: 100%;\ntext-shadow: 1px 1px 2px #FFFFFF;\n@media(max-width: 800px) {\n  font-size: 1rem;\n  font-weight: 800;\n}\n"]);
+  var data = (0, _taggedTemplateLiteral2.default)(["\ntext-align: center;\ntext-transform: uppercase;\nfont-family: ", ";\ncolor: white;\nfont-weight: 300;\nfont-size: 2rem;\nmargin: 0;\npadding: 0;\nline-height: 100%;\ntext-shadow: 1px 1px 2px #000000;\n@media(max-width: 800px) {\n  font-size: 1rem;\n  font-weight: 800;\n}\n"]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -53133,7 +53143,7 @@ var FormLabel = _styledComponents.default.th(_templateObject18());
 
 exports.FormLabel = FormLabel;
 
-var FormError = _styledComponents.default.th(_templateObject19(), function (_ref) {
+var FormError = _styledComponents.default.p(_templateObject19(), function (_ref) {
   var level = _ref.level;
   if (level === 'war') return 'darkorange';
   return 'darkred';
@@ -53173,17 +53183,19 @@ exports.ToggleButton = ToggleButton;
 var EditButton = _styledComponents.default.button(_templateObject26(), LIGHT_GREY);
 
 exports.EditButton = EditButton;
-var CategoryView = (0, _styledComponents.default)(_reactRouterDom.Link)(_templateObject27(), _constants.SMALL_NAV, _constants.LARGE_NAV);
+var EditLink = (0, _styledComponents.default)(_reactRouterDom.Link)(_templateObject27(), LIGHT_GREY);
+exports.EditLink = EditLink;
+var CategoryView = (0, _styledComponents.default)(_reactRouterDom.Link)(_templateObject28(), _constants.SMALL_NAV, _constants.LARGE_NAV);
 exports.CategoryView = CategoryView;
 
-var Line = _styledComponents.default.hr(_templateObject28());
+var Line = _styledComponents.default.hr(_templateObject29());
 
 exports.Line = Line;
 
-var CategoryList = _styledComponents.default.div(_templateObject29());
+var CategoryList = _styledComponents.default.div(_templateObject30());
 
 exports.CategoryList = CategoryList;
-var UserLink = (0, _styledComponents.default)(_reactRouterDom.Link)(_templateObject30(), _constants.SMALL_NAV, _constants.LARGE_NAV);
+var UserLink = (0, _styledComponents.default)(_reactRouterDom.Link)(_templateObject31(), _constants.SMALL_NAV, _constants.LARGE_NAV);
 exports.UserLink = UserLink;
 },{"@babel/runtime-corejs2/helpers/taggedTemplateLiteral":"../node_modules/@babel/runtime-corejs2/helpers/taggedTemplateLiteral.js","styled-components":"../node_modules/styled-components/dist/styled-components.browser.esm.js","react-router-dom":"../node_modules/react-router-dom/es/index.js","../constants":"constants.json"}],"components/Navbar/NavbarView.jsx":[function(require,module,exports) {
 "use strict";
@@ -53233,7 +53245,7 @@ var NavbarView = function NavbarView(_ref) {
         return gotoCategory(cat);
       }
     }, cat.title);
-  })), _react.default.createElement(_style.Line, null));
+  })));
 };
 
 NavbarView.propTypes = {
@@ -80402,6 +80414,13 @@ function () {
 
     if (props && _lodash.default.isObject(props)) {
       var data = (0, _objectSpread2.default)({}, props);
+
+      if (!data.filename) {
+        if (data.path && data.directory) {
+          data.filename = data.path.substr(data.directory.length).replace(/^[/]+/, '').replace(/\..*/, '');
+        }
+      }
+
       delete data.path; // it is computed
 
       (0, _assign.default)(this, data);
@@ -80760,10 +80779,12 @@ function errMgr(name) {
   type: 'string'
 }, errMgr('title'))).addProp('filename', (0, _objectSpread2.default)({
   required: true,
-  type: 'string'
+  type: 'string',
+  defaultValue: ''
 }, errMgr('title'))).addProp('directory', (0, _objectSpread2.default)({
   required: true,
-  type: 'string'
+  type: 'string',
+  defaultValue: ''
 }, errMgr('title')));
 var _default = articles;
 exports.default = _default;
@@ -82442,361 +82463,7 @@ var global = arguments[3];
     root.marked = marked;
   }
 })(this || (typeof window !== 'undefined' ? window : global));
-},{}],"components/ArticleEdit/ArticleEditView.jsx":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-
-var _react = _interopRequireDefault(require("react"));
-
-var _propTypes = _interopRequireDefault(require("prop-types"));
-
-var _style = require("../style");
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var noop = function noop() {};
-
-var ArticleEditView = function ArticleEditView(_ref) {
-  var content = _ref.content,
-      title = _ref.title,
-      save = _ref.save,
-      onHomepage = _ref.onHomepage,
-      toggleOnHomepage = _ref.toggleOnHomepage,
-      published = _ref.published,
-      setTitle = _ref.setTitle,
-      togglePublished = _ref.togglePublished,
-      setContent = _ref.setContent;
-  return _react.default.createElement(_react.default.Fragment, null, _react.default.createElement(_style.FormItem, null, _react.default.createElement(_style.FormLabel, null, "Title"), _react.default.createElement(_style.Input, {
-    type: "text",
-    value: title,
-    onChange: function onChange(event) {
-      return setTitle(event.target.value);
-    }
-  })), _react.default.createElement(_style.FormItem, null, _react.default.createElement(_style.FormLabel, null, "\xA0"), _react.default.createElement(_style.CheckboxWrapper, {
-    onClick: togglePublished
-  }, _react.default.createElement("input", {
-    type: "checkbox",
-    checked: published,
-    onChange: togglePublished
-  }), "Published")), _react.default.createElement(_style.FormItem, null, _react.default.createElement(_style.FormLabel, null, "\xA0"), _react.default.createElement(_style.CheckboxWrapper, {
-    onClick: toggleOnHomepage
-  }, _react.default.createElement("input", {
-    type: "checkbox",
-    checked: onHomepage,
-    onChange: toggleOnHomepage
-  }), "On Home Page")), _react.default.createElement(_style.ContentEditor, {
-    name: "article-content",
-    value: content,
-    onChange: function onChange(event) {
-      return setContent(event.target.value);
-    },
-    rows: "20"
-  }), _react.default.createElement(_style.ButtonList, null, _react.default.createElement(_style.EditButton, {
-    onClick: save
-  }, "Save")));
-};
-
-ArticleEditView.propTypes = {
-  content: _propTypes.default.string,
-  title: _propTypes.default.string,
-  setContent: _propTypes.default.func,
-  save: _propTypes.default.func,
-  onHomepage: _propTypes.default.bool,
-  toggleOnHomepage: _propTypes.default.func,
-  published: _propTypes.default.bool,
-  togglePublished: _propTypes.default.func
-};
-ArticleEditView.defaultProps = {
-  content: '',
-  title: '',
-  onHomepage: false,
-  published: false,
-  setTitle: noop,
-  setContent: noop,
-  save: noop,
-  toggleOnHomepage: noop,
-  togglePublished: noop
-};
-var _default = ArticleEditView;
-exports.default = _default;
-},{"react":"../node_modules/react/index.js","prop-types":"../node_modules/prop-types/index.js","../style":"components/style.js"}],"components/ArticleEdit/ArticleEditContainer.jsx":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-
-var _extends2 = _interopRequireDefault(require("@babel/runtime-corejs2/helpers/extends"));
-
-var _regenerator = _interopRequireDefault(require("@babel/runtime-corejs2/regenerator"));
-
-var _asyncToGenerator2 = _interopRequireDefault(require("@babel/runtime-corejs2/helpers/asyncToGenerator"));
-
-var _objectSpread2 = _interopRequireDefault(require("@babel/runtime-corejs2/helpers/objectSpread"));
-
-var _classCallCheck2 = _interopRequireDefault(require("@babel/runtime-corejs2/helpers/classCallCheck"));
-
-var _createClass2 = _interopRequireDefault(require("@babel/runtime-corejs2/helpers/createClass"));
-
-var _possibleConstructorReturn2 = _interopRequireDefault(require("@babel/runtime-corejs2/helpers/possibleConstructorReturn"));
-
-var _getPrototypeOf2 = _interopRequireDefault(require("@babel/runtime-corejs2/helpers/getPrototypeOf"));
-
-var _inherits2 = _interopRequireDefault(require("@babel/runtime-corejs2/helpers/inherits"));
-
-var _react = _interopRequireWildcard(require("react"));
-
-var _ArticleEditView = _interopRequireDefault(require("./ArticleEditView"));
-
-var _user = _interopRequireDefault(require("../../models/user"));
-
-var _articles = _interopRequireDefault(require("../../models/articles"));
-
-var _lodash = _interopRequireDefault(require("lodash"));
-
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var ArticleEditContainer =
-/*#__PURE__*/
-function (_Component) {
-  (0, _inherits2.default)(ArticleEditContainer, _Component);
-
-  function ArticleEditContainer(props) {
-    var _this;
-
-    (0, _classCallCheck2.default)(this, ArticleEditContainer);
-    _this = (0, _possibleConstructorReturn2.default)(this, (0, _getPrototypeOf2.default)(ArticleEditContainer).call(this, props));
-    _this.state = {
-      path: props.path,
-      title: '',
-      content: '',
-      loaded: false,
-      editing: false
-    };
-    return _this;
-  }
-
-  (0, _createClass2.default)(ArticleEditContainer, [{
-    key: "componentDidMount",
-    value: function componentDidMount() {
-      var _this2 = this;
-
-      if (!this.state.loaded && this.state.path) {
-        _articles.default.actions.getArticle(this.state.path).then(function () {
-          _this2.setState((0, _objectSpread2.default)({}, _articles.default.state.currentArticle, {
-            loaded: true
-          }));
-        }).catch(function (err) {
-          console.log('cannot get article', err);
-        });
-      }
-
-      this._userSub = _user.default.subscribe(function (_ref) {
-        var state = _ref.state;
-
-        _this2.setState({
-          user: state.user,
-          isAdmin: state.isAdmin
-        });
-      });
-    }
-  }, {
-    key: "save",
-    value: function () {
-      var _save = (0, _asyncToGenerator2.default)(
-      /*#__PURE__*/
-      _regenerator.default.mark(function _callee() {
-        var _this3 = this;
-
-        var newArticle;
-        return _regenerator.default.wrap(function _callee$(_context) {
-          while (1) {
-            switch (_context.prev = _context.next) {
-              case 0:
-                if (!(!this.state.title && this.state.content)) {
-                  _context.next = 2;
-                  break;
-                }
-
-                return _context.abrupt("return", alert('you cannot publish an article without a title or content'));
-
-              case 2:
-                if (this.state.isAdmin) {
-                  _context.next = 4;
-                  break;
-                }
-
-                return _context.abrupt("return", alert('you are not an administrative user -- you cannot edit articles'));
-
-              case 4:
-                if (!_lodash.default.get(_articles.default, 'state.currentArticle.path' !== this.state.path)) {
-                  _context.next = 6;
-                  break;
-                }
-
-                return _context.abrupt("return", _articles.default.actions.getArticle(this.state.path).then(function () {
-                  return _this3.save();
-                }));
-
-              case 6:
-                newArticle = (0, _objectSpread2.default)({}, _articles.default.state.currentArticle);
-                newArticle.published = this.state.published;
-                newArticle.title = this.state.title;
-                newArticle.content = this.state.content;
-                newArticle.onHomepage = this.state.onHomepage;
-                _context.next = 13;
-                return _articles.default.actions.saveArticle(newArticle, _user.default.state.acessToken, _user.default.state.sub);
-
-              case 13:
-                _context.next = 15;
-                return _articles.default.actions.getArticle(this.state.path);
-
-              case 15:
-                console.log('asserting new version of  article: ', _articles.default.state.currentArticle);
-                this.setState(newArticle); // @TODO: inspect result for match
-
-                if (this.props.onSave) this.props.onSave();
-
-              case 18:
-              case "end":
-                return _context.stop();
-            }
-          }
-        }, _callee, this);
-      }));
-
-      function save() {
-        return _save.apply(this, arguments);
-      }
-
-      return save;
-    }()
-  }, {
-    key: "setContent",
-    value: function setContent(content) {
-      this.setState({
-        content: content
-      });
-    }
-  }, {
-    key: "setTitle",
-    value: function setTitle(title) {
-      this.setState({
-        title: title
-      });
-    }
-  }, {
-    key: "componentWillUnmount",
-    value: function componentWillUnmount() {
-      if (this._userSub) this._userSub.unsubscribe();
-    }
-  }, {
-    key: "togglePublished",
-    value: function togglePublished() {
-      var onHomepage = this.state.onHomepage;
-      if (this.state.published) onHomepage = false; // remove hidden articles from homepage
-
-      this.setState({
-        published: !this.state.published,
-        onHomepage: onHomepage
-      });
-    }
-  }, {
-    key: "toggleOnHomepage",
-    value: function toggleOnHomepage() {
-      this.setState({
-        onHomepage: !this.state.onHomepage
-      });
-    }
-  }, {
-    key: "render",
-    value: function render() {
-      var _this4 = this;
-
-      return _react.default.createElement(_ArticleEditView.default, (0, _extends2.default)({}, this.state, {
-        setContent: function setContent(value) {
-          return _this4.setContent(value);
-        },
-        setTitle: function setTitle(value) {
-          return _this4.setTitle(value);
-        },
-        togglePublished: function togglePublished() {
-          return _this4.togglePublished();
-        },
-        toggleOnHomepage: function toggleOnHomepage() {
-          return _this4.toggleOnHomepage();
-        },
-        save: function save() {
-          return _this4.save();
-        }
-      }), " ");
-    }
-  }]);
-  return ArticleEditContainer;
-}(_react.Component);
-
-exports.default = ArticleEditContainer;
-},{"@babel/runtime-corejs2/helpers/extends":"../node_modules/@babel/runtime-corejs2/helpers/extends.js","@babel/runtime-corejs2/regenerator":"../node_modules/@babel/runtime-corejs2/regenerator/index.js","@babel/runtime-corejs2/helpers/asyncToGenerator":"../node_modules/@babel/runtime-corejs2/helpers/asyncToGenerator.js","@babel/runtime-corejs2/helpers/objectSpread":"../node_modules/@babel/runtime-corejs2/helpers/objectSpread.js","@babel/runtime-corejs2/helpers/classCallCheck":"../node_modules/@babel/runtime-corejs2/helpers/classCallCheck.js","@babel/runtime-corejs2/helpers/createClass":"../node_modules/@babel/runtime-corejs2/helpers/createClass.js","@babel/runtime-corejs2/helpers/possibleConstructorReturn":"../node_modules/@babel/runtime-corejs2/helpers/possibleConstructorReturn.js","@babel/runtime-corejs2/helpers/getPrototypeOf":"../node_modules/@babel/runtime-corejs2/helpers/getPrototypeOf.js","@babel/runtime-corejs2/helpers/inherits":"../node_modules/@babel/runtime-corejs2/helpers/inherits.js","react":"../node_modules/react/index.js","./ArticleEditView":"components/ArticleEdit/ArticleEditView.jsx","../../models/user":"models/user.js","../../models/articles":"models/articles.js","lodash":"../node_modules/lodash/lodash.js"}],"components/ArticleEdit/extend.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-
-/**
- * allows you to merge in router, redux, etc.
- *
- * @param component {Component}
- * @returns {Component}
- */
-var _default = function _default(component) {
-  return component;
-};
-
-exports.default = _default;
-},{}],"components/ArticleEdit/index.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-Object.defineProperty(exports, "ArticleEditContainer", {
-  enumerable: true,
-  get: function () {
-    return _ArticleEditContainer.default;
-  }
-});
-Object.defineProperty(exports, "ArticleEditView", {
-  enumerable: true,
-  get: function () {
-    return _ArticleEditView.default;
-  }
-});
-exports.ArticleEditContainerHOC = exports.ArticleEditViewHOC = exports.default = void 0;
-
-var _ArticleEditContainer = _interopRequireDefault(require("./ArticleEditContainer"));
-
-var _ArticleEditView = _interopRequireDefault(require("./ArticleEditView"));
-
-var _extend = _interopRequireDefault(require("./extend"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var ArticleEditViewHOC = (0, _extend.default)(_ArticleEditView.default);
-exports.ArticleEditViewHOC = ArticleEditViewHOC;
-var ArticleEditContainerHOC = (0, _extend.default)(_ArticleEditContainer.default);
-exports.ArticleEditContainerHOC = ArticleEditContainerHOC;
-var _default = ArticleEditContainerHOC;
-exports.default = _default;
-},{"./ArticleEditContainer":"components/ArticleEdit/ArticleEditContainer.jsx","./ArticleEditView":"components/ArticleEdit/ArticleEditView.jsx","./extend":"components/ArticleEdit/extend.js"}],"components/Article/ArticleView.jsx":[function(require,module,exports) {
+},{}],"components/Article/ArticleView.jsx":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -82812,8 +82479,6 @@ var _marked = _interopRequireDefault(require("marked"));
 
 var _style = require("../style");
 
-var _ArticleEdit = _interopRequireDefault(require("../ArticleEdit"));
-
 var _reactRouterDom = require("react-router-dom");
 
 var _encodePath = _interopRequireDefault(require("../../js/encodePath"));
@@ -82823,7 +82488,6 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var headline = function headline(category) {
   if (!category) return '';
   var url = '/category/' + (0, _encodePath.default)(category.directory);
-  console.log('url:', url);
   return _react.default.createElement(_reactRouterDom.Link, {
     to: url
   }, category.title, ":\xA0");
@@ -82836,41 +82500,40 @@ var ArticleView = function ArticleView(_ref) {
       title = _ref.title,
       content = _ref.content,
       isAdmin = _ref.isAdmin,
-      isEditing = _ref.isEditing,
-      toggleEdit = _ref.toggleEdit,
       path = _ref.path;
 
   if (!loaded) {
     return '';
   }
 
-  return _react.default.createElement("div", null, _react.default.createElement(_style.PageHead, null, headline(category), title), _react.default.createElement(_style.ArticleFrame, null, _react.default.createElement(_style.FuzzyBox, null, !isEditing && _react.default.createElement(_style.Text, {
+  return _react.default.createElement("div", null, _react.default.createElement(_style.PageHead, null, headline(category), title), _react.default.createElement(_style.ArticleFrame, null, _react.default.createElement(_style.FuzzyBox, null, _react.default.createElement(_style.Text, {
     dangerouslySetInnerHTML: {
       __html: (0, _marked.default)(content)
     }
-  }), isEditing && _react.default.createElement(_ArticleEdit.default, {
-    path: path,
-    onSave: onSave
-  }), isAdmin && _react.default.createElement(_style.ButtonList, null, _react.default.createElement(_style.EditButton, {
-    "data-sc-type": "ButtonList",
-    onClick: toggleEdit
-  }, isEditing ? 'Cancel' : 'Edit')))));
+  }), isAdmin && _react.default.createElement(_style.ButtonList, null, _react.default.createElement(_style.EditLink, {
+    to: '/edit-article/' + (0, _encodePath.default)(path)
+  }, "Edit")))));
 };
 
 ArticleView.propTypes = {
   title: _propTypes.default.string,
   content: _propTypes.default.string,
   loaded: _propTypes.default.bool,
-  toggleEdit: _propTypes.default.func
+  category: _propTypes.default.object,
+  toggleEdit: _propTypes.default.func,
+  isAdmin: _propTypes.default.bool,
+  path: _propTypes.default.string
 };
 ArticleView.defaultProps = {
   title: '',
   content: '',
+  path: '',
+  isAdmin: false,
   loaded: false
 };
 var _default = ArticleView;
 exports.default = _default;
-},{"react":"../node_modules/react/index.js","prop-types":"../node_modules/prop-types/index.js","marked":"../node_modules/marked/lib/marked.js","../style":"components/style.js","../ArticleEdit":"components/ArticleEdit/index.js","react-router-dom":"../node_modules/react-router-dom/es/index.js","../../js/encodePath":"js/encodePath.js"}],"components/Article/ArticleContainer.jsx":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","prop-types":"../node_modules/prop-types/index.js","marked":"../node_modules/marked/lib/marked.js","../style":"components/style.js","react-router-dom":"../node_modules/react-router-dom/es/index.js","../../js/encodePath":"js/encodePath.js"}],"components/Article/ArticleContainer.jsx":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -83786,7 +83449,7 @@ function (_Component) {
     (0, _classCallCheck2.default)(this, CategoryChooserContainer);
     _this = (0, _possibleConstructorReturn2.default)(this, (0, _getPrototypeOf2.default)(CategoryChooserContainer).call(this, props));
     _this.state = {
-      value: '',
+      value: _lodash.default.get(props, 'value', ''),
       categories: []
     };
     return _this;
@@ -83807,7 +83470,10 @@ function (_Component) {
   }, {
     key: "componentWillUnmount",
     value: function componentWillUnmount() {
-      if (this._cSub) this._cSub.unsubscribe();
+      if (this._cSub) {
+        this._cSub.unsubscribe();
+      }
+
       this._mounted = false;
     }
   }, {
@@ -83817,12 +83483,21 @@ function (_Component) {
 
       var categories = _lodash.default.get(state, 'categories', []);
 
-      if (categories.length) this.setState({
-        categories: categories,
-        value: categories[0].directory
-      }, function () {
-        _this3.onChange(categories[0].directory);
-      });
+      if (categories.length) {
+        if (this.state.value) {
+          this.setState({
+            categories: categories
+          });
+        } else {
+          var value = categories[0].directory;
+          this.setState({
+            categories: categories,
+            value: value
+          }, function () {
+            _this3.onChange(value);
+          });
+        }
+      }
     }
   }, {
     key: "onChange",
@@ -83962,8 +83637,6 @@ function (_Component) {
 
       var error = _lodash.default.get(errors, field, false);
 
-      console.log('field: ', field, 'error:', error);
-
       if (_lodash.default.isArray(error)) {
         error = _react.default.createElement("tr", null, _react.default.createElement("th", null, "\xA0"), _react.default.createElement("td", null, error.map(function (msg) {
           return _react.default.createElement(_style.FormError, {
@@ -84060,11 +83733,11 @@ var NewArticleView = function NewArticleView(_ref) {
       setFilename = _ref.setFilename,
       setTitle = _ref.setTitle,
       setContent = _ref.setContent,
-      setCategory = _ref.setCategory,
+      setDirectory = _ref.setDirectory,
       exists = _ref.exists,
       sameTitle = _ref.sameTitle,
       save = _ref.save;
-  return _react.default.createElement(_style.ArticleFrame, null, _react.default.createElement(_style.PageHead, null, "New Article"), _react.default.createElement(_style.FuzzyBox, null, _react.default.createElement(_style.FormContainer, null, _react.default.createElement("tbody", null, _react.default.createElement(_style.FormItem, null, _react.default.createElement(_style.FormLabel, null, "Title"), _react.default.createElement(_style.FormContent, null, _react.default.createElement(_style.Input, {
+  return _react.default.createElement(_style.ArticleFrame, null, _react.default.createElement(_style.PageHead, null, exists ? 'Update Article' : 'New Article'), _react.default.createElement(_style.FuzzyBox, null, _react.default.createElement(_style.FormContainer, null, _react.default.createElement("tbody", null, _react.default.createElement(_style.FormItem, null, _react.default.createElement(_style.FormLabel, null, "Title"), _react.default.createElement(_style.FormContent, null, _react.default.createElement(_style.Input, {
     type: "text",
     value: title,
     onChange: function onChange(event) {
@@ -84090,7 +83763,7 @@ var NewArticleView = function NewArticleView(_ref) {
     errors: errors
   }), _react.default.createElement(_style.FormItem, null, _react.default.createElement(_style.FormLabel, null, "Category"), _react.default.createElement(_style.FormContent, null, _react.default.createElement(_CategoryChooser.default, {
     value: directory,
-    onChange: setCategory
+    onChange: setDirectory
   }))), _react.default.createElement(_FormErrors.default, {
     field: "category",
     errors: errors
@@ -84201,13 +83874,31 @@ function (_Component) {
 
     (0, _classCallCheck2.default)(this, NewArticleContainer);
     _this = (0, _possibleConstructorReturn2.default)(this, (0, _getPrototypeOf2.default)(NewArticleContainer).call(this, props));
+    var directory = '';
+    var filename = 'new_article';
+
+    var path = _lodash.default.get(props, 'match.params.path', '');
+
+    console.log('========= params path: ', path);
+
+    if (path) {
+      var decoded = decodeURIComponent(path);
+      var parts = /^(.*)\/([^/]+)(\.md)?$/.exec(decoded);
+
+      if (parts) {
+        filename = parts[2];
+        directory = parts[1];
+      }
+    }
+
     _this.state = {
       published: true,
       onHomepage: false,
+      directory: directory,
+      filename: filename,
       content: '',
       title: 'New Article',
       errors: false,
-      filename: 'new_filename',
       exists: false,
       sameTitle: false
     };
@@ -84255,8 +83946,8 @@ function (_Component) {
       });
     }
   }, {
-    key: "setCategory",
-    value: function setCategory(directory) {
+    key: "setDirectory",
+    value: function setDirectory(directory) {
       var _this5 = this;
 
       this.setState({
@@ -84426,32 +84117,49 @@ function (_Component) {
       });
     }
   }, {
-    key: "render",
-    value: function render() {
+    key: "componentDidMount",
+    value: function componentDidMount() {
       var _this11 = this;
 
-      console.log('directory --- ', this.state.directory);
+      var path = _lodash.default.get(this.props, 'match.params.path', '');
+
+      if (path) {
+        var decoded = decodeURIComponent(path);
+        console.log('existing path:', path, decoded);
+
+        _articles.Article.get(decoded).then(function (article) {
+          _this11.setState((0, _objectSpread2.default)({
+            exists: true
+          }, article.toJSON()));
+        });
+      }
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var _this12 = this;
+
       return _react.default.createElement(_NewArticleView.default, (0, _extends2.default)({}, this.state, {
         setContent: function setContent(content) {
-          return _this11.setContent(content);
+          return _this12.setContent(content);
         },
         setFilename: function setFilename(filename) {
-          return _this11.setFilename(filename);
+          return _this12.setFilename(filename);
         },
         setTitle: function setTitle(title) {
-          return _this11.setTitle(title);
+          return _this12.setTitle(title);
         },
-        setCategory: function setCategory(category) {
-          return _this11.setCategory(category);
+        setDirectory: function setDirectory(category) {
+          return _this12.setDirectory(category);
         },
         toggleOnHomepage: function toggleOnHomepage() {
-          return _this11.toggleOnHomepage();
+          return _this12.toggleOnHomepage();
         },
         togglePublished: function togglePublished() {
-          return _this11.togglePublished();
+          return _this12.togglePublished();
         },
         save: function save() {
-          return _this11.save();
+          return _this12.save();
         }
       }));
     }
@@ -84620,6 +84328,12 @@ function (_Component) {
       }), _react.default.createElement(_reactRouterDom.Route, {
         path: "/new-article",
         component: _NewArticle.default
+      }), _react.default.createElement(_reactRouterDom.Route, {
+        path: "/edit-article/:path*",
+        component: _NewArticle.default
+      }), _react.default.createElement(_reactRouterDom.Redirect, {
+        from: "/*",
+        to: "/"
       })))));
     }
   }]);
@@ -91023,7 +90737,7 @@ function () {
             var i = r - 3.5;
             var j = c - 3.5;
             sprite.anchor.set(0.5);
-            sprite.scale.set(ss / 200 * _this2.scale);
+            sprite.scale.set(ss / 200);
             sprite.position.set(i * ss, j * ss);
             sprite.angle = -_this2.rotAngle;
 

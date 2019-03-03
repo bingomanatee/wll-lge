@@ -238,7 +238,7 @@ class Backgrounder {
           let i = r - 3.5;
           let j = c - 3.5;
           sprite.anchor.set(0.5);
-          sprite.scale.set(ss/200 * this.scale);
+          sprite.scale.set(ss/200);
           sprite.position.set(i * ss, j * ss);
           sprite.angle = -this.rotAngle;
           this.pieces.addChild(sprite);

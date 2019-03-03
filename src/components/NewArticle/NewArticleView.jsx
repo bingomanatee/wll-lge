@@ -23,11 +23,11 @@ const noop = a => a;
 const NewArticleView = ({
   title, content, published, onHomepage, directory, filename, errors,
   togglePublished, toggleOnHomepage,
-  setFilename, setTitle, setContent, setCategory, exists, sameTitle,
+  setFilename, setTitle, setContent, setDirectory, exists, sameTitle,
   save
 }) => (
   <ArticleFrame>
-    <PageHead>New Article</PageHead>
+    <PageHead>{exists ? 'Update Article' : 'New Article'}</PageHead>
     <FuzzyBox>
       <FormContainer>
         <tbody>
@@ -51,7 +51,7 @@ const NewArticleView = ({
           <FormItem>
             <FormLabel>Category</FormLabel>
             <FormContent>
-              <CategoryChooser value={directory} onChange={setCategory}/>
+              <CategoryChooser value={directory} onChange={setDirectory}/>
             </FormContent>
           </FormItem>
           <FormErrors field="category" errors={errors}/>

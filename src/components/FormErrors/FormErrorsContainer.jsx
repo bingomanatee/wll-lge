@@ -14,7 +14,6 @@ export default class FormErrorsContainer extends Component {
   render() {
     const {field, errors, level } = { ...this.props };
     let error = _.get(errors, field, false);
-    console.log('field: ', field, 'error:', error);
     if (_.isArray(error)){
       error =
         (

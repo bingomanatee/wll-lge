@@ -1,21 +1,19 @@
 import React from 'react';
 import pt from 'prop-types';
 import marked from 'marked';
-import {ArticleFrame, PageHead, Text, ButtonList, FuzzyBox, EditButton} from '../style';
-import ArticleEdit from '../ArticleEdit';
+import {ArticleFrame, PageHead, Text, ButtonList, FuzzyBox, EditLink} from '../style';
 import {Link} from 'react-router-dom' ;
 import encodePath from '../../js/encodePath';
 
 const headline = (category) => {
   if (!category) return '';
   const url = '/category/' + encodePath(category.directory);
-  console.log('url:', url);
   return <Link to={url}>
     {category.title}:&nbsp;
   </Link>;
 };
 
-const ArticleView = ({loaded, onSave, category, title, content, isAdmin, isEditing, toggleEdit, path}) => {
+const ArticleView = ({loaded, onSave, category, title, content, isAdmin, path}) => {
   if (!loaded) {
     return '';
   }
@@ -24,12 +22,11 @@ const ArticleView = ({loaded, onSave, category, title, content, isAdmin, isEditi
       <PageHead>{headline(category)}{title}</PageHead>
       <ArticleFrame>
         <FuzzyBox>
-          {!isEditing && <Text dangerouslySetInnerHTML={{__html: marked(content)}}/>}
-          {isEditing && <ArticleEdit path={path} onSave={onSave}/>}
+          <Text dangerouslySetInnerHTML={{__html: marked(content)}}/>
           {isAdmin && <ButtonList>
-            <EditButton data-sc-type='ButtonList' onClick={toggleEdit}>
-              {isEditing ? 'Cancel' : 'Edit'}
-            </EditButton>
+            <EditLink to={'/edit-article/' + encodePath(path)}>
+              Edit
+            </EditLink>
           </ButtonList>}
         </FuzzyBox>
       </ArticleFrame>
@@ -41,12 +38,17 @@ ArticleView.propTypes = {
   title: pt.string,
   content: pt.string,
   loaded: pt.bool,
+  category: pt.object,
   toggleEdit: pt.func,
+  isAdmin: pt.bool,
+  path: pt.string
 };
 
 ArticleView.defaultProps = {
   title: '',
   content: '',
+  path: '',
+  isAdmin: false,
   loaded: false
 };
 

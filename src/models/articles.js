@@ -114,6 +114,13 @@ export class Article {
     this.isNew = isNew;
     if (props && _.isObject(props)) {
       let data = {...props};
+      if (!data.filename) {
+        if (data.path && data.directory) {
+          data.filename = data.path.substr(data.directory.length)
+            .replace(/^[/]+/, '')
+            .replace(/\..*/, '');
+        }
+      }
       delete data.path; // it is computed
       Object.assign(this, data);
     }
@@ -267,11 +274,13 @@ propper(Article)
   .addProp('filename', {
     required: true,
     type: 'string',
+    defaultValue: '',
     ... errMgr('title')
   })
   .addProp('directory', {
     required: true,
     type: 'string',
+    defaultValue: '',
     ... errMgr('title')
   });
 

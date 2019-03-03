@@ -11,13 +11,27 @@ const ARTICLE_FIELDS = 'content,title,published,onHomepage,filename,directory'.s
 export default class NewArticleContainer extends Component {
   constructor(props) {
     super(props);
+    let directory = '';
+    let filename = 'new_article';
+    const path = _.get(props, 'match.params.path', '');
+    console.log('========= params path: ', path);
+    if (path) {
+      const decoded = decodeURIComponent(path);
+      const parts = /^(.*)\/([^/]+)(\.md)?$/.exec(decoded);
+      if (parts) {
+        filename = parts[2];
+        directory = parts[1];
+      }
+    }
+
     this.state = {
       published: true,
       onHomepage: false,
+      directory,
+      filename,
       content: '',
       title: 'New Article',
       errors: false,
-      filename: 'new_filename',
       exists: false,
       sameTitle: false,
     };
@@ -41,7 +55,7 @@ export default class NewArticleContainer extends Component {
     });
   }
 
-  setCategory(directory) {
+  setDirectory(directory) {
     this.setState({directory, errors: false}, () => {
       this.validate();
       this.checkPath();
@@ -49,7 +63,7 @@ export default class NewArticleContainer extends Component {
     });
   }
 
-  checkPath(){
+  checkPath() {
     if (!this.article) {
       this.setState({exists: false});
       return;
@@ -82,7 +96,7 @@ export default class NewArticleContainer extends Component {
     console.log('saving');
 
     const {accessToken, sub} = userStore.state;
-    if (!(sub && accessToken)){
+    if (!(sub && accessToken)) {
       console.log('cannot save - not logged in');
       return;
     }
@@ -95,7 +109,7 @@ export default class NewArticleContainer extends Component {
         }
         else {
           console.log('can save');
-          const article =  this.article();
+          const article = this.article();
           article.save(accessToken, sub, true)
             .then(() => {
               this.props.history.push('/article/' + encodePath(article.path));
@@ -114,27 +128,39 @@ export default class NewArticleContainer extends Component {
 
   validate() {
     return new Promise((done) => {
-      const article =  this.article();
+      const article = this.article();
       let errors = false;
       if (!_.isEmpty(article.errors)) {
         errors = {...article.errors};
       }
       if (this._mounted) {
         this.setState({errors}, () => done(errors));
-      } else {
+      }
+      else {
         done(errors);
       }
     });
   }
 
+  componentDidMount(){
+    const path = _.get(this.props, 'match.params.path', '');
+    if (path) {
+      const decoded = decodeURIComponent(path);
+      console.log('existing path:', path, decoded);
+      Article.get(decoded)
+        .then((article) => {
+          this.setState({exists: true, ...article.toJSON()});
+        });
+    }
+  }
+
   render() {
-    console.log('directory --- ', this.state.directory);
     return (
       <NewArticleView {...this.state}
         setContent={(content) => this.setContent(content)}
         setFilename={(filename) => this.setFilename(filename)}
         setTitle={(title) => this.setTitle(title)}
-        setCategory={(category) => this.setCategory(category)}
+        setDirectory={(category) => this.setDirectory(category)}
         toggleOnHomepage={() => this.toggleOnHomepage()}
         togglePublished={() => this.togglePublished()}
         save={() => this.save()}

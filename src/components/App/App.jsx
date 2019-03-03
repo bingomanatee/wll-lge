@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import _ from 'lodash';
-import {BrowserRouter, Switch, Route} from 'react-router-dom';
+import {BrowserRouter, Switch, Route, Redirect} from 'react-router-dom';
 
 import sc from 'styled-components';
 import Navbar from '../Navbar';
@@ -40,6 +40,8 @@ export default class App extends Component {
               <Route path="/article/:path*" component={Article}/>
               <Route path="/category/:directory*" component={Category}/>
               <Route path="/new-article" component={NewArticle} />
+              <Route path="/edit-article/:path*" component={NewArticle} />
+              <Redirect from="/*" to="/" />
             </Switch>
           </Content>
         </SiteFrame>

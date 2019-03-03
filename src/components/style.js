@@ -12,13 +12,13 @@ export const SiteHeadline = sc.h1`
 text-align: center;
 text-transform: uppercase;
 font-family: ${HEADLINE_FONT};
-color: black;
+color: white;
 font-weight: 300;
 font-size: 2rem;
 margin: 0;
 padding: 0;
 line-height: 100%;
-text-shadow: 1px 1px 2px #FFFFFF;
+text-shadow: 1px 1px 2px #000000;
 @media(max-width: 800px) {
   font-size: 1rem;
   font-weight: 800;
@@ -261,10 +261,11 @@ margin-right: 2rem;
 white-space: nowrap;
 font-family: 'Merriweather Sans', sans-serif;
 `;
-export const FormError = sc.th`
+export const FormError = sc.p`
 font-weight: 300;
-padding: 0.25rem;
-text-align: right;
+padding: 0;
+margin: 0;
+text-align: left;
 white-space: nowrap;
 font-family: 'Merriweather Sans', sans-serif;
 color: ${({level}) => {
@@ -334,7 +335,26 @@ color: yellow;
 
 export const EditButton = sc.button`
 background-color: black;
+font-family: 'Merriweather Sans', sans-serif;
 font-size: 1rem;
+color: ${LIGHT_GREY};
+text-decoration: none;
+text-transform: uppercase;
+outline: none;
+border: 1px solid rgba(0,0,0,0);
+padding: 0.5rem 1rem;
+-webkit-appearance: none;
+-moz-appearance: none;
+:hover {
+color: white;
+background-color: blue;
+}
+`;
+export const EditLink = sc(Link)`
+background-color: black;
+font-family: 'Merriweather Sans', sans-serif;
+font-size: 1rem;
+text-decoration: none;
 color: ${LIGHT_GREY};
 text-transform: uppercase;
 outline: none;

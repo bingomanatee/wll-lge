@@ -27,8 +27,6 @@ const NavbarView = ({categories, gotoCategory, user, isAdmin, isEditing, userSto
         </CategoryView>;
       })}
     </CategoryList>
-    <Line />
-
   </NavbarFrame>
 );
 
