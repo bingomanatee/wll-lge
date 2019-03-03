@@ -13,7 +13,7 @@ const headline = (category) => {
   </Link>;
 };
 
-const ArticleView = ({loaded, onSave, category, title, content, isAdmin, path}) => {
+const ArticleView = ({loaded, category, title, content, isAdmin, path}) => {
   if (!loaded) {
     return '';
   }
@@ -22,7 +22,7 @@ const ArticleView = ({loaded, onSave, category, title, content, isAdmin, path}) 
       <PageHead>{headline(category)}{title}</PageHead>
       <ArticleFrame>
         <FuzzyBox>
-          <Text dangerouslySetInnerHTML={{__html: marked(content)}}/>
+          <Text dangerouslySetInnerHTML={{__html: content ? marked(content) : ''}}/>
           {isAdmin && <ButtonList>
             <EditLink to={'/edit-article/' + encodePath(path)}>
               Edit

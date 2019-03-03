@@ -42,7 +42,6 @@ display: flex;
 flex-direction: row;
 justify-content: center;
 flex-wrap: wrap;
-overflow: visible;
 }
 `;
 
@@ -79,8 +78,8 @@ text-decoration: line-through
 export const ArticleText = sc.div`
 display: none;
 position: absolute;
-left: 2rem;
-top: 1.5rem;
+left: 1rem;
+top: 2rem;
 width: 20rem;
 text-decoration: none;
 background: white;
@@ -150,8 +149,6 @@ font-size: 0.95em;
 `;
 
 export const ArticleFrame = sc.article`
-padding: 2rem 3rem;
-padding-top: 0; 
 @media(max-width: ${SMALL_NAV}) {
 padding: 0;
 }
@@ -169,6 +166,7 @@ box-shadow: 0px 0px ${n1} ${n2} ${CONTENT_MASK};
 display: flex;
 flex-direction: column;
 align-items: stretch;
+margin: 0.5rem 0;
 `;
 
 export const TableBox = sc.div`

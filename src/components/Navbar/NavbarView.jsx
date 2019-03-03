@@ -1,6 +1,6 @@
 import React from 'react';
 import pt from 'prop-types';
-import {NavbarFrame, SiteHeadline, CategoryList, CategoryView,UserButton, UserIcon, Line, UserLink} from '../style';
+import {NavbarFrame, SiteHeadline, CategoryList, CategoryView,UserButton, UserIcon, UserLink} from '../style';
 
 const NavbarView = ({categories, gotoCategory, user, isAdmin, isEditing, userStore}) => (
   <NavbarFrame data-tag="navbar-frame">

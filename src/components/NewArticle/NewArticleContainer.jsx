@@ -113,7 +113,6 @@ export default class NewArticleContainer extends Component {
           article.save(accessToken, sub, !this.state.exists)
             .then(() => {
               console.log('writing....');
-              eval('debugger');
               this.props.history.push('/article/' + encodePath(article.path));
             })
             .catch((err)=> {

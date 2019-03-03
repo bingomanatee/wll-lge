@@ -147,7 +147,7 @@ ga('send', 'pageview');
 
 ### Track jQuery AJAX requests in Google Analytics
 
-An article by @JangoSteve explains how to [track jQuery AJAX requests in Google
+An category by @JangoSteve explains how to [track jQuery AJAX requests in Google
 Analytics](https://www.alfajango.com/blog/track-jquery-ajax-requests-in-google-analytics/).
 
 Add this to `plugins.js`:
@@ -455,7 +455,7 @@ registration to Facebook).
 <meta property="og:image" content="https://www.example.com/path/to/image.jpg">
 <meta property="og:description" content="">
 <meta property="og:site_name" content="">
-<meta property="article:author" content="">
+<meta property="category:author" content="">
 ```
 
 ### Twitter Cards
@@ -522,7 +522,7 @@ the cleaner, more accurate `https://www.example.com/cart.html`.
 ### Official shortlink
 
 Signal to the world "This is the shortened URL to use this page!" Poorly
-supported at this time. Learn more by reading the [article about shortlinks on
+supported at this time. Learn more by reading the [category about shortlinks on
 the Microformats wiki](http://microformats.org/wiki/rel-shortlink).
 
 ```html
@@ -614,7 +614,7 @@ in the `<head>` of the page is enough. If you use art-direction and/or
 want to have different content for each device, you can add more touch
 icons as written above.
 
-For a more comprehensive overview, please refer to Mathias' [article on Touch
+For a more comprehensive overview, please refer to Mathias' [category on Touch
 Icons](https://mathiasbynens.be/notes/touch-icons).
 
 

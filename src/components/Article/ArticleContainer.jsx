@@ -38,7 +38,7 @@ export default class ArticleContainer extends Component {
         this.setState({...article, loaded: true});
       })
       .catch(err => {
-        console.log('cannot get article', err);
+        console.log('cannot get category', err);
       });
   }
 

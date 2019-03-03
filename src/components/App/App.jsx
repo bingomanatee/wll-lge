@@ -8,6 +8,7 @@ import Homepage from '../Homepage';
 import Article from '../Article';
 import Category from '../Category';
 import NewArticle from '../NewArticle';
+import EditCategory from '../EditCatergory';
 
 import userStore from '../../models/user';
 
@@ -39,9 +40,10 @@ export default class App extends Component {
               <Route path="/" exact component={Homepage}/>
               <Route path="/article/:path*" component={Article}/>
               <Route path="/category/:directory*" component={Category}/>
-              <Route path="/new-article" component={NewArticle} />
-              <Route path="/edit-article/:path*" component={NewArticle} />
-              <Redirect from="/*" to="/" />
+              <Route path="/new-article" component={NewArticle}/>
+              <Route path="/edit-article/:path*" component={NewArticle}/>
+              <Route path="/edit-category/:directory*" component={EditCategory}/>
+              <Redirect from="/*" to="/"/>
             </Switch>
           </Content>
         </SiteFrame>

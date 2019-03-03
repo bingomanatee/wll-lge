@@ -2,7 +2,7 @@ import {Store} from '@wonderlandlabs/looking-glass-engine';
 import axios from 'axios';
 import _ from 'lodash';
 import propper from '@wonderlandlabs/propper';
-
+import {categoryUrl} from './categories';
 import encodePath from '../js/encodePath';
 
 const API_URL = process.env.API_URL;
@@ -13,14 +13,15 @@ const asPath = (input) => {
     return '';
   }
   else if (_.isObject(input) && input.path) {
-    return input.path;
+    return input.path.replace(/\.[\w]+$/, '');
   }
   else {
-    return _.toString(input);
+    return _.toString(input).replace(/\.[\w]+$/, '');
   }
 };
 
-function articleUrl(path) {
+export function articleUrl(path) {
+  if (!path) return  `${API_URL}/articles`;
   const shortPath = encodePath(asPath(path));
   return `${API_URL}/articles/${shortPath}.json`;
 }
@@ -30,7 +31,7 @@ const articles = new Store({
   actions: {
     getCategoryArticles(store, directory, accessToken, sub) {
       return axios.get(
-        API_URL + '/categories/' + encodePath(directory), {
+        categoryUrl(directory), {
           headers: {
             'access_token': accessToken,
             'sub': sub,
@@ -60,7 +61,7 @@ const articles = new Store({
     newArticle(store, article, accessToken, sub) {
       return axios({
         method: 'POST',
-        url: API_URL + '/articles',
+        url: articleUrl(),
         headers: {
           'access_token': accessToken,
           'sub': sub,
@@ -76,12 +77,12 @@ const articles = new Store({
         });
     }, // todo: safety check
     getArticle(store, path) {
-      return axios.get(API_URL + '/articles/' + (/[%]/.test(path) ? path :  encodePath(path)))
+      return axios.get(articleUrl(path))
         .then(result => {
           store.actions.setCurrentArticle(result.data);
         })
         .catch(err => {
-          console.log('cannot get article', err);
+          console.log('cannot get category', err);
           this.setCurrentArticle(false);
         });
     },
@@ -103,6 +104,17 @@ const articles = new Store({
   .addProp('currentArticle', {start: false});
 
 articles.start();
+
+function errMgr(name){
+  return {
+    onInvalid: function (value, error, article) {
+      if (article) article.errors[name] = error;
+    },
+    onChange: function () {
+      delete this.errors[name];
+    },
+  };
+}
 
 export class Article {
   constructor(props, isNew = true) {
@@ -189,13 +201,13 @@ export class Article {
   }
 
   /**
-   * returns a new article with
-   * @returns {Promise<Article>} a new article unless true is passed in.
+   * returns a new category with
+   * @returns {Promise<Article>} a new category unless true is passed in.
    */
   async load(replace = false) {
-    const result = await axios.get(API_URL + '/articles/' +  encodePath(this.path));
+    const result = await axios.get(articleUrl(this.path));
     let data = {...result.data};
-    if (data.path !== this.path) throw new Error('bad article returned for ', + this.path);
+    if (data.path !== this.path) throw new Error('bad category returned for ', + this.path);
     delete data.path;
 
     if (replace) {
@@ -205,14 +217,14 @@ export class Article {
   }
 
   static async get(path) {
-    const result = await axios.get(API_URL + '/articles/' +  (/[%]/.test(path) ? path : encodePath(path)));
+    const result = await axios.get(articleUrl(path));
     return new Article(result.data);
   }
 
   static async exists(path) {
     try {
       let article = await Article.get(path);
-      console.log('exists test article: ', article);
+      console.log('exists test category: ', article);
       return !!article;
     } catch (err) {
       console.log('exists test err: ', err);
@@ -222,23 +234,12 @@ export class Article {
 
   static async forDirectory(directory) {
     if (!directory) throw new Error('cannot poll empty directory');
-    const {data} = await axios.get( API_URL + '/categories/' + encodePath(directory));
+    const {data} = await axios.get(categoryUrl(directory));
     if (data) {
       return data.articles.map(a => new Article(a));
     }
     return [];
   }
-}
-
-function errMgr(name){
-  return {
-    onInvalid: function (value, error, article) {
-      if (article) article.errors[name] = error;
-    },
-    onChange: function () {
-      delete this.errors[name];
-    },
-  };
 }
 
 propper(Article)

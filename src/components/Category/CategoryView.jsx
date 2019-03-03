@@ -3,33 +3,36 @@ import _ from 'lodash';
 import pt from 'prop-types';
 import {
   ArticleFrame,
-  ArticleItem,
   ArticleList,
   ArticleListWrapper,
   ButtonList,
-  EditButton,
-  FuzzyBox,
+  EditLink, FuzzyBox,
   PageHead,
-  Text
+  Text,
 } from '../style';
-import CategoryEdit from '../CategoryEdit';
-import ArticleLinks from "../ArticleLinks";
+import encodePath from '../../js/encodePath';
+import ArticleLinks from '../ArticleLinks';
+import marked from 'marked';
 
 const noop = a => a;
 
-const CategoryView = ({ category, isAdmin, toggleEdit, isEditing, directory, categoryArticles }) => (
+const CategoryView = ({category, isAdmin, directory, content, title, categoryArticles}) => (
   <div>
-    <PageHead>{_.get(category, 'title')}</PageHead>
+    <PageHead>{title}</PageHead>
+    {content && <ArticleFrame>
+      <FuzzyBox>
+        <Text dangerouslySetInnerHTML={{__html: marked(content)}}/>
+      </FuzzyBox>
+    </ArticleFrame>}
     <ArticleListWrapper>
       <ArticleList>
-        <ArticleLinks articles={categoryArticles.filter(a => a.published || isAdmin)} />
+        <ArticleLinks articles={categoryArticles.filter(a => a.published || isAdmin)}/>
       </ArticleList>
     </ArticleListWrapper>
-    {isEditing && <CategoryEdit directory={directory} />}
     {isAdmin && <ButtonList>
-      <EditButton data-sc-type='ButtonList' onClick={toggleEdit}>
-        {isEditing ? 'Cancel' : 'Edit'}
-      </EditButton>
+      <EditLink to={'/edit-category/' + encodePath(directory)}>
+        Edit
+      </EditLink>
     </ButtonList>}
   </div>
 );
@@ -39,7 +42,7 @@ CategoryView.propTypes = {
   isAdmin: pt.bool,
   isEditing: pt.bool,
   categoryArticles: pt.array,
-  toggleEdit: pt.func
+  content: pt.string,
 };
 
 CategoryView.defaultProps = {
@@ -47,7 +50,8 @@ CategoryView.defaultProps = {
   isAdmin: false,
   isEditing: false,
   toggleEdit: noop,
-  categoryArticles: []
+  categoryArticles: [],
+  content: pt.string,
 };
 
 export default CategoryView;

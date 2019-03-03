@@ -1,12 +1,8 @@
 import React, {Component} from 'react';
 import CategoryView from './CategoryView';
-import axios from 'axios';
-
-import categories from '../../models/categories';
+import categories, {Category} from '../../models/categories';
 import userStore from '../../models/user';
 import articlesStore from '../../models/articles';
-
-const API_URL = process.env.API_URL;
 
 export default class CategoryContainer extends Component {
   constructor(props) {
@@ -17,9 +13,8 @@ export default class CategoryContainer extends Component {
       category: {},
       categories: [],
       categoryArticles: [],
-      loaded:
-        false, catLoaded:
-        false
+      loaded: false,
+      catLoaded: false
     };
   }
 
@@ -52,15 +47,15 @@ export default class CategoryContainer extends Component {
     }
   }
 
-  reflectCurrentCat() {
+  async reflectCurrentCat() {
     let directory = decodeURIComponent(this.props.match.params.directory);
-    let matches = this.state.categories.filter(c => c.directory === directory);
-    this.setState({directory, category: matches[0]});
-    articlesStore.actions.getCategoryArticles(directory)
-      .then(() => {
-        console.log('category articles!', articlesStore.state.categoryArticles);
-        this.setState({categoryArticles: articlesStore.state.categoryArticles, loaded: true});
-      });
+    if (!directory) {
+      console.log('no directory in place');
+      this.props.history.push('/');
+      return;
+    }
+    let category = await Category.get(directory);
+    this.setState({...category.toJSON(), categoryArticles: category.articles, loaded: true});
   }
 
   toggleEdit() {
@@ -80,7 +75,7 @@ export default class CategoryContainer extends Component {
     return (
       <CategoryView
         toggleEdit={() => this.toggleEdit()}
-        {...this.state}>
+        {...this.state} content={this.state.content || ''}>
       </CategoryView>
     );
   }
