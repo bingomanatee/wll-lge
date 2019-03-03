@@ -1,10 +1,10 @@
 import React from 'react';
 import pt from 'prop-types';
-import {NavbarFrame, SiteHeadline, CategoryList, CategoryView,UserButton, UserIcon, UserLink} from '../style';
+import {NavbarFrame, SiteHeadline, CategoryList, CategoryView,UserButton, UserIcon, UserLink, UserNav} from '../../style';
 
 const NavbarView = ({categories, gotoCategory, user, isAdmin, isEditing, userStore}) => (
   <NavbarFrame data-tag="navbar-frame">
-    <CategoryList style={({background: 'transparent'})}>
+    <UserNav>
       {user && <UserButton>
         <UserIcon {...user} />
         {user.name}
@@ -16,7 +16,7 @@ const NavbarView = ({categories, gotoCategory, user, isAdmin, isEditing, userSto
       >{user ? 'sign out' : 'sign in'}</UserButton>
       {isAdmin &&  <UserButton>Administer</UserButton>}
       {isAdmin &&  <UserLink to="/new-article">New Article</UserLink>}
-    </CategoryList>
+    </UserNav>
     <SiteHeadline>Wonderland Labs</SiteHeadline>
     <CategoryList>
       <CategoryView key="home" to="/">Home</CategoryView>

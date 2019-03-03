@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import _ from 'lodash';
-import {FormError} from '../style';
+import {FormError} from '../../style';
 
 export default class FormErrorsContainer extends Component {
   constructor(props) {

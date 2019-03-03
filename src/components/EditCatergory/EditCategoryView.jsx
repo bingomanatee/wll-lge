@@ -14,7 +14,7 @@ import {
   FormContent,
   FormContainer,
   FuzzyBox
-} from '../style';
+} from '../../style';
 import FormErrors from '../FormErrors';
 
 const noop = a => a;

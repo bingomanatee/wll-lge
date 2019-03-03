@@ -52733,15 +52733,17 @@ module.exports = _objectSpread;
 },{"../core-js/object/get-own-property-descriptor":"../node_modules/@babel/runtime-corejs2/core-js/object/get-own-property-descriptor.js","../core-js/object/get-own-property-symbols":"../node_modules/@babel/runtime-corejs2/core-js/object/get-own-property-symbols.js","../core-js/object/keys":"../node_modules/@babel/runtime-corejs2/core-js/object/keys.js","./defineProperty":"../node_modules/@babel/runtime-corejs2/helpers/defineProperty.js"}],"constants.json":[function(require,module,exports) {
 module.exports = {
   "SMALL_NAV": "500px",
-  "LARGE_NAV": "1200px"
+  "MEDIUM_NAV": "900px",
+  "LARGE_NAV": "1200px",
+  "SMALL_LEFT_MARGIN": "1.5rem"
 };
-},{}],"components/style.js":[function(require,module,exports) {
+},{}],"style.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.UserLink = exports.CategoryList = exports.Line = exports.CategoryView = exports.EditLink = exports.EditButton = exports.ToggleButton = exports.CheckboxWrapper = exports.Select = exports.Input = exports.FormContent = exports.FormContainer = exports.FormError = exports.FormLabel = exports.FormItem = exports.ButtonList = exports.UserButton = exports.NavbarFrame = exports.Text = exports.TableBox = exports.FuzzyBox = exports.ArticleFrame = exports.PageHead = exports.ContentEditor = exports.UserIcon = exports.ArticleText = exports.ArticleItem = exports.ArticleList = exports.ArticleItemWrapper = exports.ArticleListWrapper = exports.SiteHeadline = void 0;
+exports.CategoryList = exports.Line = exports.CategoryView = exports.EditLink = exports.EditButton = exports.ToggleButton = exports.CheckboxWrapper = exports.Select = exports.Input = exports.FormContent = exports.FormContainer = exports.FormError = exports.FormLabel = exports.FormItem = exports.ButtonList = exports.UserLink = exports.UserNav = exports.UserButton = exports.NavbarFrame = exports.TextCategory = exports.Text = exports.TableBox = exports.FuzzyBox = exports.CategoryTextFrame = exports.ArticleFrame = exports.CategoryHeadFrame = exports.CategoryHead = exports.PageHead = exports.ContentEditor = exports.UserIcon = exports.ArticleText = exports.ArticleItem = exports.ArticleList = exports.ArticleItemWrapper = exports.ArticleListWrapper = exports.SiteHeadline = void 0;
 
 var _taggedTemplateLiteral2 = _interopRequireDefault(require("@babel/runtime-corejs2/helpers/taggedTemplateLiteral"));
 
@@ -52749,12 +52751,62 @@ var _styledComponents = _interopRequireDefault(require("styled-components"));
 
 var _reactRouterDom = require("react-router-dom");
 
-var _constants = require("../constants");
+var _constants = require("./constants");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _templateObject36() {
+  var data = (0, _taggedTemplateLiteral2.default)(["\nclear: both;\nmargin:0.5rem 0 ;\nflex-wrap: wrap;\npadding: 0 1rem;\ndisplay: flex;\nflex-direction: row;\njustify-content: center;\nbackground: ", ";\n"]);
+
+  _templateObject36 = function _templateObject36() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject35() {
+  var data = (0, _taggedTemplateLiteral2.default)(["\nborder-top: 1px solid black;\nmargin: 0.5rem 0;\n"]);
+
+  _templateObject35 = function _templateObject35() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject34() {
+  var data = (0, _taggedTemplateLiteral2.default)(["\ncolor: ", ";\ndisplay: block;\npadding: 0.2rem 0.333rem;\ntext-decoration: none;\ntext-align: center;\nfont-family: 'Merriweather Sans', sans-serif;\nfont-weight: 400;\nline-height: 100%;\nmargin-right: 1rem;\nwhite-space: nowrap;\nfont-size: 1rem;\n@media(max-width: ", ") {\nfont-size: 0.8rem;\n}\n@media(min-width: ", ") {\npadding: 0.5rem 0.5rem;\nfont-size: 1.2rem;\n}\n:hover {\ncolor: white;\n}\n"]);
+
+  _templateObject34 = function _templateObject34() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject33() {
+  var data = (0, _taggedTemplateLiteral2.default)(["\nbackground-color: black;\nfont-family: 'Merriweather Sans', sans-serif;\nfont-size: 1rem;\ntext-decoration: none;\ncolor: ", ";\ntext-transform: uppercase;\noutline: none;\nborder: 1px solid rgba(0,0,0,0);\npadding: 0.5rem 1rem;\n-webkit-appearance: none;\n-moz-appearance: none;\n:hover {\ncolor: white;\nbackground-color: blue;\n}\n"]);
+
+  _templateObject33 = function _templateObject33() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject32() {
+  var data = (0, _taggedTemplateLiteral2.default)(["\nbackground-color: black;\nfont-family: 'Merriweather Sans', sans-serif;\nfont-size: 1rem;\ncolor: ", ";\ntext-decoration: none;\ntext-transform: uppercase;\noutline: none;\nborder: 1px solid rgba(0,0,0,0);\npadding: 0.5rem 1rem;\n-webkit-appearance: none;\n-moz-appearance: none;\n:hover {\ncolor: white;\nbackground-color: blue;\n}\n"]);
+
+  _templateObject32 = function _templateObject32() {
+    return data;
+  };
+
+  return data;
+}
+
 function _templateObject31() {
-  var data = (0, _taggedTemplateLiteral2.default)(["\ncolor: black;\ndisplay: block;\npadding: 0.2rem 0.333rem;\nbackground: rgba(200,200,200,0.6);\ntext-decoration: none;\ntext-align: center;\nfont-family: 'Merriweather Sans', sans-serif;\nfont-weight: 100;\nline-height: 100%;\nmargin-right: 1rem;\nwhite-space: nowrap;\nfont-size: 1rem;\n@media(max-width: ", ") {\nfont-size: 0.8rem;\n}\n@media(min-width: ", ") {\npadding: 0.5rem 0.5rem;\nfont-size: 1.2rem;\n}\n:hover {\ncolor: white;\n}\n"]);
+  var data = (0, _taggedTemplateLiteral2.default)(["\nbackground-color: ", ";\nfont-size: 1rem;\ncolor: white;\ntext-transform: uppercase;\noutline: none;\nwidth: 60px;\ntex-align: center;\npadding: 0.5rem 1rem;\n-webkit-appearance: none;\n-moz-appearance: none;\nborder: 1px solid rgba(0,0,0,0);\n:hover {\ncolor: yellow;\n}\n"]);
 
   _templateObject31 = function _templateObject31() {
     return data;
@@ -52764,7 +52816,7 @@ function _templateObject31() {
 }
 
 function _templateObject30() {
-  var data = (0, _taggedTemplateLiteral2.default)(["\nclear: both;\nmargin:0.5rem 0 ;\nflex-wrap: wrap;\npadding: 0 1rem;\ndisplay: flex;\nflex-direction: row;\njustify-content: center;\nbackground: rgba(200,200,200,0.6);\n"]);
+  var data = (0, _taggedTemplateLiteral2.default)(["\nfont-weight: 600;\npadding: 0.25rem;\nborder: 1px solid black;\nborder-radius: 1px;\nflex-grow: 1.25;\n"]);
 
   _templateObject30 = function _templateObject30() {
     return data;
@@ -52774,7 +52826,7 @@ function _templateObject30() {
 }
 
 function _templateObject29() {
-  var data = (0, _taggedTemplateLiteral2.default)(["\nborder-top: 1px solid black;\nmargin: 0.5rem 0;\n"]);
+  var data = (0, _taggedTemplateLiteral2.default)(["\npadding: 0.25rem;\nborder: 1px solid black;\nborder-radius: 1px;\nfont-size: 1.25rem;\nfont-family: 'Courier New', Monaco, Courier, monospace;\n@media(min-width: ", ") {\nfont-size: 1.75rem;\n}\n"]);
 
   _templateObject29 = function _templateObject29() {
     return data;
@@ -52784,7 +52836,7 @@ function _templateObject29() {
 }
 
 function _templateObject28() {
-  var data = (0, _taggedTemplateLiteral2.default)(["\ncolor: black;\ndisplay: block;\npadding: 0.2rem 0.333rem;\ntext-decoration: none;\ntext-align: center;\nfont-family: 'Merriweather Sans', sans-serif;\nfont-weight: 100;\nline-height: 100%;\nmargin-right: 1rem;\nwhite-space: nowrap;\nfont-size: 1rem;\n@media(max-width: ", ") {\nfont-size: 0.8rem;\n}\n@media(min-width: ", ") {\npadding: 0.5rem 0.5rem;\nfont-size: 1.2rem;\n}\n:hover {\ncolor: white;\n}\n"]);
+  var data = (0, _taggedTemplateLiteral2.default)(["\npadding: 0.25rem;\nborder: 1px solid black;\nborder-radius: 1px;\nwidth: 100%;\nfont-size: 1.25rem;\nfont-family: 'Courier New', Monaco, Courier, monospace;\n@media(min-width: ", ") {\nfont-size: 1.75rem;\n}\n"]);
 
   _templateObject28 = function _templateObject28() {
     return data;
@@ -52794,7 +52846,7 @@ function _templateObject28() {
 }
 
 function _templateObject27() {
-  var data = (0, _taggedTemplateLiteral2.default)(["\nbackground-color: black;\nfont-family: 'Merriweather Sans', sans-serif;\nfont-size: 1rem;\ntext-decoration: none;\ncolor: ", ";\ntext-transform: uppercase;\noutline: none;\nborder: 1px solid rgba(0,0,0,0);\npadding: 0.5rem 1rem;\n-webkit-appearance: none;\n-moz-appearance: none;\n:hover {\ncolor: white;\nbackground-color: blue;\n}\n"]);
+  var data = (0, _taggedTemplateLiteral2.default)(["\nwidth: 80%;\n"]);
 
   _templateObject27 = function _templateObject27() {
     return data;
@@ -52804,7 +52856,7 @@ function _templateObject27() {
 }
 
 function _templateObject26() {
-  var data = (0, _taggedTemplateLiteral2.default)(["\nbackground-color: black;\nfont-family: 'Merriweather Sans', sans-serif;\nfont-size: 1rem;\ncolor: ", ";\ntext-decoration: none;\ntext-transform: uppercase;\noutline: none;\nborder: 1px solid rgba(0,0,0,0);\npadding: 0.5rem 1rem;\n-webkit-appearance: none;\n-moz-appearance: none;\n:hover {\ncolor: white;\nbackground-color: blue;\n}\n"]);
+  var data = (0, _taggedTemplateLiteral2.default)(["\nwidth: 100%;\n"]);
 
   _templateObject26 = function _templateObject26() {
     return data;
@@ -52814,7 +52866,7 @@ function _templateObject26() {
 }
 
 function _templateObject25() {
-  var data = (0, _taggedTemplateLiteral2.default)(["\nbackground-color: ", ";\nfont-size: 1rem;\ncolor: white;\ntext-transform: uppercase;\noutline: none;\nwidth: 60px;\ntex-align: center;\npadding: 0.5rem 1rem;\n-webkit-appearance: none;\n-moz-appearance: none;\nborder: 1px solid rgba(0,0,0,0);\n:hover {\ncolor: yellow;\n}\n"]);
+  var data = (0, _taggedTemplateLiteral2.default)(["\nfont-weight: 300;\npadding: 0;\nmargin: 0;\ntext-align: left;\nwhite-space: nowrap;\nfont-family: 'Merriweather Sans', sans-serif;\ncolor: ", ";\n"]);
 
   _templateObject25 = function _templateObject25() {
     return data;
@@ -52824,7 +52876,7 @@ function _templateObject25() {
 }
 
 function _templateObject24() {
-  var data = (0, _taggedTemplateLiteral2.default)(["\nfont-weight: 600;\npadding: 0.25rem;\nborder: 1px solid black;\nborder-radius: 1px;\nflex-grow: 1.25;\n"]);
+  var data = (0, _taggedTemplateLiteral2.default)(["\nfont-weight: 600;\npadding: 0.25rem;\ntext-align: right;\nmargin-right: 2rem;\nwhite-space: nowrap;\nfont-family: 'Merriweather Sans', sans-serif;\n"]);
 
   _templateObject24 = function _templateObject24() {
     return data;
@@ -52834,7 +52886,7 @@ function _templateObject24() {
 }
 
 function _templateObject23() {
-  var data = (0, _taggedTemplateLiteral2.default)(["\npadding: 0.25rem;\nborder: 1px solid black;\nborder-radius: 1px;\nfont-size: 1.25rem;\nfont-family: 'Courier New', Monaco, Courier, monospace;\n@media(min-width: ", ") {\nfont-size: 1.75rem;\n}\n"]);
+  var data = (0, _taggedTemplateLiteral2.default)(["\nmargin-bottom: 0.5rem;\nfont-family: 'Merriweather Sans', sans-serif;\n"]);
 
   _templateObject23 = function _templateObject23() {
     return data;
@@ -52844,7 +52896,7 @@ function _templateObject23() {
 }
 
 function _templateObject22() {
-  var data = (0, _taggedTemplateLiteral2.default)(["\npadding: 0.25rem;\nborder: 1px solid black;\nborder-radius: 1px;\nwidth: 100%;\nfont-size: 1.25rem;\nfont-family: 'Courier New', Monaco, Courier, monospace;\n@media(min-width: ", ") {\nfont-size: 1.75rem;\n}\n"]);
+  var data = (0, _taggedTemplateLiteral2.default)(["\ndisplay: flex;\nflex-direction: row;\njustify-content: space-around;\npadding: 0 0.5rem;\nclear: both;\nmargin: 1rem;\nwidth: 100%;\n"]);
 
   _templateObject22 = function _templateObject22() {
     return data;
@@ -52854,7 +52906,7 @@ function _templateObject22() {
 }
 
 function _templateObject21() {
-  var data = (0, _taggedTemplateLiteral2.default)(["\nwidth: 80%;\n"]);
+  var data = (0, _taggedTemplateLiteral2.default)(["\ncolor: ", ";\ndisplay: block;\npadding: 0.2rem 0.333rem;\ntext-decoration: none;\ntext-align: center;\nfont-family: 'Merriweather Sans', sans-serif;\nfont-weight: 100;\nline-height: 100%;\nmargin-right: 1rem;\nwhite-space: nowrap;\nfont-size: 1rem;\n@media(max-width: ", ") {\nfont-size: 0.8rem;\n}\n@media(min-width: ", ") {\npadding: 0.5rem 0.5rem;\nfont-size: 1.2rem;\n}\n:hover {\ncolor: white;\nbackground-color: ", ";\n}\n"]);
 
   _templateObject21 = function _templateObject21() {
     return data;
@@ -52864,7 +52916,7 @@ function _templateObject21() {
 }
 
 function _templateObject20() {
-  var data = (0, _taggedTemplateLiteral2.default)(["\nwidth: 100%;\n"]);
+  var data = (0, _taggedTemplateLiteral2.default)(["\nclear: both;\nmargin:0.5rem 1rem;\nflex-wrap: wrap;\ndisplay: flex;\nflex-direction: row;\njustify-content: flex-end;\n"]);
 
   _templateObject20 = function _templateObject20() {
     return data;
@@ -52874,7 +52926,7 @@ function _templateObject20() {
 }
 
 function _templateObject19() {
-  var data = (0, _taggedTemplateLiteral2.default)(["\nfont-weight: 300;\npadding: 0;\nmargin: 0;\ntext-align: left;\nwhite-space: nowrap;\nfont-family: 'Merriweather Sans', sans-serif;\ncolor: ", ";\n"]);
+  var data = (0, _taggedTemplateLiteral2.default)(["\ncolor: ", ";\ndisplay: flex;\nflex-direction: row;\nalign-items: center;\npadding: 0rem 0.25rem;\ntext-decoration: none;\ntext-align: center;\nfont-family: 'Merriweather Sans', sans-serif;\nfont-weight: 400;\nfont-size: 0.8rem;\nline-height: 100%;\nmargin-right: 1rem;\nwhite-space: nowrap;\n@media(min-width: ", ") {\nfont-size: 1rem;\n}\n:hover {\nbackground-color: ", ";\ncolor: white;\n}\n"]);
 
   _templateObject19 = function _templateObject19() {
     return data;
@@ -52884,7 +52936,7 @@ function _templateObject19() {
 }
 
 function _templateObject18() {
-  var data = (0, _taggedTemplateLiteral2.default)(["\nfont-weight: 600;\npadding: 0.25rem;\ntext-align: right;\nmargin-right: 2rem;\nwhite-space: nowrap;\nfont-family: 'Merriweather Sans', sans-serif;\n"]);
+  var data = (0, _taggedTemplateLiteral2.default)(["\nflex: 0;\nmargin-top: 4px;\n"]);
 
   _templateObject18 = function _templateObject18() {
     return data;
@@ -52894,7 +52946,7 @@ function _templateObject18() {
 }
 
 function _templateObject17() {
-  var data = (0, _taggedTemplateLiteral2.default)(["\nmargin-bottom: 0.5rem;\nfont-family: 'Merriweather Sans', sans-serif;\n"]);
+  var data = (0, _taggedTemplateLiteral2.default)(["\nfont-family: ", ";\ncolor: ", ";\np {\nmargin: 0.5em 0;\n}\nfont-size: 1.25rem;\npre {\nfont-size: 1rem;\n@media(min-width: ", ") {\nfont-size: 1.2rem;\nfont-weight: 100;\n}\n}\nli {\npadding-left: 0.5em;\n}\nol, ul {\npadding-left: 2em;\n}\nh1, h2, h3, h4, h5, h6 {\nfont-family: ", ";\nfont-size: 1rem;\npadding: 0;\nmargin: 0;\ncolor: white;\n}\nh1 {\nfont-size: 1.75rem;\ntext-shadow: none;\ntext-transform: uppercase;\nmargin-bottom: 0.5rem;\n}\nh2 {\ntext-shadow: 2px 2px 2px white;\nfont-size: 1.5rem;\nmargin-bottom: 0.25rem;\n}\n@media(min-width: ", ") {\nfont-size: 1.33rem;\n}\n"]);
 
   _templateObject17 = function _templateObject17() {
     return data;
@@ -52904,7 +52956,7 @@ function _templateObject17() {
 }
 
 function _templateObject16() {
-  var data = (0, _taggedTemplateLiteral2.default)(["\ndisplay: flex;\nflex-direction: row;\njustify-content: space-around;\npadding: 0 0.5rem;\nclear: both;\nmargin: 1rem;\nwidth: 100%;\n"]);
+  var data = (0, _taggedTemplateLiteral2.default)(["\nfont-family: 'Lora',Georgia,serif;\nfont-size: ", ";\nmax-width: ", ";\n@media(max-width: ", ") {\n  font-size: ", ";\n}\n\np {\n  margin: 0.5em 0;\n}\npre {\n  font-size: 1rem;\n  @media(min-width: ", ") {\n    font-size: 1.2rem;\n  }\n}\nh1, h2, h3, h4, h5, h6 {\nfont-family: ", ";\nfont-size: ", ";\npadding: 0;\nmargin: 0;\n@media(min-width: ", ") {\nfont-size: ", ";\n}\nh1 {\nfont-size: ", ";\ntext-shadow: none;\ncolor: black;\ntext-transform: uppercase;\nmargin-bottom: 0.5rem;\n@media(min-width: ", ") {\nfont-size: ", ";\n}\n}\nh2 {\ntext-shadow: 2px 2px 2px white;\nfont-size: 1.5rem;\nmargin-bottom: 0.25rem;\n}\nli {\npadding-left: 0.5em;\nmargin-bottom: 0.333em;\n}\nol, ul {\npadding-left: 2em;\n}\n"]);
 
   _templateObject16 = function _templateObject16() {
     return data;
@@ -52914,7 +52966,7 @@ function _templateObject16() {
 }
 
 function _templateObject15() {
-  var data = (0, _taggedTemplateLiteral2.default)(["\nbackground-color: ", ";\ncolor: black;\ndisplay: flex;\nflex-direction: row;\nalign-items: center;\npadding: 0rem 0.25rem;\ntext-decoration: none;\ntext-align: center;\nfont-family: 'Merriweather Sans', sans-serif;\nfont-weight: 400;\nfont-size: 0.8rem;\nline-height: 100%;\nmargin-right: 1rem;\nwhite-space: nowrap;\n@media(min-width: ", ") {\nfont-size: 1rem;\n}\n:hover {\ncolor: white;\n}\n"]);
+  var data = (0, _taggedTemplateLiteral2.default)(["\ndisplay: flex;\nflex-direction: column;\nalign-items: stretch;\n"]);
 
   _templateObject15 = function _templateObject15() {
     return data;
@@ -52924,7 +52976,7 @@ function _templateObject15() {
 }
 
 function _templateObject14() {
-  var data = (0, _taggedTemplateLiteral2.default)(["\nflex: 0;\nmargin-top: 4px;\n"]);
+  var data = (0, _taggedTemplateLiteral2.default)(["\npadding: 0.5rem 2rem;\nbackground-color: ", ";\n-webkit-box-shadow: 0px 0px ", " ", " ", ";\n-moz-box-shadow: 0px 0px ", " ", " ", ";\nbox-shadow: 0px 0px ", " ", " ", ";\ndisplay: flex;\nflex-direction: column;\nalign-items: center;\nmargin: 0.5rem 0;\n"]);
 
   _templateObject14 = function _templateObject14() {
     return data;
@@ -52934,7 +52986,7 @@ function _templateObject14() {
 }
 
 function _templateObject13() {
-  var data = (0, _taggedTemplateLiteral2.default)(["\nfont-family: 'Cormorant Garamond',Georgia,serif;\nfont-size: 1.1rem;\npre {\nfont-size: 0.8rem;\n@media(min-width: ", ") {\nfont-size: 1rem;\n}\n}\nh1, h2, h3, h4, h5, h6 {\nfont-family: ", ";\nfont-size: 1rem;\npadding: 0;\nmargin: 0;\n}\nh1 {\nfont-size: 1.75rem;\ntext-shadow: none;\ncolor: black;\ntext-transform: uppercase;\nmargin-bottom: 0.5rem;\n}\nh2 {\ntext-shadow: 2px 2px 2px white;\nfont-size: 1.5rem;\nmargin-bottom: 0.25rem;\n}\n@media(min-width: ", ") {\nfont-size: 1.25rem;\n}\n"]);
+  var data = (0, _taggedTemplateLiteral2.default)(["\nmargin-left:1rem;\nflex: 1;\n@media(max-width: ", ") {\ndisplay: none;\n}\n"]);
 
   _templateObject13 = function _templateObject13() {
     return data;
@@ -52944,7 +52996,7 @@ function _templateObject13() {
 }
 
 function _templateObject12() {
-  var data = (0, _taggedTemplateLiteral2.default)(["\ndisplay: flex;\nflex-direction: column;\nalign-items: stretch;\n"]);
+  var data = (0, _taggedTemplateLiteral2.default)(["\n@media(max-width: ", ") {\npadding: 0;\n}\n"]);
 
   _templateObject12 = function _templateObject12() {
     return data;
@@ -52954,7 +53006,7 @@ function _templateObject12() {
 }
 
 function _templateObject11() {
-  var data = (0, _taggedTemplateLiteral2.default)(["\npadding: 0.5rem 2rem;\nbackground-color: ", ";\n-webkit-box-shadow: 0px 0px ", " ", " ", ";\n-moz-box-shadow: 0px 0px ", " ", " ", ";\nbox-shadow: 0px 0px ", " ", " ", ";\ndisplay: flex;\nflex-direction: column;\nalign-items: stretch;\nmargin: 0.5rem 0;\n"]);
+  var data = (0, _taggedTemplateLiteral2.default)(["\ndisplay: flex;\nflex-direction: row;\njustify-content: stretch;\nalign-items: baseline;\n@media(max-width: ", "){\nflex-direction: column;\nalign-items: stretch;\n}\n"]);
 
   _templateObject11 = function _templateObject11() {
     return data;
@@ -52964,7 +53016,7 @@ function _templateObject11() {
 }
 
 function _templateObject10() {
-  var data = (0, _taggedTemplateLiteral2.default)(["\n@media(max-width: ", ") {\npadding: 0;\n}\n"]);
+  var data = (0, _taggedTemplateLiteral2.default)(["\nfont-family: ", ";\ncolor: white;\nfont-weight: 800;\nfont-size: 2rem;\ntext-transform: uppercase;\ntext-shadow: 2px 2px 2px #000000;\ntext-align: right;\nmargins: 0;\npadding: 0;\nflex-basis: 50%;\nflex: 1;\n@media(max-width: ", "){\ntext-align: center;\nmargin-left: ", ";\n}\n@media(max-width: ", "){\ntext-align: left;\n\n}\n"]);
 
   _templateObject10 = function _templateObject10() {
     return data;
@@ -52974,7 +53026,7 @@ function _templateObject10() {
 }
 
 function _templateObject9() {
-  var data = (0, _taggedTemplateLiteral2.default)(["\nfont-family: ", ";\ncolor: white;\nfont-weight: 800;\nfont-size: 2rem;\ntext-align: center;\ntext-transform: uppercase;\nmargins: 0;\n  padding: 0 4rem;\ntext-shadow: 2px 2px 2px #000000;\n@media(max-width: ", ") {\nfont-size: 1rem;\npadding: 0;\n}\na {\ntext-decoration: none;\ncolor: rgba(255,255,255,0.8);\ntext-shadow: none;\nfont-weight: 200;\nfont-size: 0.95em;\n:hover {\n  text-decoration: underline;\n}\n}\n"]);
+  var data = (0, _taggedTemplateLiteral2.default)(["\nfont-family: ", ";\nfont-size: ", ";\ncolor: white;\nfont-weight: 800;\ntext-align: center;\ntext-transform: uppercase;\nmargins: 0;\ntext-shadow: 2px 2px 2px #000000;\n@media(min-width: ", ") {\n  font-size: ", ";\n}@media(max-width: ", ") {\n  font-size: ", ";\n}\na {\n  text-decoration: none;\n  color: ", ";\n  text-shadow: none;\n  font-weight: 200;\n  :hover {\n    text-decoration: underline;\n  }\n}\n"]);
 
   _templateObject9 = function _templateObject9() {
     return data;
@@ -53004,7 +53056,7 @@ function _templateObject7() {
 }
 
 function _templateObject6() {
-  var data = (0, _taggedTemplateLiteral2.default)(["\ndisplay: none;\nposition: absolute;\nleft: 1rem;\ntop: 2rem;\nwidth: 20rem;\ntext-decoration: none;\nbackground: white;\nborder-radius: 2px;\nz-index: 1000;\ncolor: white;\nfont-family: 'Merriweather Sans', sans-serif;\nfont-weight: 200;\nfont-size: 1rem;\ncolor: black;\npadding: 0.2rem 0.5rem;\nmargin: 0.333rem 0.25rem;\nmargin-left: -0.666rem;\n@media(max-width: ", ") {\npadding: 2px;\nmargin: 0;\n}\n@media(min-width: ", ") {\npadding: 0.5rem 1rem;\nfont-size: 1.1rem;\n}\n"]);
+  var data = (0, _taggedTemplateLiteral2.default)(["\ndisplay: none;\nposition: absolute;\nleft: 1rem;\ntop: 2rem;\nwidth: 20rem;\ntext-decoration: none;\nbackground: white;\nborder-radius: 2px;\nz-index: 1000;\ncolor: white;\nfont-family: 'Merriweather Sans', sans-serif;\nfont-weight: 200;\nfont-size: ", ";\ncolor: black;\ntext-shadow: none;\npadding: 0.2rem 0.5rem;\nmargin: 0.333rem 0.25rem;\nmargin-left: -0.666rem;\n@media(max-width: ", ") {\npadding: 2px;\nmargin: 0;\n}\n@media(min-width: ", ") {\npadding: 0.5rem 1rem;\nfont-size: ", ";\n}\n"]);
 
   _templateObject6 = function _templateObject6() {
     return data;
@@ -53014,7 +53066,7 @@ function _templateObject6() {
 }
 
 function _templateObject5() {
-  var data = (0, _taggedTemplateLiteral2.default)(["\ndisplay: block;\ntext-decoration: none;\nposition: relative;\nbackground: ", ";\ncolor: white;\nfont-family: 'Merriweather Sans', sans-serif;\nfont-weight: 300;\nfont-size: 1rem;\ncolor: white !important;\npadding: 0.2rem 0.5rem;\nmargin: 0.333rem 0.25rem;\n@media(max-width: ", ") {\npadding: 2px;\nmargin: 0;\n}\n@media(min-width: ", ") {\npadding: 0.5rem 1rem;\nfont-size: 1.1rem;\n}\n:hover {\ntext-decoration: underline;\ndiv[data-role='text'] {\ndisplay: block;\n}\n}\n&.unpublished {\ntext-decoration: line-through\n}\n"]);
+  var data = (0, _taggedTemplateLiteral2.default)(["\ndisplay: block;\ntext-decoration: none;\nposition: relative;\ncolor: ", ";\nfont-family: 'Merriweather Sans', sans-serif;\nfont-weight: 300;\nfont-size: 1rem;\npadding: 0.2rem 0.5rem;\nmargin: 0.333rem 0.25rem;\ntext-shadow: 1px 1px 0px #000000;\n@media(max-width: ", ") {\npadding: 2px;\nmargin: 0;\n}\n@media(min-width: ", ") {\npadding: 0.5rem 1rem;\nfont-size: 1.1rem;\n}\n:hover {\nbackground: ", ";\ntext-decoration: underline;\ndiv[data-role='text'] {\ndisplay: block;\n}\n}\n&.unpublished {\ntext-decoration: line-through\n}\n"]);
 
   _templateObject5 = function _templateObject5() {
     return data;
@@ -53044,7 +53096,7 @@ function _templateObject3() {
 }
 
 function _templateObject2() {
-  var data = (0, _taggedTemplateLiteral2.default)(["\nwidth: 100%;\n@media(min-width: 800px) {\noverflow-y: visible\n}"]);
+  var data = (0, _taggedTemplateLiteral2.default)(["\n@media(max-width: ", ") {\nmargin-left: ", ";\n}\n@media(min-width: ", ") {\noverflow-y: visible;\n}"]);
 
   _templateObject2 = function _templateObject2() {
     return data;
@@ -53054,7 +53106,7 @@ function _templateObject2() {
 }
 
 function _templateObject() {
-  var data = (0, _taggedTemplateLiteral2.default)(["\ntext-align: center;\ntext-transform: uppercase;\nfont-family: ", ";\ncolor: white;\nfont-weight: 300;\nfont-size: 2rem;\nmargin: 0;\npadding: 0;\nline-height: 100%;\ntext-shadow: 1px 1px 2px #000000;\n@media(max-width: 800px) {\n  font-size: 1rem;\n  font-weight: 800;\n}\n"]);
+  var data = (0, _taggedTemplateLiteral2.default)(["\ntext-align: center;\ntext-transform: uppercase;\nfont-family: ", ";\ncolor: white;\nfont-weight: 100;\nfont-size: 2.5rem;\nmargin: 0;\npadding: 0;\nline-height: 100%;\ntext-shadow: 1px 1px 2px #000000;\n@media(max-width: 800px) {\n  font-size: 1.5rem;\n  font-weight: 800;\n}\n"]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -53068,12 +53120,25 @@ var CONTENT_MASK = 'rgb(255,255,255)';
 var LIGHT_GREY = 'rgb(200,200,200)';
 var ARTICLE_LINK_BACK = 'rgba(128,128,128,0.95)';
 var HEADLINE_FONT = '\'Merriweather Sans\', sans-serif';
+var USER_LINK = 'rgb(200,200,200)';
+var CATEGORY_TEXT_COLOR = 'rgb(200,200,200)';
+var CATEGORY_LIST = 'rgb(0,0,0,0.8)';
+var CATEGORY_LIST_TEXT = 'rgb(255,255,255,0.8)';
+var ARTICLE_LINK = 'rgb(225,225,255)';
+var TEXT_FONT_SIZE = '1.25rem';
+var TEXT_FONT_SIZE_SMALL = '1rem';
+var TEXT_FONT_SIZE_LARGE = '1.5rem';
+var HEADLINE_FONT_SIZE = '2rem';
+var HEADLINE_FONT_SIZE_LARGE = '3rem';
+var HEADLINE_FONT_SIZE_SMALL = '1.25rem';
+var SUB_HEADLINE_FONT_SIZE = '1.5rem';
+var SUB_HEADLINE_FONT_SIZE_LARGE = '1.75rem';
 
 var SiteHeadline = _styledComponents.default.h1(_templateObject(), HEADLINE_FONT);
 
 exports.SiteHeadline = SiteHeadline;
 
-var ArticleListWrapper = _styledComponents.default.div(_templateObject2());
+var ArticleListWrapper = _styledComponents.default.div(_templateObject2(), _constants.MEDIUM_NAV, _constants.SMALL_LEFT_MARGIN, _constants.MEDIUM_NAV);
 
 exports.ArticleListWrapper = ArticleListWrapper;
 
@@ -53084,10 +53149,10 @@ exports.ArticleItemWrapper = ArticleItemWrapper;
 var ArticleList = _styledComponents.default.div(_templateObject4(), _constants.SMALL_NAV);
 
 exports.ArticleList = ArticleList;
-var ArticleItem = (0, _styledComponents.default)(_reactRouterDom.Link)(_templateObject5(), ARTICLE_LINK_BACK, _constants.SMALL_NAV, _constants.LARGE_NAV);
+var ArticleItem = (0, _styledComponents.default)(_reactRouterDom.Link)(_templateObject5(), ARTICLE_LINK, _constants.SMALL_NAV, _constants.LARGE_NAV, ARTICLE_LINK_BACK);
 exports.ArticleItem = ArticleItem;
 
-var ArticleText = _styledComponents.default.div(_templateObject6(), _constants.SMALL_NAV, _constants.LARGE_NAV);
+var ArticleText = _styledComponents.default.div(_templateObject6(), TEXT_FONT_SIZE, _constants.SMALL_NAV, _constants.LARGE_NAV, TEXT_FONT_SIZE_LARGE);
 
 exports.ArticleText = ArticleText;
 
@@ -53101,49 +53166,71 @@ var ContentEditor = _styledComponents.default.textarea(_templateObject8(), _cons
 
 exports.ContentEditor = ContentEditor;
 
-var PageHead = _styledComponents.default.h1(_templateObject9(), HEADLINE_FONT, _constants.SMALL_NAV);
+var PageHead = _styledComponents.default.h1(_templateObject9(), HEADLINE_FONT, HEADLINE_FONT_SIZE, _constants.MEDIUM_NAV, HEADLINE_FONT_SIZE_LARGE, _constants.SMALL_NAV, HEADLINE_FONT_SIZE_SMALL, ARTICLE_LINK);
 
 exports.PageHead = PageHead;
 
-var ArticleFrame = _styledComponents.default.article(_templateObject10(), _constants.SMALL_NAV);
+var CategoryHead = _styledComponents.default.h1(_templateObject10(), HEADLINE_FONT, _constants.MEDIUM_NAV, _constants.SMALL_LEFT_MARGIN, _constants.SMALL_NAV);
+
+exports.CategoryHead = CategoryHead;
+
+var CategoryHeadFrame = _styledComponents.default.section(_templateObject11(), _constants.MEDIUM_NAV);
+
+exports.CategoryHeadFrame = CategoryHeadFrame;
+
+var ArticleFrame = _styledComponents.default.article(_templateObject12(), _constants.SMALL_NAV);
 
 exports.ArticleFrame = ArticleFrame;
-var n1 = '4px';
-var n2 = '4px';
 
-var FuzzyBox = _styledComponents.default.div(_templateObject11(), CONTENT_MASK, n1, n2, CONTENT_MASK, n1, n2, CONTENT_MASK, n1, n2, CONTENT_MASK);
+var CategoryTextFrame = _styledComponents.default.article(_templateObject13(), _constants.MEDIUM_NAV);
+
+exports.CategoryTextFrame = CategoryTextFrame;
+var n1 = '18px';
+var n2 = '9px';
+
+var FuzzyBox = _styledComponents.default.div(_templateObject14(), CONTENT_MASK, n1, n2, CONTENT_MASK, n1, n2, CONTENT_MASK, n1, n2, CONTENT_MASK);
 
 exports.FuzzyBox = FuzzyBox;
 
-var TableBox = _styledComponents.default.div(_templateObject12());
+var TableBox = _styledComponents.default.div(_templateObject15());
 
 exports.TableBox = TableBox;
 
-var Text = _styledComponents.default.div(_templateObject13(), _constants.LARGE_NAV, HEADLINE_FONT, _constants.LARGE_NAV);
+var Text = _styledComponents.default.div(_templateObject16(), TEXT_FONT_SIZE, _constants.LARGE_NAV, _constants.SMALL_NAV, TEXT_FONT_SIZE_SMALL, _constants.LARGE_NAV, HEADLINE_FONT, SUB_HEADLINE_FONT_SIZE, _constants.LARGE_NAV, SUB_HEADLINE_FONT_SIZE_LARGE, HEADLINE_FONT_SIZE, _constants.LARGE_NAV, HEADLINE_FONT_SIZE_LARGE);
 
 exports.Text = Text;
 
-var NavbarFrame = _styledComponents.default.div(_templateObject14());
+var TextCategory = _styledComponents.default.div(_templateObject17(), HEADLINE_FONT, CATEGORY_TEXT_COLOR, _constants.LARGE_NAV, HEADLINE_FONT, _constants.LARGE_NAV);
+
+exports.TextCategory = TextCategory;
+
+var NavbarFrame = _styledComponents.default.div(_templateObject18());
 
 exports.NavbarFrame = NavbarFrame;
 
-var UserButton = _styledComponents.default.div(_templateObject15(), BUTTON_MASK, _constants.SMALL_NAV);
+var UserButton = _styledComponents.default.div(_templateObject19(), USER_LINK, _constants.SMALL_NAV, BUTTON_MASK);
 
 exports.UserButton = UserButton;
 
-var ButtonList = _styledComponents.default.div(_templateObject16());
+var UserNav = _styledComponents.default.div(_templateObject20());
+
+exports.UserNav = UserNav;
+var UserLink = (0, _styledComponents.default)(_reactRouterDom.Link)(_templateObject21(), USER_LINK, _constants.SMALL_NAV, _constants.LARGE_NAV, BUTTON_MASK);
+exports.UserLink = UserLink;
+
+var ButtonList = _styledComponents.default.div(_templateObject22());
 
 exports.ButtonList = ButtonList;
 
-var FormItem = _styledComponents.default.tr(_templateObject17());
+var FormItem = _styledComponents.default.tr(_templateObject23());
 
 exports.FormItem = FormItem;
 
-var FormLabel = _styledComponents.default.th(_templateObject18());
+var FormLabel = _styledComponents.default.th(_templateObject24());
 
 exports.FormLabel = FormLabel;
 
-var FormError = _styledComponents.default.p(_templateObject19(), function (_ref) {
+var FormError = _styledComponents.default.p(_templateObject25(), function (_ref) {
   var level = _ref.level;
   if (level === 'war') return 'darkorange';
   return 'darkred';
@@ -53151,27 +53238,27 @@ var FormError = _styledComponents.default.p(_templateObject19(), function (_ref)
 
 exports.FormError = FormError;
 
-var FormContainer = _styledComponents.default.table(_templateObject20());
+var FormContainer = _styledComponents.default.table(_templateObject26());
 
 exports.FormContainer = FormContainer;
 
-var FormContent = _styledComponents.default.td(_templateObject21());
+var FormContent = _styledComponents.default.td(_templateObject27());
 
 exports.FormContent = FormContent;
 
-var Input = _styledComponents.default.input(_templateObject22(), _constants.LARGE_NAV);
+var Input = _styledComponents.default.input(_templateObject28(), _constants.LARGE_NAV);
 
 exports.Input = Input;
 
-var Select = _styledComponents.default.select(_templateObject23(), _constants.LARGE_NAV);
+var Select = _styledComponents.default.select(_templateObject29(), _constants.LARGE_NAV);
 
 exports.Select = Select;
 
-var CheckboxWrapper = _styledComponents.default.div(_templateObject24());
+var CheckboxWrapper = _styledComponents.default.div(_templateObject30());
 
 exports.CheckboxWrapper = CheckboxWrapper;
 
-var ToggleButton = _styledComponents.default.button(_templateObject25(), function (props) {
+var ToggleButton = _styledComponents.default.button(_templateObject31(), function (props) {
   var active = 'data-on' in props ? props['data-on'] : null;
   if (active === null) return 'grey';
   if (active) return 'darkgreen';
@@ -53180,24 +53267,22 @@ var ToggleButton = _styledComponents.default.button(_templateObject25(), functio
 
 exports.ToggleButton = ToggleButton;
 
-var EditButton = _styledComponents.default.button(_templateObject26(), LIGHT_GREY);
+var EditButton = _styledComponents.default.button(_templateObject32(), LIGHT_GREY);
 
 exports.EditButton = EditButton;
-var EditLink = (0, _styledComponents.default)(_reactRouterDom.Link)(_templateObject27(), LIGHT_GREY);
+var EditLink = (0, _styledComponents.default)(_reactRouterDom.Link)(_templateObject33(), LIGHT_GREY);
 exports.EditLink = EditLink;
-var CategoryView = (0, _styledComponents.default)(_reactRouterDom.Link)(_templateObject28(), _constants.SMALL_NAV, _constants.LARGE_NAV);
+var CategoryView = (0, _styledComponents.default)(_reactRouterDom.Link)(_templateObject34(), CATEGORY_LIST_TEXT, _constants.SMALL_NAV, _constants.LARGE_NAV);
 exports.CategoryView = CategoryView;
 
-var Line = _styledComponents.default.hr(_templateObject29());
+var Line = _styledComponents.default.hr(_templateObject35());
 
 exports.Line = Line;
 
-var CategoryList = _styledComponents.default.div(_templateObject30());
+var CategoryList = _styledComponents.default.div(_templateObject36(), CATEGORY_LIST);
 
 exports.CategoryList = CategoryList;
-var UserLink = (0, _styledComponents.default)(_reactRouterDom.Link)(_templateObject31(), _constants.SMALL_NAV, _constants.LARGE_NAV);
-exports.UserLink = UserLink;
-},{"@babel/runtime-corejs2/helpers/taggedTemplateLiteral":"../node_modules/@babel/runtime-corejs2/helpers/taggedTemplateLiteral.js","styled-components":"../node_modules/styled-components/dist/styled-components.browser.esm.js","react-router-dom":"../node_modules/react-router-dom/es/index.js","../constants":"constants.json"}],"components/Navbar/NavbarView.jsx":[function(require,module,exports) {
+},{"@babel/runtime-corejs2/helpers/taggedTemplateLiteral":"../node_modules/@babel/runtime-corejs2/helpers/taggedTemplateLiteral.js","styled-components":"../node_modules/styled-components/dist/styled-components.browser.esm.js","react-router-dom":"../node_modules/react-router-dom/es/index.js","./constants":"constants.json"}],"components/Navbar/NavbarView.jsx":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -53209,7 +53294,7 @@ var _react = _interopRequireDefault(require("react"));
 
 var _propTypes = _interopRequireDefault(require("prop-types"));
 
-var _style = require("../style");
+var _style = require("../../style");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -53222,11 +53307,7 @@ var NavbarView = function NavbarView(_ref) {
       userStore = _ref.userStore;
   return _react.default.createElement(_style.NavbarFrame, {
     "data-tag": "navbar-frame"
-  }, _react.default.createElement(_style.CategoryList, {
-    style: {
-      background: 'transparent'
-    }
-  }, user && _react.default.createElement(_style.UserButton, null, _react.default.createElement(_style.UserIcon, user), user.name), _react.default.createElement(_style.UserButton, {
+  }, _react.default.createElement(_style.UserNav, null, user && _react.default.createElement(_style.UserButton, null, _react.default.createElement(_style.UserIcon, user), user.name), _react.default.createElement(_style.UserButton, {
     onClick: function onClick() {
       !user ? userStore.actions.logIn() : userStore.actions.logOut();
     }
@@ -53257,7 +53338,7 @@ NavbarView.defaultProps = {
 };
 var _default = NavbarView;
 exports.default = _default;
-},{"react":"../node_modules/react/index.js","prop-types":"../node_modules/prop-types/index.js","../style":"components/style.js"}],"../node_modules/regenerator-runtime/runtime.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","prop-types":"../node_modules/prop-types/index.js","../../style":"style.js"}],"../node_modules/regenerator-runtime/runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 /**
  * Copyright (c) 2014-present, Facebook, Inc.
@@ -80453,7 +80534,7 @@ var _react = _interopRequireDefault(require("react"));
 
 var _propTypes = _interopRequireDefault(require("prop-types"));
 
-var _style = require("../style");
+var _style = require("../../style");
 
 var _encodePath = _interopRequireDefault(require("../../js/encodePath"));
 
@@ -80479,7 +80560,7 @@ ArticleLinksView.defaultProps = {
 };
 var _default = ArticleLinksView;
 exports.default = _default;
-},{"react":"../node_modules/react/index.js","prop-types":"../node_modules/prop-types/index.js","../style":"components/style.js","../../js/encodePath":"js/encodePath.js"}],"components/ArticleLinks/ArticleLinksContainer.jsx":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","prop-types":"../node_modules/prop-types/index.js","../../style":"style.js","../../js/encodePath":"js/encodePath.js"}],"components/ArticleLinks/ArticleLinksContainer.jsx":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -80606,7 +80687,7 @@ var _react = _interopRequireDefault(require("react"));
 
 var _propTypes = _interopRequireDefault(require("prop-types"));
 
-var _style = require("../style");
+var _style = require("../../style");
 
 var _ArticleLinks = _interopRequireDefault(require("../ArticleLinks"));
 
@@ -80627,7 +80708,7 @@ HomepageView.defaultProps = {
 };
 var _default = HomepageView;
 exports.default = _default;
-},{"react":"../node_modules/react/index.js","prop-types":"../node_modules/prop-types/index.js","../style":"components/style.js","../ArticleLinks":"components/ArticleLinks/index.js"}],"models/articles.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","prop-types":"../node_modules/prop-types/index.js","../../style":"style.js","../ArticleLinks":"components/ArticleLinks/index.js"}],"models/articles.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -82849,7 +82930,7 @@ var _propTypes = _interopRequireDefault(require("prop-types"));
 
 var _marked = _interopRequireDefault(require("marked"));
 
-var _style = require("../style");
+var _style = require("../../style");
 
 var _reactRouterDom = require("react-router-dom");
 
@@ -82877,7 +82958,7 @@ var ArticleView = function ArticleView(_ref) {
     return '';
   }
 
-  return _react.default.createElement("div", null, _react.default.createElement(_style.PageHead, null, headline(category), title), _react.default.createElement(_style.ArticleFrame, null, _react.default.createElement(_style.FuzzyBox, null, _react.default.createElement(_style.Text, {
+  return _react.default.createElement("div", null, _react.default.createElement(_style.PageHead, null, headline(category), " ", title), _react.default.createElement(_style.ArticleFrame, null, _react.default.createElement(_style.FuzzyBox, null, _react.default.createElement(_style.Text, {
     dangerouslySetInnerHTML: {
       __html: content ? (0, _marked.default)(content) : ''
     }
@@ -82904,7 +82985,7 @@ ArticleView.defaultProps = {
 };
 var _default = ArticleView;
 exports.default = _default;
-},{"react":"../node_modules/react/index.js","prop-types":"../node_modules/prop-types/index.js","marked":"../node_modules/marked/lib/marked.js","../style":"components/style.js","react-router-dom":"../node_modules/react-router-dom/es/index.js","../../js/encodePath":"js/encodePath.js"}],"components/Article/ArticleContainer.jsx":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","prop-types":"../node_modules/prop-types/index.js","marked":"../node_modules/marked/lib/marked.js","../../style":"style.js","react-router-dom":"../node_modules/react-router-dom/es/index.js","../../js/encodePath":"js/encodePath.js"}],"components/Article/ArticleContainer.jsx":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -83108,7 +83189,7 @@ var _lodash = _interopRequireDefault(require("lodash"));
 
 var _propTypes = _interopRequireDefault(require("prop-types"));
 
-var _style = require("../style");
+var _style = require("../../style");
 
 var _encodePath = _interopRequireDefault(require("../../js/encodePath"));
 
@@ -83129,11 +83210,13 @@ var CategoryView = function CategoryView(_ref) {
       content = _ref.content,
       title = _ref.title,
       categoryArticles = _ref.categoryArticles;
-  return _react.default.createElement("div", null, _react.default.createElement(_style.PageHead, null, title), content && _react.default.createElement(_style.ArticleFrame, null, _react.default.createElement(_style.FuzzyBox, null, _react.default.createElement(_style.Text, {
+  return _react.default.createElement("div", null, _react.default.createElement(_style.CategoryHeadFrame, null, _react.default.createElement(_style.CategoryHead, null, title), content && _react.default.createElement(_style.CategoryTextFrame, null, _react.default.createElement(_style.TextCategory, {
     dangerouslySetInnerHTML: {
       __html: (0, _marked.default)(content)
     }
-  }))), _react.default.createElement(_style.ArticleListWrapper, null, _react.default.createElement(_style.ArticleList, null, _react.default.createElement(_ArticleLinks.default, {
+  }))), _react.default.createElement(_style.ArticleListWrapper, {
+    "data-type": "ArticleListWrapper"
+  }, _react.default.createElement(_style.ArticleList, null, _react.default.createElement(_ArticleLinks.default, {
     articles: categoryArticles.filter(function (a) {
       return a.published || isAdmin;
     })
@@ -83159,7 +83242,7 @@ CategoryView.defaultProps = {
 };
 var _default = CategoryView;
 exports.default = _default;
-},{"react":"../node_modules/react/index.js","lodash":"../node_modules/lodash/lodash.js","prop-types":"../node_modules/prop-types/index.js","../style":"components/style.js","../../js/encodePath":"js/encodePath.js","../ArticleLinks":"components/ArticleLinks/index.js","marked":"../node_modules/marked/lib/marked.js"}],"components/Category/CategoryContainer.jsx":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","lodash":"../node_modules/lodash/lodash.js","prop-types":"../node_modules/prop-types/index.js","../../style":"style.js","../../js/encodePath":"js/encodePath.js","../ArticleLinks":"components/ArticleLinks/index.js","marked":"../node_modules/marked/lib/marked.js"}],"components/Category/CategoryContainer.jsx":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -83409,7 +83492,7 @@ var _react = _interopRequireDefault(require("react"));
 
 var _propTypes = _interopRequireDefault(require("prop-types"));
 
-var _style = require("../style");
+var _style = require("../../style");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -83446,7 +83529,7 @@ CategoryChooserView.defaultProps = {
 };
 var _default = CategoryChooserView;
 exports.default = _default;
-},{"react":"../node_modules/react/index.js","prop-types":"../node_modules/prop-types/index.js","../style":"components/style.js"}],"components/CategoryChooser/CategoryChooserContainer.jsx":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","prop-types":"../node_modules/prop-types/index.js","../../style":"style.js"}],"components/CategoryChooser/CategoryChooserContainer.jsx":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -83644,7 +83727,7 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _lodash = _interopRequireDefault(require("lodash"));
 
-var _style = require("../style");
+var _style = require("../../style");
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
 
@@ -83693,7 +83776,7 @@ function (_Component) {
 }(_react.Component);
 
 exports.default = FormErrorsContainer;
-},{"@babel/runtime-corejs2/helpers/objectSpread":"../node_modules/@babel/runtime-corejs2/helpers/objectSpread.js","@babel/runtime-corejs2/helpers/classCallCheck":"../node_modules/@babel/runtime-corejs2/helpers/classCallCheck.js","@babel/runtime-corejs2/helpers/createClass":"../node_modules/@babel/runtime-corejs2/helpers/createClass.js","@babel/runtime-corejs2/helpers/possibleConstructorReturn":"../node_modules/@babel/runtime-corejs2/helpers/possibleConstructorReturn.js","@babel/runtime-corejs2/helpers/getPrototypeOf":"../node_modules/@babel/runtime-corejs2/helpers/getPrototypeOf.js","@babel/runtime-corejs2/helpers/inherits":"../node_modules/@babel/runtime-corejs2/helpers/inherits.js","react":"../node_modules/react/index.js","lodash":"../node_modules/lodash/lodash.js","../style":"components/style.js"}],"components/FormErrors/extend.js":[function(require,module,exports) {
+},{"@babel/runtime-corejs2/helpers/objectSpread":"../node_modules/@babel/runtime-corejs2/helpers/objectSpread.js","@babel/runtime-corejs2/helpers/classCallCheck":"../node_modules/@babel/runtime-corejs2/helpers/classCallCheck.js","@babel/runtime-corejs2/helpers/createClass":"../node_modules/@babel/runtime-corejs2/helpers/createClass.js","@babel/runtime-corejs2/helpers/possibleConstructorReturn":"../node_modules/@babel/runtime-corejs2/helpers/possibleConstructorReturn.js","@babel/runtime-corejs2/helpers/getPrototypeOf":"../node_modules/@babel/runtime-corejs2/helpers/getPrototypeOf.js","@babel/runtime-corejs2/helpers/inherits":"../node_modules/@babel/runtime-corejs2/helpers/inherits.js","react":"../node_modules/react/index.js","lodash":"../node_modules/lodash/lodash.js","../../style":"style.js"}],"components/FormErrors/extend.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -83748,7 +83831,7 @@ var _react = _interopRequireDefault(require("react"));
 
 var _propTypes = _interopRequireDefault(require("prop-types"));
 
-var _style = require("../style");
+var _style = require("../../style");
 
 var _CategoryChooser = _interopRequireDefault(require("../CategoryChooser"));
 
@@ -83858,7 +83941,7 @@ NewArticleView.defaultProps = {
 };
 var _default = NewArticleView;
 exports.default = _default;
-},{"react":"../node_modules/react/index.js","prop-types":"../node_modules/prop-types/index.js","../style":"components/style.js","../CategoryChooser":"components/CategoryChooser/index.js","../FormErrors":"components/FormErrors/index.js"}],"components/NewArticle/NewArticleContainer.jsx":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","prop-types":"../node_modules/prop-types/index.js","../../style":"style.js","../CategoryChooser":"components/CategoryChooser/index.js","../FormErrors":"components/FormErrors/index.js"}],"components/NewArticle/NewArticleContainer.jsx":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -84277,7 +84360,7 @@ var _react = _interopRequireDefault(require("react"));
 
 var _propTypes = _interopRequireDefault(require("prop-types"));
 
-var _style = require("../style");
+var _style = require("../../style");
 
 var _FormErrors = _interopRequireDefault(require("../FormErrors"));
 
@@ -84363,7 +84446,7 @@ EditCategoryView.defaultProps = {
 };
 var _default = EditCategoryView;
 exports.default = _default;
-},{"react":"../node_modules/react/index.js","prop-types":"../node_modules/prop-types/index.js","../style":"components/style.js","../FormErrors":"components/FormErrors/index.js"}],"components/EditCatergory/EditCategoryContainer.jsx":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","prop-types":"../node_modules/prop-types/index.js","../../style":"style.js","../FormErrors":"components/FormErrors/index.js"}],"components/EditCatergory/EditCategoryContainer.jsx":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -91064,8 +91147,8 @@ function moveToPieces(move) {
 
 var WHITE = (0, _chromaJs.default)(255, 255, 255).num();
 var BLACK = (0, _chromaJs.default)(0, 0, 0).num();
-var SQUARE1 = (0, _chromaJs.default)(102, 102, 102).num();
-var SQUARE2 = (0, _chromaJs.default)(51, 51, 51).num();
+var SQUARE1 = (0, _chromaJs.default)(51, 51, 51).num();
+var SQUARE2 = (0, _chromaJs.default)(0, 0, 0).num();
 var TIME_MAX = 8000;
 
 var Backgrounder =
@@ -91215,11 +91298,7 @@ function () {
           isWhite = !isWhite;
           g.beginFill(color);
           g.drawRect(i * ss, j * ss, ss, ss);
-          g.endFill(); // console.log('drawing ', i, j, 'color: ', color);
-
-          g.lineStyle(1, (0, _chromaJs.default)(255, 0, 0));
-          g.drawRect(i * ss, j * ss, ss, ss);
-          g.lineStyle(0);
+          g.endFill();
         }
       }
 
@@ -91517,7 +91596,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "62464" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51578" + '/');
 
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);

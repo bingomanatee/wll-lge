@@ -1,7 +1,7 @@
 import React from 'react';
 import pt from 'prop-types';
 import marked from 'marked';
-import {ArticleFrame, PageHead, Text, ButtonList, FuzzyBox, EditLink} from '../style';
+import {ArticleFrame, PageHead, Text, ButtonList, FuzzyBox, EditLink} from '../../style';
 import {Link} from 'react-router-dom' ;
 import encodePath from '../../js/encodePath';
 
@@ -19,7 +19,7 @@ const ArticleView = ({loaded, category, title, content, isAdmin, path}) => {
   }
   return (
     <div>
-      <PageHead>{headline(category)}{title}</PageHead>
+      <PageHead>{headline(category)} {title}</PageHead>
       <ArticleFrame>
         <FuzzyBox>
           <Text dangerouslySetInnerHTML={{__html: content ? marked(content) : ''}}/>

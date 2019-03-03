@@ -1,6 +1,6 @@
 import React from 'react';
 import pt from 'prop-types';
-import {ArticleListWrapper} from '../style';
+import {ArticleListWrapper} from '../../style';
 import ArticleLinks from '../ArticleLinks';
 const HomepageView = ({homepageArticles}) => {
   return (

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="600px" height="600px" viewBox="0 0 600 600" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 53.2 (72643) - https://sketchapp.com -->
+    <title>logo</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <polygon id="path-1" points="300.939453 55.6914062 163.537109 401.101562 155.041016 401.101562 -9.31445312 -12.2773438 23.2050781 -12.2773438 158.556641 327.273438 295.958984 -12.2773438 305.626953 -12.2773438 442.443359 327.273438 578.087891 -12.2773438 610.607422 -12.2773438 445.958984 401.101562 438.341797 401.101562"></polygon>
+    </defs>
+    <g id="logo" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <rect fill="#000000" x="0" y="0" width="600" height="600"></rect>
+        <g id="reds" transform="translate(200.000000, 0.000000)">
+            <rect id="Rectangle" fill="#8A0000" x="0" y="0" width="200" height="200"></rect>
+            <rect id="Rectangle-Copy-7" fill="#560000" x="0" y="200" width="200" height="200"></rect>
+            <rect id="Rectangle-Copy-8" fill="#560000" x="200" y="0" width="200" height="200"></rect>
+            <rect id="Rectangle-Copy" fill="#8A0000" x="200" y="200" width="200" height="200"></rect>
+        </g>
+        <g id="light-l" transform="translate(0.000000, 200.000000)" fill="#FFFFFF">
+            <rect id="Rectangle-Copy-2" x="200" y="200" width="200" height="200"></rect>
+            <rect id="Rectangle-Copy-6" x="0" y="0" width="200" height="200"></rect>
+        </g>
+        <g id="dark-l" fill="#DEDEDE">
+            <rect id="Rectangle-Copy-3" x="400" y="400" width="200" height="200"></rect>
+            <rect id="Rectangle-Copy-4" x="0" y="400" width="200" height="200"></rect>
+            <rect id="Rectangle-Copy-5" x="0" y="0" width="200" height="200"></rect>
+        </g>
+        <g id="W" opacity="0.764811198" style="mix-blend-mode: multiply;" fill-rule="nonzero">
+            <use fill="#000000" xlink:href="#path-1"></use>
+            <use fill="#8A0000" xlink:href="#path-1"></use>
+        </g>
+    </g>
+</svg>

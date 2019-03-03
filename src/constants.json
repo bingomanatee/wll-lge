@@ -1,4 +1,6 @@
 {
   "SMALL_NAV": "500px",
-  "LARGE_NAV": "1200px"
+  "MEDIUM_NAV": "900px",
+  "LARGE_NAV": "1200px",
+  "SMALL_LEFT_MARGIN": "1.5rem"
 }

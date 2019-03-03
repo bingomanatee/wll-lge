@@ -57,8 +57,8 @@ function moveToPieces(move) {
 
 const WHITE = c(255, 255, 255).num();
 const BLACK = c(0, 0, 0).num();
-const SQUARE1 = c(102, 102, 102).num();
-const SQUARE2 = c(51, 51, 51).num();
+const SQUARE1 = c(51, 51, 51).num();
+const SQUARE2 = c(0, 0, 0).num();
 const TIME_MAX = 8000;
 
 class Backgrounder {
@@ -200,6 +200,7 @@ class Backgrounder {
 
     let g = new PIXI.Graphics();
     let isWhite = true;
+
     for (let i = -4; i < 4; ++i) {
       for (let j = -4; j < 4; ++j) {
         let color = ((j + 200) % 2 === (i + 200) % 2) ? SQUARE1 : SQUARE2;
@@ -207,10 +208,6 @@ class Backgrounder {
         g.beginFill(color);
         g.drawRect(i * ss, j * ss, ss, ss);
         g.endFill();
-        // console.log('drawing ', i, j, 'color: ', color);
-        g.lineStyle(1, c(255, 0, 0));
-        g.drawRect(i * ss, j * ss, ss, ss);
-        g.lineStyle(0);
       }
     }
 

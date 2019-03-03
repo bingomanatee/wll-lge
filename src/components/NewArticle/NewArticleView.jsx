@@ -14,7 +14,7 @@ import {
   FormContent,
   FormContainer,
   FuzzyBox
-} from '../style';
+} from '../../style';
 import CategoryChooser from '../CategoryChooser';
 import FormErrors from '../FormErrors';
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import pt from 'prop-types';
-import {ArticleItem, ArticleList, ArticleText} from '../style';
+import {ArticleItem, ArticleList, ArticleText} from '../../style';
 import encodePath from '../../js/encodePath';
 
 const ArticleLinksView = ({articles}) => (

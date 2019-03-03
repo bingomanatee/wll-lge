@@ -1,7 +1,7 @@
 import React from 'react';
 import pt from 'prop-types';
 
-import {Select} from '../style';
+import {Select} from '../../style';
 
 const noop = a => a;
 
