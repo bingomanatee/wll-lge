@@ -52956,7 +52956,7 @@ function _templateObject17() {
 }
 
 function _templateObject16() {
-  var data = (0, _taggedTemplateLiteral2.default)(["\nfont-family: 'Lora',Georgia,serif;\nfont-size: ", ";\nmax-width: ", ";\n@media(max-width: ", ") {\n  font-size: ", ";\n}\n\np {\n  margin: 0.5em 0;\n}\npre {\n  font-size: 1rem;\n  @media(min-width: ", ") {\n    font-size: 1.2rem;\n  }\n}\nh1, h2, h3, h4, h5, h6 {\nfont-family: ", ";\nfont-size: ", ";\npadding: 0;\nmargin: 0;\n@media(min-width: ", ") {\nfont-size: ", ";\n}\nh1 {\nfont-size: ", ";\ntext-shadow: none;\ncolor: black;\ntext-transform: uppercase;\nmargin-bottom: 0.5rem;\n@media(min-width: ", ") {\nfont-size: ", ";\n}\n}\nh2 {\ntext-shadow: 2px 2px 2px white;\nfont-size: 1.5rem;\nmargin-bottom: 0.25rem;\n}\nli {\npadding-left: 0.5em;\nmargin-bottom: 0.333em;\n}\nol, ul {\npadding-left: 2em;\n}\n"]);
+  var data = (0, _taggedTemplateLiteral2.default)(["\nfont-family: 'Lora',Georgia,serif;\nfont-size: ", ";\nmax-width: ", ";\n@media(max-width: ", ") {\n  font-size: ", ";\n}\n@media(min-width: ", ") {\n  font-size: ", ";\n}\n\np {\n  margin: 0.5em 0;\n}\npre {\n  font-size: 1rem;\n  @media(min-width: ", ") {\n    font-size: 1.2rem;\n  }\n}\nh1, h2, h3, h4, h5, h6 {\nfont-family: ", ";\nfont-size: ", ";\npadding: 0;\nmargin: 0;\n@media(min-width: ", ") {\nfont-size: ", ";\n}\nh1 {\nfont-size: ", ";\ntext-shadow: none;\ncolor: black;\nmargin-bottom: 0.5rem;\n@media(min-width: ", ") {\nfont-size: ", ";\n}\n}\nh2 {\ntext-shadow: 2px 2px 2px white;\nfont-size: 1.5rem;\nmargin-bottom: 0.25rem;\n}\nli {\npadding-left: 0.5em;\nmargin-bottom: 0.333em;\n}\nol, ul {\npadding-left: 2em;\n}\n"]);
 
   _templateObject16 = function _templateObject16() {
     return data;
@@ -53026,7 +53026,7 @@ function _templateObject10() {
 }
 
 function _templateObject9() {
-  var data = (0, _taggedTemplateLiteral2.default)(["\nfont-family: ", ";\nfont-size: ", ";\ncolor: white;\nfont-weight: 800;\ntext-align: center;\ntext-transform: uppercase;\nmargins: 0;\ntext-shadow: 2px 2px 2px #000000;\n@media(min-width: ", ") {\n  font-size: ", ";\n}@media(max-width: ", ") {\n  font-size: ", ";\n}\na {\n  text-decoration: none;\n  color: ", ";\n  text-shadow: none;\n  font-weight: 200;\n  :hover {\n    text-decoration: underline;\n  }\n}\n"]);
+  var data = (0, _taggedTemplateLiteral2.default)(["\nfont-family: ", ";\nfont-size: ", ";\ncolor: white;\nfont-weight: 800;\ntext-align: center;\nmargins: 0;\ntext-shadow: 2px 2px 2px #000000;\n@media(min-width: ", ") {\n  font-size: ", ";\n}@media(max-width: ", ") {\n  font-size: ", ";\n}\na {\n  text-decoration: none;\n  color: ", ";\n  text-shadow: none;\n  font-weight: 200;\n  :hover {\n    text-decoration: underline;\n  }\n}\n"]);
 
   _templateObject9 = function _templateObject9() {
     return data;
@@ -53066,7 +53066,7 @@ function _templateObject6() {
 }
 
 function _templateObject5() {
-  var data = (0, _taggedTemplateLiteral2.default)(["\ndisplay: block;\ntext-decoration: none;\nposition: relative;\ncolor: ", ";\nfont-family: 'Merriweather Sans', sans-serif;\nfont-weight: 300;\nfont-size: 1rem;\npadding: 0.2rem 0.5rem;\nmargin: 0.333rem 0.25rem;\ntext-shadow: 1px 1px 0px #000000;\n@media(max-width: ", ") {\npadding: 2px;\nmargin: 0;\n}\n@media(min-width: ", ") {\npadding: 0.5rem 1rem;\nfont-size: 1.1rem;\n}\n:hover {\nbackground: ", ";\ntext-decoration: underline;\ndiv[data-role='text'] {\ndisplay: block;\n}\n}\n&.unpublished {\ntext-decoration: line-through\n}\n"]);
+  var data = (0, _taggedTemplateLiteral2.default)(["\ndisplay: block;\ntext-decoration: none;\nposition: relative;\ncolor: ", ";\nfont-family: 'Merriweather Sans', sans-serif;\nfont-weight: 300;\nfont-size: ", ";\npadding: 0.2rem 0.5rem;\nmargin: 0.333rem 0.25rem;\ntext-shadow: 1px 1px 0px #000000;\n@media(max-width: ", ") {\npadding: 2px;\nmargin: 0;\nfont-size: ", ";\n}\n@media(min-width: ", ") {\npadding: 0.5rem 1rem;\nfont-size: ", ";\n}\n:hover {\nbackground: ", ";\ntext-decoration: underline;\ndiv[data-role='text'] {\ndisplay: block;\n}\n}\n&.unpublished {\ntext-decoration: line-through\n}\n"]);
 
   _templateObject5 = function _templateObject5() {
     return data;
@@ -53149,7 +53149,7 @@ exports.ArticleItemWrapper = ArticleItemWrapper;
 var ArticleList = _styledComponents.default.div(_templateObject4(), _constants.SMALL_NAV);
 
 exports.ArticleList = ArticleList;
-var ArticleItem = (0, _styledComponents.default)(_reactRouterDom.Link)(_templateObject5(), ARTICLE_LINK, _constants.SMALL_NAV, _constants.LARGE_NAV, ARTICLE_LINK_BACK);
+var ArticleItem = (0, _styledComponents.default)(_reactRouterDom.Link)(_templateObject5(), ARTICLE_LINK, TEXT_FONT_SIZE, _constants.SMALL_NAV, TEXT_FONT_SIZE_SMALL, _constants.LARGE_NAV, TEXT_FONT_SIZE_LARGE, ARTICLE_LINK_BACK);
 exports.ArticleItem = ArticleItem;
 
 var ArticleText = _styledComponents.default.div(_templateObject6(), TEXT_FONT_SIZE, _constants.SMALL_NAV, _constants.LARGE_NAV, TEXT_FONT_SIZE_LARGE);
@@ -53196,7 +53196,7 @@ var TableBox = _styledComponents.default.div(_templateObject15());
 
 exports.TableBox = TableBox;
 
-var Text = _styledComponents.default.div(_templateObject16(), TEXT_FONT_SIZE, _constants.LARGE_NAV, _constants.SMALL_NAV, TEXT_FONT_SIZE_SMALL, _constants.LARGE_NAV, HEADLINE_FONT, SUB_HEADLINE_FONT_SIZE, _constants.LARGE_NAV, SUB_HEADLINE_FONT_SIZE_LARGE, HEADLINE_FONT_SIZE, _constants.LARGE_NAV, HEADLINE_FONT_SIZE_LARGE);
+var Text = _styledComponents.default.div(_templateObject16(), TEXT_FONT_SIZE, _constants.LARGE_NAV, _constants.SMALL_NAV, TEXT_FONT_SIZE_SMALL, _constants.LARGE_NAV, TEXT_FONT_SIZE_LARGE, _constants.LARGE_NAV, HEADLINE_FONT, SUB_HEADLINE_FONT_SIZE, _constants.LARGE_NAV, SUB_HEADLINE_FONT_SIZE_LARGE, HEADLINE_FONT_SIZE, _constants.LARGE_NAV, HEADLINE_FONT_SIZE_LARGE);
 
 exports.Text = Text;
 
@@ -82958,7 +82958,12 @@ var ArticleView = function ArticleView(_ref) {
     return '';
   }
 
-  return _react.default.createElement("div", null, _react.default.createElement(_style.PageHead, null, headline(category), " ", title), _react.default.createElement(_style.ArticleFrame, null, _react.default.createElement(_style.FuzzyBox, null, _react.default.createElement(_style.Text, {
+  return _react.default.createElement("div", null, _react.default.createElement(_style.PageHead, null, headline(category), " ", title), _react.default.createElement(_style.ArticleFrame, {
+    "data-type": "ArticleFrame"
+  }, _react.default.createElement(_style.FuzzyBox, {
+    "data-type": "FuzzyBox"
+  }, _react.default.createElement(_style.Text, {
+    "data-type": "Text",
     dangerouslySetInnerHTML: {
       __html: content ? (0, _marked.default)(content) : ''
     }
@@ -91132,7 +91137,7 @@ function getGame() {
   return boards;
 }
 
-var pieceMap = new _map.default([['p', 'black_pawn'], ['P', 'white_pawn'], ['k', 'black_king'], ['K', 'white_king'], ['black', 'black_bishop'], ['BLACK', 'white_bishop'], ['n', 'black_horse'], ['N', 'white_horse'], ['q', 'black_queen'], ['Q', 'white_queen'], ['B', 'white_bishop'], ['b', 'black_bishop'], ['1', [false]], ['2', [false, false]], ['3', [false, false, false]], ['4', [false, false, false, false]], ['5', [false, false, false, false, false]], ['6', [false, false, false, false, false, false]], ['7', [false, false, false, false, false, false, false]], ['8', [false, false, false, false, false, false, false, false]]]);
+var pieceMap = new _map.default([['p', 'pieces_metal/black_pawn_sm.png'], ['P', 'pieces_metal/white_pawn_sm.png'], ['k', 'pieces_metal/black_king_sm.png'], ['K', 'pieces_metal/white_king_sm.png'], ['n', 'pieces_metal/black_horse_sm.png'], ['N', 'pieces_metal/white_horse_sm.png'], ['q', 'pieces_metal/black_queen_sm.png'], ['Q', 'pieces_metal/white_queen_sm.png'], ['b', 'pieces_metal/black_bishop_sm.png'], ['B', 'pieces_metal/white_bishop_sm.png'], ['1', [false]], ['2', [false, false]], ['3', [false, false, false]], ['4', [false, false, false, false]], ['5', [false, false, false, false, false]], ['6', [false, false, false, false, false, false]], ['7', [false, false, false, false, false, false, false]], ['8', [false, false, false, false, false, false, false, false]]]);
 
 function rowToPieces(row) {
   var pieces = row.split('').map(function (key) {
@@ -91323,10 +91328,10 @@ function () {
       pieces.forEach(function (row, r) {
         row.forEach(function (name, c) {
           if (name) {
-            var sprite = PIXI.Sprite.from('images/pieces/' + name + '.png');
+            var sprite = PIXI.Sprite.from('images/' + name);
             var i = r - 3.5;
             var j = c - 3.5;
-            sprite.anchor.set(0.5);
+            sprite.anchor.set(0.6, 0.7);
             sprite.scale.set(ss / 200);
             sprite.position.set(i * ss, j * ss);
             sprite.angle = -_this2.rotAngle;
@@ -91596,7 +91601,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51578" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49289" + '/');
 
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);

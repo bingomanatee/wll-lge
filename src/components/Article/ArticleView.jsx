@@ -20,9 +20,9 @@ const ArticleView = ({loaded, category, title, content, isAdmin, path}) => {
   return (
     <div>
       <PageHead>{headline(category)} {title}</PageHead>
-      <ArticleFrame>
-        <FuzzyBox>
-          <Text dangerouslySetInnerHTML={{__html: content ? marked(content) : ''}}/>
+      <ArticleFrame data-type="ArticleFrame">
+        <FuzzyBox data-type="FuzzyBox">
+          <Text data-type="Text" dangerouslySetInnerHTML={{__html: content ? marked(content) : ''}}/>
           {isAdmin && <ButtonList>
             <EditLink to={'/edit-article/' + encodePath(path)}>
               Edit

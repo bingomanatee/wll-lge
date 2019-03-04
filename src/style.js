@@ -68,17 +68,18 @@ position: relative;
 color: ${ARTICLE_LINK};
 font-family: 'Merriweather Sans', sans-serif;
 font-weight: 300;
-font-size: 1rem;
+font-size: ${TEXT_FONT_SIZE};
 padding: 0.2rem 0.5rem;
 margin: 0.333rem 0.25rem;
 text-shadow: 1px 1px 0px #000000;
 @media(max-width: ${SMALL_NAV}) {
 padding: 2px;
 margin: 0;
+font-size: ${TEXT_FONT_SIZE_SMALL};
 }
 @media(min-width: ${LARGE_NAV}) {
 padding: 0.5rem 1rem;
-font-size: 1.1rem;
+font-size: ${TEXT_FONT_SIZE_LARGE};
 }
 :hover {
 background: ${ARTICLE_LINK_BACK};
@@ -145,7 +146,6 @@ font-size: ${HEADLINE_FONT_SIZE};
 color: white;
 font-weight: 800;
 text-align: center;
-text-transform: uppercase;
 margins: 0;
 text-shadow: 2px 2px 2px #000000;
 @media(min-width: ${MEDIUM_NAV}) {
@@ -237,6 +237,9 @@ max-width: ${LARGE_NAV};
 @media(max-width: ${SMALL_NAV}) {
   font-size: ${TEXT_FONT_SIZE_SMALL};
 }
+@media(min-width: ${LARGE_NAV}) {
+  font-size: ${TEXT_FONT_SIZE_LARGE};
+}
 
 p {
   margin: 0.5em 0;
@@ -259,7 +262,6 @@ h1 {
 font-size: ${HEADLINE_FONT_SIZE};
 text-shadow: none;
 color: black;
-text-transform: uppercase;
 margin-bottom: 0.5rem;
 @media(min-width: ${LARGE_NAV}) {
 font-size: ${HEADLINE_FONT_SIZE_LARGE};

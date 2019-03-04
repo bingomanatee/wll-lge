@@ -22,18 +22,16 @@ function getGame() {
 }
 
 const pieceMap = new Map([
-  ['p', 'black_pawn'],
-  ['P', 'white_pawn'],
-  ['k', 'black_king'],
-  ['K', 'white_king'],
-  ['black', 'black_bishop'],
-  ['BLACK', 'white_bishop'],
-  ['n', 'black_horse'],
-  ['N', 'white_horse'],
-  ['q', 'black_queen'],
-  ['Q', 'white_queen'],
-  ['B', 'white_bishop'],
-  ['b', 'black_bishop'],
+  ['p', 'pieces_metal/black_pawn_sm.png'],
+  ['P', 'pieces_metal/white_pawn_sm.png'],
+  ['k', 'pieces_metal/black_king_sm.png'],
+  ['K', 'pieces_metal/white_king_sm.png'],
+  ['n', 'pieces_metal/black_horse_sm.png'],
+  ['N', 'pieces_metal/white_horse_sm.png'],
+  ['q', 'pieces_metal/black_queen_sm.png'],
+  ['Q', 'pieces_metal/white_queen_sm.png'],
+  ['b', 'pieces_metal/black_bishop_sm.png'],
+  ['B', 'pieces_metal/white_bishop_sm.png'],
   ['1', [false]],
   ['2', [false, false]],
   ['3', [false, false, false]],
@@ -231,10 +229,10 @@ class Backgrounder {
     pieces.forEach((row, r) => {
       row.forEach((name, c) => {
         if (name) {
-          const sprite = PIXI.Sprite.from('images/pieces/' + name + '.png');
+          const sprite = PIXI.Sprite.from('images/' + name);
           let i = r - 3.5;
           let j = c - 3.5;
-          sprite.anchor.set(0.5);
+          sprite.anchor.set(0.6, 0.7);
           sprite.scale.set(ss/200);
           sprite.position.set(i * ss, j * ss);
           sprite.angle = -this.rotAngle;
