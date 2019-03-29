@@ -40,23 +40,42 @@ const articles = new Store({
         .then(result => result.data.articles)
         .then(da => store.actions.setCategoryArticles(da));
     },
-    saveArticle(store, article, accessToken, sub) {
-      return axios({
-        method: 'PUT',
-        url: articleUrl(article),
-        headers: {
-          'access_token': accessToken,
-          'sub': sub,
-        },
-        data: article
-      })
-        .then(() => {
-          if (store.state.currentArticle && store.state.currentArticle.path === article.path) {
-            return store.actions.getArticle(article.path);
-          }
-        }).catch((err) => {
-          console.log('error creating articles:', err);
-        });
+    saveArticle: async (store, article, accessToken, sub) => {
+      let result;
+      try {
+        if (isNew) {
+          result = await axios({
+            method: 'POST',
+            url: articleUrl(),
+            headers: {
+              'access_token': accessToken,
+              'sub': sub,
+            },
+            data: article
+          });
+        } else {
+          result = await axios({
+            method: 'PUT',
+            url: articleUrl(article),
+            headers: {
+              'access_token': accessToken,
+              'sub': sub,
+            },
+            data: article
+          });
+        }
+        console.log('result:', result);
+      } catch (err) {
+        console.log ('error putting article', article, err);
+        return;
+      }
+      console.log('article put result');
+
+      if (store.state.currentArticle && store.state.currentArticle.path === article.path) {
+        return store.actions.getArticle(article.path);
+      }
+
+
     }, // todo: safety check
     newArticle(store, article, accessToken, sub) {
       return axios({
@@ -158,6 +177,7 @@ export class Article {
 
   save(token, sub, isNew = null) {
     if (isNew !== null) this.isNew = isNew;
+    console.log('article --- saving ', this, ' --- is new -- ', isNew);
     return this.isNew ? this.insert( token, sub) :  this.update(token, sub);
   }
 
@@ -171,7 +191,7 @@ export class Article {
     /** todo: overwrite protection */
     await axios({
       method: 'POST',
-      url: articleUrl(this),
+      url: articleUrl(),
       headers: {
         'access_token': token,
         'sub': sub,
@@ -179,7 +199,7 @@ export class Article {
       data: this.toJSON()
     });
     // re-write local data with remote data
-    await this.get(true);
+    await this.load(true);
     this.isNew = false;
     return this;
   }

@@ -2,11 +2,6 @@ import _ from 'lodash';
 import c from 'chroma-js';
 import {Chess} from 'chess.js';
 
-if (window.hasBackgroundDrawn) {
-  return;
-}
-
-window.hasBackgroundDrawn = true;
 
 function getGame() {
   var chess = new Chess();
@@ -61,6 +56,11 @@ const TIME_MAX = 8000;
 
 class Backgrounder {
   constructor(monitor, fsm) {
+    if (window.hasBackgroundDrawn) {
+      this.interrupt = true;
+      return;
+    }
+    window.hasBackgroundDrawn = true;
     this.monitor = monitor;
     this.fsm = fsm;
     this.cycle = 0;
@@ -68,6 +68,9 @@ class Backgrounder {
   }
 
   makeApp() {
+    if (this.interrupt) {
+      return;
+    }
     let container = document.getElementById('site-background');
     container.innerHTML = ''; // wipe out any old canvas -- should be done in stop but just in case.
     this.app = new PIXI.Application({
@@ -86,6 +89,9 @@ class Backgrounder {
   }
 
   start() {
+    if (this.interrupt) {
+      return;
+    }
     this.started = true;
     this.resize();
     this.draw();
@@ -113,8 +119,10 @@ class Backgrounder {
     blurrer.blur = blur;
     this.o.filters = [blurrer];
     this.o.angle = this.rotAngle;
-    this.o.scale.set(this.scale + 0.75,this.scale + 0.75);
-    if (this.pieces) this.pieces.children.forEach(p => p.angle = -this.rotAngle);
+    this.o.scale.set(this.scale + 0.75, this.scale + 0.75);
+    if (this.pieces) {
+      this.pieces.children.forEach(p => p.angle = -this.rotAngle);
+    }
     const s = Date.now();
     const since = s - this.lastMoveTime;
     if (since > 1200) {
@@ -157,7 +165,9 @@ class Backgrounder {
   kill() {
     console.log('Backgrounder.kill', this.fsm.state);
     this.stop();
-    this.app.destroy();
+    if (this.app) {
+      this.app.destroy();
+    }
   }
 
   get width() {
@@ -233,7 +243,7 @@ class Backgrounder {
           let i = r - 3.5;
           let j = c - 3.5;
           sprite.anchor.set(0.6, 0.7);
-          sprite.scale.set(ss/200);
+          sprite.scale.set(ss / 200);
           sprite.position.set(i * ss, j * ss);
           sprite.angle = -this.rotAngle;
           this.pieces.addChild(sprite);
