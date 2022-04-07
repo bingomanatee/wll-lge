@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 23.0.2, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 595.28 841.89" style="enable-background:new 0 0 595.28 841.89;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:#C3C3E2;}
+	.st1{fill:#131A43;}
+	.st2{fill:#787ABA;}
+	.st3{fill:#AD1F23;}
+	.st4{display:none;}
+	.st5{display:inline;fill:#C7DA2E;}
+	.st6{display:inline;fill:#131A43;}
+	.st7{fill:#FFFFFF;}
+	.st8{font-family:'KapraNeue-Medium';}
+	.st9{font-size:24px;}
+	.st10{font-size:36px;}
+	.st11{font-size:14px;}
+	.st12{fill:#C7DA2E;}
+</style>
+<g id="background">
+	<rect y="20.43" class="st0" width="595.28" height="51.39"/>
+	<rect class="st1" width="595.28" height="22.22"/>
+	<rect class="st2" width="595.28" height="7.84"/>
+</g>
+<g id="Text">
+	<rect y="70.21" class="st3" width="599.21" height="3.21"/>
+	<g class="st4">
+		<rect x="18.35" class="st5" width="34.25" height="36.86"/>
+		<circle class="st6" cx="37" cy="18.15" r="15.6"/>
+		<path class="st5" d="M34.82,20.99H20.77c-0.76,0-1.37-0.61-1.37-1.37v-2.92c0-0.76,0.61-1.37,1.37-1.37h14.05
+			c0.76,0,1.37,0.61,1.37,1.37v2.92C36.19,20.37,35.58,20.99,34.82,20.99z"/>
+		<rect x="49.79" y="13.27" class="st6" width="2.81" height="10.68"/>
+	</g>
+	<text transform="matrix(1 0 0 1 54.599 19.9886)" class="st7 st8 st9">EDELBUCKS</text>
+	<text transform="matrix(1 0 0 1 235.3351 68.214)" class="st3 st8 st10">ACCOUNT</text>
+	<text transform="matrix(1 0 0 1 159.1488 19.9887)" class="st7 st8 st11">ACCOUNT    BILLS    ABOUT</text>
+</g>
+<g id="Logo_Alt">
+	<path class="st12" d="M18.28,0v34.15c0,1.28,1.04,2.32,2.32,2.32h27.22c1.28,0,2.32-1.04,2.32-2.32V0H18.28z"/>
+	<rect x="23.72" y="5.25" class="st3" width="21.82" height="25.98"/>
+	<rect x="45.54" y="10.71" class="st3" width="5.41" height="11.51"/>
+	<rect x="22.83" y="15.45" class="st12" width="15.77" height="3.73"/>
+</g>
+</svg>

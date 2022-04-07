@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="180px" height="180px" viewBox="0 0 180 180" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 53.2 (72643) - https://sketchapp.com -->
+    <title>logo_sm</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <polygon id="path-1" points="90.0897921 13.8816442 47.9773157 120 45.3733459 120 -5 -7 4.96691871 -7 46.4508507 97.318214 88.563327 -7 91.526465 -7 133.459357 97.318214 175.033081 -7 185 -7 134.536862 120 132.202268 120"></polygon>
+    </defs>
+    <g id="logo_sm" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <rect fill="#000000" x="0" y="0" width="180" height="180"></rect>
+        <polygon id="Path" fill="#FFFFFF" points="0 0 0 180 180 180 180 120 60 120 60 0"></polygon>
+        <rect id="Rectangle" fill="#D8D8D8" x="0" y="0" width="60" height="60"></rect>
+        <rect id="Rectangle-Copy-9" fill="#D8D8D8" x="0" y="120" width="60" height="60"></rect>
+        <rect id="Rectangle-Copy-10" fill="#D8D8D8" x="120" y="120" width="60" height="60"></rect>
+        <rect id="Rectangle" fill="#8A0000" x="60" y="0" width="120" height="120"></rect>
+        <rect id="Rectangle" fill="#560000" x="60" y="60" width="60" height="60"></rect>
+        <rect id="Rectangle-Copy-11" fill="#560000" x="120" y="0" width="60" height="60"></rect>
+        <mask id="mask-2" fill="white">
+            <use xlink:href="#path-1"></use>
+        </mask>
+        <g id="Mask" opacity="0.764811198" style="mix-blend-mode: multiply;" fill-rule="nonzero">
+            <use fill="#000000" xlink:href="#path-1"></use>
+            <use fill="#8A0000" xlink:href="#path-1"></use>
+        </g>
+    </g>
+</svg>
