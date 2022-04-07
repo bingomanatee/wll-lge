@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import ArticleView from './ArticleView';
-
+import lGet from 'lodash/get';
 import userStore from '../../models/user';
 import articleStore from '../../models/articles';
 import categoryStore from '../../models/categories';
@@ -8,7 +8,7 @@ import categoryStore from '../../models/categories';
 export default class ArticleContainer extends Component {
   constructor(props) {
     super(props);
-    this.state = {path: props.match.params.path, title: '', content: '', loaded: false, isEditing: false};
+    this.state = {path: lGet(props, 'match.params.path'), title: '', content: '', loaded: false, isEditing: false};
   }
 
   componentDidMount() {

@@ -80717,10 +80717,6 @@ Object.defineProperty(exports, "__esModule", {
 exports.articleUrl = articleUrl;
 exports.default = exports.Article = void 0;
 
-var _regenerator = _interopRequireDefault(require("@babel/runtime-corejs2/regenerator"));
-
-var _asyncToGenerator2 = _interopRequireDefault(require("@babel/runtime-corejs2/helpers/asyncToGenerator"));
-
 var _assign = _interopRequireDefault(require("@babel/runtime-corejs2/core-js/object/assign"));
 
 var _objectSpread2 = _interopRequireDefault(require("@babel/runtime-corejs2/helpers/objectSpread"));
@@ -80728,6 +80724,10 @@ var _objectSpread2 = _interopRequireDefault(require("@babel/runtime-corejs2/help
 var _classCallCheck2 = _interopRequireDefault(require("@babel/runtime-corejs2/helpers/classCallCheck"));
 
 var _createClass2 = _interopRequireDefault(require("@babel/runtime-corejs2/helpers/createClass"));
+
+var _regenerator = _interopRequireDefault(require("@babel/runtime-corejs2/regenerator"));
+
+var _asyncToGenerator2 = _interopRequireDefault(require("@babel/runtime-corejs2/helpers/asyncToGenerator"));
 
 var _lookingGlassEngine = require("@wonderlandlabs/looking-glass-engine");
 
@@ -80777,23 +80777,88 @@ var articles = new _lookingGlassEngine.Store({
         return store.actions.setCategoryArticles(da);
       });
     },
-    saveArticle: function saveArticle(store, article, accessToken, sub) {
-      return (0, _axios.default)({
-        method: 'PUT',
-        url: articleUrl(article),
-        headers: {
-          'access_token': accessToken,
-          'sub': sub
-        },
-        data: article
-      }).then(function () {
-        if (store.state.currentArticle && store.state.currentArticle.path === article.path) {
-          return store.actions.getArticle(article.path);
-        }
-      }).catch(function (err) {
-        console.log('error creating articles:', err);
-      });
-    },
+    saveArticle: function () {
+      var _saveArticle = (0, _asyncToGenerator2.default)(
+      /*#__PURE__*/
+      _regenerator.default.mark(function _callee(store, article, accessToken, sub) {
+        var result;
+        return _regenerator.default.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _context.prev = 0;
+
+                if (!isNew) {
+                  _context.next = 7;
+                  break;
+                }
+
+                _context.next = 4;
+                return (0, _axios.default)({
+                  method: 'POST',
+                  url: articleUrl(),
+                  headers: {
+                    'access_token': accessToken,
+                    'sub': sub
+                  },
+                  data: article
+                });
+
+              case 4:
+                result = _context.sent;
+                _context.next = 10;
+                break;
+
+              case 7:
+                _context.next = 9;
+                return (0, _axios.default)({
+                  method: 'PUT',
+                  url: articleUrl(article),
+                  headers: {
+                    'access_token': accessToken,
+                    'sub': sub
+                  },
+                  data: article
+                });
+
+              case 9:
+                result = _context.sent;
+
+              case 10:
+                console.log('result:', result);
+                _context.next = 17;
+                break;
+
+              case 13:
+                _context.prev = 13;
+                _context.t0 = _context["catch"](0);
+                console.log('error putting article', article, _context.t0);
+                return _context.abrupt("return");
+
+              case 17:
+                console.log('article put result');
+
+                if (!(store.state.currentArticle && store.state.currentArticle.path === article.path)) {
+                  _context.next = 20;
+                  break;
+                }
+
+                return _context.abrupt("return", store.actions.getArticle(article.path));
+
+              case 20:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, this, [[0, 13]]);
+      }));
+
+      function saveArticle(_x, _x2, _x3, _x4) {
+        return _saveArticle.apply(this, arguments);
+      }
+
+      return saveArticle;
+    }(),
     // todo: safety check
     newArticle: function newArticle(store, article, accessToken, sub) {
       return (0, _axios.default)({
@@ -80904,6 +80969,7 @@ function () {
     value: function save(token, sub) {
       var isNew = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
       if (isNew !== null) this.isNew = isNew;
+      console.log('article --- saving ', this, ' --- is new -- ', isNew);
       return this.isNew ? this.insert(token, sub) : this.update(token, sub);
     }
     /** ********** METHODS ********** */
@@ -80918,49 +80984,6 @@ function () {
     value: function () {
       var _insert = (0, _asyncToGenerator2.default)(
       /*#__PURE__*/
-      _regenerator.default.mark(function _callee(token, sub) {
-        return _regenerator.default.wrap(function _callee$(_context) {
-          while (1) {
-            switch (_context.prev = _context.next) {
-              case 0:
-                _context.next = 2;
-                return (0, _axios.default)({
-                  method: 'POST',
-                  url: articleUrl(this),
-                  headers: {
-                    'access_token': token,
-                    'sub': sub
-                  },
-                  data: this.toJSON()
-                });
-
-              case 2:
-                _context.next = 4;
-                return this.get(true);
-
-              case 4:
-                this.isNew = false;
-                return _context.abrupt("return", this);
-
-              case 6:
-              case "end":
-                return _context.stop();
-            }
-          }
-        }, _callee, this);
-      }));
-
-      function insert(_x, _x2) {
-        return _insert.apply(this, arguments);
-      }
-
-      return insert;
-    }()
-  }, {
-    key: "update",
-    value: function () {
-      var _update = (0, _asyncToGenerator2.default)(
-      /*#__PURE__*/
       _regenerator.default.mark(function _callee2(token, sub) {
         return _regenerator.default.wrap(function _callee2$(_context2) {
           while (1) {
@@ -80968,8 +80991,8 @@ function () {
               case 0:
                 _context2.next = 2;
                 return (0, _axios.default)({
-                  method: 'PUT',
-                  url: articleUrl(this),
+                  method: 'POST',
+                  url: articleUrl(),
                   headers: {
                     'access_token': token,
                     'sub': sub
@@ -80993,7 +81016,50 @@ function () {
         }, _callee2, this);
       }));
 
-      function update(_x3, _x4) {
+      function insert(_x5, _x6) {
+        return _insert.apply(this, arguments);
+      }
+
+      return insert;
+    }()
+  }, {
+    key: "update",
+    value: function () {
+      var _update = (0, _asyncToGenerator2.default)(
+      /*#__PURE__*/
+      _regenerator.default.mark(function _callee3(token, sub) {
+        return _regenerator.default.wrap(function _callee3$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
+                _context3.next = 2;
+                return (0, _axios.default)({
+                  method: 'PUT',
+                  url: articleUrl(this),
+                  headers: {
+                    'access_token': token,
+                    'sub': sub
+                  },
+                  data: this.toJSON()
+                });
+
+              case 2:
+                _context3.next = 4;
+                return this.load(true);
+
+              case 4:
+                this.isNew = false;
+                return _context3.abrupt("return", this);
+
+              case 6:
+              case "end":
+                return _context3.stop();
+            }
+          }
+        }, _callee3, this);
+      }));
+
+      function update(_x7, _x8) {
         return _update.apply(this, arguments);
       }
 
@@ -81009,25 +81075,25 @@ function () {
     value: function () {
       var _load = (0, _asyncToGenerator2.default)(
       /*#__PURE__*/
-      _regenerator.default.mark(function _callee3() {
+      _regenerator.default.mark(function _callee4() {
         var replace,
             result,
             data,
-            _args3 = arguments;
-        return _regenerator.default.wrap(function _callee3$(_context3) {
+            _args4 = arguments;
+        return _regenerator.default.wrap(function _callee4$(_context4) {
           while (1) {
-            switch (_context3.prev = _context3.next) {
+            switch (_context4.prev = _context4.next) {
               case 0:
-                replace = _args3.length > 0 && _args3[0] !== undefined ? _args3[0] : false;
-                _context3.next = 3;
+                replace = _args4.length > 0 && _args4[0] !== undefined ? _args4[0] : false;
+                _context4.next = 3;
                 return _axios.default.get(articleUrl(this.path));
 
               case 3:
-                result = _context3.sent;
+                result = _context4.sent;
                 data = (0, _objectSpread2.default)({}, result.data);
 
                 if (!(data.path !== this.path)) {
-                  _context3.next = 7;
+                  _context4.next = 7;
                   break;
                 }
 
@@ -81037,21 +81103,21 @@ function () {
                 delete data.path;
 
                 if (!replace) {
-                  _context3.next = 10;
+                  _context4.next = 10;
                   break;
                 }
 
-                return _context3.abrupt("return", (0, _assign.default)(this, data));
+                return _context4.abrupt("return", (0, _assign.default)(this, data));
 
               case 10:
-                return _context3.abrupt("return", new Article(data));
+                return _context4.abrupt("return", new Article(data));
 
               case 11:
               case "end":
-                return _context3.stop();
+                return _context4.stop();
             }
           }
-        }, _callee3, this);
+        }, _callee4, this);
       }));
 
       function load() {
@@ -81081,28 +81147,28 @@ function () {
     value: function () {
       var _get = (0, _asyncToGenerator2.default)(
       /*#__PURE__*/
-      _regenerator.default.mark(function _callee4(path) {
+      _regenerator.default.mark(function _callee5(path) {
         var result;
-        return _regenerator.default.wrap(function _callee4$(_context4) {
+        return _regenerator.default.wrap(function _callee5$(_context5) {
           while (1) {
-            switch (_context4.prev = _context4.next) {
+            switch (_context5.prev = _context5.next) {
               case 0:
-                _context4.next = 2;
+                _context5.next = 2;
                 return _axios.default.get(articleUrl(path));
 
               case 2:
-                result = _context4.sent;
-                return _context4.abrupt("return", new Article(result.data));
+                result = _context5.sent;
+                return _context5.abrupt("return", new Article(result.data));
 
               case 4:
               case "end":
-                return _context4.stop();
+                return _context5.stop();
             }
           }
-        }, _callee4, this);
+        }, _callee5, this);
       }));
 
-      function get(_x5) {
+      function get(_x9) {
         return _get.apply(this, arguments);
       }
 
@@ -81113,36 +81179,36 @@ function () {
     value: function () {
       var _exists = (0, _asyncToGenerator2.default)(
       /*#__PURE__*/
-      _regenerator.default.mark(function _callee5(path) {
+      _regenerator.default.mark(function _callee6(path) {
         var article;
-        return _regenerator.default.wrap(function _callee5$(_context5) {
+        return _regenerator.default.wrap(function _callee6$(_context6) {
           while (1) {
-            switch (_context5.prev = _context5.next) {
+            switch (_context6.prev = _context6.next) {
               case 0:
-                _context5.prev = 0;
-                _context5.next = 3;
+                _context6.prev = 0;
+                _context6.next = 3;
                 return Article.get(path);
 
               case 3:
-                article = _context5.sent;
+                article = _context6.sent;
                 console.log('exists test category: ', article);
-                return _context5.abrupt("return", !!article);
+                return _context6.abrupt("return", !!article);
 
               case 8:
-                _context5.prev = 8;
-                _context5.t0 = _context5["catch"](0);
-                console.log('exists test err: ', _context5.t0);
-                return _context5.abrupt("return", false);
+                _context6.prev = 8;
+                _context6.t0 = _context6["catch"](0);
+                console.log('exists test err: ', _context6.t0);
+                return _context6.abrupt("return", false);
 
               case 12:
               case "end":
-                return _context5.stop();
+                return _context6.stop();
             }
           }
-        }, _callee5, this, [[0, 8]]);
+        }, _callee6, this, [[0, 8]]);
       }));
 
-      function exists(_x6) {
+      function exists(_x10) {
         return _exists.apply(this, arguments);
       }
 
@@ -81153,49 +81219,49 @@ function () {
     value: function () {
       var _forDirectory = (0, _asyncToGenerator2.default)(
       /*#__PURE__*/
-      _regenerator.default.mark(function _callee6(directory) {
+      _regenerator.default.mark(function _callee7(directory) {
         var _ref2, data;
 
-        return _regenerator.default.wrap(function _callee6$(_context6) {
+        return _regenerator.default.wrap(function _callee7$(_context7) {
           while (1) {
-            switch (_context6.prev = _context6.next) {
+            switch (_context7.prev = _context7.next) {
               case 0:
                 if (directory) {
-                  _context6.next = 2;
+                  _context7.next = 2;
                   break;
                 }
 
                 throw new Error('cannot poll empty directory');
 
               case 2:
-                _context6.next = 4;
+                _context7.next = 4;
                 return _axios.default.get((0, _categories.categoryUrl)(directory));
 
               case 4:
-                _ref2 = _context6.sent;
+                _ref2 = _context7.sent;
                 data = _ref2.data;
 
                 if (!data) {
-                  _context6.next = 8;
+                  _context7.next = 8;
                   break;
                 }
 
-                return _context6.abrupt("return", data.articles.map(function (a) {
+                return _context7.abrupt("return", data.articles.map(function (a) {
                   return new Article(a);
                 }));
 
               case 8:
-                return _context6.abrupt("return", []);
+                return _context7.abrupt("return", []);
 
               case 9:
               case "end":
-                return _context6.stop();
+                return _context7.stop();
             }
           }
-        }, _callee6, this);
+        }, _callee7, this);
       }));
 
-      function forDirectory(_x7) {
+      function forDirectory(_x11) {
         return _forDirectory.apply(this, arguments);
       }
 
@@ -81241,7 +81307,7 @@ exports.Article = Article;
 }, errMgr('title')));
 var _default = articles;
 exports.default = _default;
-},{"@babel/runtime-corejs2/regenerator":"../node_modules/@babel/runtime-corejs2/regenerator/index.js","@babel/runtime-corejs2/helpers/asyncToGenerator":"../node_modules/@babel/runtime-corejs2/helpers/asyncToGenerator.js","@babel/runtime-corejs2/core-js/object/assign":"../node_modules/@babel/runtime-corejs2/core-js/object/assign.js","@babel/runtime-corejs2/helpers/objectSpread":"../node_modules/@babel/runtime-corejs2/helpers/objectSpread.js","@babel/runtime-corejs2/helpers/classCallCheck":"../node_modules/@babel/runtime-corejs2/helpers/classCallCheck.js","@babel/runtime-corejs2/helpers/createClass":"../node_modules/@babel/runtime-corejs2/helpers/createClass.js","@wonderlandlabs/looking-glass-engine":"../node_modules/@wonderlandlabs/looking-glass-engine/build/index.js","axios":"../node_modules/axios/index.js","lodash":"../node_modules/lodash/lodash.js","@wonderlandlabs/propper":"../node_modules/@wonderlandlabs/propper/build/index.js","./categories":"models/categories.js","../js/encodePath":"js/encodePath.js"}],"components/Homepage/HomepageContainer.jsx":[function(require,module,exports) {
+},{"@babel/runtime-corejs2/core-js/object/assign":"../node_modules/@babel/runtime-corejs2/core-js/object/assign.js","@babel/runtime-corejs2/helpers/objectSpread":"../node_modules/@babel/runtime-corejs2/helpers/objectSpread.js","@babel/runtime-corejs2/helpers/classCallCheck":"../node_modules/@babel/runtime-corejs2/helpers/classCallCheck.js","@babel/runtime-corejs2/helpers/createClass":"../node_modules/@babel/runtime-corejs2/helpers/createClass.js","@babel/runtime-corejs2/regenerator":"../node_modules/@babel/runtime-corejs2/regenerator/index.js","@babel/runtime-corejs2/helpers/asyncToGenerator":"../node_modules/@babel/runtime-corejs2/helpers/asyncToGenerator.js","@wonderlandlabs/looking-glass-engine":"../node_modules/@wonderlandlabs/looking-glass-engine/build/index.js","axios":"../node_modules/axios/index.js","lodash":"../node_modules/lodash/lodash.js","@wonderlandlabs/propper":"../node_modules/@wonderlandlabs/propper/build/index.js","./categories":"models/categories.js","../js/encodePath":"js/encodePath.js"}],"components/Homepage/HomepageContainer.jsx":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -91116,12 +91182,6 @@ var _chess = require("chess.js");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-if (window.hasBackgroundDrawn) {
-  return;
-}
-
-window.hasBackgroundDrawn = true;
-
 function getGame() {
   var chess = new _chess.Chess();
   var boards = [];
@@ -91161,6 +91221,13 @@ var Backgrounder =
 function () {
   function Backgrounder(monitor, fsm) {
     (0, _classCallCheck2.default)(this, Backgrounder);
+
+    if (window.hasBackgroundDrawn) {
+      this.interrupt = true;
+      return;
+    }
+
+    window.hasBackgroundDrawn = true;
     this.monitor = monitor;
     this.fsm = fsm;
     this.cycle = 0;
@@ -91170,6 +91237,10 @@ function () {
   (0, _createClass2.default)(Backgrounder, [{
     key: "makeApp",
     value: function makeApp() {
+      if (this.interrupt) {
+        return;
+      }
+
       var container = document.getElementById('site-background');
       container.innerHTML = ''; // wipe out any old canvas -- should be done in stop but just in case.
 
@@ -91190,6 +91261,10 @@ function () {
   }, {
     key: "start",
     value: function start() {
+      if (this.interrupt) {
+        return;
+      }
+
       this.started = true;
       this.resize();
       this.draw();
@@ -91229,9 +91304,13 @@ function () {
       this.o.filters = [blurrer];
       this.o.angle = this.rotAngle;
       this.o.scale.set(this.scale + 0.75, this.scale + 0.75);
-      if (this.pieces) this.pieces.children.forEach(function (p) {
-        return p.angle = -_this.rotAngle;
-      });
+
+      if (this.pieces) {
+        this.pieces.children.forEach(function (p) {
+          return p.angle = -_this.rotAngle;
+        });
+      }
+
       var s = (0, _now.default)();
       var since = s - this.lastMoveTime;
 
@@ -91259,7 +91338,10 @@ function () {
     value: function kill() {
       console.log('Backgrounder.kill', this.fsm.state);
       this.stop();
-      this.app.destroy();
+
+      if (this.app) {
+        this.app.destroy();
+      }
     }
   }, {
     key: "oX",
@@ -91601,7 +91683,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49289" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "60754" + '/');
 
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
